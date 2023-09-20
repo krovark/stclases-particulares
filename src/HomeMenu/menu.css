@@ -1,0 +1,230 @@
+
+    /* Estilos para hacerlo responsivo */
+    @media (max-width: 768px) {
+      .sidebar {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+      }
+    
+      .side-container-elements {
+        margin: 10px;
+      }
+    }
+
+    .Subnav{
+        background-color: #e0e1e0;
+        display: flex;
+        justify-content: right; /* Centra horizontalmente */
+        align-items: center;
+        padding-right: 250px;
+    }
+
+    .post-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 100px;
+    }
+    
+    .post-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* Tres columnas por fila */
+      gap: 20px;
+    }    
+
+    .post-preview {
+      padding: 10px 16px;
+      margin: 20px 0;
+      border: 1px solid  grey;
+      border-radius: 20px;
+    }
+    .post-preview:hover {
+      box-shadow: 1px 3px 5px rgba(0,0,0,0.3);
+    }
+
+    .post-list {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+    
+    .avatar{
+      padding-bottom: 10px;
+    }
+
+    .class-category{
+      text-align: center;
+      text-shadow: rgba(0,0,0,0.3);
+    }
+
+    .sidebar {
+      background-color: #fff;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .side-container-elements {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .side-container-elements h5 {
+      margin-bottom: 10px;
+    }
+    /* Estilos para los select (dropdowns) */
+    select {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    /* Estilos para el Slider de Calificación */
+    .slider-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .precio-clase{
+      text-align: right;
+      font-size: large;
+    }
+
+    .asideleft{
+
+      flex-shrink: 0;
+      width: 248px;
+      display: block;
+
+
+    }
+    .sidebar {
+      background-color: #fff;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .custom-select {
+      width: 100%;
+      padding: 10px 15px; /* Ajusta el padding según tu preferencia */
+      border: 1px solid #ddd; /* Borde personalizado */
+      border-radius: 5px;
+      font-size: 16px; /* Tamaño de fuente */
+      background-color: #f8f8f8; /* Color de fondo */
+    }
+    
+    .custom-label {
+      background-color: #f8f8f8; /* Color de fondo para la etiqueta */
+      margin-left: 5px; /* Espaciado izquierdo */
+      padding: 0 5px; /* Espaciado interno */
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .filter-container {
+      display: flex;
+      justify-content: space-between;
+    }
+    .filter-button {
+      background-color: #f2f2f2;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 8px 16px;
+      margin: 5px;
+      cursor: pointer;
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+    .filter-button:hover {
+      background-color: #007bff;
+      color: #fff;
+    }
+    .filter {
+      width: 30%;
+    }
+    .filter h5 {
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    .filter .MuiFormControl-root {
+      width: 100%;
+    }
+    .filter .MuiInputLabel-root {
+      background-color: #fff;
+      padding-left: 5px;
+    }
+    .filter .MuiInput-root {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 5px;
+    }
+    .filter .MuiMenuItem-root {
+      padding: 5px;
+    }
+    .filter .Mui-selected {
+      background-color: #007bff; /* Color de fondo cuando seleccionado */
+      color: #fff; /* Color de texto cuando seleccionado */
+    }
+    .filter .MuiSlider-root {
+  width: 100%;
+}
+
+/* Estilo para la etiqueta de Calificación */
+.filter .MuiTypography-root {
+  text-align: center;
+  font-weight: bold; /* Texto en negrita */
+  margin-top: 10px; /* Espaciado superior */
+}
+
+    .side-container-elements{
+
+      box-sizing: border-box;
+      
+      padding: auto;
+      
+    }
+
+    .sidebar-menu h5 {
+      margin: 0;
+      padding: 0;
+      font-size: 24px;
+      text-align: left;
+    }
+    
+    .sidebar-menu {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .menu-item {
+      margin-bottom: 10px;
+    }
+    
+    .menu-item:hover {
+      background-color: #555; /* Cambia el color de fondo al pasar el cursor */
+    }
+
+    /* Estilos para el slider */
+.slider {
+  width: 80%;
+  margin: 20px auto;
+}
+
+/* Cambia el color de la barra del slider */
+.slider .slider-track {
+  background-color: #007bff;
+}
+
+/* Cambia el color del pomo o manija del slider */
+.slider .slider-handle {
+  background-color: #007bff;
+  border: 2px solid #007bff;
+}

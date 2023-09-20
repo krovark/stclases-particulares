@@ -1,0 +1,118 @@
+.big-container{
+  background: rgb(35,37,37);
+  background: linear-gradient(170deg, rgba(35,37,37,1) 0%, rgba(213,226,231,1) 21%, rgba(255,255,255,1) 56%);
+  }
+  
+  .post-preview {
+      position: relative;
+      padding: 10px 16px;
+      margin: 20px 0;
+      border: 1px solid  grey;
+      border-radius: 20px;
+      background:linear-gradient(rgb(83,104,120, 0.2), rgb(214, 214, 214));
+      
+      
+    }
+    .post-preview:hover {
+      box-shadow: 1px 3px 5px rgba(0,0,0,0.3);
+    }
+  
+    .historial-list {
+      max-width: 1500px;
+      height: auto;
+      margin: 40px auto;
+      padding: 20px;
+      
+    }
+    
+    .status-class{
+    position: absolute; /* Utilizamos position: absolute; para posicionarlo de forma independiente */
+    top: 50%; /* Lo colocamos en la mitad vertical */
+    right: 0; /* Lo colocamos en la esquina derecha */
+    transform: translateY(-50%); /* Lo desplazamos hacia arriba en la mitad de su altura */
+    }
+  
+    .status-class p{
+      padding-right: 150px;
+      text-align: left;
+    }
+  
+    .main-container h1{
+      text-align: center;
+      padding: auto;
+      margin-top: 20px;
+    }
+  
+    #confirm-state{
+    padding: 10px 30px;
+    border-radius: 3px;
+    box-shadow: 0px 0px 12px -2px rgba(0,0,0,0.5);
+    line-height: 1.25;
+    background:  #3e4a61;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    position: relative;
+    transition: background-color .6s ease;
+    overflow: hidden;
+    &:after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      top: 50%;
+      left: 50%;
+      top: var(--mouse-y);
+      left: var(--mouse-x);
+      transform-style: flat;
+      transform: translate3d(-50%,-50%,0);
+      background: rgba(white,.1);
+      border-radius: 100%;
+      transition: width .3s ease, height .3s ease;
+    }
+    &:focus,
+    &:hover {
+        background: darken( #3e4a61,7%);
+    }
+    &:active {
+      &:after {
+        width: 300px;
+        height: 300px;
+      }
+    }
+    }
+  
+    #select-value{
+  
+      padding: 10px 20px;
+      cursor: pointer;
+      background-color: white;
+      box-shadow: 0 2px 0 white;
+      border-radius: 2px;
+  
+    }
+  
+    .pagination-container {
+      display: flex; /* Usamos flexbox para centrar horizontalmente */
+      justify-content: center; /* Centramos horizontalmente */  
+      border-radius: 100px;
+      padding: 10px;
+      cursor: pointer; /* Cambia el cursor al pasar el cursor sobre él */
+      transition: background-color 0.3s; /* Transición suave al cambiar el fondo */
+    }
+    
+  
+    .pagination{
+    
+    transition: background-color 0.3s;
+    border-radius: 10px;
+    justify-content: center;
+    }
+  
+    .pagination-container .pagination a:hover {
+      color: #212121;
+      cursor: pointer;
+    }
+  
