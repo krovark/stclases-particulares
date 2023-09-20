@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './historial-style.css';
-//import ReactPaginate from 'react-paginate';
+import Pagination from 'react-bootstrap/Pagination';
 
 const PedidoStatusSelector = ({ selectedStatus, onStatusChange }) => {
   const [isDropdownDisabled, setIsDropdownDisabled] = useState(false);
@@ -52,8 +52,8 @@ const HistorialCursos = () => {
 
   const [currentPage, setCurrentPage] = useState(0);
 
-  const handlePageChange = ({ selected }) => {
-    setCurrentPage(selected);
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
 
   const paginatedData = historial.slice(currentPage * ITEMS_PER_PAGE, (currentPage + 1) * ITEMS_PER_PAGE);
@@ -68,7 +68,7 @@ const HistorialCursos = () => {
               <h2>{historialItem.studentName}</h2>
             </div>
             <div className='body-alumno'>
-              <ul className='ul-alumno' >
+            <ul className='ul-alumno' >
                 <li>Telefono: {historialItem.telefono}</li>
                 <li>Email: {historialItem.email}</li>
                 <li>Cantidad de clases: {historialItem.cclases}</li>
@@ -76,29 +76,39 @@ const HistorialCursos = () => {
                 <li>Calificacion : {historialItem.calificacion}</li>
                 <li>Comentario: {historialItem.comentario}</li>
               </ul>
-            
+            </div>
             <PedidoStatusSelector
               selectedStatus={historialItem.estado || 'Pendiente'}
               onStatusChange={(nuevoEstado, isDropdownDisabled) => handleStatusChange(historialItem.id, nuevoEstado, isDropdownDisabled)}
             />
-            </div>
           </div>
         ))}
       </div>
-      {/* <div className="pagination-container">
-        <ReactPaginate
-          previousLabel={"Anterior"}
-          nextLabel={"Siguiente"}
-          breakLabel={"..."}
-          breakClassName={"break-me"}
-          pageCount={Math.ceil(historial.length / ITEMS_PER_PAGE)} 
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
-          onPageChange={handlePageChange}
-          containerClassName={"pagination"}
-          activeClassName={"active"}
-        />
-      </div> */}
+      <div className="pagination-container">
+        <Pagination>
+          <Pagination.First onClick={() => handlePageChange(0)} />
+          <Pagination.Prev
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 0}
+          />
+          {[...Array(Math.ceil(historial.length / ITEMS_PER_PAGE))].map((_, index) => (
+            <Pagination.Item
+              key={index}
+              active={index === currentPage}
+              onClick={() => handlePageChange(index)}
+            >
+              {index + 1}
+            </Pagination.Item>
+          ))}
+          <Pagination.Next
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === Math.ceil(historial.length / ITEMS_PER_PAGE) - 1}
+          />
+          <Pagination.Last
+            onClick={() => handlePageChange(Math.ceil(historial.length / ITEMS_PER_PAGE) - 1)}
+          />
+        </Pagination>
+      </div>
     </div>
   );
 };
