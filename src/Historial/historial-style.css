@@ -34,7 +34,8 @@
   
     .status-class p{
       padding-right: 150px;
-      text-align: left;
+      text-align: center;
+      justify-content: center;
     }
   
     .main-container h1{
@@ -116,3 +117,10 @@
       cursor: pointer;
     }
   
+    .selector-value{
+      width: 150px;
+    }
+
+    #confirm-state{
+      width: 150px;
+    }

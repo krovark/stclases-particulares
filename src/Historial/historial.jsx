@@ -17,16 +17,20 @@ const PedidoStatusSelector = ({ selectedStatus, onStatusChange }) => {
 
   return (
     <div className="status-class">
+      
       <p>Estado del pedido</p>
-      <br></br>
+      
+      <div className="selector-value">
       <select id='select-value' value={selectedStatus} onChange={handleStatusChange} disabled={isDropdownDisabled}>
         <option value="Pendiente">Pendiente</option>
         <option value="Aceptada">Aceptada</option>
         <option value="Finalizada">Finalizada</option>
         <option value="Cancelada">Cancelada</option>
       </select>
-      <br></br>
+      </div>
+      <br />
       <button id='confirm-state' onClick={handleAceptarClick}>Aceptar</button>
+      
     </div>
   );
 };
@@ -77,10 +81,14 @@ const HistorialCursos = () => {
                 <li>Comentario: {historialItem.comentario}</li>
               </ul>
             </div>
+           
+            
             <PedidoStatusSelector
               selectedStatus={historialItem.estado || 'Pendiente'}
-              onStatusChange={(nuevoEstado, isDropdownDisabled) => handleStatusChange(historialItem.id, nuevoEstado, isDropdownDisabled)}
+              onStatusChange={(nuevoEstado, isDropdownDisabled) => handleStatusChange(historialItem.id, nuevoEstado, isDropdownDisabled)} 
             />
+
+
           </div>
         ))}
       </div>
