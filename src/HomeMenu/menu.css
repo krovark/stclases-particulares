@@ -104,6 +104,8 @@
       align-items: center;
     }
 
+    
+
     .precio-clase{
     display: flex;
     justify-content: center;
@@ -195,7 +197,7 @@
       color: #fff;
     }
     .filter {
-      width: 30%;
+      width: 22%;
     }
     .filter h5 {
       font-weight: bold;
