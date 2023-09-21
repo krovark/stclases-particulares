@@ -63,7 +63,7 @@ const HistorialCursos = () => {
       <h1>Historial de Cursos</h1>
       <div className="historial-list">
         {paginatedData.map((historialItem) => (
-          <div className="post-preview" key={historialItem.id}>
+          <div className="historial-preview" key={historialItem.id}>
             <div className="class-category">
               <h2>{historialItem.studentName}</h2>
             </div>

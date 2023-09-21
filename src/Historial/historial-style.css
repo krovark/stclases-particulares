@@ -3,7 +3,7 @@
   background: linear-gradient(170deg, rgba(35,37,37,1) 0%, rgba(213,226,231,1) 21%, rgba(255,255,255,1) 56%);
   }
   
-  .post-preview {
+  .historial-preview {
       position: relative;
       padding: 10px 16px;
       margin: 20px 0;
@@ -13,7 +13,7 @@
       
       
     }
-    .post-preview:hover {
+    .historial-preview:hover {
       box-shadow: 1px 3px 5px rgba(0,0,0,0.3);
     }
   

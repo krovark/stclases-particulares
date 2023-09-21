@@ -41,9 +41,9 @@ const Profilesite = () => {
 
 
                       <div className="publicaciones-container">
-                        <div className="posteos-list">
+                        <div className="perfil-list">
                             {pub_commited.map((dcPost) => (
-                                <div className="post-preview">
+                                <div className="perfil-preview">
                                     <div key={dcPost.id}>
                                                                    
                                         <h1 id='category'>{dcPost.categoria}</h1>
