@@ -134,6 +134,7 @@
   hsl(265deg 29% 96%) 100%,
   hsl(0deg 0% 100%) 100%
 );
+
     border-radius: 10px; /* Radio de borde del 50% para hacerlo circular */
     color: white;
     box-shadow: -3px 6px 19px 0px #121212;
