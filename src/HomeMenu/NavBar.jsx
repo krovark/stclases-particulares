@@ -30,24 +30,23 @@ const NavigationBar = () => {
           {/* Grupo de elementos a la derecha */}
           <div className="d-flex align-items-center">
             {/* Formulario de búsqueda */}
-            <Form className="me-2">
+            {/* <Form className="me-2">
               <Form.Control
                 type="search"
                 placeholder="Buscar por categoría"
                 aria-label="Buscar"
               />
             </Form>
-            {/* Botón de buscar con Dropdown */}
+            
             <Button variant="light" className="me-2">
               Buscar
-            </Button>
+            </Button> */}
             {/* Botón de iniciar sesión con icono de usuario */}
-            <Link to="/iniciarsesion" className="btn btn-light">
+            <Link to="/iniciarsesion" className="btn btn-primary">
               <PersonCircle /> Iniciar sesión
             </Link>
           </div>
         </Navbar.Collapse>
-        
       </Container>
     </Navbar>
     

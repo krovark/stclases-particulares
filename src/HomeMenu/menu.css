@@ -22,6 +22,9 @@
         padding-right: 250px;
     }
 
+    .mainMenu{
+      background-color: #E6E6E6;
+    }
     .post-container {
       display: flex;
       justify-content: center;
@@ -42,12 +45,8 @@
       margin: 20px 0;
       border: 1px solid  grey;
       border-radius: 20px;
-      
-      
-     
       background-color: #f9f9fc;
       opacity: 1;
-      background-image: radial-gradient(#dedede 0.9px, #f9f9fc 0.9px);
       background-size: 18px 18px;
       
       
