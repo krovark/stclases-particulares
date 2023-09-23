@@ -110,31 +110,7 @@
     justify-content: center;
     align-items: center;
     font-size: large;
-    background-image: linear-gradient(
-  0deg,
-  hsl(240deg 100% 20%) 40%,
-  hsl(250deg 82% 23%) 56%,
-  hsl(253deg 67% 27%) 66%,
-  hsl(255deg 57% 31%) 72%,
-  hsl(257deg 49% 34%) 78%,
-  hsl(258deg 42% 38%) 82%,
-  hsl(259deg 37% 42%) 85%,
-  hsl(260deg 32% 45%) 88%,
-  hsl(261deg 28% 49%) 91%,
-  hsl(261deg 27% 53%) 93%,
-  hsl(262deg 27% 56%) 94%,
-  hsl(262deg 27% 60%) 96%,
-  hsl(263deg 27% 64%) 97%,
-  hsl(263deg 28% 68%) 98%,
-  hsl(264deg 28% 72%) 99%,
-  hsl(264deg 28% 76%) 99%,
-  hsl(264deg 28% 80%) 100%,
-  hsl(264deg 28% 84%) 100%,
-  hsl(265deg 29% 88%) 100%,
-  hsl(265deg 29% 92%) 100%,
-  hsl(265deg 29% 96%) 100%,
-  hsl(0deg 0% 100%) 100%
-);
+    background-color: #3333FF;
 
     border-radius: 10px; /* Radio de borde del 50% para hacerlo circular */
     color: white;
