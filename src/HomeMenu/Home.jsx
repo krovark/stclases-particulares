@@ -14,6 +14,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import HistorialSite from '../Historial/Historial-site';
 import Profilesite from '../Perfil/perfil-site';
 import userLogin from '../Login/LoginForm';
+import Box from '@mui/material/Box';
+import Rating from '@mui/material/Rating';
+
+
 
 const getAvatarColor = (name) => {
   const firstLetter = name.charAt(0).toUpperCase();
@@ -114,11 +118,13 @@ const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, fil
                 </Avatar>
               </Stack>
             </div>
-            <ul>
+            <ul id="ul-data-cards">
               <li>Nombre: {post.author}</li>
               <li>Titulo: {post.titulo}</li>
               <li>Experiencia: {post.experiencia}</li>
-              <li>Calificacion: {post.calificacion}</li>
+              <li> 
+              <Rating name="read-only" value={post.calificacion} readOnly />
+              </li>
             </ul>
             <div className="precio-clase">
               <h1>{post.precio}/h</h1>

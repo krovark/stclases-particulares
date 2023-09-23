@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import './historial-style.css';
 import Pagination from 'react-bootstrap/Pagination';
+import Box from '@mui/material/Box';
+import Rating from '@mui/material/Rating';
+import Typography from '@mui/material/Typography';
 
 const PedidoStatusSelector = ({ selectedStatus, onStatusChange }) => {
   const [isDropdownDisabled, setIsDropdownDisabled] = useState(false);
@@ -77,7 +80,9 @@ const HistorialCursos = () => {
                 <li>Email: {historialItem.email}</li>
                 <li>Cantidad de clases: {historialItem.cclases}</li>
                 <li>Servicio: {historialItem.categoria}</li>
-                <li>Calificacion : {historialItem.calificacion}</li>
+                <li>Calificacion : <Rating name="read-only" value={historialItem.calificacion} readOnly />
+                
+                </li>
                 <li>Comentario: {historialItem.comentario}</li>
               </ul>
             </div>

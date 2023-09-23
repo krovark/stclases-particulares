@@ -94,6 +94,10 @@
       border-radius: 2px;
   
     }
+
+    .ul-alumno li{
+      padding: 1px;
+    }
   
     .pagination-container {
       display: flex; /* Usamos flexbox para centrar horizontalmente */

@@ -6,6 +6,7 @@
         justify-content: space-around;
         align-items: center;
         
+        
       }
     
       .side-container-elements {
@@ -42,13 +43,15 @@
 
     .post-preview {
       padding: 10px 16px;
+      /* margin: 20px 0; */
       margin: 20px 0;
       border: 1px solid  grey;
       border-radius: 20px;
       background-color: #f9f9fc;
       opacity: 1;
       background-size: 18px 18px;
-      
+      flex-direction: column;
+  justify-content: space-between;
       
       
     }
@@ -60,7 +63,7 @@
       max-width: 600px;
       margin: 40px auto;
       padding: 20px;
-      
+      display: grid;
     }
     
     .avatar{
@@ -103,7 +106,9 @@
       align-items: center;
     }
 
-    
+  #ul-data-cards{
+    list-style-type: none;
+  }    
 
     .precio-clase{
     display: flex;
@@ -111,10 +116,10 @@
     align-items: center;
     font-size: large;
     background-color: #3333FF;
-
     border-radius: 10px; /* Radio de borde del 50% para hacerlo circular */
     color: white;
     box-shadow: -3px 6px 19px 0px #121212;
+    margin-top: auto;
     }
 
     .asideleft{
