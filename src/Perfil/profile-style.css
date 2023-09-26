@@ -36,12 +36,12 @@
     margin-bottom: 30px;
   }
   
-  .perfil-list{
+  /* .perfil-list{
     max-width: 800px;
     height: auto;
     margin: 40px auto;
     padding: 20px;
-  }
+  } */
   
   /* Estilos para las tarjetas de publicaciones (ajusta según tus necesidades) */
   .publicacion {
@@ -53,9 +53,12 @@
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   }
 
-  .perfil-preview{
-    padding: 10px 16px;
-    margin: 20px 0;
+  /* divide post por post */
+  .perfil-preview{ 
+    height: auto;
+    max-width: 700px;
+    padding: 10px 16px 20px;
+    margin: 40px auto;
     border: 1px solid  grey;
     border-radius: 5px;
     background-color: #fff;
@@ -69,4 +72,16 @@
     box-shadow: 1px 3px 5px rgba(0,0,0,0.3);
   }
 
-  
+  #card-body{
+    text-align: left;
+  }
+
+  #box-comentarios{
+    text-align: left;
+  }
+
+  .comentario-box{
+    border: 1px solid black;
+    margin: 10px 0;
+    padding: 5px;
+  }

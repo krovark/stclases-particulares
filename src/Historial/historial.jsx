@@ -57,17 +57,17 @@ const HistorialCursos = () => {
     setHistorial(nuevoHistorial);
   };
 
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-  const paginatedData = historial.slice(currentPage * ITEMS_PER_PAGE, (currentPage + 1) * ITEMS_PER_PAGE);
+  const paginatedData = historial.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   return (
     <div className="main-container">
-      <h1>Historial de Cursos</h1>
+      <h1>Historial de Contrataciones</h1>
       <div className="historial-list">
         {paginatedData.map((historialItem) => (
           <div className="historial-preview" key={historialItem.id}>
@@ -98,29 +98,13 @@ const HistorialCursos = () => {
         ))}
       </div>
       <div className="pagination-container">
-        <Pagination>
-          <Pagination.First onClick={() => handlePageChange(0)} />
-          <Pagination.Prev
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 0}
-          />
-          {[...Array(Math.ceil(historial.length / ITEMS_PER_PAGE))].map((_, index) => (
-            <Pagination.Item
-              key={index}
-              active={index === currentPage}
-              onClick={() => handlePageChange(index)}
-            >
-              {index + 1}
-            </Pagination.Item>
-          ))}
-          <Pagination.Next
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === Math.ceil(historial.length / ITEMS_PER_PAGE) - 1}
-          />
-          <Pagination.Last
-            onClick={() => handlePageChange(Math.ceil(historial.length / ITEMS_PER_PAGE) - 1)}
-          />
-        </Pagination>
+            <Pagination className="mt-3 justify-content-center"> 
+        {Array.from({ length: Math.ceil(historial.length / ITEMS_PER_PAGE) }).map((_, idx) => (
+          <Pagination.Item key={idx + 1} active={idx + 1 === currentPage} onClick={() => setCurrentPage(idx + 1)}>
+            {idx + 1}
+          </Pagination.Item>
+        ))}
+      </Pagination>
       </div>
     </div>
   );

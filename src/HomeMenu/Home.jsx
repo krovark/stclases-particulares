@@ -16,6 +16,8 @@ import Profilesite from '../Perfil/perfil-site';
 import userLogin from '../Login/LoginForm';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
+import Pagination from 'react-bootstrap/Pagination';
+
 
 
 
@@ -30,6 +32,12 @@ const generateRandomCalificacion = () => {
 
 const generateRandomFrecuencia = () => {
   const frecuencias = ['unica', 'semanal', 'mensual'];
+  const randomIndex = Math.floor(Math.random() * frecuencias.length);
+  return frecuencias[randomIndex];
+};
+
+const generateRandomDuracion = () => {
+  const frecuencias = ['60', '30'];
   const randomIndex = Math.floor(Math.random() * frecuencias.length);
   return frecuencias[randomIndex];
 };
@@ -73,6 +81,7 @@ const generateRandomPosts = (count) => {
     const calificacion = generateRandomCalificacion();
     const tipoClase = generateRandomTipoClase();
     const frecuencia = generateRandomFrecuencia();
+    const duracion = generateRandomDuracion();
 
     const post = {
       author,
@@ -84,6 +93,7 @@ const generateRandomPosts = (count) => {
       id: i,
       tipoClase,
       frecuencia,
+      duracion,
     };
 
     posts.push(post);
@@ -101,6 +111,8 @@ const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, fil
     );
   });
 
+  
+
   return (
     <div className="post-container">
       <div className="post-grid">
@@ -117,11 +129,14 @@ const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, fil
                   {post.author.charAt(0).toUpperCase()}
                 </Avatar>
               </Stack>
-            </div>
+            </div>        
             <ul id="ul-data-cards">
               <li>Nombre: {post.author}</li>
               <li>Titulo: {post.titulo}</li>
               <li>Experiencia: {post.experiencia}</li>
+              <li>Frecuencia: {post.frecuencia} </li>
+              <li>Duración: {post.duracion} minutos </li>
+              <br></br>
               <li> 
               <Rating name="read-only" value={post.calificacion} readOnly />
               </li>
@@ -223,8 +238,14 @@ const HomeMenu = () => {
   const [filtroCalificacion, setFiltroCalificacion] = useState(null);
   const [filtroCategoria, setFiltroCategoria] = useState('');
 
+  
+  const [currentPage, setCurrentPage] = useState(1); // Nuevo estado
+  const postsPerPage = 10; // Nueva constante
+  const publicaciones = generateRandomPosts(30);
   // Generar 50 publicaciones aleatorias que cumplen con los filtros
-  const publicaciones = generateRandomPosts(50);
+  const indexOfLastPost = currentPage * postsPerPage; // Nueva constante
+  const indexOfFirstPost = indexOfLastPost - postsPerPage; // Nueva constante
+  const currentPosts = publicaciones.slice(indexOfFirstPost, indexOfLastPost); // Nueva constante
 
   return (
     <Router>
@@ -253,6 +274,13 @@ const HomeMenu = () => {
                 filtroCategoria={filtroCategoria}
               />
             </div>
+            <Pagination className="mt-3 justify-content-center"> 
+            {Array.from({ length: Math.ceil(publicaciones.length / postsPerPage) }).map((_, idx) => (
+            <Pagination.Item key={idx + 1} active={idx + 1 === currentPage} onClick={() => setCurrentPage(idx + 1)}>
+              {idx + 1}
+            </Pagination.Item>
+          ))}
+        </Pagination>
           </Route>
         </Switch>
         

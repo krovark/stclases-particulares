@@ -4,13 +4,7 @@ import ProfileInfo from './profile-content'
 
 const userProfile = () => {
     return ( 
-
-        <div className="big-container-profile">
-        
-            <ProfileInfo></ProfileInfo>
-
-        </div>
-
+            <ProfileInfo></ProfileInfo> 
 );
 }
  
