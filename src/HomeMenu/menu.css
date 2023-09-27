@@ -5,27 +5,27 @@
   box-sizing: border-box;
 }   
     
-/* Estilos para hacerlo responsivo */
-    @media (max-width: 768px) {
-      .sidebar {
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-        max-width: none;
-        grid-template-columns: repeat(1, 1fr); /* Una columna por fila para dispositivos móviles */
-        padding: 0 10px;
-      }
+@media (max-width: 768px) {
+ 
+  .post-grid {
+      grid-template-columns: repeat(2, 1fr); /* 2 columnas de igual tamaño */
+  }
+  .post-preview {
+      padding: 10px;
+  }
+}
 
-      @media (max-width: 1200px) {
-        .post-grid {
-          grid-template-columns: repeat(2, 1fr); /* Dos columnas por fila para tabletas y laptops pequeñas */
-        }
-      }
-    
-      .side-container-elements {
-        margin: 10px;
-      }
-    }
+/* Estilos para móviles */
+@media only screen and (max-width: 480px) {
+  .post-grid {
+    grid-template-columns: repeat(2, 1fr); /* 1 columna para móviles */
+  }
+
+  .post-preview {
+    padding: 10px;
+}
+
+}
 
     .Subnav{
         background-color: #e0e1e0;
@@ -41,16 +41,21 @@
     }
 
     .post-container {
-      display: flex;
+      /* display: flex;
       justify-content: center;
       align-items: center;
-      margin: 20px;
-      
+      margin: 20px; */
+      width: 100%;
+      padding: 20px;
     }
+    
+
     
     .post-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr); /* Tres columnas por fila */
+      /* grid-template-columns: repeat(3, 1fr);  */
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Esto crea columnas según el espacio disponible */
+      justify-content: center; 
       gap: 20px;
       
     }    
