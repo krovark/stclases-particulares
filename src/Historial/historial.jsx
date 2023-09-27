@@ -1,44 +1,70 @@
 import React, { useState } from 'react';
 import './historial-style.css';
 import Pagination from 'react-bootstrap/Pagination';
-import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
-import Typography from '@mui/material/Typography';
 
 const PedidoStatusSelector = ({ selectedStatus, onStatusChange }) => {
   const [isDropdownDisabled, setIsDropdownDisabled] = useState(false);
+  const [currentSelection, setCurrentSelection] = useState(selectedStatus);
 
   const handleStatusChange = (event) => {
-    const nuevoEstado = event.target.value;
-    onStatusChange(nuevoEstado, isDropdownDisabled);
+      setCurrentSelection(event.target.value);
   };
 
-  const handleAceptarClick = () => {
-    onStatusChange(selectedStatus, selectedStatus === 'Finalizada' || selectedStatus === 'Cancelada');
-    setIsDropdownDisabled(selectedStatus === 'Finalizada' || selectedStatus === 'Cancelada');
+  const handleConfirm = () => {
+      onStatusChange(currentSelection);
+      setIsDropdownDisabled(currentSelection === 'Finalizada' || currentSelection === 'Cancelada');
   };
 
   return (
-    <div className="status-class">
-      
-      <p>Estado del pedido</p>
-      
       <div className="selector-value">
-      <select id='select-value' value={selectedStatus} onChange={handleStatusChange} disabled={isDropdownDisabled}>
-        <option value="Pendiente">Pendiente</option>
-        <option value="Aceptada">Aceptada</option>
-        <option value="Finalizada">Finalizada</option>
-        <option value="Cancelada">Cancelada</option>
-      </select>
+          <select value={currentSelection} onChange={handleStatusChange} disabled={isDropdownDisabled}>
+              <option value="Pendiente">Pendiente</option>
+              <option value="Aceptada">Aceptada</option>
+              <option value="Finalizada">Finalizada</option>
+              <option value="Cancelada">Cancelada</option>
+          </select> 
+          <br />
+          <button id='confirm-state' onClick={handleConfirm}>Aceptar</button>
       </div>
-      <br />
-      <button id='confirm-state' onClick={handleAceptarClick}>Aceptar</button>
-      
-    </div>
   );
 };
 
-const ITEMS_PER_PAGE = 5;
+const HistorialItem = ({ item }) => (
+    <li>
+        <strong>{item.title}:</strong> {item.value}
+    </li>
+);
+
+const HistorialPreview = ({ item, onStatusChange }) => {
+    const studentDetails = [
+        { title: 'Telefono', value: item.telefono },
+        { title: 'Email', value: item.email },
+        { title: 'Cantidad de clases', value: item.cclases },
+        { title: 'Servicio', value: item.categoria },
+        { title: 'Calificacion', value: <Rating name="read-only" value={item.calificacion} readOnly /> },
+        { title: 'Comentario', value: item.comentario }
+    ];
+
+    return (
+        <div className="historial-preview">         
+                <h2>{item.studentName}</h2>     
+            <div className='body-alumno'>
+                <ul className='ul-alumno'>
+                    {studentDetails.map(detail => (
+                        <HistorialItem key={detail.title} item={detail} />
+                    ))}
+                </ul>
+            </div>
+            <div className="status-class">
+            <PedidoStatusSelector selectedStatus={item.estado || 'Pendiente'} onStatusChange={nuevoEstado => onStatusChange(item.id, nuevoEstado)} />
+        </div>
+        </div>
+    );
+};
+
+
+
 
 const HistorialCursos = () => {
   const [historial, setHistorial] = useState([
@@ -62,52 +88,35 @@ const HistorialCursos = () => {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
+  const ITEMS_PER_PAGE = 5;
+  
+  const PaginationContainer = ({ currentPage, totalItems, onPageChange }) => {
+    
+    return (
+        <div className="pagination-container">
+            <Pagination className="mt-3 justify-content-center"> 
+                {Array.from({ length: Math.ceil(totalItems / ITEMS_PER_PAGE) }).map((_, idx) => (
+                    <Pagination.Item key={idx + 1} active={idx + 1 === currentPage} onClick={() => onPageChange(idx + 1)}>
+                        {idx + 1}
+                    </Pagination.Item>
+                ))}
+            </Pagination>
+        </div>
+    );
+};
   const paginatedData = historial.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   return (
     <div className="main-container">
-      <h1>Historial de Contrataciones</h1>
-      <div className="historial-list">
-        {paginatedData.map((historialItem) => (
-          <div className="historial-preview" key={historialItem.id}>
-            <div className="class-category">
-              <h2>{historialItem.studentName}</h2>
-            </div>
-            <div className='body-alumno'>
-            <ul className='ul-alumno' >
-                <li>Telefono: {historialItem.telefono}</li>
-                <li>Email: {historialItem.email}</li>
-                <li>Cantidad de clases: {historialItem.cclases}</li>
-                <li>Servicio: {historialItem.categoria}</li>
-                <li>Calificacion : <Rating name="read-only" value={historialItem.calificacion} readOnly />
-                
-                </li>
-                <li>Comentario: {historialItem.comentario}</li>
-              </ul>
-            </div>
-           
-            
-            <PedidoStatusSelector
-              selectedStatus={historialItem.estado || 'Pendiente'}
-              onStatusChange={(nuevoEstado, isDropdownDisabled) => handleStatusChange(historialItem.id, nuevoEstado, isDropdownDisabled)} 
-            />
-
-
-          </div>
-        ))}
-      </div>
-      <div className="pagination-container">
-            <Pagination className="mt-3 justify-content-center"> 
-        {Array.from({ length: Math.ceil(historial.length / ITEMS_PER_PAGE) }).map((_, idx) => (
-          <Pagination.Item key={idx + 1} active={idx + 1 === currentPage} onClick={() => setCurrentPage(idx + 1)}>
-            {idx + 1}
-          </Pagination.Item>
-        ))}
-      </Pagination>
-      </div>
+        <h1>Historial de Contrataciones</h1>
+        <div className="historial-list">
+            {paginatedData.map(historialItem => (
+                <HistorialPreview key={historialItem.id} item={historialItem} onStatusChange={handleStatusChange} />
+            ))}
+        </div>
+        <PaginationContainer currentPage={currentPage} totalItems={historial.length} onPageChange={handlePageChange} />
     </div>
-  );
+);
 };
 
 export default HistorialCursos;

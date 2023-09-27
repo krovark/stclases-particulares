@@ -10,9 +10,17 @@
       border: 1px solid  grey;
       border-radius: 20px;
       background:linear-gradient(rgb(83,104,120, 0.2), rgb(214, 214, 214));
-      
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
       
     }
+
+    .historial-preview h2 {
+      text-align: center;
+      text-shadow: rgba(0,0,0,0.3);
+    }
+
     .historial-preview:hover {
       box-shadow: 1px 3px 5px rgba(0,0,0,0.3);
     }
@@ -26,17 +34,9 @@
     }
     
     .status-class{
-    position: absolute; /* Utilizamos position: absolute; para posicionarlo de forma independiente */
-    top: 50%; /* Lo colocamos en la mitad vertical */
-    right: 0; /* Lo colocamos en la esquina derecha */
-    transform: translateY(-50%); /* Lo desplazamos hacia arriba en la mitad de su altura */
+    margin: auto 0;
     }
   
-    .status-class p{
-      padding-right: 150px;
-      text-align: center;
-      justify-content: center;
-    }
   
     .main-container h1{
       text-align: center;
@@ -128,3 +128,51 @@
     #confirm-state{
       width: 150px;
     }
+
+/* Estilos para tablets */
+@media (min-width: 901px) and (max-width: 1200px) {
+  .historial-list {
+    max-width: 90%;
+    padding: 15px;
+  }
+
+  .status-class{
+    margin: auto;
+  }
+
+  .status-class p {
+    padding-right: 150px;
+    
+  }
+
+  #confirm-state {
+    width: 120px;
+  }
+
+  .selector-value, #confirm-state {
+    width: 80%;
+  }
+
+  .pagination-container {
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan al siguiente renglón si no hay espacio */
+  }
+}
+
+@media (max-width: 768px) {
+  .historial-preview {
+      flex-direction: column;
+      
+  }
+  .status-class {
+      width: 100%; /* Ocupa el ancho completo */
+      margin: 0; /* Reinicia el margen */
+      text-align: center; /* Centra el contenido dentro de .status-class */
+     
+  }
+
+  .selector-value{
+    width: 100%;
+    
+  }
+  
+}

@@ -1,12 +1,25 @@
 
-    /* Estilos para hacerlo responsivo */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}   
+    
+/* Estilos para hacerlo responsivo */
     @media (max-width: 768px) {
       .sidebar {
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
-        
-        
+        max-width: none;
+        grid-template-columns: repeat(1, 1fr); /* Una columna por fila para dispositivos móviles */
+        padding: 0 10px;
+      }
+
+      @media (max-width: 1200px) {
+        .post-grid {
+          grid-template-columns: repeat(2, 1fr); /* Dos columnas por fila para tabletas y laptops pequeñas */
+        }
       }
     
       .side-container-elements {
@@ -16,7 +29,6 @@
 
     .Subnav{
         background-color: #e0e1e0;
-        
         display: flex;
         justify-content: right; /* Centra horizontalmente */
         align-items: center;
@@ -24,13 +36,15 @@
     }
 
     .mainMenu{
+     
       background-color: #E6E6E6;
     }
+
     .post-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 100px;
+      margin: 20px;
       
     }
     
@@ -258,4 +272,3 @@
   background-color: #007bff;
   border: 2px solid #007bff;
 }
-

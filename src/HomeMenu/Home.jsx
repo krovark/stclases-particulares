@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import { deepOrange } from '@mui/material/colors';
@@ -31,7 +31,7 @@ const generateRandomCalificacion = () => {
 };
 
 const generateRandomFrecuencia = () => {
-  const frecuencias = ['unica', 'semanal', 'mensual'];
+  const frecuencias = ['Unica', 'Semanal', 'Mensual'];
   const randomIndex = Math.floor(Math.random() * frecuencias.length);
   return frecuencias[randomIndex];
 };
@@ -43,7 +43,7 @@ const generateRandomDuracion = () => {
 };
 
 const generateRandomTipoClase = () => {
-  const tipos = ['individual', 'grupal'];
+  const tipos = ['Individual', 'Grupal'];
   const randomIndex = Math.floor(Math.random() * tipos.length);
   return tipos[randomIndex];
 };
@@ -106,11 +106,10 @@ const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, fil
     return (
       (!filtroTipo || post.tipoClase === filtroTipo) &&
       (!filtroFrecuencia || post.frecuencia === filtroFrecuencia) &&
-      (!filtroCalificacion || post.calificacion === filtroCalificacion) &&
+      (!filtroCalificacion || post.calificacion >= filtroCalificacion) && // Cambio aquí
       (!filtroCategoria || post.categoria === filtroCategoria)
     );
   });
-
   
 
   return (
@@ -134,6 +133,7 @@ const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, fil
               <li>Nombre: {post.author}</li>
               <li>Titulo: {post.titulo}</li>
               <li>Experiencia: {post.experiencia}</li>
+              <li>Tipo: {post.tipoClase}</li>
               <li>Frecuencia: {post.frecuencia} </li>
               <li>Duración: {post.duracion} minutos </li>
               <br></br>
@@ -166,7 +166,7 @@ const Sidebar = ({ setFiltroTipo, setFiltroFrecuencia, setFiltroCalificacion, se
         <h3>Filtros</h3>
       </header>
 
-      <div className="filter-container">
+      <div className="filter-container" aria-hidden="false">
         <div className="filter">
           <InputLabel className="custom-label">Tipo de clase</InputLabel>
           <Select
@@ -175,8 +175,8 @@ const Sidebar = ({ setFiltroTipo, setFiltroFrecuencia, setFiltroCalificacion, se
             onChange={(e) => setFiltroTipo(e.target.value)}
           >
             <MenuItem value="">Todos</MenuItem>
-            <MenuItem value="individual">Individual</MenuItem>
-            <MenuItem value="grupal">Grupal</MenuItem>
+            <MenuItem value="Individual">Individual</MenuItem>
+            <MenuItem value="Grupal">Grupal</MenuItem>
           </Select>
         </div>
 
@@ -188,9 +188,9 @@ const Sidebar = ({ setFiltroTipo, setFiltroFrecuencia, setFiltroCalificacion, se
             onChange={(e) => setFiltroFrecuencia(e.target.value)}
           >
             <MenuItem value="">Todos</MenuItem>
-            <MenuItem value="unica">Única</MenuItem>
-            <MenuItem value="semanal">Semanal</MenuItem>
-            <MenuItem value="mensual">Mensual</MenuItem>
+            <MenuItem value="Unica">Única</MenuItem>
+            <MenuItem value="Semanal">Semanal</MenuItem>
+            <MenuItem value="Mensual">Mensual</MenuItem>
           </Select>
         </div>
 
@@ -242,16 +242,22 @@ const HomeMenu = () => {
   const [currentPage, setCurrentPage] = useState(1); // Nuevo estado
   const postsPerPage = 10; // Nueva constante
   const publicaciones = generateRandomPosts(30);
+  
+
+
   // Generar 50 publicaciones aleatorias que cumplen con los filtros
   const indexOfLastPost = currentPage * postsPerPage; // Nueva constante
   const indexOfFirstPost = indexOfLastPost - postsPerPage; // Nueva constante
   const currentPosts = publicaciones.slice(indexOfFirstPost, indexOfLastPost); // Nueva constante
 
   return (
+    
     <Router>
       <NavigationBar />
       <div className="mainMenu">
+        
         <Switch>
+          
           <Route path="/historial" component={HistorialSite} />
           <Route path="/perfil" component={Profilesite} />
           <Route path="/iniciarsesion" component={userLogin} />
