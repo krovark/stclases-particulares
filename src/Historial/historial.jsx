@@ -47,8 +47,10 @@ const HistorialPreview = ({ item, onStatusChange }) => {
     ];
 
     return (
-        <div className="historial-preview">         
+        <div className="historial-preview">
+          <div className="hist-estudiante">         
                 <h2>{item.studentName}</h2>     
+          </div>
             <div className='body-alumno'>
                 <ul className='ul-alumno'>
                     {studentDetails.map(detail => (

@@ -1,25 +1,38 @@
 .big-container{
   background: rgb(35,37,37);
+  background-color: #E6E6E6;
   background: linear-gradient(170deg, rgba(35,37,37,1) 0%, rgba(213,226,231,1) 21%, rgba(255,255,255,1) 56%);
   }
   
   .historial-preview {
       position: relative;
       padding: 10px 16px;
-      margin: 20px 0;
+      margin: 20px auto;
       border: 1px solid  grey;
       border-radius: 20px;
-      background:linear-gradient(rgb(83,104,120, 0.2), rgb(214, 214, 214));
+      background-color: #f9f9fc;
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
-      
+      justify-content: center;
+      align-items: center;
+      max-width: 90%;
     }
 
-    .historial-preview h2 {
+
+    .hist-estudiante{
       text-align: center;
       text-shadow: rgba(0,0,0,0.3);
+      
+      width: 200px;
+      height: 150px;
+      align-items: center;
     }
+
+    .body-alumno, .ul-alumno {
+      flex: 2;  /* le da más flexibilidad para crecer en comparación con status-class */
+      text-align: left; 
+      order: 1;  /* se asegura de que se coloque primero en la fila */
+  }
 
     .historial-preview:hover {
       box-shadow: 1px 3px 5px rgba(0,0,0,0.3);
@@ -30,11 +43,13 @@
       height: auto;
       margin: 40px auto;
       padding: 20px;
-      
+      background:linear-gradient(rgb(83,104,120, 0.2), rgb(214, 214, 214));
     }
     
     .status-class{
-    margin: auto 0;
+      flex: 1;  /* le permite crecer pero menos que body-alumno */
+      text-align: right;
+      order: 2;
     }
   
   
@@ -141,38 +156,32 @@
   }
 
   .historial-preview {
-    display: flex;
     flex-direction: column;
-    align-items: center; /* Centra elementos horizontalmente */
+    align-items: center;
+    justify-content: space-between;
   }
 
-  .historial-preview h2 {
-    order: 1; /* Ordena el título en la parte superior */
-    align-self: center; /* Centra el título horizontalmente */
+
+
+  .body-alumno, .ul-alumno {
+    align-self: flex-start;
+    max-width: 70%;
+    padding: 0 15px; /* Agregado para dar algo de espacio en los lados */
+    flex: 1;
   }
 
-  .body-alumno {
-    order: 2; /* Ordena body-alumno debajo del título */
-    align-self: flex-start; /* Alinea body-alumno a la izquierda */
-  }
-
-  .status-class{
-    margin: auto;
-    order: 3;
-  }
-
-  
-  /* .selector-value{
-    width: 80%;
+  .status-class {
+    max-width: 30%;
+    text-align: center;
+    margin-top: 15px;
+    flex-basis: auto;
+    flex: 0;
     
   }
 
-  .selector-value, #confirm-state {
-    width: 80%;
-  } */
-
-  .pagination-container {
-    flex-wrap: wrap; /* Permite que los elementos se envuelvan al siguiente renglón si no hay espacio */
+  #confirm-state {
+    display: block; 
+    margin: 10px auto; /* Centra el botón */
   }
 }
 
