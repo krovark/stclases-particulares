@@ -130,3 +130,58 @@
   .siG p{
     font-size: 20px;
   }
+
+  @media only screen and (max-width: 768px) {
+    .loginContainer {
+      width: 80%;
+      height: auto;
+      padding: 20px;
+    }
+    .loginBut, .siG {
+      width: 90%;
+    }
+    .input-container input {
+      width: 90%;
+    }
+    .links {
+      flex-direction: column;
+      align-items: center;
+      margin-right: 0;
+    }
+    a {
+      margin-left: 0;
+      margin-bottom: 10px;
+    }
+
+    .regist-form {
+      padding: 20px; /* Espacio alrededor del formulario en pantallas pequeñas */
+      
+    }
+
+  }
+
+  .my-custom-modal {
+    max-width: 100%;
+  }
+  
+  /* Estilo para celulares */
+  @media only screen and (max-width: 480px) {
+    .loginContainer {
+      width: 90%;
+    }
+    .loginBut, .siG {
+      width: 100%;
+    }
+    .input-container input {
+      width: 100%;
+    }
+    .links {
+      flex-direction: column;
+      align-items: center;
+      margin-right: 0;
+    }
+    a {
+      margin-left: 0;
+      margin-bottom: 10px;
+    }
+  }
