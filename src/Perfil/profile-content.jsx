@@ -21,7 +21,7 @@ import ProfileTest from './profile-test'
 
 const Profilesite = () => {
   const [perfil, setDatos] = useState([
-    { dcName: 'Gaston', dcApellido: 'Bortolin', calificacion: '4', ccreada: '04/8/2022', cclases: '3', id: 1 },
+    { dcName: 'Gaston', dcApellido: 'Bortolin', calificacion: '4', ccreada: '04/8/2022',email:'sapopepe@gmail.com', phonen:'1150591132' ,cclases: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae, repudiandae sit', id: 1 },
   ]);
 
   const [pub_commited, setPublicaciones] = useState([
@@ -70,8 +70,12 @@ const promedio = calcularPromedio(pub_commited);
               <div key={dcPersona.id}>
                 <h1>{dcPersona.dcName} {dcPersona.dcApellido}</h1>
                 <p id='time-stamp'>Cuenta creada: {dcPersona.ccreada}</p>
-                <p>Promedio: {promedio}</p>
+                <br></br>
+                <p>Email: {dcPersona.email} </p>
+                <p>Telefono: {dcPersona.phonen} </p>
                 <p>Título: {dcPersona.cclases}</p>
+                <p>Experiencia: {dcPersona.cclases}</p>
+                <p>Promedio: {promedio}</p>
               </div>
             ))}
           </div>

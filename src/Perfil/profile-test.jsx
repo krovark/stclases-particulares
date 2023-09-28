@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import NavigationBar from '../HomeMenu/NavBar';
 import './profile-style.css';
 import avatarImage from '../Img/avatar.png';
 import CommentBox from'./Comment_Box/master-comments';
@@ -18,6 +17,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Rating from '@mui/material/Rating';
 import { Box } from '@mui/material';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -41,6 +42,15 @@ const ExpandMore = styled((props) => {
 
     }
 
+    const [anchorEl, setAnchorEl] = useState(null);
+    const handleMenuOpen = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+    
+    const handleMenuClose = () => {
+      setAnchorEl(null);
+    };
+
     return (
         <div>
           
@@ -48,9 +58,20 @@ const ExpandMore = styled((props) => {
               <CardHeader
                
                 action={
-                  <IconButton aria-label="settings">
-                    <MoreVertIcon />
-                  </IconButton>
+                  <React.Fragment>
+                    <IconButton aria-label="settings" onClick={handleMenuOpen}>
+                      <MoreVertIcon />
+                    </IconButton>
+                    <Menu
+                      anchorEl={anchorEl}
+                      open={Boolean(anchorEl)}
+                      onClose={handleMenuClose}
+                    >
+                      <MenuItem onClick={handleMenuClose}>Modificar</MenuItem>
+                      <MenuItem onClick={handleMenuClose}>Desactivar</MenuItem>
+                      <MenuItem onClick={handleMenuClose}>Eliminar</MenuItem>
+                    </Menu>
+                  </React.Fragment>
                 }
                 title={publicacion.categoria}
                 
