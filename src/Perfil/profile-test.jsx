@@ -81,9 +81,11 @@ const ExpandMore = styled((props) => {
     
               <CardContent id="card-body">
                 
-                    <p>Clases: {publicacion.cclases}</p>    
-                    <p>Calificación: <Rating name="read-only" value={publicacion.calificacion} readOnly /></p>
-                    <p>Descripcion: {publicacion.despcripcion}</p>
+                    <h5>Clases: {publicacion.cclases}</h5>
+                    <h5>Frecuencia: {publicacion.freq}</h5>    
+                    <h5>Precio hora: {publicacion.precio}</h5>
+                    <br></br>
+                    <h6>Descripcion: {publicacion.despcripcion}</h6>
    
               </CardContent>
     

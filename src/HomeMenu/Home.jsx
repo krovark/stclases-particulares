@@ -49,7 +49,7 @@ const generateRandomTipoClase = () => {
 };
 
 const generateRandomCategoria = () => {
-  const categorias = ['Piano', 'Masticar', 'Manejo', 'Matematicas', 'Circo', 'Natación'];
+  const categorias = ['Piano', 'Cocina', 'Manejo', 'Matematicas', 'Circo', 'Natación'];
   const randomIndex = Math.floor(Math.random() * categorias.length);
   return categorias[randomIndex];
 };
@@ -142,7 +142,7 @@ const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, fil
               </li>
             </ul>
             <div className="precio-clase">
-              <h1>{post.precio}/h</h1>
+              <h1>${post.precio}</h1>
             </div>
           </div>
         ))}
@@ -220,7 +220,7 @@ const Sidebar = ({ setFiltroTipo, setFiltroFrecuencia, setFiltroCalificacion, se
           >
             <MenuItem value="">Todos</MenuItem>
             <MenuItem value="Piano">Piano</MenuItem>
-            <MenuItem value="Masticar">Masticar</MenuItem>
+            <MenuItem value="Cocina">Cocina</MenuItem>
             <MenuItem value="Manejo">Manejo</MenuItem>
             <MenuItem value="Matematicas">Matematicas</MenuItem>
             <MenuItem value="Circo">Circo</MenuItem>
@@ -280,6 +280,7 @@ const HomeMenu = () => {
                 filtroCategoria={filtroCategoria}
               />
             </div>
+            <footer>
             <Pagination className="mt-3 justify-content-center"> 
             {Array.from({ length: Math.ceil(publicaciones.length / postsPerPage) }).map((_, idx) => (
             <Pagination.Item key={idx + 1} active={idx + 1 === currentPage} onClick={() => setCurrentPage(idx + 1)}>
@@ -287,6 +288,7 @@ const HomeMenu = () => {
             </Pagination.Item>
           ))}
         </Pagination>
+        </footer>
           </Route>
         </Switch>
         

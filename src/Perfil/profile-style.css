@@ -10,13 +10,27 @@
     position: relative;
     padding: 10px 16px;
     margin: auto;
-    border: 1px solid  grey;
+    /* border: 1px solid  grey; */
     border-radius: 10px;
     background-color: white;
     display: flex;
     max-width: 1000px;
     justify-content: center;
     align-items: center;
+  
+    border: 2px solid #6497b1;
+    box-shadow: 0 0 10px #6497b1,
+              0 0 20px #6497b1,
+              0 0 30px #6497b1,
+              0 0 40px #6497b1;
+  transition: box-shadow 0.1s ease-in-out;
+  }
+
+  .info-container:hover {
+    box-shadow: 0 0 5px #6497b1,
+                0 0 10px #6497b1,
+                0 0 15px #6497b1,
+                0 0 20px #6497b1;
   }
 
   #time-stamp{
@@ -46,15 +60,26 @@
     flex-direction: column;
     margin-bottom: 30px;
     text-align: left;
+    
   }
+
   
-  /* .perfil-list{
-    max-width: 800px;
-    height: auto;
-    margin: 40px auto;
-    padding: 20px;
-  } */
-  
+
+  .settings{
+    text-align: right;
+  }
+
+
+  .agregar-publi{
+  display: flex; /* Usar flexbox para centrar vertical y horizontalmente */
+  flex-direction: column; /* Colocar los elementos uno encima del otro */
+  align-items: center; /* Centrar horizontalmente */
+  justify-content: center; /* Centrar verticalmente */
+  padding: 15px; /* Agregar espacio interno para mejorar la apariencia */
+  text-align: center; /* Alinear el texto en el centro */
+  }
+
+
   /* Estilos para las tarjetas de publicaciones (ajusta según tus necesidades) */
   .publicacion {
     border: 1px solid #ccc;
@@ -71,7 +96,7 @@
     max-width: 700px;
     padding: 10px 16px 20px;
     margin: 40px auto;
-    border: 1px solid  grey;
+    border: 1mm ridge  #6497b1;
     border-radius: 5px;
     background-color: #fff;
   }
