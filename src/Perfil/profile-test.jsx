@@ -89,9 +89,8 @@ const ExpandMore = styled((props) => {
    
               </CardContent>
     
-              <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites"></IconButton>
-                <IconButton aria-label="share"></IconButton>
+              {/* <CardActions disableSpacing>
+                
                 <ExpandMore
                   expand={expanded}
                   onClick={handleExpandClick}
@@ -100,7 +99,7 @@ const ExpandMore = styled((props) => {
                 >
                   <ExpandMoreIcon />
                 </ExpandMore>
-              </CardActions>
+              </CardActions> */}
     
               <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent id='box-comentarios'>

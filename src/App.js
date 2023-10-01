@@ -1,15 +1,18 @@
 
 import './App.css';
 import Home from './HomeMenu/Home';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 
 
 function App() {
   return (
 
+    <Provider store={store}>
     
+      <Home/>
     
-    <Home></Home>
-    
+    </Provider>
 
   );
 }

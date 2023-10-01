@@ -1,8 +1,4 @@
-.big-container{
-  background: rgb(35,37,37);
-  background-color: #E6E6E6;
-  background: linear-gradient(170deg, rgba(35,37,37,1) 0%, rgba(213,226,231,1) 21%, rgba(255,255,255,1) 56%);
-  }
+
   
   .historial-preview {
       position: relative;
@@ -16,6 +12,7 @@
       justify-content: center;
       align-items: center;
       max-width: 90%;
+      /* background:linear-gradient(rgb(83,104,120, 0.2), rgb(214, 214, 214)); */
     }
 
 
@@ -43,7 +40,7 @@
       height: auto;
       margin: 40px auto;
       padding: 20px;
-      background:linear-gradient(rgb(83,104,120, 0.2), rgb(214, 214, 214));
+      /* background:linear-gradient(rgb(83,104,120, 0.2), rgb(214, 214, 214)); */
     }
     
     .status-class{

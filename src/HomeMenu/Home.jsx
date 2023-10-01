@@ -1,4 +1,4 @@
-import React, { useState, useEffect  } from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import { deepOrange } from '@mui/material/colors';
@@ -10,6 +10,14 @@ import MenuItem from '@mui/material/MenuItem';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './menu.css';
 import NavigationBar from './NavBar';
+
+
+import { useDispatch, useSelector } from 'react-redux';
+import { login, logout } from '../redux/authSlice';
+
+
+
+
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import HistorialSite from '../Historial/Historial-site';
 import Profilesite from '../Perfil/perfil-site';
@@ -19,12 +27,6 @@ import Rating from '@mui/material/Rating';
 import Pagination from 'react-bootstrap/Pagination';
 
 
-
-
-const getAvatarColor = (name) => {
-  const firstLetter = name.charAt(0).toUpperCase();
-  return deepOrange[500];
-};
 
 const generateRandomCalificacion = () => {
   return Math.floor(Math.random() * 5) + 1; // Genera una calificación aleatoria de 1 a 5
@@ -123,9 +125,8 @@ const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, fil
               </div>
             </div>
             <div className="avatar">
-              <Stack direction="row" spacing={2}>
-                <Avatar sx={{ bgcolor: getAvatarColor(post.author) }}>
-                  {post.author.charAt(0).toUpperCase()}
+              <Stack direction="row" spacing={1}>
+                <Avatar alt="Remy Sharp" src="/2.jpg">   
                 </Avatar>
               </Stack>
             </div>        

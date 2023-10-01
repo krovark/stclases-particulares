@@ -7,12 +7,11 @@ import './historial-style.css';
 const History_site = () => {
     return ( 
 
-    <div className="big-container">
+    
       
-       <body>
+       
            <HistorialSite></HistorialSite>
-       </body>
-       </div>
+      
       
   
 

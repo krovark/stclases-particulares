@@ -131,6 +131,10 @@
     font-size: 20px;
   }
 
+  #rq{
+    color: red;
+  }
+
   @media only screen and (max-width: 768px) {
     .loginContainer {
       width: 80%;

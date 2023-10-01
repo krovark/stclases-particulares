@@ -15,7 +15,7 @@ const RecoverPw = ({ show, handleClose, handleShow }) => {
         <div className="recover-pwd">
           <form>
             <div className="input-container">
-              <label htmlFor="nombre">Email:</label>
+              <label htmlFor="nombre">Email:<span id='rq'> *</span></label>
               <input
                 type="email"
                 id="email"
@@ -26,7 +26,7 @@ const RecoverPw = ({ show, handleClose, handleShow }) => {
             </div>
 
             <div className="input-container">
-              <label htmlFor="secretpw">¿Lugar favorito en el mundo?</label>
+              <label htmlFor="secretpw">¿Lugar favorito en el mundo?<span id='rq'> *</span></label>
               <input
                 type="text"
                 id="secretpw"

@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
 import RegistrationForm from './Registerform';
 import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
 import RecoverPw from './recoverPw'
 import './login.css'
+import { useDispatch, useSelector } from 'react-redux';
+import { logIn } from '../redux/authSlice';
+import { useHistory } from 'react-router-dom';
 
 
 
 const Login = () => {
 
+  //Manejos de estados para
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
   
@@ -17,6 +20,25 @@ const Login = () => {
 
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
+
+
+  const DUMMY_USER = 'admin';
+  const DUMMY_PASSWORD = '123';
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+
+  const handleLogin = () => {
+    if (username === DUMMY_USER && password === DUMMY_PASSWORD) {  
+      dispatch(logIn());
+      history.push('/home');
+      // Aquí puedes agregar más lógica, como redirigir a otra página, etc.
+    } else {
+      alert('Usuario o contraseña incorrecta!');
+    }
+  };
 
     return ( 
 
@@ -29,12 +51,12 @@ const Login = () => {
   
           <div className="input-container">
             <label>Username </label>
-            <input type="text" name="uname" required />
+            <input type="text" name="uname" required onChange={(e) => setUsername(e.target.value)}/>
             {/* {renderErrorMessage("uname")} */}
           </div>
           <div className="input-container">
             <label>Password </label>
-            <input type="password" name="pass" required />
+            <input type="password" name="pass" required onChange={(e) => setPassword(e.target.value)}/>
             {/* {renderErrorMessage("pass")} */}
           </div>
   
@@ -45,7 +67,7 @@ const Login = () => {
   
           </div>
 
-          <button className="loginBut" >
+          <button className="loginBut" onClick={handleLogin}>
             <p>Login</p>
           </button>
 

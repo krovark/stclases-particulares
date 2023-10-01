@@ -179,7 +179,7 @@ const promedio = calcularPromedio(pub_commited);
         <div className="info-container">
           
           <div className="avatar-container">
-            <img src={avatarImage} alt="Avatar del docente" />
+            <img src="/2.jpg" alt="Avatar del docente" />
           </div>
           <div className="datos-docente">
             <div className="settings">

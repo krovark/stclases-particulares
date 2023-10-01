@@ -18,7 +18,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
           <div className="regist-form">
                                 <form>
                               <div className="input-container">
-                                <label htmlFor="nombre">Nombre:</label>
+                                <label htmlFor="nombre">Nombre:<span id='rq'> *</span></label>
                                 <input
                                   type="text"
                                   id="nombre"
@@ -29,7 +29,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
                               </div>
 
                               <div className="input-container">
-                                <label htmlFor="apellido">Apellido:</label>
+                                <label htmlFor="apellido">Apellido:<span id='rq'> *</span></label>
                                 <input
                                   type="text"
                                   id="apellido"
@@ -40,7 +40,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
                               </div>
 
                               <div className="input-container">
-                                <label htmlFor="dni">DNI:</label>
+                                <label htmlFor="dni">DNI:<span id='rq'> *</span></label>
                                 <input
                                   type="text"
                                   id="dni"
@@ -51,7 +51,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
                               </div>
 
                               <div className="input-container">
-                                <label htmlFor="telefono">Teléfono:</label>
+                                <label htmlFor="telefono">Teléfono:<span id='rq'> *</span></label>
                                 <input
                                   type="tel"
                                   id="telefono"
@@ -62,7 +62,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
                               </div>
 
                               <div className="input-container">
-                                <label htmlFor="email">Email:</label>
+                                <label htmlFor="email">Email:<span id='rq'> *</span></label>
                                 <input
                                   type="email"
                                   id="email"
@@ -73,7 +73,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
                               </div>
 
                               <div className="input-container">
-                                <label htmlFor="password">Contraseña:</label>
+                                <label htmlFor="password">Contraseña:<span id='rq'> *</span></label>
                                 <input
                                   type="password"
                                   id="password"
@@ -84,7 +84,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
                               </div>
 
                               <div className="input-container">
-                                <label htmlFor="confirmPassword">Confirmar Contraseña:</label>
+                                <label htmlFor="confirmPassword">Confirmar Contraseña:<span id='rq'> *</span></label>
                                 <input
                                   type="password"
                                   id="confirmPassword"
@@ -94,7 +94,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
                                 />
                               </div>
                               <div className="input-container">
-                              <label htmlFor="pregunta-rec">¿Lugar favorito en el mundo?</label>
+                              <label htmlFor="pregunta-rec">¿Lugar favorito en el mundo?<span id='rq'> *</span></label>
                                 <input
                                   type="text"
                                   id="secretpw"
@@ -104,7 +104,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
                                 />
                                 </div>
                               <div className="input-container">
-                                <label htmlFor="experiencia">Experiencia:</label>
+                                <label htmlFor="experiencia">Experiencia: <span id='rq'> *</span></label>
                                 <textarea
                                   id="experiencia"
                                   name="experiencia"
