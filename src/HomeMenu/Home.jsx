@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
-import { deepOrange } from '@mui/material/colors';
 import Slider from '@mui/material/Slider';
 import Typography from '@mui/material/Typography';
 import Select from '@mui/material/Select';
@@ -10,27 +9,24 @@ import MenuItem from '@mui/material/MenuItem';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './menu.css';
 import NavigationBar from './NavBar';
-
-
-import { useDispatch, useSelector } from 'react-redux';
-import { login, logout } from '../redux/authSlice';
-
-
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import HistorialSite from '../Historial/Historial-site';
 import Profilesite from '../Perfil/perfil-site';
 import userLogin from '../Login/LoginForm';
-import Box from '@mui/material/Box';
+
+
 import Rating from '@mui/material/Rating';
 import Pagination from 'react-bootstrap/Pagination';
-
 
 
 const generateRandomCalificacion = () => {
   return Math.floor(Math.random() * 5) + 1; // Genera una calificación aleatoria de 1 a 5
 };
+
 
 const generateRandomFrecuencia = () => {
   const frecuencias = ['Unica', 'Semanal', 'Mensual'];
@@ -70,6 +66,10 @@ const generateRandomExperiencia = () => {
 
 const generateRandomPrecio = () => {
   return Math.floor(Math.random() * 100) + 20; // Genera un precio aleatorio entre 20 y 120
+};
+
+const getRandomAvatarNumber = () => {
+  return Math.floor(Math.random() * 4) + 1; 
 };
 
 const generateRandomPosts = (count) => {
@@ -113,12 +113,24 @@ const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, fil
     );
   });
   
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [selectedPost, setSelectedPost] = useState(null);
+
+  const handlePostClick = (post) => {
+    setSelectedPost(post);
+    setModalOpen(true);
+};
+
+const handleModalClose = () => {
+    setSelectedPost(null);
+    setModalOpen(false);
+};
 
   return (
     <div className="post-container">
       <div className="post-grid">
         {filteredPosts.map((post) => (
-          <div className="post-preview" key={post.id}>
+          <div className="post-preview" key={post.id} onClick={() => handlePostClick(post)}>
             <div className="head-post">
               <div className="class-category">
                 <h2>{post.categoria}</h2>
@@ -126,7 +138,7 @@ const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, fil
             </div>
             <div className="avatar">
               <Stack direction="row" spacing={1}>
-                <Avatar alt="Remy Sharp" src="/2.jpg">   
+                <Avatar alt="Remy Sharp" src={`/${getRandomAvatarNumber()}.jpg`} sx={{ width: 56, height: 56 }}>   
                 </Avatar>
               </Stack>
             </div>        

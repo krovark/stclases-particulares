@@ -67,7 +67,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
                                   type="email"
                                   id="email"
                                   name="email"
-                                  placeholder="Tu dirección de correo electrónico"
+                                  placeholder="Tu correo electrónico"
                                   required
                                 />
                               </div>

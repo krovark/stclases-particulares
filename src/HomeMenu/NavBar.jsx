@@ -10,14 +10,21 @@ import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
 import PermIdentity from '@mui/icons-material/Person';
 
-import { useSelector } from 'react-redux';
-import { selectLoggedIn } from '../redux/authSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectLoggedIn, logOut } from '../redux/authSlice';
 
 
 const NavigationBar = () => {
 
 
   const isLoggedIn = useSelector(selectLoggedIn);
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    
+    dispatch(logOut());
+
+  };
 
   return (
     // Barra de navegación utilizando React Bootstrap
@@ -36,10 +43,20 @@ const NavigationBar = () => {
           <>
             <Nav.Link as={Link} to="/perfil" className="text-center" style={{ color: 'white' }}>Perfil</Nav.Link>
             <Nav.Link as={Link} to="/historial" className="text-center" style={{ color: 'white' }}>Historial</Nav.Link>
+
+           
           </>
         )}
 
           </Nav>
+
+          {isLoggedIn && (
+            <div className="d-flex ml-auto">
+              {/* <Button variant="outline-light" onClick={handleLogout}>Cerrar sesión</Button> */}
+              <a href="#" style={{ color: 'white', textDecoration: 'underline' }} onClick={handleLogout}>Cerrar sesión</a>
+            </div>
+          )}
+
 
           {!isLoggedIn && ( // mostrar el botón de inicio de sesión si el usuario no está autenticado
           <div className="d-flex align-items-center">
@@ -58,5 +75,7 @@ const NavigationBar = () => {
     
   );
 }
+
+
 
 export default NavigationBar;
