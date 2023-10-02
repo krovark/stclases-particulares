@@ -50,7 +50,7 @@ export function FormDialog() {
 
   return (
     <div>
-      <Button variant="contained" onClick={handleClickOpen}>
+      <Button variant="contained" onClick={handleClickOpen} sx={{fontSize: "large",}} >
         Crear curso
       </Button>
       <Dialog open={open} onClose={handleClose}>

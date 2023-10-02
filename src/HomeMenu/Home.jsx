@@ -6,21 +6,27 @@ import Typography from '@mui/material/Typography';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
+import AddCircle from '@mui/icons-material/AddCircle';
+import Button from '@mui/material/Button';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './menu.css';
 import NavigationBar from './NavBar';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 
+
+import CommentM from './commentModal'
+import HireService from './getService'
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import HistorialSite from '../Historial/Historial-site';
 import Profilesite from '../Perfil/perfil-site';
 import userLogin from '../Login/LoginForm';
-
-
+import { useSelector } from 'react-redux';
+import { selectLoggedIn } from '../redux/authSlice';
 import Rating from '@mui/material/Rating';
 import Pagination from 'react-bootstrap/Pagination';
+
+
 
 
 const generateRandomCalificacion = () => {
@@ -113,24 +119,23 @@ const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, fil
     );
   });
   
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [selectedPost, setSelectedPost] = useState(null);
+  const isUserLoggedIn = useSelector(selectLoggedIn);
 
-  const handlePostClick = (post) => {
-    setSelectedPost(post);
-    setModalOpen(true);
-};
+  const [modalShow, setModalShow] = useState(false);
+  const [hireServiceOpen, setHireServiceOpen] = useState(false);
 
-const handleModalClose = () => {
-    setSelectedPost(null);
-    setModalOpen(false);
-};
+  const handleHireServiceOpen = () => {
+    setHireServiceOpen(true);
+  };
 
+  const handleHireServiceClose = () => {
+    setHireServiceOpen(false);
+  };
   return (
     <div className="post-container">
       <div className="post-grid">
         {filteredPosts.map((post) => (
-          <div className="post-preview" key={post.id} onClick={() => handlePostClick(post)}>
+          <div className="post-preview" key={post.id} >
             <div className="head-post">
               <div className="class-category">
                 <h2>{post.categoria}</h2>
@@ -141,6 +146,13 @@ const handleModalClose = () => {
                 <Avatar alt="Remy Sharp" src={`/${getRandomAvatarNumber()}.jpg`} sx={{ width: 56, height: 56 }}>   
                 </Avatar>
               </Stack>
+              <AddCircle className="PlusIcon" sx={{ fontSize: 30 }} onClick={() => setModalShow(true)}/>
+                  <CommentM
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    
+                  />
+
             </div>        
             <ul id="ul-data-cards">
               <li>Nombre: {post.author}</li>
@@ -155,8 +167,12 @@ const handleModalClose = () => {
               </li>
             </ul>
             <div className="precio-clase">
-              <h1>${post.precio}</h1>
+               
+            <HireService precio={post.precio} open={hireServiceOpen} onClose={handleHireServiceClose} > </HireService>     
             </div>
+
+            
+
           </div>
         ))}
       </div>
