@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -6,6 +6,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 
 export default function FormDialog({precio, onClose}) {
   const [open, setOpen] = React.useState(false);
@@ -17,6 +19,26 @@ export default function FormDialog({precio, onClose}) {
   const handleClose = () => {
     setOpen(false);
   };
+
+
+  const [tipo, setTipo] = useState(''); // Estado para rastrear el valor del tipo
+  const [frecuencia, setFrecuencia] = useState(''); // Estado para rastrear el valor de la frecuencia
+  const [descripcion, setDescripcion] = useState('');
+
+
+  const handleTipoChange = (event) => {
+    setTipo(event.target.value); // Actualiza el valor del tipo cuando cambia
+  };
+
+  const handleFrecuenciaChange = (event) => {
+    setFrecuencia(event.target.value); // Actualiza el valor de la frecuencia cuando cambia
+  };
+
+  const handleDescripcionChange = (event) => {
+    setDescripcion(event.target.value);
+  };
+
+const numericOptions = Array.from({ length: 10 }, (_, index) => index + 1);
 
   return (
     <div>
@@ -31,25 +53,84 @@ export default function FormDialog({precio, onClose}) {
         <h1>${precio}</h1>
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle>Contratar clases</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To subscribe to this website, please enter your email address here. We
-            will send updates occasionally.
+            Por favor complete sus verdaderos datos para contratar un servicio. El auxiliar recibirá una notificación con su pedido, y luego evaluará si dedide
+            tomar o no al alumno.
+        
           </DialogContentText>
           <TextField
             autoFocus
             margin="dense"
             id="name"
-            label="Email Address"
-            type="email"
+            label="Nombre"
+            type="text"
             fullWidth
-            variant="standard"
+            variant="outlined"
           />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="surname"
+            label="Apellido"
+            type="text"
+            fullWidth
+            variant="outlined"
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="email"
+            label="Email"
+            type="text"
+            fullWidth
+            variant="outlined"
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="cclases"
+            label="Cantidad de claces"
+            type="text"
+            fullWidth
+            variant="outlined"
+          />
+           <TextField
+            margin="dense"
+            id="frecuencia"
+            label="Frecuencia"
+            select
+            fullWidth
+            variant="outlined"
+            value={frecuencia} // Valor seleccionado para frecuencia
+            onChange={handleFrecuenciaChange} // Manejar cambios en el valor de la frecuencia
+          >
+            <MenuItem value="Única">Única</MenuItem>
+            <MenuItem value="Semanal">Semanal</MenuItem>
+            <MenuItem value="Mensual">Mensual</MenuItem>
+          </TextField>
+
+<TextField
+      margin="dense"
+      id="type"
+      label="Tipo"
+      select
+      fullWidth
+      value={tipo}
+      onChange={handleTipoChange}
+      variant="outlined"
+      InputProps={{
+        
+      }}
+    >
+      <MenuItem value="Individual">Individual</MenuItem>
+      <MenuItem value="Grupal">Grupal</MenuItem>
+    </TextField>
+
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Subscribe</Button>
+          <Button variant="contained" onClick={handleClose}>Confirmar</Button>
         </DialogActions>
       </Dialog>
     </div>

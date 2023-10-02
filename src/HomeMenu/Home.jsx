@@ -166,8 +166,7 @@ const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, fil
               <Rating name="read-only" value={post.calificacion} readOnly />
               </li>
             </ul>
-            <div className="precio-clase">
-               
+            <div className="precio-clase">     
             <HireService precio={post.precio} open={hireServiceOpen} onClose={handleHireServiceClose} > </HireService>     
             </div>
 

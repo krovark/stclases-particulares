@@ -66,7 +66,7 @@ export function FormDialog() {
       label="Categoría"
       type="text"
       fullWidth
-      variant="standard"
+      variant="outlined"
     />
     <TextField
       margin="dense"
@@ -76,7 +76,7 @@ export function FormDialog() {
       fullWidth
       value={tipo}
       onChange={handleTipoChange}
-      variant="standard"
+      variant="outlined"
       InputProps={{
         
       }}
@@ -90,7 +90,7 @@ export function FormDialog() {
             label="Frecuencia"
             select
             fullWidth
-            variant="standard"
+            variant="outlined"
             value={frecuencia} // Valor seleccionado para frecuencia
             onChange={handleFrecuenciaChange} // Manejar cambios en el valor de la frecuencia
           >
@@ -105,7 +105,7 @@ export function FormDialog() {
       label="Costo por clase"
       type="text"
       fullWidth
-      variant="standard"
+      variant="outlined"
     />
     <TextField
             margin="dense"
@@ -123,7 +123,7 @@ export function FormDialog() {
         <DialogActions>
 
           <Button variant="outlined" onClick={handleClose}>Cancelar</Button>
-          <Button variant="outlined" onClick={handleClose}>Aceptar</Button>
+          <Button variant="contained" onClick={handleClose}>Aceptar</Button>
         </DialogActions>
       </Dialog>
     </div>

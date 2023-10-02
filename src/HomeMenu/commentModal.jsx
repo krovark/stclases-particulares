@@ -79,7 +79,7 @@ function CommentModal(props) {
           Comentarios: 
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body style={{ maxHeight: '700px', overflowY: 'auto' }}>
+      <Modal.Body className="custom-dialog-content" style={{ maxHeight: '700px', overflowY: 'auto' }}>
     {simulatedComments.map((comment, index) => (
         <div key={index} style={{ margin: '10px 0', borderBottom: '1px solid gray', padding: '10px' }}>
             <strong>{comment.username}</strong>: {comment.text}

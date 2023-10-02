@@ -110,7 +110,9 @@ const HistorialCursos = () => {
 
   return (
     <div className="main-container">
+        <div className="titulo">
         <h1>Historial de Contrataciones</h1>
+        </div>
         <div className="historial-list">
             {paginatedData.map(historialItem => (
                 <HistorialPreview key={historialItem.id} item={historialItem} onStatusChange={handleStatusChange} />

@@ -145,7 +145,12 @@
     .precio-clase span{
       color: white;
     }
+    
+    .precio-clase:hover{
 
+      color: #003f6e;
+
+    }
     .asideleft{
 
       flex-shrink: 0;
@@ -163,10 +168,16 @@
     }
 
     
-
     .PlusIcon{
       color: #005B96;
+      transition: color 0.3s ease;
+      
     }
+    .PlusIcon:hover {
+      color: #003f6e; /* Cambia el color del ícono en hover */
+    
+    }
+
 
     .modal-open .post-grid {
       filter: blur(5px);

@@ -13,6 +13,7 @@
       align-items: center;
       max-width: 90%;
       /* background:linear-gradient(rgb(83,104,120, 0.2), rgb(214, 214, 214)); */
+      
     }
 
 
@@ -41,6 +42,8 @@
       margin: 40px auto;
       padding: 20px;
       /* background:linear-gradient(rgb(83,104,120, 0.2), rgb(214, 214, 214)); */
+      
+  
     }
     
     .status-class{
@@ -49,13 +52,15 @@
       order: 2;
     }
   
-  
-    .main-container h1{
+
+    .titulo{
+      background-color: white;
       text-align: center;
       padding: auto;
-      margin-top: 20px;
+      border: 1px solid black;
+      border-radius: 5px;
     }
-  
+
     #confirm-state{
     padding: 10px 30px;
     border-radius: 3px;
