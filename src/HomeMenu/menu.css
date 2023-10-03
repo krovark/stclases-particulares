@@ -88,14 +88,14 @@
     
     .avatar{
       padding-bottom: 10px;
-    }
-
-    .class-category{
-      text-align: center;
-      text-shadow: rgba(0,0,0,0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
       
     }
 
+    
     .sidebar {
       background-color: #fff;
       padding: 20px;
@@ -126,8 +126,23 @@
       align-items: center;
     }
 
+
+    .class-category{
+      text-align: center;
+      text-shadow: rgba(0,0,0,0.3);
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+    }
+
+    .comentarios{
+      display: flex;
+      align-items: center;
+    }
+
   #ul-data-cards{
     list-style-type: none;
+    
   }    
 
     .precio-clase{
@@ -136,7 +151,7 @@
     align-items: center;
     font-size: large;
     background-color: #005B96;
-    border-radius: 10px; /* Radio de borde del 50% para hacerlo circular */
+    border-radius: 10px;
     color: white;
     box-shadow: -3px 6px 19px 0px #121212;
     margin-top: auto;

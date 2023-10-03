@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import AddCircle from '@mui/icons-material/AddCircle';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import Button from '@mui/material/Button';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -60,11 +60,10 @@ const generateRandomCategoria = () => {
 
 const generateRandomExperiencia = () => {
   const experiencias = [
-    'Lorem ipsum dolor sit amet consectetur adipiscing elit.',
-    'Experiencia en la enseñanza de esta materia por más de 5 años.',
-    'Amplia experiencia en el campo y excelentes resultados con mis estudiantes.',
+    // 'Experiencia en la enseñanza de esta materia por más de 5 años.',
+    // 'Amplia experiencia en el campo y excelentes resultados con mis estudiantes.',
     'Soy un experto en esta área y he ayudado a muchos estudiantes a tener éxito.',
-    'He trabajado con estudiantes de todas las edades y niveles de habilidad.',
+    // 'He trabajado con estudiantes de todas las edades y niveles de habilidad.',
   ];
   const randomIndex = Math.floor(Math.random() * experiencias.length);
   return experiencias[randomIndex];
@@ -137,17 +136,18 @@ const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, fil
         {filteredPosts.map((post) => (
           <div className="post-preview" key={post.id} >
             <div className="head-post">
-              <div className="class-category">
-                <h2>{post.categoria}</h2>
-              </div>
-            </div>
             <div className="avatar">
               <Stack direction="row" spacing={1}>
-                <Avatar alt="Remy Sharp" src={`/${getRandomAvatarNumber()}.jpg`} sx={{ width: 56, height: 56 }}>   
+                <Avatar alt="Remy Sharp" src={`/${getRandomAvatarNumber()}.jpg`} sx={{ width: 80, height: 80 }}>   
                 </Avatar>
               </Stack>
-
-            </div>        
+              
+            </div>
+            </div>
+            
+            <div className="class-category">
+                <h2>{post.categoria}</h2>
+              </div>        
             <ul id="ul-data-cards">
               <li>Nombre: {post.author}</li>
               <li>Titulo: {post.titulo}</li>
@@ -159,12 +159,14 @@ const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, fil
               <li> 
               <Rating name="read-only" value={post.calificacion} readOnly />
               </li>
-              <AddCircle className="PlusIcon" sx={{ fontSize: 30 }} onClick={() => setModalShow(true)}/>
+              <div className="comentarios">
+              <QuestionAnswerIcon className="PlusIcon" sx={{ fontSize: 30 }} onClick={() => setModalShow(true)}/>
                   <CommentM
                     show={modalShow}
                     onHide={() => setModalShow(false)}
                     
                   />
+                  </div>
             </ul>
  
             <div className="precio-clase">     
