@@ -146,12 +146,6 @@ const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, fil
                 <Avatar alt="Remy Sharp" src={`/${getRandomAvatarNumber()}.jpg`} sx={{ width: 56, height: 56 }}>   
                 </Avatar>
               </Stack>
-              <AddCircle className="PlusIcon" sx={{ fontSize: 30 }} onClick={() => setModalShow(true)}/>
-                  <CommentM
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
-                    
-                  />
 
             </div>        
             <ul id="ul-data-cards">
@@ -166,6 +160,12 @@ const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, fil
               <Rating name="read-only" value={post.calificacion} readOnly />
               </li>
             </ul>
+            <AddCircle className="PlusIcon" sx={{ fontSize: 30 }} onClick={() => setModalShow(true)}/>
+                  <CommentM
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    
+                  />
             <div className="precio-clase">     
             <HireService precio={post.precio} open={hireServiceOpen} onClose={handleHireServiceClose} > </HireService>     
             </div>
