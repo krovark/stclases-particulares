@@ -159,13 +159,14 @@ const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, fil
               <li> 
               <Rating name="read-only" value={post.calificacion} readOnly />
               </li>
-            </ul>
-            <AddCircle className="PlusIcon" sx={{ fontSize: 30 }} onClick={() => setModalShow(true)}/>
+              <AddCircle className="PlusIcon" sx={{ fontSize: 30 }} onClick={() => setModalShow(true)}/>
                   <CommentM
                     show={modalShow}
                     onHide={() => setModalShow(false)}
                     
                   />
+            </ul>
+ 
             <div className="precio-clase">     
             <HireService precio={post.precio} open={hireServiceOpen} onClose={handleHireServiceClose} > </HireService>     
             </div>
