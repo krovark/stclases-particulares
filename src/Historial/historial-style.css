@@ -42,9 +42,16 @@
       margin: 40px auto;
       padding: 20px;
       /* background:linear-gradient(rgb(83,104,120, 0.2), rgb(214, 214, 214)); */
-      
+    
   
     }
+
+    /* .mainMenu{
+      background-image: url('../Img/workplace.jpg'); 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    
+    } */
     
     .status-class{
       flex: 1;  /* le permite crecer pero menos que body-alumno */

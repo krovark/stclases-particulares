@@ -167,7 +167,6 @@ export default function ProfileTest({ publicacion }) {
             aria-expanded={expanded}
             aria-label="show more"
           >
-            Comentarios:
             <ExpandMoreIcon />
           </ExpandMore>
         </CardActions>

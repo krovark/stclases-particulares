@@ -9,6 +9,10 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
 import PermIdentity from '@mui/icons-material/Person';
+import Badge from '@mui/material/Badge';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import Popover from '@mui/material/Popover';
+import NotificationContent from './NotificationContent';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { selectLoggedIn, logOut } from '../redux/authSlice';
@@ -26,8 +30,23 @@ const NavigationBar = () => {
 
   };
 
+  const unreadCount = useSelector((state) => state.notifications.unreadCount);
+
+
+      const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleOpenPopover = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+
+    const handleClosePopover = () => {
+      setAnchorEl(null);
+    };
+
+
   return (
-    // Barra de navegación utilizando React Bootstrap
+    <>
+    
     <Navbar expand="lg" bg="dark" variant="dark" data-bs-theme="dark" className="bg-body-tertiary navbar-dark">
       <Container fluid>
         {/* Marca del sitio (con enlace a Home) */}
@@ -51,12 +70,18 @@ const NavigationBar = () => {
           </Nav>
 
           {isLoggedIn && (
+            <>
             <div className="d-flex ml-auto">
-              {/* <Button variant="outline-light" onClick={handleLogout}>Cerrar sesión</Button> */}
-              <a href="#" style={{ color: 'white', textDecoration: 'underline' }} onClick={handleLogout}>Cerrar sesión</a>
-            </div>
-          )}
+              <Badge badgeContent={unreadCount} color="error">
+            <NotificationsIcon style={{ color: 'white', marginRight: '15px', cursor: 'pointer' }} onClick={handleOpenPopover} />
+          </Badge>
+          </div>
 
+           <div className="d-flex ml-auto">
+              <a href="/home" style={{ color: 'white', textDecoration: 'underline' }} onClick={handleLogout}>Cerrar sesión</a>
+            </div>
+            </>
+          )}
 
           {!isLoggedIn && ( // mostrar el botón de inicio de sesión si el usuario no está autenticado
           <div className="d-flex align-items-center">
@@ -68,10 +93,27 @@ const NavigationBar = () => {
           </div>
         )}
           
-          {/* Grupo de elementos a la derecha */}
         </Navbar.Collapse>
       </Container>
     </Navbar>
+
+<Popover
+            open={Boolean(anchorEl)}
+            anchorEl={anchorEl}
+            onClose={handleClosePopover}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'center',
+            }}
+        >
+           <NotificationContent></NotificationContent>
+        </Popover>
+    </>
+
     
   );
 }

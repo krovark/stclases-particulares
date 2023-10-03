@@ -173,6 +173,7 @@ const promedio = calcularPromedio(pub_commited);
   return (
     // Contiene toda la pagina de perfil
     <div className="big-profile-container"> 
+    
       <div className="inside-container">
       
         {/* Contiene toda la data del usuario docente */}
