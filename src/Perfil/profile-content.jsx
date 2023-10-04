@@ -12,7 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import ProfileTest from './profile-test';
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
-
+import HistoryCompo from './TabComponents/historyCompo'
 
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -21,114 +21,113 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 
+// export function FormDialog() {
+//   const [open, setOpen] = React.useState(false);
+//   const [tipo, setTipo] = useState(''); // Estado para rastrear el valor del tipo
+//   const [frecuencia, setFrecuencia] = useState(''); // Estado para rastrear el valor de la frecuencia
+//   const [descripcion, setDescripcion] = useState('');
 
-export function FormDialog() {
-  const [open, setOpen] = React.useState(false);
-  const [tipo, setTipo] = useState(''); // Estado para rastrear el valor del tipo
-  const [frecuencia, setFrecuencia] = useState(''); // Estado para rastrear el valor de la frecuencia
-  const [descripcion, setDescripcion] = useState('');
+//   const handleClickOpen = () => {
+//     setOpen(true);
+//   };
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+//   const handleClose = () => {
+//     setOpen(false);
+//   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+//   const handleTipoChange = (event) => {
+//     setTipo(event.target.value); // Actualiza el valor del tipo cuando cambia
+//   };
 
-  const handleTipoChange = (event) => {
-    setTipo(event.target.value); // Actualiza el valor del tipo cuando cambia
-  };
+//   const handleFrecuenciaChange = (event) => {
+//     setFrecuencia(event.target.value); // Actualiza el valor de la frecuencia cuando cambia
+//   };
 
-  const handleFrecuenciaChange = (event) => {
-    setFrecuencia(event.target.value); // Actualiza el valor de la frecuencia cuando cambia
-  };
+//   const handleDescripcionChange = (event) => {
+//     setDescripcion(event.target.value);
+//   };
 
-  const handleDescripcionChange = (event) => {
-    setDescripcion(event.target.value);
-  };
-
-  return (
-    <div>
-      <Button variant="contained" onClick={handleClickOpen} sx={{fontSize: "large",}} >
-        Crear curso
-      </Button>
-      <Dialog open={open} onClose={handleClose}>
+//   return (
+//     <div>
+//       <Button variant="contained" onClick={handleClickOpen} sx={{fontSize: "large",}} >
+//         Crear curso
+//       </Button>
+//       <Dialog open={open} onClose={handleClose}>
         
-        <DialogContent>
-          <DialogContentText>
+//         <DialogContent>
+//           <DialogContentText>
             
-          </DialogContentText>
-          <TextField
-      autoFocus
-      margin="dense"
-      id="category"
-      label="Categoría"
-      type="text"
-      fullWidth
-      variant="outlined"
-    />
-    <TextField
-      margin="dense"
-      id="type"
-      label="Tipo"
-      select
-      fullWidth
-      value={tipo}
-      onChange={handleTipoChange}
-      variant="outlined"
-      InputProps={{
+//           </DialogContentText>
+//           <TextField
+//       autoFocus
+//       margin="dense"
+//       id="category"
+//       label="Categoría"
+//       type="text"
+//       fullWidth
+//       variant="outlined"
+//     />
+//     <TextField
+//       margin="dense"
+//       id="type"
+//       label="Tipo"
+//       select
+//       fullWidth
+//       value={tipo}
+//       onChange={handleTipoChange}
+//       variant="outlined"
+//       InputProps={{
         
-      }}
-    >
-      <MenuItem value="Individual">Individual</MenuItem>
-      <MenuItem value="Grupal">Grupal</MenuItem>
-    </TextField>
-    <TextField
-            margin="dense"
-            id="frecuencia"
-            label="Frecuencia"
-            select
-            fullWidth
-            variant="outlined"
-            value={frecuencia} // Valor seleccionado para frecuencia
-            onChange={handleFrecuenciaChange} // Manejar cambios en el valor de la frecuencia
-          >
-            <MenuItem value="Única">Única</MenuItem>
-            <MenuItem value="Semanal">Semanal</MenuItem>
-            <MenuItem value="Mensual">Mensual</MenuItem>
-          </TextField>
-          <TextField
-      autoFocus
-      margin="dense"
-      id="costo"
-      label="Costo por clase"
-      type="text"
-      fullWidth
-      variant="outlined"
-    />
-    <TextField
-            margin="dense"
-            id="descripcion"
-            label="Descripción"
-            multiline // Esto habilita el modo multilinea
-            rows={4} // Puedes ajustar la cantidad de filas que deseas mostrar
-            fullWidth
-            variant="outlined" // Puedes usar outlined para un borde visible o standard para un borde más delgado
-            value={descripcion}
-            onChange={handleDescripcionChange}
-          />
-  </DialogContent>
+//       }}
+//     >
+//       <MenuItem value="Individual">Individual</MenuItem>
+//       <MenuItem value="Grupal">Grupal</MenuItem>
+//     </TextField>
+//     <TextField
+//             margin="dense"
+//             id="frecuencia"
+//             label="Frecuencia"
+//             select
+//             fullWidth
+//             variant="outlined"
+//             value={frecuencia} // Valor seleccionado para frecuencia
+//             onChange={handleFrecuenciaChange} // Manejar cambios en el valor de la frecuencia
+//           >
+//             <MenuItem value="Única">Única</MenuItem>
+//             <MenuItem value="Semanal">Semanal</MenuItem>
+//             <MenuItem value="Mensual">Mensual</MenuItem>
+//           </TextField>
+//           <TextField
+//       autoFocus
+//       margin="dense"
+//       id="costo"
+//       label="Costo por clase"
+//       type="text"
+//       fullWidth
+//       variant="outlined"
+//     />
+//     <TextField
+//             margin="dense"
+//             id="descripcion"
+//             label="Descripción"
+//             multiline // Esto habilita el modo multilinea
+//             rows={4} // Puedes ajustar la cantidad de filas que deseas mostrar
+//             fullWidth
+//             variant="outlined" // Puedes usar outlined para un borde visible o standard para un borde más delgado
+//             value={descripcion}
+//             onChange={handleDescripcionChange}
+//           />
+//   </DialogContent>
         
-        <DialogActions>
+//         <DialogActions>
 
-          <Button variant="outlined" onClick={handleClose}>Cancelar</Button>
-          <Button variant="contained" onClick={handleClose}>Aceptar</Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-  );
-}
+//           <Button variant="outlined" onClick={handleClose}>Cancelar</Button>
+//           <Button variant="contained" onClick={handleClose}>Aceptar</Button>
+//         </DialogActions>
+//       </Dialog>
+//     </div>
+//   );
+// }
 
 
 const Profilesite = () => {
@@ -162,10 +161,7 @@ const Profilesite = () => {
     }, 0);
 
     return suma / publicaciones.length;
-}
-
-
-
+  }
 
 const promedio = calcularPromedio(pub_commited);
 
@@ -173,7 +169,6 @@ const promedio = calcularPromedio(pub_commited);
   return (
     // Contiene toda la pagina de perfil
     <div className="big-profile-container"> 
-    
       <div className="inside-container">
       
         {/* Contiene toda la data del usuario docente */}
@@ -206,17 +201,29 @@ const promedio = calcularPromedio(pub_commited);
             <div className="agregar-publi">
 
             
-           <FormDialog></FormDialog>
+           {/* <FormDialog></FormDialog> */}
 
             </div>
-            {/* Aca este es el container de todas las publicaciones del docente */}
-            <div className="publicaciones-container">
-    {pub_commited.map((dcPost) => (
-        <div className="perfil-preview" key={dcPost.id}>
-            <ProfileTest publicacion={dcPost}></ProfileTest>
+            <div className="agregar-publi">
+
             
-        </div>
-    ))}
+           {/* <FormDialog></FormDialog> */}
+
+            </div>
+
+
+
+            <div className="publicaciones-container">
+            
+            <div className="box-container-historial">
+              <HistoryCompo></HistoryCompo>
+              </div>
+              {/* {pub_commited.map((dcPost) => (
+                  <div className="perfil-preview" key={dcPost.id}>
+                      <ProfileTest publicacion={dcPost}></ProfileTest>
+                      
+                  </div>
+              ))} */}
         </div>
         </div>
        </div>

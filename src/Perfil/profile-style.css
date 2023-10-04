@@ -4,7 +4,6 @@
     margin-top: 20px;
 }
 
-
   .info-container {
     
     position: relative;
@@ -63,12 +62,9 @@
     
   }
 
-  
-
   .settings{
     text-align: right;
   }
-
 
   .agregar-publi{
   display: flex; /* Usar flexbox para centrar vertical y horizontalmente */
@@ -141,6 +137,11 @@
       margin: auto;
     
     }
+}
+
+.box-container-historial{
+
+  align-items: center;
 }
 
 /* Para móviles (supongamos que es un diseño para anchos menores a 600px) */
