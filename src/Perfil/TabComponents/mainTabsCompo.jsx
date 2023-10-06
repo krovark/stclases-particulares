@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Historial from '../../Historial/historial'
 import PostCreados from './PostComponents'
+import CoursesTaken from './coursesTaken'
 import '../profile-style.css';
 
 function CustomTabPanel(props) {
@@ -78,6 +79,7 @@ export default function BasicTabs() {
         <PostCreados/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
+      <CoursesTaken/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
       <Historial></Historial>

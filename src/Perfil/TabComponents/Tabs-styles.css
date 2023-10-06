@@ -7,23 +7,15 @@
 
 }
 
- /* position: relative;
-        padding: 10px 16px;
-        margin: 20px auto;
-        border: 1px solid  grey;
-        border-radius: 20px;
-        background-color: #f9f9fc;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        max-width: 90%; */
-
 .curso-box h2 {
     margin-top: 0;
 }
 
-.curso-box ol {
+.servicio-title{
+    padding-top: 20px;
+}
+
+.datos-list {
     list-style-type: none;
     padding-left: 0;
 }
@@ -42,27 +34,91 @@
     gap: 20px;
   }
   
-  .cursoBox {
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: white;
+  .cursos-preview {
+    position: relative;
+  padding: 10px 16px;
+  margin: 20px auto;
+  border: 1px solid  grey;
+  border-radius: 20px;
+  background-color: #f9f9fc;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  max-width: 60%;
   }
   
-  .header {
-    margin-top: 0;
+  .servicio-title h1 {
+    margin: 0;
+    text-align: center;
+    width: 100%;
   }
-  
-  .list {
-    list-style-type: none;
-    padding-left: 0;
+
+  .estado-curso{
+    color: grey;
+    font-size: 12px;
   }
+
+  .body-datos {
+    display: flex;
+    justify-content: center;
+  }
+
+  .ul-datos {
+  list-style-type: none;
+  width: 100%;
+  text-align: left;
+  padding-top: 30px;
+  }
+
   
   .textArea {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 20px; 
+  }
+
+  .cursos-list{
+    margin: 40px auto;
+    padding: 20px;
+  }
+ 
+  .comentario-section {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+  }
+
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .cursos-preview {
+      max-width: 80%; 
+    }
+  
+    .ul-datos, .textArea, .servicio-title h2 {
+      padding-left: 10px; 
+      padding-right: 10px; 
+    }
+  }
+  
+  /* Estilos para móviles */
+  @media (max-width: 767px) {
+    .cursos-preview {
+      max-width: 100%; 
+      padding: 5px 10px; 
+    }
+  
+    .ul-datos, .textArea, .servicio-title h2 {
+      padding-left: 5px; 
+      padding-right: 5px; 
+    }
+  
+    .servicio-title h2 {
+      font-size: 1.2rem; 
+    }
+  
+    .textArea {
+      margin-top: 10px; 
+    }
   }
