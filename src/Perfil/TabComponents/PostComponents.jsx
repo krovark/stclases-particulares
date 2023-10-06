@@ -1,18 +1,7 @@
 import React, { useState } from 'react';
 import '../profile-style.css';
-import avatarImage from '../../Img/avatar.png';
-import { styled } from '@mui/material/styles';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
 import MenuItem from '@mui/material/MenuItem';
 import ProfileTest from '../profile-test';
-import EditIcon from '@mui/icons-material/Edit';
-import IconButton from '@mui/material/IconButton';
-import HistoryCompo from './historyCompo'
 
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -120,7 +109,6 @@ export function FormDialog() {
     </DialogContent>
           
           <DialogActions>
-  
             <Button variant="outlined" onClick={handleClose}>Cancelar</Button>
             <Button variant="contained" onClick={handleClose}>Aceptar</Button>
           </DialogActions>
@@ -131,56 +119,134 @@ export function FormDialog() {
 
 
 const PostSite = () => {
-
-
-    const [perfil, setDatos] = useState([
-        { dcName: 'Gaston', dcApellido: 'Bortolin', calificacion: '4', ccreada: '04/8/2022',email:'sapopepe@gmail.com', phonen:'1150591132' ,cclases: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae, repudiandae sit', id: 1 },
-      ]);
     
       const [pub_commited, setPublicaciones] = useState([
-        { categoria: 'Piano', precio: '50', calificacion: 4 ,cclases: 'Individuales', despcripcion: 'Vamos hacer esto y lo otro', id: 1, freq: 'Semanal', estado:'Activa' ,comentarios: [
+        { 
+          categoria: 'Piano', 
+          precio: '50', 
+          calificacion: 4 ,
+          cclases: 'Individuales', 
+          despcripcion: 'Vamos hacer esto y lo otro', 
+          id: 1, 
+          freq: 'Semanal', 
+          estado:'Activa', 
+          comentarios: [
             { id: 1, texto: 'Usuario 20: Comentario 1 para Piano' },
-            { id: 2, texto: 'Usuario 10: Comentario 2 para Piano' },],},
+            { id: 2, texto: 'Usuario 10: Comentario 2 para Piano' },
+            { id: 3, texto: 'Usuario 18: Comentario 3 para Piano' },
+            { id: 4, texto: 'Usuario 12: Comentario 4 para Piano' },
+            { id: 5, texto: 'Usuario 26: Comentario 5 para Piano' },
+            { id: 6, texto: 'Usuario 24: Comentario 6 para Piano' },
+            { id: 7, texto: 'Usuario 23: Comentario 7 para Piano' },
+            { id: 8, texto: 'Usuario 17: Comentario 8 para Piano' },
+            { id: 9, texto: 'Usuario 27: Comentario 9 para Piano' },
+            { id: 10, texto: 'Usuario 14: Comentario 10 para Piano' },
+          ]
+        },
             
-        { categoria: 'Guitarra', precio: '50', calificacion: 5 ,cclases: 'Individual', despcripcion: 'Vamos hacer esto y lo otro', id: 2, freq: 'Unica', estado:'Deshabilitada' ,comentarios: [
+        { 
+          categoria: 'Guitarra', 
+          precio: '50', 
+          calificacion: 5 ,
+          cclases: 'Individual', 
+          despcripcion: 'Vamos hacer esto y lo otro', 
+          id: 2, 
+          freq: 'Unica', 
+          estado:'Deshabilitada',
+          comentarios: 
+          [
             { id: 1, texto:  'Usuario 8: Comentario 1 para Guitarra' },
             { id: 2, texto: 'Usuario 3: Comentario 2 para Guitarra' },
-          ], },
-        { categoria: 'Cocina', precio: '50', calificacion: 1 ,cclases: 'Grupales', despcripcion: 'Vamos hacer esto y lo otro', id: 3,freq: 'Mensual' ,estado:'Deshabilitada' ,comentarios: [
+          ]
+        },
+        { 
+          categoria: 'Cocina', 
+          precio: '50', 
+          calificacion: 1 ,
+          cclases: 'Grupales', 
+          despcripcion: 'Vamos hacer esto y lo otro', 
+          id: 3,
+          freq: 'Mensual',
+          estado:'Deshabilitada',
+          comentarios: 
+          [
             { id: 1, texto: 'Usuario 22:  Comentario 1 para Cocina' },
             { id: 2, texto: 'Usuario 12: Comentario 2 para Cocina' },
-          ], },
-        { categoria: 'Manejo', precio: '50', calificacion: 3 ,cclases: 'Individual', despcripcion: 'Vamos hacer esto y lo otro', id: 4,freq: 'Unica' ,estado:'Activa' ,comentarios: [
+          ]
+        },
+        { 
+          categoria: 'Manejo', 
+          precio: '50', 
+          calificacion: 3 ,
+          cclases: 'Individual', 
+          despcripcion: 'Vamos hacer esto y lo otro', 
+          id: 4,
+          freq: 'Unica' ,
+          estado:'Activa' ,
+          comentarios: 
+          [
             { id: 1, texto: 'Usuario 50: Comentario 1 para Manejo' },
             { id: 2, texto: 'Usuario 40: Comentario 2 para Manejo' },
-          ], },
+          ] 
+        },
       ]);
+
+
+    // Función para aceptar un comentario en una publicación específica
+    const acceptComment = (postId, commentId) => {
+      setPublicaciones((prevState) =>
+        prevState.map((post) => {
+          if (post.id === postId) {
+            return {
+              ...post,
+              comentarios: post.comentarios.map((comment) => {
+                if (comment.id === commentId) {
+                  return { ...comment, aceptado: true };
+                }
+                return comment;
+              }),
+            };
+          }
+          return post;
+        })
+      );
+    };
+
+    // Función para eliminar un comentario en una publicación específica
+    const deleteComment = (postId, commentId) => {
+      setPublicaciones((prevState) =>
+        prevState.map((post) => {
+          if (post.id === postId) {
+            return {
+              ...post,
+              comentarios: post.comentarios.filter(
+                (comment) => comment.id !== commentId
+              ),
+            };
+          }
+          return post;
+        })
+      );
+    };
     
 
     return ( 
 
-        <div className="posteos-hechos">
-        <div className="agregar-publi">
-
-            
-        <FormDialog></FormDialog>
-
+      <div className="posteos-hechos">
+      <div className="agregar-publi">
+        <FormDialog />
+      </div>
+      {pub_commited.map((dcPost) => (
+        <div className="perfil-preview" key={dcPost.id}>
+          <ProfileTest
+            publicacion={dcPost}
+            onAcceptComment={acceptComment}
+            onDeleteComment={deleteComment}
+          />
         </div>
-        {pub_commited.map((dcPost) => (
-            <div className="perfil-preview" key={dcPost.id}>
-                <ProfileTest publicacion={dcPost}></ProfileTest>
-                
-            </div>
-        ))}
-
-        </div>
+      ))}
+    </div>
      );
 }
  
 export default PostSite;
-
-
-
-
-
-

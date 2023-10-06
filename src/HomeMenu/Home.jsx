@@ -19,7 +19,7 @@ import HireService from './getService'
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import HistorialSite from '../Historial/Historial-site';
-import Profilesite from '../Perfil/perfil-site';
+import Profilesite from '../Perfil/profile-site';
 import userLogin from '../Login/LoginForm';
 import { useSelector } from 'react-redux';
 import { selectLoggedIn } from '../redux/authSlice';

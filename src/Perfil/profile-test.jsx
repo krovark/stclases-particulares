@@ -16,6 +16,9 @@ import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
+import AcceptIcon from '@mui/icons-material/CheckCircle';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -28,7 +31,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function ProfileTest({ publicacion }) {
+export default function ProfileTest({ publicacion, onAcceptComment, onDeleteComment }) {
   const [expanded, setExpanded] = React.useState(false);
   const [editMode, setEditMode] = useState(false); // Estado para controlar el modo de edición
   const [editedData, setEditedData] = useState({}); // Estado para rastrear los valores editados
@@ -172,9 +175,25 @@ export default function ProfileTest({ publicacion }) {
             {publicacion.comentarios.map((comentario) => (
               <Box
                 key={comentario.id}
-                sx={{ border: '1px solid gray', m: 1, p: 1 }}
+                sx={{ border: '1px solid gray', m: 1, p: 1, display: 'flex', alignItems: 'center' }}
               >
                 <Typography>{comentario.texto}</Typography>
+                {!comentario.aceptado && (
+                  <>
+                    <IconButton
+                      aria-label="Aceptar"
+                      onClick={() => onAcceptComment(publicacion.id, comentario.id)}
+                    >
+                      <AcceptIcon />
+                    </IconButton>
+                    <IconButton
+                      aria-label="Eliminar"
+                      onClick={() => onDeleteComment(publicacion.id, comentario.id)}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </>
+                )}
               </Box>
             ))}
           </CardContent>
