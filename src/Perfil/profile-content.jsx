@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './profile-style.css';
 import avatarImage from '../Img/avatar.png';
 import { styled } from '@mui/material/styles';
@@ -12,92 +12,113 @@ import MenuItem from '@mui/material/MenuItem';
 import ProfileTest from './PrExpansionC';
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
-import TabsComponent from './TabComponents/mainTabsCompo'
-
-
+import TabsComponent from './TabComponents/mainTabsCompo';
 
 const Profilesite = () => {
-  const [perfil, setDatos] = useState([
-    { dcName: 'Gaston', dcApellido: 'Bortolin', calificacion: '4', ccreada: '04/8/2022',email:'sapopepe@gmail.com', phonen:'1150591132' ,cclases: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae, repudiandae sit', id: 1 },
-  ]);
+  const initialProfileData = [
+    { dcName: 'Gaston', dcApellido: 'Bortolin', calificacion: '4', ccreada: '04/8/2022', email: 'sapopepe@gmail.com', phonen: '1150591132', cclases: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae, repudiandae sit', experiencia: 'Estudié en UADE', id: 1 },
+  ];
+
+  const [perfil, setDatos] = useState(initialProfileData);
+  const [editMode, setEditMode] = useState(false);
+  const [editedData, setEditedData] = useState(null);
+
+  const [editedTitulo, setEditedTitulo] = useState('');
+  const [editedExperiencia, setEditedExperiencia] = useState('');
 
   const [pub_commited, setPublicaciones] = useState([
-    { categoria: 'Piano', precio: '50', calificacion: 4 ,cclases: 'Individuales', despcripcion: 'Vamos hacer esto y lo otro', id: 1, freq: 'Semanal', estado:'Activa' ,comentarios: [
+    {
+      categoria: 'Piano',
+      precio: '50',
+      calificacion: 4,
+      cclases: 'Individuales',
+      descripcion: 'Vamos a hacer esto y lo otro',
+      id: 1,
+      freq: 'Semanal',
+      estado: 'Activa',
+      comentarios: [
         { id: 1, texto: 'Usuario 20: Comentario 1 para Piano' },
-        { id: 2, texto: 'Usuario 10: Comentario 2 para Piano' },],},
-        
-    { categoria: 'Guitarra', precio: '50', calificacion: 5 ,cclases: 'Individual', despcripcion: 'Vamos hacer esto y lo otro', id: 2, freq: 'Unica', estado:'Deshabilitada' ,comentarios: [
-        { id: 1, texto:  'Usuario 8: Comentario 1 para Guitarra' },
-        { id: 2, texto: 'Usuario 3: Comentario 2 para Guitarra' },
-      ], },
-    { categoria: 'Cocina', precio: '50', calificacion: 1 ,cclases: 'Grupales', despcripcion: 'Vamos hacer esto y lo otro', id: 3,freq: 'Mensual' ,estado:'Deshabilitada' ,comentarios: [
-        { id: 1, texto: 'Usuario 22:  Comentario 1 para Cocina' },
-        { id: 2, texto: 'Usuario 12: Comentario 2 para Cocina' },
-      ], },
-    { categoria: 'Manejo', precio: '50', calificacion: 3 ,cclases: 'Individual', despcripcion: 'Vamos hacer esto y lo otro', id: 4,freq: 'Unica' ,estado:'Activa' ,comentarios: [
-        { id: 1, texto: 'Usuario 50: Comentario 1 para Manejo' },
-        { id: 2, texto: 'Usuario 40: Comentario 2 para Manejo' },
-      ], },
+        { id: 2, texto: 'Usuario 10: Comentario 2 para Piano' },
+      ],
+    },
+    // ... Otras publicaciones
   ]);
-
 
   const calcularPromedio = (publicaciones) => {
     let suma = publicaciones.reduce((acumulador, publicacion) => {
-        return acumulador + publicacion.calificacion;
+      return acumulador + publicacion.calificacion;
     }, 0);
 
     return suma / publicaciones.length;
   }
 
-const promedio = calcularPromedio(pub_commited);
+  const promedio = calcularPromedio(pub_commited);
 
+  useEffect(() => {
+    if (editMode) {
+      // Copia los datos actuales del perfil a editedData al entrar en modo de edición
+      setEditedData(perfil[0]);
+      setEditedTitulo(perfil[0].cclases);
+      setEditedExperiencia(perfil[0].experiencia);
+    }
+  }, [editMode, perfil]);
+
+  const handleSaveChanges = () => {
+    // Aquí puedes enviar los datos editados al servidor o realizar otras acciones necesarias.
+    // Actualiza el perfil con los datos de editedData.
+    setDatos([{
+      ...editedData,
+      cclases: editedTitulo,
+      experiencia: editedExperiencia,
+    }]);
+    setEditMode(false); // Desactiva el modo de edición.
+  };
 
   return (
-    // Contiene toda la pagina de perfil
-      <div className="inside-container">
-      
-        {/* Contiene toda la data del usuario docente */}
-        <div className="info-container">
-          
-          <div className="avatar-container">
-            <img src="/2.jpg" alt="Avatar del docente" />
-          </div>
-          <div className="datos-docente">
-            <div className="settings">
-          <IconButton>
-            <EditIcon />
-          </IconButton>
-          </div>
-            {perfil.map((dcPersona) => (
-              <div key={dcPersona.id}>
-                <h1>{dcPersona.dcName} {dcPersona.dcApellido}</h1>
-               
-                <p id='time-stamp'>Cuenta creada: {dcPersona.ccreada}</p>
-                <br></br>
-                <p>Email: {dcPersona.email} </p>
-                <p>Telefono: {dcPersona.phonen} </p>
-                <p>Título: {dcPersona.cclases}</p>
-                <p>Experiencia: {dcPersona.cclases}</p>
-                <p>Promedio: {promedio}</p>
+    <div className="inside-container">
+      <div className="info-container">
+        <div className="avatar-container">
+          <img src={avatarImage} alt="Avatar del docente" />
+        </div>
+        <div className="datos-docente">
+          <div className="settings">
+            {editMode ? (
+              <div>
+                <IconButton onClick={() => setEditMode(false)}>
+                  Cancelar
+                </IconButton>
+                <IconButton onClick={() => handleSaveChanges()}>
+                  Guardar
+                </IconButton>
               </div>
-            ))}
+            ) : (
+              <IconButton onClick={() => setEditMode(true)}>
+                <EditIcon />
+              </IconButton>
+            )}
           </div>
+          {perfil.map((dcPersona) => (
+            <div key={dcPersona.id}>
+              <h1>{dcPersona.dcName} {dcPersona.dcApellido}</h1>
+              <p id='time-stamp'>Cuenta creada: {dcPersona.ccreada}</p>
+              <br></br>
+              <p>Email: {editMode ? <input type="text" value={editedData?.email || ''} onChange={(e) => setEditedData({ ...editedData, email: e.target.value })} /> : dcPersona.email}</p>
+              <p>Telefono: {editMode ? <input type="text" value={editedData?.phonen || ''} onChange={(e) => setEditedData({ ...editedData, phonen: e.target.value })} /> : dcPersona.phonen}</p>
+              <p>Título: {editMode ? <input type="text" value={editedTitulo || ''} onChange={(e) => setEditedTitulo(e.target.value)} /> : dcPersona.cclases}</p>
+              <p>Experiencia: {editMode ? <input type="text" value={editedExperiencia || ''} onChange={(e) => setEditedExperiencia(e.target.value)} /> : dcPersona.experiencia}</p>
+              {!editMode && <p>Calificación: {dcPersona.calificacion}</p>}
+            </div>
+          ))}
         </div>
-        <br></br>
-        <br></br>
-            <div className="publicaciones-container">
-            
-            <div className="box-container-historial">
-              <TabsComponent/>
-              </div>
-              
+      </div>
+      <br></br>
+      <br></br>
+      <div className="publicaciones-container">
+        <div className="box-container-historial">
+          <TabsComponent />
         </div>
-        </div>
-       
-    
-       
-    
-    
+      </div>
+    </div>
   );
 };
 
