@@ -9,7 +9,6 @@
     position: relative;
     padding: 10px 16px;
     margin: auto;
-    /* border: 1px solid  grey; */
     border-radius: 10px;
     background-color: white;
     display: flex;
@@ -93,7 +92,7 @@
     padding: 10px 16px 20px;
     margin: 40px auto;
     border: 1mm ridge  #6497b1;
-    border-radius: 5px;
+    border-radius: 20px;
     background-color: #fff;
   }
  
