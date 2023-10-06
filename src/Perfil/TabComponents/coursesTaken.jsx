@@ -228,7 +228,7 @@ function CursosInscritos() {
             </div>
             <div className="comentario-section">
               {!curso.comentario ? (
-                <Button variant="outlined" onClick={() => openCommentDialog(curso)}>
+                <Button variant="outlined" onClick={() => openCommentDialog(curso)} disabled={curso.estadoServicio === 'Cancelado'}>
                   Agregar Comentario
                 </Button>
               ) : (

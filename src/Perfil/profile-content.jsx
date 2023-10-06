@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './profile-style.css';
-import avatarImage from '../Img/avatar.png';
+import avatarImage from '../Img/2.jpg';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
