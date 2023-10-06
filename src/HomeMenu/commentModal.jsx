@@ -1,8 +1,10 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useEffect } from 'react';
 import './menu.css';
+import Rating from '@mui/material/Rating';
+
+
 
 function CommentModal(props) {
 
@@ -20,50 +22,50 @@ function CommentModal(props) {
       }, [props.show]);
 
       const simulatedComments = [
-        { username: "Usuario1", text: "Este es un comentario." },
-        { username: "Usuario2", text: "Bien explicado." },
-        { username: "Usuario3", text: "¡Me encanta este contenido!" },
-        { username: "Usuario4", text: "Este es un comentario." },
-        { username: "Usuario5", text: "Bien explicado." },
-        { username: "Usuario6", text: "¡Me encanta este contenido!" },
-        { username: "Usuario7", text: "Este es un comentario." },
-        { username: "Usuario8", text: "Bien explicado." },
+        { username: "Usuario1", text: "Este es un comentario.", calificacion: 4 },
+        { username: "Usuario2", text: "Bien explicado.", calificacion: 4 },
+        { username: "Usuario3", text: "¡Me encanta este contenido!" , calificacion: 2 },
+        { username: "Usuario4", text: "Este es un comentario." , calificacion: 5 },
+        { username: "Usuario5", text: "Bien explicado." , calificacion: 2 }, 
+        { username: "Usuario6", text: "¡Me encanta este contenido!" , calificacion: 1 },
+        { username: "Usuario7", text: "Este es un comentario.", calificacion: 3 },
+        { username: "Usuario8", text: "Bien explicado." , calificacion: 3 },
+        { username: "Usuario9", text: "¡Me encanta este contenido!", calificacion: 2 },
+        { username: "Usuario10", text: "Este es un comentario.",  calificacion: 4 },
+        { username: "Usuario11", text: "Bien explicado.", calificacion: 4 },
+        { username: "Usuario12", text: "¡Me encanta este contenido!", calificacion: 4 },
+        { username: "Usuario13", text: "Este es un comentario.", calificacion: 4 },
+        { username: "Usuario14", text: "Bien explicado.", calificacion: 3 },
+        { username: "Usuario11", text: "Bien explicado." ,calificacion: 2 },
+        { username: "Usuario12", text: "¡Me encanta este contenido!" ,calificacion: 2},
+        { username: "Usuario13", text: "Este es un comentario." ,calificacion: 2 },
+        { username: "Usuario14", text: "Bien explicado.",calificacion: 3 },
+        { username: "Usuario11", text: "Bien explicado." ,calificacion: 2},
+        { username: "Usuario12", text: "¡Me encanta este contenido!",calificacion: 3 },
+        { username: "Usuario13", text: "Este es un comentario.",calificacion: 5 },
+        { username: "Usuario14", text: "Bien explicado." ,calificacion: 5 },
+        { username: "Usuario1", text: "Este es un comentario.",calificacion: 5 },
+        { username: "Usuario2", text: "Bien explicado.",calificacion: 2 },
+        { username: "Usuario3", text: "¡Me encanta este contenido!",calificacion: 2 },
+        { username: "Usuario4", text: "Este es un comentario.",calificacion: 3 },
+        { username: "Usuario5", text: "Bien explicado.",calificacion: 3 },
+        { username: "Usuario6", text: "¡Me encanta este contenido!",calificacion: 5 },
+        { username: "Usuario7", text: "Este es un comentario." ,calificacion: 1 },
+        { username: "Usuario8", text: "Bien explicado.",calificacion: 5 },
         { username: "Usuario9", text: "¡Me encanta este contenido!" },
-        { username: "Usuario10", text: "Este es un comentario." },
-        { username: "Usuario11", text: "Bien explicado." },
+        { username: "Usuario10", text: "Este es un comentario.",calificacion: 5 },
+        { username: "Usuario11", text: "Bien explicado.",calificacion: 5 },
         { username: "Usuario12", text: "¡Me encanta este contenido!" },
-        { username: "Usuario13", text: "Este es un comentario." },
-        { username: "Usuario14", text: "Bien explicado." },
-        { username: "Usuario11", text: "Bien explicado." },
-        { username: "Usuario12", text: "¡Me encanta este contenido!" },
-        { username: "Usuario13", text: "Este es un comentario." },
-        { username: "Usuario14", text: "Bien explicado." },
-        { username: "Usuario11", text: "Bien explicado." },
-        { username: "Usuario12", text: "¡Me encanta este contenido!" },
-        { username: "Usuario13", text: "Este es un comentario." },
-        { username: "Usuario14", text: "Bien explicado." },
-        { username: "Usuario1", text: "Este es un comentario." },
-        { username: "Usuario2", text: "Bien explicado." },
-        { username: "Usuario3", text: "¡Me encanta este contenido!" },
-        { username: "Usuario4", text: "Este es un comentario." },
-        { username: "Usuario5", text: "Bien explicado." },
-        { username: "Usuario6", text: "¡Me encanta este contenido!" },
-        { username: "Usuario7", text: "Este es un comentario." },
-        { username: "Usuario8", text: "Bien explicado." },
-        { username: "Usuario9", text: "¡Me encanta este contenido!" },
-        { username: "Usuario10", text: "Este es un comentario." },
-        { username: "Usuario11", text: "Bien explicado." },
-        { username: "Usuario12", text: "¡Me encanta este contenido!" },
-        { username: "Usuario13", text: "Este es un comentario." },
-        { username: "Usuario14", text: "Bien explicado." },
-        { username: "Usuario11", text: "Bien explicado." },
-        { username: "Usuario12", text: "¡Me encanta este contenido!" },
-        { username: "Usuario13", text: "Este es un comentario." },
-        { username: "Usuario14", text: "Bien explicado." },
-        { username: "Usuario11", text: "Bien explicado." },
-        { username: "Usuario12", text: "¡Me encanta este contenido!" },
-        { username: "Usuario13", text: "Este es un comentario." },
-        { username: "Usuario14", text: "Bien explicado." },
+        { username: "Usuario13", text: "Este es un comentario." ,calificacion: 3 },
+        { username: "Usuario14", text: "Bien explicado." ,calificacion: 1 },
+        { username: "Usuario11", text: "Bien explicado." ,calificacion: 1 },
+        { username: "Usuario12", text: "¡Me encanta este contenido!" ,calificacion: 1 },
+        { username: "Usuario13", text: "Este es un comentario.",calificacion: 3 },
+        { username: "Usuario14", text: "Bien explicado." ,calificacion: 1 },
+        { username: "Usuario11", text: "Bien explicado.",calificacion: 1 },
+        { username: "Usuario12", text: "¡Me encanta este contenido!",calificacion: 3 },
+        { username: "Usuario13", text: "Este es un comentario.",calificacion: 1 },
+        { username: "Usuario14", text: "Bien explicado." ,calificacion: 3 },
         
     ];
 
@@ -82,7 +84,9 @@ function CommentModal(props) {
       <Modal.Body className="custom-dialog-content" style={{ maxHeight: '650px', overflowY: 'auto' }}>
     {simulatedComments.map((comment, index) => (
         <div key={index} style={{ margin: '10px 0', borderBottom: '1px solid gray', padding: '10px' }}>
-            <strong>{comment.username}</strong>: {comment.text}
+            <strong>{comment.username}</strong>: {comment.text} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            <Rating name="read-only" value={comment.calificacion} readOnly />
+
         </div>
     ))}
 </Modal.Body>
@@ -94,3 +98,6 @@ function CommentModal(props) {
 }
 
 export default CommentModal;
+
+
+

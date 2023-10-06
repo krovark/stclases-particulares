@@ -7,7 +7,7 @@ import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
-import Button from '@mui/material/Button';
+
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './menu.css';
@@ -18,16 +18,12 @@ import CommentM from './commentModal'
 import HireService from './getService'
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import HistorialSite from '../Historial/Historial-site';
+import HistorialSite from '../Historial/historial';
 import Profilesite from '../Perfil/perfil-site';
 import userLogin from '../Login/LoginForm';
-import { useSelector } from 'react-redux';
-import { selectLoggedIn } from '../redux/authSlice';
+
 import Rating from '@mui/material/Rating';
 import Pagination from 'react-bootstrap/Pagination';
-
-
-
 
 const generateRandomCalificacion = () => {
   return Math.floor(Math.random() * 5) + 1; // Genera una calificación aleatoria de 1 a 5
@@ -118,7 +114,7 @@ const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, fil
     );
   });
   
-  const isUserLoggedIn = useSelector(selectLoggedIn);
+  
 
   const [modalShow, setModalShow] = useState(false);
   const [hireServiceOpen, setHireServiceOpen] = useState(false);
@@ -126,15 +122,17 @@ const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, fil
   const handleHireServiceOpen = () => {
     setHireServiceOpen(true);
   };
-
   const handleHireServiceClose = () => {
     setHireServiceOpen(false);
   };
+
+ 
+ 
   return (
     <div className="post-container">
       <div className="post-grid">
         {filteredPosts.map((post) => (
-          <div className="post-preview" key={post.id} >
+          <div className="post-preview" key={post.id}>
             <div className="head-post">
             <div className="avatar">
               <Stack direction="row" spacing={1}>
@@ -177,6 +175,9 @@ const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, fil
 
           </div>
         ))}
+
+
+
       </div>
     </div>
   );
