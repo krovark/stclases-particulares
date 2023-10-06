@@ -13,7 +13,7 @@ import Badge from '@mui/material/Badge';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Popover from '@mui/material/Popover';
 import NotificationContent from './NotificationContent';
-
+import backgroundImage from '../Img/fondoLog.jpg'
 import { useSelector, useDispatch } from 'react-redux';
 import { selectLoggedIn, logOut } from '../redux/authSlice';
 
@@ -46,7 +46,10 @@ const NavigationBar = () => {
 
   return (
     <>
-    
+      <head>
+        <link rel="preload" as="image" href={backgroundImage} />
+      </head>
+
     <Navbar expand="lg" bg="dark" variant="dark" data-bs-theme="dark" className="bg-body-tertiary navbar-dark">
       <Container fluid>
         {/* Marca del sitio (con enlace a Home) */}
