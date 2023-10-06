@@ -4,10 +4,9 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import HistorySite from '../../Historial/Historial-site'
+import Historial from '../../Historial/historial'
 import PostCreados from './PostComponents'
 import '../profile-style.css';
-
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -70,19 +69,18 @@ export default function BasicTabs() {
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example"  variant="scrollable" scrollButtons="auto">
-          <Tab label="Publicaciones" {...a11yProps(0)} />
-          <Tab label="Cursos tomados" {...a11yProps(1)} />
-          <Tab label="Cursos dictados" {...a11yProps(2)} />
+          <Tab label="Publicaciones" {...a11yProps(0)} style={{ fontSize: '16px' }}/>
+          <Tab label="Cursos tomados" {...a11yProps(1)} style={{ fontSize: '16px' }}/>
+          <Tab label="Cursos dictados" {...a11yProps(2)} style={{ fontSize: '16px' }}/>
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
         <PostCreados/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Item Two
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        <HistorySite/>
+      <Historial></Historial>
       </CustomTabPanel>
     </Box>
   );

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import '../profile-style.css';
 import MenuItem from '@mui/material/MenuItem';
 import ProfileTest from '../profile-test';
-
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -229,7 +228,6 @@ const PostSite = () => {
       );
     };
     
-
     return ( 
 
       <div className="posteos-hechos">

@@ -1,0 +1,68 @@
+.curso-box {
+    border: 1px solid  grey;
+    margin: 20px auto;
+    padding: 10px 16px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+ /* position: relative;
+        padding: 10px 16px;
+        margin: 20px auto;
+        border: 1px solid  grey;
+        border-radius: 20px;
+        background-color: #f9f9fc;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        max-width: 90%; */
+
+.curso-box h2 {
+    margin-top: 0;
+}
+
+.curso-box ol {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.curso-box textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.cursosContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .cursoBox {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+  }
+  
+  .header {
+    margin-top: 0;
+  }
+  
+  .list {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .textArea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
