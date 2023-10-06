@@ -4,9 +4,10 @@
       position: relative;
       padding: 10px 16px;
       margin: 20px auto;
-      border: 1px solid  grey;
+      border: 2mm solid  #8AA1B1;
+      
       border-radius: 20px;
-      background-color: #f9f9fc;
+      background-color: #FAFAFA;
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -33,6 +34,7 @@
 
     .historial-preview:hover {
       box-shadow: 1px 3px 5px rgba(0,0,0,0.3);
+      
     }
   
     .historial-list {

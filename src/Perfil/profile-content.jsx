@@ -75,7 +75,8 @@ const Profilesite = () => {
   };
 
   return (
-    <div className="inside-container">
+    <div className="inside-container"> 
+    <div className="top-site_profile">
       <div className="info-container">
         <div className="avatar-container">
           <img src={avatarImage} alt="Avatar del docente" />
@@ -113,6 +114,7 @@ const Profilesite = () => {
       </div>
       <br></br>
       <br></br>
+      </div>
       <div className="publicaciones-container">
         <div className="box-container-historial">
           <TabsComponent />

@@ -38,9 +38,9 @@
     position: relative;
   padding: 10px 16px;
   margin: 20px auto;
-  border: 1px solid  grey;
+  border: 2mm solid  #8AA1B1;
+  background-color: #FAFAFA;
   border-radius: 20px;
-  background-color: #f9f9fc;
   display: flex;
   flex-direction: column; 
   align-items: center;
