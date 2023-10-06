@@ -16,10 +16,13 @@ const PedidoStatusSelector = ({ selectedStatus, onStatusChange }) => {
       setIsDropdownDisabled(currentSelection === 'Finalizada' || currentSelection === 'Cancelada');
   };
 
+  const shouldDisplayPendiente = !(["Aceptada", "Finalizada", "Cancelada"].includes(currentSelection));
+
   return (
       <div className="selector-value">
           <select value={currentSelection} onChange={handleStatusChange} disabled={isDropdownDisabled}>
-              <option value="Pendiente">Pendiente</option>
+              {/* <option value="Pendiente">Pendiente</option> */}
+              { shouldDisplayPendiente && <option value="Pendiente">Pendiente</option> }
               <option value="Aceptada">Aceptada</option>
               <option value="Finalizada">Finalizada</option>
               <option value="Cancelada">Cancelada</option>
