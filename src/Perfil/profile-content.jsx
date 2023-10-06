@@ -9,7 +9,7 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import MenuItem from '@mui/material/MenuItem';
-import ProfileTest from './profile-test';
+import ProfileTest from './PrExpansionC';
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import TabsComponent from './TabComponents/mainTabsCompo'
@@ -54,7 +54,6 @@ const promedio = calcularPromedio(pub_commited);
 
   return (
     // Contiene toda la pagina de perfil
-    <div className="big-profile-container"> 
       <div className="inside-container">
       
         {/* Contiene toda la data del usuario docente */}
@@ -94,7 +93,7 @@ const promedio = calcularPromedio(pub_commited);
               
         </div>
         </div>
-       </div>
+       
     
        
     

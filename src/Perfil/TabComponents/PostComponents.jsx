@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../profile-style.css';
 import MenuItem from '@mui/material/MenuItem';
-import ProfileTest from '../profile-test';
+import ProfileTest from '../PrExpansionC';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
