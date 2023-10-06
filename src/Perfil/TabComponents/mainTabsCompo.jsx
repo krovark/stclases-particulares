@@ -4,7 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Historial from '../../Historial/historial'
+import Historial from './coursesDictated'
 import PostCreados from './PostComponents'
 import CoursesTaken from './coursesTaken'
 import '../profile-style.css';

@@ -108,7 +108,7 @@ const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, fil
     return (
       (!filtroTipo || post.tipoClase === filtroTipo) &&
       (!filtroFrecuencia || post.frecuencia === filtroFrecuencia) &&
-      (!filtroCalificacion || post.calificacion >= filtroCalificacion) && // Cambio aquí
+      (!filtroCalificacion || post.calificacion >= filtroCalificacion) && 
       (!filtroCategoria || post.categoria === filtroCategoria)
     );
   });
