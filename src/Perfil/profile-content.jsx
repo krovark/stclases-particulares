@@ -57,7 +57,7 @@ const Profilesite = () => {
   useEffect(() => {
     if (editMode) {
       // Copia los datos actuales del perfil a editedData al entrar en modo de edición
-      setEditedData(perfil[0]);
+      setEditedData(perfil[0]) ;
       setEditedTitulo(perfil[0].cclases);
       setEditedExperiencia(perfil[0].experiencia);
     }
