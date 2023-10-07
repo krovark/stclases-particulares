@@ -53,7 +53,7 @@ const NavigationBar = () => {
     <Navbar expand="lg" bg="dark" variant="dark" data-bs-theme="dark" className="bg-body-tertiary navbar-dark">
       <Container fluid>
         {/* Marca del sitio (con enlace a Home) */}
-        <Navbar.Brand as={Link} to="/home" style={{ color: 'white' }}>ClaseYA</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/home" style={{ color: 'white' }}>  <span id='tu'>tu</span>ClaseYA</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll" >
           {/* Menú de navegación centrado */}

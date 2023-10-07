@@ -35,7 +35,7 @@
   }
   
   .cursos-preview {
-    position: relative;
+    /* position: relative;
   padding: 10px 16px;
   margin: 20px auto;
   border: 2mm solid  #8AA1B1;
@@ -44,7 +44,37 @@
   display: flex;
   flex-direction: column; 
   align-items: center;
-  max-width: 60%;
+  max-width: 60%; */
+
+
+/*   
+  position: relative;
+  padding: 10px 16px;
+  margin: 20px auto;
+  border: 2mm solid  #8AA1B1;
+  background-color: #FAFAFA;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 48%;  */
+
+
+
+  position: relative;
+  padding: 10px 16px;
+  margin: 20px 0.5%;  /* Un pequeño margen para el espacio entre ellos */
+  border: 2mm solid  #8AA1B1;
+  background-color: #FAFAFA;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(33.33% - 1%); 
+
+
+
+
   }
   
   .servicio-title h1 {
@@ -82,6 +112,14 @@
   .cursos-list{
     margin: 40px auto;
     padding: 20px;
+
+
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+
   }
  
   .comentario-section {
@@ -91,7 +129,7 @@
   }
 
 
-  @media (min-width: 768px) and (max-width: 1024px) {
+  /* @media (min-width: 768px) and (max-width: 1024px) {
     .cursos-preview {
       max-width: 80%; 
     }
@@ -102,7 +140,7 @@
     }
   }
   
-  /* Estilos para móviles */
+  
   @media (max-width: 767px) {
     .cursos-preview {
       max-width: 100%; 
@@ -121,4 +159,20 @@
     .textArea {
       margin-top: 10px; 
     }
-  }
+  } */
+
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .cursos-preview {
+        width: calc(50% - 1%); 
+    }
+}
+
+/* Estilo para Celulares */
+@media (max-width: 767px) {
+    .cursos-preview {
+        width: 100%; 
+        margin-left: 0;
+        margin-right: 0;
+    }
+}

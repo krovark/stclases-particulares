@@ -72,7 +72,7 @@ export default function BasicTabs() {
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example"  variant="scrollable" scrollButtons="auto">
           <Tab label="Publicaciones" {...a11yProps(0)} style={{ fontSize: '16px' }}/>
           <Tab label="Cursos tomados" {...a11yProps(1)} style={{ fontSize: '16px' }}/>
-          <Tab label="Cursos dictados" {...a11yProps(2)} style={{ fontSize: '16px' }}/>
+          <Tab label="Solicitudes" {...a11yProps(2)} style={{ fontSize: '16px' }}/>
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>

@@ -91,12 +91,12 @@ const numericOptions = Array.from({ length: 10 }, (_, index) => index + 1);
             autoFocus
             margin="dense"
             id="cclases"
-            label="Cantidad de claces"
+            label="Cantidad de clases"
             type="text"
             fullWidth
             variant="outlined"
           />
-           <TextField
+           {/* <TextField
             margin="dense"
             id="frecuencia"
             label="Frecuencia"
@@ -126,7 +126,7 @@ const numericOptions = Array.from({ length: 10 }, (_, index) => index + 1);
     >
       <MenuItem value="Individual">Individual</MenuItem>
       <MenuItem value="Grupal">Grupal</MenuItem>
-    </TextField>
+    </TextField> */}
 
         </DialogContent>
         <DialogActions>

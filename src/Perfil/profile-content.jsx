@@ -7,7 +7,7 @@ import TabsComponent from './TabComponents/mainTabsCompo';
 
 const Profilesite = () => {
   const initialProfileData = [
-    { dcName: 'Gaston', dcApellido: 'Bortolin', calificacion: '4', ccreada: '04/8/2022', email: 'sapopepe@gmail.com', phonen: '1150591132', cclases: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae, repudiandae sit', experiencia: 'Estudié en UADE', id: 1 },
+    { dcName: 'Gaston', dcApellido: 'Bortolin', calificacion: '4', ccreada: '04/8/2022', email: 'sapopepe@gmail.com', phonen: '1150591132', cclases: 'Ingeniero de Alimentos', experiencia: 'Estudié en UADE', id: 1 },
   ];
 
   const [perfil, setDatos] = useState(initialProfileData);

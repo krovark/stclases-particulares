@@ -18,14 +18,40 @@ const PedidoStatusSelector = ({ selectedStatus, onStatusChange }) => {
 
   const shouldDisplayPendiente = !(["Aceptada", "Finalizada", "Cancelada"].includes(currentSelection));
 
+
+  const getDropdownOptions = () => {
+    switch (currentSelection) {
+      case 'Aceptada':
+        return [
+         
+          { value: 'Finalizada', label: 'Finalizada' }
+        ];
+      default:
+        return [
+          { value: 'Pendiente', label: 'Pendiente' },
+          { value: 'Aceptada', label: 'Aceptada' },
+          { value: 'Cancelada', label: 'Cancelada' }
+        ];
+    }
+};
+
+
+
   return (
       <div className="selector-value">
           <select value={currentSelection} onChange={handleStatusChange} disabled={isDropdownDisabled}>
-              {/* <option value="Pendiente">Pendiente</option> */}
               { shouldDisplayPendiente && <option value="Pendiente">Pendiente</option> }
               <option value="Aceptada">Aceptada</option>
               <option value="Finalizada">Finalizada</option>
               <option value="Cancelada">Cancelada</option>
+              
+              {/* {getDropdownOptions().map(option => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))} */}
+
+
           </select> 
           <br />
           <button id='confirm-state' onClick={handleConfirm}>Aceptar</button>
@@ -86,6 +112,9 @@ const HistorialCursos = () => {
     const nuevoHistorial = historial.map((item) =>
       item.id === id ? { ...item, estado: nuevoEstado, isDropdownDisabled } : item
     );
+
+
+    
     setHistorial(nuevoHistorial);
   };
 
