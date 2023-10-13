@@ -51,6 +51,18 @@ export default function ProfileTest({ publicacion, onAcceptComment, onDeleteComm
 
   const handleEditClick = () => {
     setEditMode(true);
+    handleMenuClose();
+  };
+
+
+  const handleDisableClick = () => {
+    
+    handleMenuClose();
+  };
+
+  const handleDeleteClick = () => {
+    
+    handleMenuClose();
   };
 
   const handleSaveClick = () => {
@@ -100,8 +112,8 @@ export default function ProfileTest({ publicacion, onAcceptComment, onDeleteComm
                 ) : (
                   <MenuItem onClick={handleEditClick}>Modificar</MenuItem>
                 )}
-                <MenuItem onClick={handleMenuClose}>Desactivar</MenuItem>
-                <MenuItem onClick={handleMenuClose}>Eliminar</MenuItem>
+                <MenuItem onClick={handleDisableClick}>Desactivar</MenuItem>
+                <MenuItem onClick={handleDeleteClick}>Eliminar</MenuItem>
               </Menu>
             </React.Fragment>
           }
@@ -164,7 +176,7 @@ export default function ProfileTest({ publicacion, onAcceptComment, onDeleteComm
             aria-expanded={expanded}
             aria-label="show more"
           >
-            <ExpandMoreIcon />
+            {/* <ExpandMoreIcon /> */}
           </ExpandMore>
         </CardActions>
 
