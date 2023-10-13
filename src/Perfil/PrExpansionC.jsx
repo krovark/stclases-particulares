@@ -115,6 +115,7 @@ export default function ProfileTest({ publicacion, onAcceptComment, onDeleteComm
                 <MenuItem onClick={handleDisableClick}>Desactivar</MenuItem>
                 <MenuItem onClick={handleDeleteClick}>Eliminar</MenuItem>
               </Menu>
+              {/* checking */}
             </React.Fragment>
           }
           title={editMode ? (

@@ -38,13 +38,13 @@ export function FormDialog() {
     return (
       <div>
         <Button variant="contained" onClick={handleClickOpen} sx={{fontSize: "large",}} >
-          Crear curso
+          Crear curso  
         </Button>
         <Dialog open={open} onClose={handleClose}>
           
           <DialogContent>
             <DialogContentText>
-              
+              {/* Dialog para la creacion de un nuevo curso  */}
             </DialogContentText>
             <TextField
         autoFocus
