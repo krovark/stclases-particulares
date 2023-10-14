@@ -234,6 +234,7 @@ const PostSite = () => {
       <div className="agregar-publi">
         <FormDialog />
       </div>
+      <div className="posteos-container">
       {pub_commited.map((dcPost) => (
         <div className="perfil-preview" key={dcPost.id}>
           <ProfileTest
@@ -243,6 +244,7 @@ const PostSite = () => {
           />
         </div>
       ))}
+    </div>
     </div>
      );
 }

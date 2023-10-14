@@ -32,7 +32,7 @@ const Profilesite = () => {
         { id: 2, texto: 'Usuario 10: Comentario 2 para Piano' },
       ],
     },
-    // ... Otras publicaciones
+   
   ]);
 
   const calcularPromedio = (publicaciones) => {

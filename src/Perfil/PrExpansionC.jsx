@@ -84,7 +84,7 @@ export default function ProfileTest({ publicacion, onAcceptComment, onDeleteComm
 
   return (
     <div>
-      <Card sx={{ maxWidth: 700 }}>
+      <Card sx={{ maxWidth: 1000 }}>
         <CardHeader
           action={
             <React.Fragment>
