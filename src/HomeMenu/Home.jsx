@@ -7,17 +7,17 @@ import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
-
+import LandingPage from './LandingPage'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './menu.css';
+import './estilos-menu/menu.css';
 import NavigationBar from './NavBar';
-
+import Home from './Home'
 
 import CommentM from './commentModal'
 import HireService from './getService'
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, useLocation  } from 'react-router-dom';
 import Profilesite from '../Perfil/profile-content';
 import userLogin from '../Login/LoginForm';
 
@@ -277,21 +277,23 @@ const HomeMenu = () => {
 
 
   // Generar 50 publicaciones aleatorias que cumplen con los filtros
-  const indexOfLastPost = currentPage * postsPerPage; // Nueva constante
-  const indexOfFirstPost = indexOfLastPost - postsPerPage; // Nueva constante
-  const currentPosts = publicaciones.slice(indexOfFirstPost, indexOfLastPost); // Nueva constante
+  // const indexOfLastPost = currentPage * postsPerPage; // Nueva constante
+  // const indexOfFirstPost = indexOfLastPost - postsPerPage; // Nueva constante
+  // const currentPosts = publicaciones.slice(indexOfFirstPost, indexOfLastPost); // Nueva constante
+  
 
   return (
     
     <Router>
       <NavigationBar />
+      
       <div className="mainMenu">
         
         <Switch>
-          
+          <Route path='/' exact component={LandingPage}/>
           <Route path="/perfil" component={Profilesite} />
           <Route path="/iniciarsesion" component={userLogin} />
-          <Route path="/">
+          <Route path="/home" >
             <div className="aside-container">
               <Sidebar
                 setFiltroTipo={setFiltroTipo}

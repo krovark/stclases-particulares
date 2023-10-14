@@ -1,7 +1,7 @@
 import React , { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { useEffect } from 'react';
-import './menu.css';
+import './estilos-menu/menu.css';
 import Rating from '@mui/material/Rating';
 import Button from 'react-bootstrap/Button';
 
