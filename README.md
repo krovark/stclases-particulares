@@ -115,12 +115,27 @@ Postcondiciones: El comentario bloqueado ya no es visible para el proveedor ni l
 
  ✅ Crear Repositorio
 
+ ✅ Primer commit
+
+ ✅ Landing page 
+
+ ✅ Menu inicial
+
+ ✅ Sitio del Perfil
+
+ ✅ Creacion de publicaciones
+
+ ✅ Historial de pedidos
+
  ✅ Entregar el FrontEnd
 
  ⬜ Definir DB
 
+ ⬜ Entregar aplicación mobile
+
  ⬜ Deployar en algun hosting gratuito
 
+ ⬜ Terminar documentación
  
  🙋‍♂️ Contribuciones
 
