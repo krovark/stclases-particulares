@@ -109,8 +109,8 @@ button:hover {
   .btn-primary {
     /* background: var(--orange-web);
     box-shadow: 5px 10px 30px hsla(39, 100%, 50%, 0.3); */
-    background: blue; /* Cambio de var(--orange-web) a blue */
-    box-shadow: 5px 10px 30px rgba(0, 0, 255, 0.3); /* Ajuste del color de la sombra a azul */
+    /* background: blue; */
+    /* box-shadow: 5px 10px 30px rgba(0, 0, 255, 0.3); */
   }
   
   .btn-primary:is(:hover, :focus) {
