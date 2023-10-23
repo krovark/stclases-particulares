@@ -129,7 +129,7 @@ const numericOptions = Array.from({ length: 10 }, (_, index) => index + 1);
     </TextField> */}
 
         </DialogContent>
-        <DialogActions>
+        <DialogActions style={{ justifyContent: 'center' }}>
           <Button variant="contained" onClick={handleClose}>Confirmar</Button>
         </DialogActions>
       </Dialog>

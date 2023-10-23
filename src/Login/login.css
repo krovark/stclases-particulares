@@ -80,13 +80,16 @@
 
   .loginBut {
     height: 4em;
-    width: 24em;
+    width: 20em;
     margin: 10px;
     margin-top: 25px;
     border-radius: 15px;
     background:linear-gradient(#00a2bb, #009c8c);
     border: none;
     transition: all .2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .loginBut:hover{
     transform: scale(1.1);
@@ -95,7 +98,9 @@
   .loginBut p{
     color:white;
     font-size: 20px;
-    margin-top: 13px;
+    margin-top: 0;
+    padding-top: 15px;
+    
   }
   .siG{
     display: flex;
