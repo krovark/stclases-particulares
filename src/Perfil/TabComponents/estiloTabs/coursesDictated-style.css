@@ -1,0 +1,221 @@
+
+  
+  .historial-preview {
+      position: relative;
+      padding: 10px 16px;
+      margin: 20px auto;
+      border: 2mm solid  #8AA1B1;
+      
+      border-radius: 20px;
+      background-color: #FAFAFA;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      max-width: 90%;
+      
+    }
+
+
+    .hist-estudiante{
+      text-align: center;
+      text-shadow: rgba(0,0,0,0.3);
+      
+      width: 200px;
+      height: 50px;
+      align-items: center;
+    }
+
+    .body-alumno, .ul-alumno {
+      flex: 2;  /* le da más flexibilidad para crecer en comparación con status-class */
+      text-align: left; 
+      order: 1;  /* se asegura de que se coloque primero en la fila */
+  }
+
+    .historial-preview:hover {
+      box-shadow: 1px 3px 5px rgba(0,0,0,0.3);
+      
+    }
+  
+    .historial-list {
+      max-width: 1500px;
+      height: auto;
+      margin: 40px auto;
+      padding: 20px;
+      /* background:linear-gradient(rgb(83,104,120, 0.2), rgb(214, 214, 214)); */
+    
+  
+    }
+
+    .main-container{
+      padding: none;
+      margin: none;
+    }
+
+    /* .mainMenu{
+      background-image: url('../Img/workplace.jpg'); 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    
+    } */
+    
+    .status-class{
+      flex: 1;  /* le permite crecer pero menos que body-alumno */
+      text-align: right;
+      order: 2;
+    }
+  
+
+    .titulo{
+      background-color: white;
+      text-align: center;
+      border: 1px solid black;
+      /* border-radius: 5px; */
+    }
+
+    #confirm-state{
+    padding: 10px 30px;
+    border-radius: 3px;
+    box-shadow: 0px 0px 12px -2px rgba(0,0,0,0.5);
+    line-height: 1.25;
+    background:  #3e4a61;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    position: relative;
+    transition: background-color .6s ease;
+    overflow: hidden;
+    &:after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      top: 50%;
+      left: 50%;
+      top: var(--mouse-y);
+      left: var(--mouse-x);
+      transform-style: flat;
+      transform: translate3d(-50%,-50%,0);
+      background: rgba(white,.1);
+      border-radius: 100%;
+      transition: width .3s ease, height .3s ease;
+    }
+    &:focus,
+    &:hover {
+        background: darken( #3e4a61,7%);
+    }
+    &:active {
+      &:after {
+        width: 300px;
+        height: 300px;
+      }
+    }
+    }
+  
+    .ul-alumno{
+      list-style-type: none;
+    }
+
+    #select-value{
+  
+      padding: 10px 20px;
+      cursor: pointer;
+      background-color: white;
+      box-shadow: 0 2px 0 white;
+      border-radius: 2px;
+  
+    }
+
+    .ul-alumno li{
+      padding: 1px;
+    }
+  
+    .pagination-container {
+      display: flex; /* Usamos flexbox para centrar horizontalmente */
+      justify-content: center; /* Centramos horizontalmente */  
+      border-radius: 100px;
+      padding: 10px;
+      cursor: pointer; /* Cambia el cursor al pasar el cursor sobre él */
+      transition: background-color 0.3s; /* Transición suave al cambiar el fondo */
+    }
+    
+  
+    .pagination{
+    
+    transition: background-color 0.3s;
+    border-radius: 10px;
+    justify-content: center;
+    }
+  
+    .pagination-container .pagination a:hover {
+      color: #212121;
+      cursor: pointer;
+    }
+  
+    .selector-value{
+      width: 150px;
+    }
+
+    #confirm-state{
+      width: 150px;
+    }
+
+/* Estilos para tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .historial-list {
+    max-width: 90%;
+    padding: 15px;
+  }
+
+  .historial-preview {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+
+
+  .body-alumno, .ul-alumno {
+    align-self: flex-start;
+    max-width: 70%;
+    padding: 0 15px; /* Agregado para dar algo de espacio en los lados */
+    flex: 1;
+  }
+
+  .status-class {
+    max-width: 30%;
+    text-align: center;
+    margin-top: 15px;
+    flex-basis: auto;
+    flex: 0;
+    
+  }
+
+  #confirm-state {
+    display: block; 
+    margin: 10px auto; /* Centra el botón */
+  }
+}
+
+@media (min-width: 375px) and (max-width: 844px) {
+  .historial-preview {
+      flex-direction: column;
+      
+  }
+  .status-class {
+      width: 100%; /* Ocupa el ancho completo */
+      margin: 0; /* Reinicia el margen */
+      text-align: center; /* Centra el contenido dentro de .status-class */
+     
+  }
+
+  .selector-value{
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  
+}

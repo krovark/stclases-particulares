@@ -18,7 +18,7 @@ import CommentM from './commentModal'
 import HireService from './getService'
 
 import { BrowserRouter as Router, Route, Switch, useLocation  } from 'react-router-dom';
-import Profilesite from '../Perfil/profile-content';
+import Profilesite from '../Perfil/TabComponents/VistasTab/profile-content';
 import userLogin from '../Login/LoginForm';
 
 import Rating from '@mui/material/Rating';

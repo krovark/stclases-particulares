@@ -4,10 +4,10 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Historial from './coursesDictated'
-import PostCreados from './PostComponents'
-import CoursesTaken from './coursesTaken'
-import '../profile-style.css';
+import Historial from './VistasTab/cursosDados'
+import PostCreados from './VistasTab/PostComponents'
+
+import '../TabComponents/estiloTabs/profile-style.css';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -64,7 +64,6 @@ export default function BasicTabs() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const comentariosAleatorios = generarComentariosAleatorios();
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -72,7 +71,7 @@ export default function BasicTabs() {
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example"  variant="scrollable" scrollButtons="auto">
           <Tab label="Publicaciones" {...a11yProps(0)} style={{ fontSize: '16px' }}/>
           <Tab label="Solicitudes" {...a11yProps(1)} style={{ fontSize: '16px' }}/>
-          {/* <Tab label="Solicitudes" {...a11yProps(2)} style={{ fontSize: '16px' }}/> */}
+          <Tab label="Moderar" {...a11yProps(2)} style={{ fontSize: '16px' }}/>
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
