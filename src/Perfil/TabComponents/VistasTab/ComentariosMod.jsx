@@ -23,7 +23,7 @@ export default function GridOfCards() {
   return (
     <Grid container spacing={3}>
       {comentarios.map((comentario, index) => (
-        <Grid item xs={4} key={index}>
+        <Grid item xs={12} sm={6} md={4} key={index}>
           <Box sx={{ minWidth: 275 }}>
             <Card variant="outlined">
               <CardContent>
