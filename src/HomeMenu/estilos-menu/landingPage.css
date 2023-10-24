@@ -46,13 +46,7 @@ h1 {
     z-index: 0; /* Para que esté debajo del contenido */
 }
 
-.bg-image {
-    width: 100%;
-    height: 50%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
+
 
 @keyframes moveUp {
     0% {
@@ -61,29 +55,6 @@ h1 {
     100% {
         top: -100%; 
     }
-}
-
-
-
-button {
-    background-color: yellow;
-    border-radius: 50px;
-    color: #ffffff;
-    padding: 30px 70px; /* Agrandando el botón */
-    font-size: 130px; /* Ajustando el tamaño de la fuente */
-    border: none;
-    cursor: pointer;
-    color: black;
-    position: relative; 
-    z-index: 1; 
-}
-
-button:hover {
-    background-color: #D1D000;
-    transform: scale(1.1);
-    transition: transform 0.3s ease;
-    position: relative; 
-    z-index: 1; 
 }
 
 
