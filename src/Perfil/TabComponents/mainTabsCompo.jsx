@@ -6,6 +6,9 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Historial from './VistasTab/cursosDados'
 import PostCreados from './VistasTab/PostComponents'
+import ComentariosMod from './VistasTab/ComentariosMod'
+
+
 
 import '../TabComponents/estiloTabs/profile-style.css';
 
@@ -81,7 +84,7 @@ export default function BasicTabs() {
       <Historial/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-      
+      <ComentariosMod/>
       </CustomTabPanel>
     </Box>
   );

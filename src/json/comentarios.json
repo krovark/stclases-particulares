@@ -1,0 +1,42 @@
+[
+    {
+      "comentario": "Me gusta como explica",
+      "rating": "4"
+    },
+    {
+      "comentario": "Normal, explica bien",
+      "rating": "3"
+    }
+,
+    {
+        "comentario": "Deja que desear",
+        "rating": "2"
+      },
+      {
+        "comentario": "No asistió",
+        "rating": "1"
+      }
+,
+      {
+        "comentario": "Me cancelo a ultimo momento",
+        "rating": "1"
+      },
+      {
+        "comentario": "Normal, explica bien",
+        "rating": "3"
+      }
+,
+      {
+        "comentario": "Me gusta como explica",
+        "rating": "4"
+      },
+      {
+        "comentario": "Normal, explica bien",
+        "rating": "3"
+      }
+
+
+
+
+    
+  ]
