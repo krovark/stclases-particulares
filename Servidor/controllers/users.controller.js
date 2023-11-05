@@ -40,9 +40,14 @@ exports.createUser = async function (req, res, next) {
     // Req.Body contains the form submit values.
     console.log("llegue al controller",req.body)
     var User = {
-        name: req.body.name,
+        nombre: req.body.nombre,
+        apellido: req.body.apellido,
         email: req.body.email,
-        password: req.body.password
+        telefono: req.body.telefono,
+        password: req.body.password, 
+        titulo: req.body.titulo,
+        experiencia: req.body.experiencia,
+        calificacionPromedio: req.body.calificacionPromedio 
     }
     try {
         // Calling the Service function with the new object from the Request Body
@@ -65,9 +70,15 @@ exports.updateUser = async function (req, res, next) {
     
     var User = {
        
-        name: req.body.name ? req.body.name : null,
-        email: req.body.email ? req.body.email : null,
-        password: req.body.password ? req.body.password : null
+        _id: req.body._id,
+        nombre: req.body.nombre,
+        apellido: req.body.apellido,
+        email: req.body.email,
+        telefono: req.body.telefono,
+        password: req.body.password, 
+        titulo: req.body.titulo,
+        experiencia: req.body.experiencia,
+        calificacionPromedio: req.body.calificacionPromedio
     }
 
     try {
