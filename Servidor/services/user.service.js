@@ -32,6 +32,8 @@ exports.createUser = async function (user) {
     // Creating a new Mongoose Object by using the new keyword
     var hashedPassword = bcrypt.hashSync(user.password, 8);
     
+    //mañana sigo con esto 
+    
     var newUser = new User({
         name: user.name,
         email: user.email,
