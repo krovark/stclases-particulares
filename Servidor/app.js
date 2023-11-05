@@ -33,7 +33,7 @@ app.use('/api', apiRouter);
 app.use('/', indexRouter);
 
 
-//onsole.log("processENV",process.env);
+//console.log("processENV",process.env);
 if (process.env.NODE_ENV === 'Development') {
   require('./config').config();
 }
