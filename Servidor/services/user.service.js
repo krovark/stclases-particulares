@@ -33,12 +33,17 @@ exports.createUser = async function (user) {
     var hashedPassword = bcrypt.hashSync(user.password, 8);
     
     //mañana sigo con esto 
-    
+
     var newUser = new User({
-        name: user.name,
+
+        nombre: user.nombre,
+        apellido: user.apellido,
         email: user.email,
-        date: new Date(),
-        password: hashedPassword
+        telefono: user.telefono,
+        password: hashedPassword,
+        titulo: user.titulo,
+        experiencia: user.experiencia,
+        calificacionPromedio: user.calificacionPromedio
     })
 
     try {
@@ -49,7 +54,8 @@ exports.createUser = async function (user) {
         }, process.env.SECRET, {
             expiresIn: 86400 // expires in 24 hours
         });
-        return token;
+        //return token;
+        return { user: savedUser, token: token };
     } catch (e) {
         // return a Error message describing the reason 
         console.log(e)    
@@ -60,6 +66,7 @@ exports.createUser = async function (user) {
 exports.updateUser = async function (user) {
     
     var id = {name :user.name}
+
     console.log(id)
     try {
         //Find the old User Object by the Id
@@ -73,10 +80,14 @@ exports.updateUser = async function (user) {
         return false;
     }
     //Edit the User Object
-    var hashedPassword = bcrypt.hashSync(user.password, 8);
-    oldUser.name = user.name
-    oldUser.email = user.email
-    oldUser.password = hashedPassword
+        if (user.nombre) oldUser.nombre = user.nombre;
+        if (user.apellido) oldUser.apellido = user.apellido;
+        if (user.email) oldUser.email = user.email;
+        if (user.telefono) oldUser.telefono = user.telefono;
+        if (user.password) oldUser.password = bcrypt.hashSync(user.password, 8);
+        if (user.titulo) oldUser.titulo = user.titulo;
+        if (user.experiencia) oldUser.experiencia = user.experiencia;
+        if (user.calificacionPromedio) oldUser.calificacionPromedio = user.calificacionPromedio;
     try {
         var savedUser = await oldUser.save()
         return savedUser;
@@ -122,7 +133,7 @@ exports.loginUser = async function (user) {
         return {token:token, user:_details};
     } catch (e) {
         // return a Error message describing the reason     
-        throw Error("Error while Login User")
+        throw Error("Error invalid password")
     }
 
 }
