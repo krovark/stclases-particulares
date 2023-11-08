@@ -13,7 +13,7 @@ router.post('/newcomentario', Authorization, ComentariosController.createComenta
 router.get('/allcomentarios', Authorization, ComentariosController.getAllComentarios); // Obtener todos los comentarios
 router.get('/:id', Authorization, ComentariosController.getComentarioById); // Obtener un comentario por ID
 router.patch('/:id/estado', Authorization, ComentariosController.updateEstadoComentario); // Actualizar solo el estado de un comentario
-
+router.get('/estado', Authorization, ComentariosController.getComentariosByEstado);
 
 module.exports = router;
 

@@ -54,6 +54,10 @@ exports.createUser = async function (req, res, next) {
         var createdUser = await UserService.createUser(User)
         return res.status(201).json({createdUser, message: "Succesfully Created User"})
     } catch (e) {
+        if (e.message === 'El email ya se encuentra registrado.') {
+            // Devolver un código de estado HTTP 409 si el email ya está registrado
+            return res.status(409).json({ message: e.message });
+        }
         //Return an Error Response Message with Code and the Error Message.
         console.log(e)
         return res.status(400).json({status: 400, message: "User Creation was Unsuccesfull"})

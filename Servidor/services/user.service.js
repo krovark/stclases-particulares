@@ -57,9 +57,13 @@ exports.createUser = async function (user) {
         //return token;
         return { user: savedUser, token: token };
     } catch (e) {
-        // return a Error message describing the reason 
-        console.log(e)    
-        throw Error("Error while Creating User")
+        if (e.code === 11000) { // Verificar si el error es un error de duplicidad de MongoDB
+            // Lanzar un nuevo Error que será manejado en el controlador
+            throw new Error('El email ya se encuentra registrado.');
+        } else {
+            // Lanzar un Error genérico o puedes manejar otros códigos específicos
+            throw new Error('Error while Creating User: ' + e.message);
+        }
     }
 }
 

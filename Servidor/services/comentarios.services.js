@@ -37,3 +37,12 @@ exports.updateEstadoComentario = async function (comentarioId, nuevoEstado) {
     }
 };
 
+exports.getComentariosByEstado = async function (estado) {
+    try {
+        var comentarios = await Comentario.find({ estado: estado });
+        return comentarios;
+    } catch (e) {
+        // Manejo de errores
+        throw Error('Error while Getting Comentarios by estado');
+    }
+};
