@@ -13,7 +13,7 @@ router.post('/registration', UserController.createUser)
 router.post('/login/', UserController.loginUser)
 router.get('/users',Authorization, UserController.getUsers)
 router.post('/userByMail', Authorization, UserController.getUsersByMail)
-router.put('/update', Authorization, UserController.updateUser)
+router.patch('/update', Authorization, UserController.updateUser)
 router.delete('/delete', Authorization, UserController.removeUser)
 
 

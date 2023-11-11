@@ -59,10 +59,8 @@ exports.deleteComentario = async function (req, res, next) {
 
 exports.getComentariosByEstado = async function (req, res, next) {
     try {
-        // El estado se pasa como un parámetro de query, por ejemplo: /comentarios?estado=aprobado
-        var estado = req.query.estado;
-        var comentarios = await ComentariosService.getComentariosByEstado(estado);
-        res.status(200).json({ comentarios: comentarios, message: "Comentarios retrieved successfully" });
+        var comentarios = await ComentariosService.getComentariosByEstado(req.params.estado);
+        res.status(200).json({ comentarios: comentarios, message: "Comentarios successfully retrieved" });
     } catch (e) {
         res.status(400).json({ message: e.message });
     }
