@@ -10,7 +10,7 @@ var ComentarioSchema = new mongoose.Schema({
     },
     proveedorId: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
+        required: false,
         ref: 'User' // Referencia al modelo de usuarios
     },
     comentario: {

@@ -14,11 +14,12 @@ var authorization = function (req, res, next) {
         return res.status(403).send({ auth: false, message: 'No token provided.' });
 
     let sec = process.env.SECRET;
-    //console.log("secret",sec)
+    console.log("secret",sec)
     jwt.verify(token, sec, function (err, decoded) {
         var msg = {auth: false, message: 'Failed to authenticate token.'};
         if (err)
         return res.status(401).send({ auth: false, message: 'Failed to authenticate token.' });
+    
         req.userId = decoded.id;
         next();
     });

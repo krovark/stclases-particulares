@@ -6,6 +6,7 @@ exports.createComentario = async function (req, res, next) {
     try {
         // El cuerpo de la solicitud debe incluir servicioId y proveedorId
         var comentarioData = {
+            //servicioId: req.body.servicioId,
             servicioId: req.body.servicioId,
             proveedorId: req.body.proveedorId,
             comentario: req.body.comentario,
@@ -61,6 +62,29 @@ exports.getComentariosByEstado = async function (req, res, next) {
     try {
         var comentarios = await ComentariosService.getComentariosByEstado(req.params.estado);
         res.status(200).json({ comentarios: comentarios, message: "Comentarios successfully retrieved" });
+    } catch (e) {
+        res.status(400).json({ message: e.message });
+    }
+};
+
+exports.getComentariosByProveedor = async function (req, res, next) {
+    try {
+        // Asumimos que el proveedorId viene como parámetro en la ruta, por ejemplo: /api/comentarios/proveedor/:proveedorId
+        var comentarios = await ComentariosService.getComentariosByProveedorId(req.params.proveedorId);
+        res.status(200).json({ comentarios: comentarios, message: "Comentarios retrieved successfully" });
+    } catch (e) {
+        res.status(400).json({ message: e.message });
+    }
+};
+
+exports.getComentariosByProveedorAndEstado = async function (req, res, next) {
+    try {
+       
+        var comentarios = await ComentariosService.getComentariosByProveedorIdAndEstado(
+            req.params.proveedorId,
+            req.query.estado
+        );
+        res.status(200).json({ comentarios: comentarios, message: "Comentarios retrieved successfully" });
     } catch (e) {
         res.status(400).json({ message: e.message });
     }

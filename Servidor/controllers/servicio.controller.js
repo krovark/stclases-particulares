@@ -5,7 +5,7 @@ const Servicio = require('../models/servicio.model');
 // Async Controller function to create a service
 exports.createServicio = async function (req, res, next) {
     var servicioData = {
-        proveedorId: req.body.proveedorId,
+        proveedorId: req.userId,
         nombre: req.body.nombre,
         tipoClase: req.body.tipoClase,
         descripcion: req.body.descripcion,
