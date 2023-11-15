@@ -2,6 +2,9 @@
 var User = require('../models/User.model');
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
+
 
 // Saving the context of this module inside the _the variable
 _this = this
@@ -140,3 +143,13 @@ exports.loginUser = async function (user) {
     }
 
 }
+
+exports.updateProfileImage = async function(req, res) {
+    try {
+        const result = await cloudinary.uploader.upload(req.file.path);
+        const user = await UserService.updateProfileImage(req.userId, result.secure_url);
+        res.status(200).json({ user, message: 'Profile image updated successfully' });
+    } catch (e) {
+        res.status(400).json({ message: e.message });
+    }
+};
