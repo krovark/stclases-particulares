@@ -1,6 +1,5 @@
 var UserService = require('../services/user.service');
-
-const cloudinary = require('./cloudinaryConfig');
+const multer = require('../auth/multerConfig');
 
 // Saving the context of this module inside the _the variable
 _this = this;
@@ -126,14 +125,51 @@ exports.loginUser = async function (req, res, next) {
     }
 }
 
-exports.updateProfileImage = async function(req, res) {
+// exports.updateProfileImage = async function(req, res) {
+//     try {
+//         const result = await cloudinary.uploader.upload(req.file.path);
+//         const user = await UserService.updateProfileImage(req.userId, result.secure_url);
+//         res.status(200).json({ user: user, message: "Imagen de perfil actualizada con éxito" });
+//     } catch (e) {
+//         res.status(500).json({ message: e.message });
+//     }
+// }
+ 
+
+exports.uploadProfileImage = async function(req, res) {
     try {
-        const result = await cloudinary.uploader.upload(req.file.path);
-        const user = await UserService.updateProfileImage(req.userId, result.secure_url);
-        res.status(200).json({ user: user, message: "Imagen de perfil actualizada con éxito" });
+      const userId = req.userId; // Asumimos que el userId viene de un middleware de autenticación
+      const imageBuffer = req.file.buffer; // Asumimos que estás utilizando middleware como multer para manejar la carga de archivos
+  
+      const user = await UserService.updateProfileImage(userId, imageBuffer);
+  
+      res.status(200).json({
+        message: "Profile image updated successfully",
+        user: user
+      });
     } catch (e) {
-        res.status(500).json({ message: e.message });
+      res.status(400).json({ message: e.message });
     }
-}
+  };
     
-    
+// exports.uploadProfileImage = async function(req, res) {
+//     multer.single('imgProfile')(req, res, async function(err) {
+//       if (err) {
+//         return res.status(400).json({ message: err.message });
+//       }
+//       if (!req.file) {
+//         return res.status(400).json({ message: "Please upload a file." });
+//       }
+  
+//       try {
+//         const userId = req.userId; // Asumimos que el userId viene de un middleware de autenticación
+//         const user = await UserService.updateProfileImage(userId, req.file.buffer);
+//         res.status(200).json({
+//           message: "Profile image updated successfully",
+//           user: user
+//         });
+//       } catch (e) {
+//         res.status(500).json({ message: e.message });
+//       }
+//     });
+//   };

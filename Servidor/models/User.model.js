@@ -13,7 +13,7 @@ var UserSchema = new mongoose.Schema({
     calificacionPromedio: Number,
     imgProfile: {
         type: String,
-        default: ''
+        
     },  
 })
 

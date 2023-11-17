@@ -4,6 +4,7 @@ var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
+const cloudinary = require('../auth/cloudinaryConfig');
 
 
 // Saving the context of this module inside the _the variable
@@ -144,12 +145,53 @@ exports.loginUser = async function (user) {
 
 }
 
-exports.updateProfileImage = async function(req, res) {
+// exports.updateProfileImage = async function(req, res) {
+//     try {
+//         const result = await cloudinary.uploader.upload(req.file.path);
+//         const user = await UserService.updateProfileImage(req.userId, result.secure_url);
+//         res.status(200).json({ user, message: 'Profile image updated successfully' });
+//     } catch (e) {
+//         res.status(400).json({ message: e.message });
+//     }
+// };
+
+
+// exports.updateProfileImage = async function(userId, imageBuffer) {
+//     try {
+//       const result = await cloudinary.uploader.upload_stream({
+//         resource_type: 'image',
+//       }, (error, result) => {
+//         if (error) throw new Error('Error uploading to Cloudinary: ' + error.message);
+//         return result;
+//       }).end(imageBuffer);
+  
+//       const user = await User.findById(userId);
+//       if (!user) {
+//         throw new Error('User not found');
+//       }
+  
+//       user.imgProfile = result.secure_url;
+//       await user.save();
+  
+//       return user;
+//     } catch (e) {
+//       throw new Error('Error while updating profile image: ' + e.message);
+//     }
+//   };
+
+exports.updateProfileImage = async function(userId, imageBuffer) {
     try {
-        const result = await cloudinary.uploader.upload(req.file.path);
-        const user = await UserService.updateProfileImage(req.userId, result.secure_url);
-        res.status(200).json({ user, message: 'Profile image updated successfully' });
+      
+      const imageBase64 = imageBuffer.toString('base64');
+      const imageData = `data:image/jpeg;base64,${imageBase64}`;
+  
+      const result = await cloudinary.uploader.upload(imageData);
+  
+      
+      const user = await User.findByIdAndUpdate(userId, { imgProfile: result.secure_url }, { new: true });
+      
+      return user;
     } catch (e) {
-        res.status(400).json({ message: e.message });
+      throw new Error('Error while updating profile image: ' + e.message);
     }
-};
+  };
