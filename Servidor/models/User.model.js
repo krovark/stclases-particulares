@@ -14,7 +14,9 @@ var UserSchema = new mongoose.Schema({
     imgProfile: {
         type: String,
         
-    },  
+    },
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,  
 })
 
 UserSchema.plugin(mongoosePaginate)

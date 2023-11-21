@@ -125,16 +125,7 @@ exports.loginUser = async function (req, res, next) {
     }
 }
 
-// exports.updateProfileImage = async function(req, res) {
-//     try {
-//         const result = await cloudinary.uploader.upload(req.file.path);
-//         const user = await UserService.updateProfileImage(req.userId, result.secure_url);
-//         res.status(200).json({ user: user, message: "Imagen de perfil actualizada con éxito" });
-//     } catch (e) {
-//         res.status(500).json({ message: e.message });
-//     }
-// }
- 
+
 
 exports.uploadProfileImage = async function(req, res) {
     try {
