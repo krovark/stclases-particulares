@@ -46,7 +46,10 @@ exports.createUser = async function (user) {
         password: hashedPassword,
         titulo: user.titulo,
         experiencia: user.experiencia,
-        calificacionPromedio: user.calificacionPromedio
+        calificacionPromedio: user.calificacionPromedio,
+        imgProfile: user.imgProfile,
+        resetPasswordToken: user.resetPasswordToken,
+        resetPasswordExpires: user.resetPasswordExpires,  
     })
 
     try {
@@ -121,10 +124,12 @@ exports.deleteUser = async function (id) {
 
 
 exports.loginUser = async function (user) {
-
+    console.log("Email recibido:", user.email);
+    console.log("Contraseña recibida:", user.password);
     // Creating a new Mongoose Object by using the new keyword
     try {
-        // Find the User 
+         
+
         console.log("login:",user)
         var _details = await User.findOne({
             email: user.email

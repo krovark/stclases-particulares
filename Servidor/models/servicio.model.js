@@ -47,7 +47,7 @@ var ServicioSchema = new mongoose.Schema({
         enum: [ 'activo', 'desactivado'],
         default: 'activo' 
     },
-});
+},{collection: 'servicios'});
 
 // Agrega la paginación al esquema
 ServicioSchema.plugin(mongoosePaginate);

@@ -6,7 +6,63 @@ import './login.css';
 
 
 const RegistrationForm = ({ show, handleClose, handleShow }) => {
+  const [formData, setFormData] = useState({
+    nombre: '',
+    apellido: '',
+    telefono: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    experiencia: '',
+    calificacionPromedio: '',
+    imgProfile: '',
+    titulo:'',
+    resetPasswordToken: '',
+    resetPasswordExpires: '', 
+  });
+
+  const [errorMessage, setErrorMessage] = useState('');
+
+
+  const handleInputChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+    setErrorMessage('');
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (formData.password !== formData.confirmPassword) {
+      setErrorMessage('Las contraseñas no coinciden');
+      return;
+    }
+
     
+
+    try {
+      const response = await fetch('http://192.168.0.103:4000/api/users/registration', { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        // Manejar los errores del servidor
+        console.error(data.message); // Puedes modificar esto para mostrar errores al usuario
+      } else {
+        // Manejar registro exitoso
+        console.log('Registro exitoso:', data);
+        handleClose(); 
+      }
+    } catch (error) {
+     
+      console.error('Fallo en el registro:', error);
+    }
+  };
   return (
     
     <Modal show={show} onHide={handleClose} className="my-custom-modal">
@@ -14,9 +70,9 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
       <Modal.Title>Formulario de Registro</Modal.Title>
         </Modal.Header>
           <Modal.Body>
-            
+          
           <div className="regist-form">
-                                <form>
+                                <form onSubmit={handleSubmit}>
                               <div className="input-container">
                                 <label htmlFor="nombre">Nombre:<span id='rq'> *</span></label>
                                 <input
@@ -24,6 +80,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
                                   id="nombre"
                                   name="nombre"
                                   placeholder="Tu nombre"
+                                  onChange={handleInputChange}
                                   required
                                 />
                               </div>
@@ -35,11 +92,12 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
                                   id="apellido"
                                   name="apellido"
                                   placeholder="Tu apellido"
+                                  onChange={handleInputChange}
                                   required
                                 />
                               </div>
 
-                              <div className="input-container">
+                              {/* <div className="input-container">
                                 <label htmlFor="dni">DNI:<span id='rq'> *</span></label>
                                 <input
                                   type="text"
@@ -48,7 +106,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
                                   placeholder="Tu número de DNI"
                                   required
                                 />
-                              </div>
+                              </div> */}
 
                               <div className="input-container">
                                 <label htmlFor="telefono">Teléfono:<span id='rq'> *</span></label>
@@ -57,6 +115,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
                                   id="telefono"
                                   name="telefono"
                                   placeholder="Tu número de teléfono"
+                                  onChange={handleInputChange}
                                   required
                                 />
                               </div>
@@ -68,6 +127,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
                                   id="email"
                                   name="email"
                                   placeholder="Tu correo electrónico"
+                                  onChange={handleInputChange}
                                   required
                                 />
                               </div>
@@ -79,6 +139,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
                                   id="password"
                                   name="password"
                                   placeholder="Tu contraseña"
+                                  onChange={handleInputChange}
                                   required
                                 />
                               </div>
@@ -91,6 +152,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
                                   name="confirmPassword"
                                   placeholder="Confirmar contraseña"
                                   required
+                                  onChange={handleInputChange}
                                 />
                               </div>
                               
@@ -103,14 +165,16 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
                                   cols="50"
                                   placeholder="Escribe aquí tu experiencia (máximo 200 caracteres)"
                                   maxLength="200"
+                                  onChange={handleInputChange}
                                   required
                                 ></textarea>
                               </div>
 
                               <br></br>
-                              
+                              {errorMessage && <div className="error-message">{errorMessage}</div>}
                                     <Button type="submit" variant="primary">
                                     Confirmar
+                                    
                                     </Button>
                               
                                 </form>

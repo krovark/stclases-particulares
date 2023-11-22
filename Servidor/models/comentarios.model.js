@@ -32,7 +32,7 @@ var ComentarioSchema = new mongoose.Schema({
         type: Date,
         default: Date.now // Fecha de creación por defecto al momento de guardar el documento
     }
-});
+},{collection: 'comentarios'});
 
 // Agrega paginación al esquema
 ComentarioSchema.plugin(mongoosePaginate);

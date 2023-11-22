@@ -7,7 +7,8 @@ var config = require('../config').config();
 
 var authorization = function (req, res, next) {
 
-    var token = req.headers['x-access-token'];
+    //var token = req.headers['x-access-token'];
+    var token = req.cookies.jwt;
     console.log("token",token);
     // var msg = {auth: false, message: 'No token provided.'};
     if (!token)

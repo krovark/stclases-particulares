@@ -46,9 +46,9 @@ const NavigationBar = () => {
 
   return (
     <>
-      <head>
+      {/* <head>
         <link rel="preload" as="image" href={backgroundImage} />
-      </head>
+      </head> */}
 
     <Navbar expand="lg" bg="dark" variant="dark" data-bs-theme="dark" className="bg-body-tertiary navbar-dark">
       <Container fluid>

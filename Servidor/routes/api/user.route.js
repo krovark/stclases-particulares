@@ -19,12 +19,13 @@ const Authorization = require('../../auth/authorization');
 router.get('/', function(req, res, next) {
     res.send('Llegaste a la ruta de  api/user.routes');
   });
-router.post('/registration', UserController.createUser)
-router.post('/login/', UserController.loginUser)
-router.get('/users',Authorization, UserController.getUsers)
-router.post('/userByMail', Authorization, UserController.getUsersByMail)
-router.patch('/update', Authorization, UserController.updateUser)
-router.delete('/delete', Authorization, UserController.removeUser)
+router.post('/registration', UserController.createUser);
+router.post('/login', UserController.loginUser);
+router.post('/logout', UserController.logoutUser);
+router.get('/users',Authorization, UserController.getUsers);
+router.post('/userByMail', Authorization, UserController.getUsersByMail);
+router.patch('/update', Authorization, UserController.updateUser);
+router.delete('/delete', Authorization, UserController.removeUser);
 
 //router.patch('/update_image', Authorization, upload.single('imgProfile'), UserController.uploadProfileImage);
 

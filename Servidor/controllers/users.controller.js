@@ -1,5 +1,6 @@
 var UserService = require('../services/user.service');
 const multer = require('../auth/multerConfig');
+var jwt = require('jsonwebtoken');
 
 // Saving the context of this module inside the _the variable
 _this = this;
@@ -47,11 +48,16 @@ exports.createUser = async function (req, res, next) {
         password: req.body.password, 
         titulo: req.body.titulo,
         experiencia: req.body.experiencia,
-        calificacionPromedio: req.body.calificacionPromedio 
+        calificacionPromedio: req.body.calificacionPromedio,
+        imgProfile: req.body.imgProfile,
+        resetPasswordToken: req.body.resetPasswordToken,
+        resetPasswordExpires: req.body.resetPasswordExpires, 
     }
+
     try {
         // Calling the Service function with the new object from the Request Body
         var createdUser = await UserService.createUser(User)
+        console.log("hola")
         return res.status(201).json({createdUser, message: "Succesfully Created User"})
     } catch (e) {
         if (e.message === 'El email ya se encuentra registrado.') {
@@ -105,26 +111,62 @@ exports.removeUser = async function (req, res, next) {
 }
 
 
+// exports.loginUser = async function (req, res, next) {
+//     // Req.Body contains the form submit values.
+//     console.log("body",req.body)
+//     var User = {
+//         email: req.body.email,
+//         password: req.body.password
+//     }
+//     try {
+//         // Calling the Service function with the new object from the Request Body
+//         var loginUser = await UserService.loginUser(User);
+//         if (loginUser===0)
+//             return res.status(400).json({message: "Error en la contraseña"})
+//         else
+//             return res.status(201).json({loginUser, message: "Inicio de Sesion Exitoso"})
+//     } catch (e) {
+//         //Return an Error Response Message with Code and the Error Message.
+//         return res.status(400).json({status: 400, message: "Invalid username or password"})
+//     }
+// }
+
 exports.loginUser = async function (req, res, next) {
-    // Req.Body contains the form submit values.
+    
     console.log("body",req.body)
     var User = {
         email: req.body.email,
         password: req.body.password
     }
     try {
-        // Calling the Service function with the new object from the Request Body
         var loginUser = await UserService.loginUser(User);
-        if (loginUser===0)
-            return res.status(400).json({message: "Error en la contraseña"})
-        else
-            return res.status(201).json({loginUser, message: "Succesfully login"})
-    } catch (e) {
-        //Return an Error Response Message with Code and the Error Message.
-        return res.status(400).json({status: 400, message: "Invalid username or password"})
-    }
-}
 
+        if (loginUser === 0) {
+            console.log(email);
+            console.log(password);
+            return res.status(400).json({ message: "Error en la contraseña" });
+        } else {
+            // Genera token
+            var token = jwt.sign({ id: loginUser.user._id }, process.env.SECRET, { expiresIn: 86400 });
+            console.log(token);
+            res.cookie('jwt', token, {
+              httpOnly: true,
+              
+              maxAge: 86400000 // tiempo de vida de la cookie 24 horas
+            });
+
+            return res.status(201).json({ loginUser, message: "Succesfully login" });
+        }
+    } catch (e) {
+        console.error("Error en loginUser:", e);
+        return res.status(400).json({ status: 400, message: "Invalid username or password" });
+    }
+};
+
+exports.logoutUser = function(req, res) {
+    res.cookie('jwt', '', { expires: new Date(0) });
+    res.status(200).send({ message: 'Logout successful' });
+};
 
 
 exports.uploadProfileImage = async function(req, res) {
@@ -164,3 +206,5 @@ exports.uploadProfileImage = async function(req, res) {
 //       }
 //     });
 //   };
+
+

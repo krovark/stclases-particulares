@@ -9,15 +9,13 @@ var UserSchema = new mongoose.Schema({
     telefono: String,  
     password: { type: String, required: true},
     titulo: String,  
-    experiencia: String,  
+    experiencia: { type: String, required: true},
     calificacionPromedio: Number,
     imgProfile: {
-        type: String,
-        
-    },
+        type: String },
     resetPasswordToken: String,
     resetPasswordExpires: Date,  
-})
+},{collection: 'users'})
 
 UserSchema.plugin(mongoosePaginate)
 const User = mongoose.model('User', UserSchema)

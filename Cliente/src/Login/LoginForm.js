@@ -26,17 +26,42 @@ const Login = () => {
   const DUMMY_PASSWORD = '123';
   const dispatch = useDispatch();
   const history = useHistory();
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
 
-  const handleLogin = () => {
-    if (username === DUMMY_USER && password === DUMMY_PASSWORD) {  
-      dispatch(logIn());
-      history.push('/home');
-      // Aquí puedes agregar más lógica, como redirigir a otra página, etc.
-    } else {
-      alert('Usuario o contraseña incorrecta!');
+  const handleLogin = async () => {
+    try {
+      // Preparar los datos para enviar al servidor
+      const userData = {
+        email: email,
+        password: password
+      };
+  
+      // Realizar la solicitud al servidor
+      const response = await fetch('http://192.168.0.103:4000/api/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData)
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        // Aquí manejas el inicio de sesión exitoso
+        // Por ejemplo, almacenar el token de acceso y actualizar el estado de Redux
+        dispatch(logIn(data)); // Asume que 'data' contiene la información necesaria
+        history.push('/home');
+      } else {
+        // Manejar respuesta de error del servidor
+        alert(data.message || 'Error al iniciar sesión');
+      }
+    } catch (error) {
+      // Manejar errores de red o de conexión
+      console.error('Error en el proceso de inicio de sesión:', error);
+      alert('Error al conectar con el servidor');
     }
   };
 
@@ -50,12 +75,12 @@ const Login = () => {
           <h1>Iniciar Sesion</h1>
   
           <div className="input-container">
-            <label>Username </label>
-            <input type="text" name="uname" required onChange={(e) => setUsername(e.target.value)}/>
+            <label>Email </label>
+            <input type="text" name="email" required onChange={(e) => setEmail(e.target.value)}/>
             {/* {renderErrorMessage("uname")} */}
           </div>
           <div className="input-container">
-            <label>Password </label>
+            <label>Contraseña </label>
             <input type="password" name="pass" required onChange={(e) => setPassword(e.target.value)}/>
             {/* {renderErrorMessage("pass")} */}
           </div>

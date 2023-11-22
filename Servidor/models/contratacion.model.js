@@ -32,7 +32,7 @@ const ContratacionSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
-});
+},{collection: 'contratacions'});
 
 const Contratacion = mongoose.model('Contratacion', ContratacionSchema);
 module.exports = Contratacion;
