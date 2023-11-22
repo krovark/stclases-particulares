@@ -25,17 +25,6 @@ const RecoverPw = ({ show, handleClose, handleShow }) => {
               />
             </div>
 
-            <div className="input-container">
-              <label htmlFor="secretpw">¿Lugar favorito en el mundo?<span id='rq'> *</span></label>
-              <input
-                type="text"
-                id="secretpw"
-                name="secretpw"
-                placeholder="Respuesta secreta"
-                required
-              />
-            </div>
-
             <br></br>
             <Button type="submit" variant="primary">
                 Confirmar

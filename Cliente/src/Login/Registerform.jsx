@@ -93,16 +93,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
                                   required
                                 />
                               </div>
-                              <div className="input-container">
-                              <label htmlFor="pregunta-rec">¿Lugar favorito en el mundo?<span id='rq'> *</span></label>
-                                <input
-                                  type="text"
-                                  id="secretpw"
-                                  name="secretpw"
-                                  placeholder="Tu respuesta"
-                                  required
-                                />
-                                </div>
+                              
                               <div className="input-container">
                                 <label htmlFor="experiencia">Experiencia: <span id='rq'> *</span></label>
                                 <textarea
