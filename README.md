@@ -129,19 +129,19 @@ Postcondiciones: El comentario bloqueado ya no es visible para el proveedor ni l
 
  ✅ Entregar el FrontEnd
 
- ⬜ Definir DB
+ ✅ Definir DB
 
- ⬜ Entregar aplicación mobile
+ ⬜ Entregar aplicación
 
  ⬜ Deployar en algun hosting gratuito
 
  ⬜ Terminar documentación
  
- 🙋‍♂️ Contribuciones
-
-Si te interesa colaborar, ¡bienvenido! 
+ 
 
 
 
-Nota: Sigue siendo una estructura básica y el contenido debe ser adaptado y ampliado de acuerdo a las necesidades y evolución del proyecto. ¡Espero que te sirva para empezar.
+
+
+
 
