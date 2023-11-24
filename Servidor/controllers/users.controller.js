@@ -74,10 +74,10 @@ exports.updateUser = async function (req, res, next) {
 
     // Id is necessary for the update
     if (!req.body.name) {
+        console.log("hola");
         return res.status(400).json({status: 400., message: "Name be present"})
     }
 
-    
     var User = {
        
         _id: req.body._id,
@@ -98,6 +98,8 @@ exports.updateUser = async function (req, res, next) {
         return res.status(400).json({status: 400., message: e.message})
     }
 }
+
+
 
 exports.removeUser = async function (req, res, next) {
 
@@ -142,8 +144,8 @@ exports.loginUser = async function (req, res, next) {
         var loginUser = await UserService.loginUser(User);
 
         if (loginUser === 0) {
-            console.log(email);
-            console.log(password);
+            console.log("Email controller", email);
+            console.log("password controller", password);
             return res.status(400).json({ message: "Error en la contraseña" });
         } else {
             // Genera token
@@ -151,7 +153,7 @@ exports.loginUser = async function (req, res, next) {
             console.log(token);
             res.cookie('jwt', token, {
               httpOnly: true,
-              
+              secure: false,
               maxAge: 86400000 // tiempo de vida de la cookie 24 horas
             });
 
@@ -185,6 +187,31 @@ exports.uploadProfileImage = async function(req, res) {
     }
   };
     
+  exports.getProfile = async function(req, res) {
+    try {
+        const userId = req.userId; // Asumiendo que el middleware JWT ha establecido req.userId
+        const user = await UserService.getProfile(userId);
+
+        if (!user) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
+        console.log(userId);
+        // Opcionalmente, excluye campos sensibles como la contraseña antes de enviarlos
+        user.password = undefined;
+        //console.log(token)
+        return res.status(200).json(user);
+    } catch (error) {
+        console.error(error)
+        return res.status(500).json({ message: 'Error al recuperar el perfil del usuario' });
+    }
+};
+
+
+
+
+
+
 // exports.uploadProfileImage = async function(req, res) {
 //     multer.single('imgProfile')(req, res, async function(err) {
 //       if (err) {

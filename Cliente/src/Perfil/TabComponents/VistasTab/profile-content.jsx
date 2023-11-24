@@ -7,63 +7,110 @@ import TabsComponent from '../mainTabsCompo';
 
 const Profilesite = () => {
   const initialProfileData = [
-    { dcName: 'Gaston', dcApellido: 'Bortolin', calificacion: '4', ccreada: '04/8/2022', email: 'sapopepe@gmail.com', phonen: '1150591132', cclases: 'Ingeniero de Alimentos', experiencia: 'Estudié en UADE', id: 1 },
+
+
+    { "nombre": "Santiago",
+    "apellido": "Gonzalez",
+    "email": "santglez51@gmail.com",
+    "telefono": "01149401031",
+    "password": "...",
+    "titulo": "",
+    "experiencia": "111",
+    "calificacionPromedio": null,},
+
+
+
   ];
 
-  const [perfil, setDatos] = useState(initialProfileData);
+  const [perfil, setDatos] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [editedData, setEditedData] = useState(null);
 
   const [editedTitulo, setEditedTitulo] = useState('');
   const [editedExperiencia, setEditedExperiencia] = useState('');
 
-  const [pub_commited, setPublicaciones] = useState([
-    {
-      categoria: 'Piano',
-      precio: '50',
-      calificacion: 4,
-      cclases: 'Individuales',
-      descripcion: 'Vamos a hacer esto y lo otro',
-      id: 1,
-      freq: 'Semanal',
-      estado: 'Activa',
-      comentarios: [
-        { id: 1, texto: 'Usuario 20: Comentario 1 para Piano' },
-        { id: 2, texto: 'Usuario 10: Comentario 2 para Piano' },
-      ],
-    },
-   
-  ]);
+ 
+  // useEffect(() => {
+  //   if (editMode) {
+  //     // Copia los datos actuales del perfil a editedData al entrar en modo de edición
+  //     setEditedData(perfil[0]) ;
+  //     setEditedTitulo(perfil[0].cclases);
+  //     setEditedExperiencia(perfil[0].experiencia);
+  //   }
+  // }, [editMode, perfil]);
 
-  const calcularPromedio = (publicaciones) => {
-    let suma = publicaciones.reduce((acumulador, publicacion) => {
-      return acumulador + publicacion.calificacion;
-    }, 0);
-
-    return suma / publicaciones.length;
-  }
-
-  const promedio = calcularPromedio(pub_commited);
+  // const handleSaveChanges = () => {
+  //   // Aquí puedes enviar los datos editados al servidor o realizar otras acciones necesarias.
+  //   // Actualiza el perfil con los datos de editedData.
+  //   setDatos([{
+  //     ...editedData,
+  //     cclases: editedTitulo,
+  //     experiencia: editedExperiencia,
+  //   }]);
+  //   setEditMode(false); // Desactiva el modo de edición.
+  // };
 
   useEffect(() => {
-    if (editMode) {
-      // Copia los datos actuales del perfil a editedData al entrar en modo de edición
-      setEditedData(perfil[0]) ;
-      setEditedTitulo(perfil[0].cclases);
-      setEditedExperiencia(perfil[0].experiencia);
-    }
-  }, [editMode, perfil]);
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch('http://192.168.0.103:4000/api/users/profile', {
+          method: 'GET',
+          credentials: 'include', 
+        });
+  
+        if (response.ok) {
+          const userData = await response.json();
+          
+          setDatos(userData);
+        }
+        
+        else {
+          console.error('Error al obtener los datos del usuario');
+        }
+      } catch (error) {
+        console.error('Error al conectar con el servidor:', error);
+      }
+    };
+  
+    fetchUserData();
+  }, []);
 
-  const handleSaveChanges = () => {
-    // Aquí puedes enviar los datos editados al servidor o realizar otras acciones necesarias.
-    // Actualiza el perfil con los datos de editedData.
-    setDatos([{
-      ...editedData,
-      cclases: editedTitulo,
-      experiencia: editedExperiencia,
-    }]);
-    setEditMode(false); // Desactiva el modo de edición.
+  if (!perfil) {
+          
+    return <div>Cargando datos del perfil...</div>;
+  }
+
+  const handleSaveChanges = async () => {
+    const updatedUserData = {
+      _id: 'elIdDelUsuario', // Asegúrate de tener el ID del usuario
+      nombre: editedData.nombre,
+      apellido: editedData.apellido,
+      // ... otros campos
+    };
+  
+    try {
+      const response = await fetch('http://192.168.0.103:4000/api/users/update', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include', // Importante para enviar cookies
+        body: JSON.stringify(updatedUserData),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        // Actualizar el estado del perfil aquí
+      } else {
+        // Manejar errores aquí
+      }
+    } catch (error) {
+      console.error('Error al actualizar el perfil:', error);
+      // Manejar errores de red aquí
+    }
   };
+
+
 
   return (
     <div className="inside-container"> 
@@ -89,18 +136,18 @@ const Profilesite = () => {
               </IconButton>
             )}
           </div>
-          {perfil.map((dcPersona) => (
-            <div key={dcPersona.id}>
-              <h1>{dcPersona.dcName} {dcPersona.dcApellido}</h1>
-              <p id='time-stamp'>Cuenta creada: {dcPersona.ccreada}</p>
+         
+            <div >
+              <h1>{perfil.nombre} {perfil.apellido}</h1>
+              {/* <p id='time-stamp'>Cuenta creada: {dcPersona.ccreada}</p> */}
               <br></br>
-              <p>Email: {editMode ? <input type="text" value={editedData?.email || ''} onChange={(e) => setEditedData({ ...editedData, email: e.target.value })} /> : dcPersona.email}</p>
-              <p>Telefono: {editMode ? <input type="text" value={editedData?.phonen || ''} onChange={(e) => setEditedData({ ...editedData, phonen: e.target.value })} /> : dcPersona.phonen}</p>
-              <p>Título: {editMode ? <input type="text" value={editedTitulo || ''} onChange={(e) => setEditedTitulo(e.target.value)} /> : dcPersona.cclases}</p>
-              <p>Experiencia: {editMode ? <input type="text" value={editedExperiencia || ''} onChange={(e) => setEditedExperiencia(e.target.value)} /> : dcPersona.experiencia}</p>
-              {!editMode && <p>Calificación: {dcPersona.calificacion}</p>}
+              <p>Email: {perfil.email}</p>
+              <p>Telefono: {editMode ? <input type="text" value={editedData?.phonen || ''} onChange={(e) => setEditedData({ ...editedData, phonen: e.target.value })} /> : perfil.telefono}</p>
+              <p>Título: {editMode ? <input type="text" value={editedTitulo || ''} onChange={(e) => setEditedTitulo(e.target.value)} /> : perfil.titulo}</p>
+              <p>Experiencia: {editMode ? <input type="text" value={editedExperiencia || ''} onChange={(e) => setEditedExperiencia(e.target.value)} /> : perfil.experiencia}</p>
+              {!editMode && <p>Calificación: {perfil.calificacionPromedio}</p>}
             </div>
-          ))}
+         
         </div>
       </div>
       <br></br>

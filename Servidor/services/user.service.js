@@ -75,9 +75,11 @@ exports.createUser = async function (user) {
 
 exports.updateUser = async function (user) {
     
-    var id = {name :user.name}
+    //var id = {name :user.name}
 
-    console.log(id)
+    var id = { _id: user._id };
+    console.log("######################################");
+    console.log(id);
     try {
         //Find the old User Object by the Id
         var oldUser = await User.findOne(id);
@@ -105,6 +107,8 @@ exports.updateUser = async function (user) {
         throw Error("And Error occured while updating the User");
     }
 }
+
+
 
 exports.deleteUser = async function (id) {
     console.log(id)
@@ -200,3 +204,13 @@ exports.updateProfileImage = async function(userId, imageBuffer) {
       throw new Error('Error while updating profile image: ' + e.message);
     }
   };
+
+  exports.getProfile = async function(userId) {
+    try {
+        const user = await User.findById(userId, 'email nombre apellido titulo experiencia telefono calificacionPromedio');
+        return user;
+    } catch (error) {
+        throw new Error('Error al obtener el usuario: ' + error.message);
+    }
+};
+

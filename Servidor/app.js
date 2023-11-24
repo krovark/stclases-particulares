@@ -13,6 +13,7 @@ var apiRouter = require('./routes/api'); //Custom
 //instancio el servidor
 var app = express();
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({
   extended: false
 }));
@@ -41,7 +42,7 @@ app.use(cors({
   },
   methods: "GET, POST, PUT, PATCH, DELETE, OPTIONS",
   allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept",
-  credentials: true // si necesitas manejar cookies
+  //credentials: true // si necesitas manejar cookies
 }));
 
 

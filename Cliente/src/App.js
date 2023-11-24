@@ -2,16 +2,17 @@
 import './App.css';
 import Home from './HomeMenu/Home';
 import { Provider } from 'react-redux';
-import { store } from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
+import store, { persistor } from './redux/store';
 
 
 function App() {
   return (
 
     <Provider store={store}>
-    
-      <Home/>
-    
+      <PersistGate loading={null} persistor={persistor}>
+        <Home/>
+        </PersistGate>
     </Provider>
 
   );

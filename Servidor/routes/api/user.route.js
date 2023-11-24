@@ -23,6 +23,7 @@ router.post('/registration', UserController.createUser);
 router.post('/login', UserController.loginUser);
 router.post('/logout', UserController.logoutUser);
 router.get('/users',Authorization, UserController.getUsers);
+router.get('/me', Authorization, UserController.getProfile);
 router.post('/userByMail', Authorization, UserController.getUsersByMail);
 router.patch('/update', Authorization, UserController.updateUser);
 router.delete('/delete', Authorization, UserController.removeUser);
