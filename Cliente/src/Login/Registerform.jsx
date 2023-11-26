@@ -40,7 +40,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
     
 
     try {
-      const response = await fetch('http://192.168.0.103:4000/api/users/registration', { 
+      const response = await fetch('http://localhost:4000/api/users/registration', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

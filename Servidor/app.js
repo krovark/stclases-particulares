@@ -31,18 +31,26 @@ var allowedOrigins = ['http://localhost:3000', 'http://localhost:4000'];
 
 app.use(cors({
   origin: function (origin, callback) {
-    // Permitir solicitudes sin 'origin' (como aplicaciones móviles o curl)
-    if (!origin) return callback(null, true);
-    
-    if (allowedOrigins.indexOf(origin) === -1) {
-      var msg = 'La política de CORS para este sitio no permite el acceso desde el origen especificado.';
-      return callback(new Error(msg), false);
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      // Permitir solicitudes sin 'origin' o desde origins permitidos
+      callback(null, true);
+    } else {
+      callback(new Error("La política de CORS no permite el acceso desde el origen especificado."), false);
     }
-    return callback(null, true);
   },
+  // origin: function (origin, callback) {
+  //   // Permitir solicitudes sin 'origin' (como aplicaciones móviles o curl)
+  //   if (!origin) return callback(null, true);
+    
+  //   if (allowedOrigins.indexOf(origin) === -1) {
+  //     var msg = 'La política de CORS para este sitio no permite el acceso desde el origen especificado.';
+  //     return callback(new Error(msg), false);
+  //   }
+  //   return callback(null, true);
+  // },
   methods: "GET, POST, PUT, PATCH, DELETE, OPTIONS",
   allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept",
-  //credentials: true // si necesitas manejar cookies
+  credentials: true // si necesitas manejar cookies
 }));
 
 
