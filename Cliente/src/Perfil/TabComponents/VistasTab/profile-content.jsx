@@ -53,7 +53,7 @@ const Profilesite = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch('http://192.168.0.103:4000/api/users/profile', {
+        const response = await fetch('http://localhost:4000/api/users/me', {
           method: 'GET',
           credentials: 'include', 
         });
@@ -89,8 +89,8 @@ const Profilesite = () => {
     };
   
     try {
-      const response = await fetch('http://192.168.0.103:4000/api/users/update', {
-        method: 'POST',
+      const response = await fetch('http://localhost:4000/api/users/update', {
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
