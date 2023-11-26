@@ -32,6 +32,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
+      console.log(email, password);
       // Preparar los datos para enviar al servidor
       const userData = {
         email: email,
@@ -39,7 +40,7 @@ const Login = () => {
       };
   
       // Realizar la solicitud al servidor
-      const response = await fetch('http://192.168.0.103:4000/api/users/login', {
+      const response = await fetch('http://localhost:4000/api/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -47,7 +48,9 @@ const Login = () => {
         credentials: 'include',
         body: JSON.stringify(userData)
       });
-  
+
+      console.log("response ok");
+
       const data = await response.json();
   
       if (response.ok) {
