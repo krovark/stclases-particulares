@@ -34,8 +34,42 @@ export function FormDialog() {
     const handleDescripcionChange = (event) => {
       setDescripcion(event.target.value);
     };
+
+    const handleAccept = async () => {
+      const data = {
+        category: document.getElementById("category").value,
+        type: tipo,
+        frecuency: frecuencia,
+        cost: document.getElementById("costo").value,
+        description: descripcion,
+      }; 
+
+      try {
+        const response = await fetch('http://localhost:4000/api/servicios/crearsv', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include', // Importante para enviar cookies
+          body: JSON.stringify(data),
+        });
+    
+        if (response.ok) {
+          const responseData = await response.json();
+          console.log("Servicio creado exitosamente", responseData)
+          // Actualizar el estado del perfil aquí
+        } else {
+          const errorData = await response.json();
+          // Manejar errores aquí
+          console.error('Error al crear el servicio:', errorData.message);
+        }
+      } catch (error) {
+        console.error('Error crear el curso', error);
+        // Manejar errores de red aquí
+      }
+    };
   
-    return (
+  return (
       <div>
         <Button variant="contained" onClick={handleClickOpen} sx={{fontSize: "large",}} >
           Crear curso  
@@ -109,12 +143,13 @@ export function FormDialog() {
           
           <DialogActions>
             <Button variant="outlined" onClick={handleClose}>Cancelar</Button>
-            <Button variant="contained" onClick={handleClose}>Aceptar</Button>
+            <Button variant="contained" onClick={handleAccept}>Aceptar</Button>
           </DialogActions>
         </Dialog>
       </div>
     );
   }
+  
 
 
 const PostSite = () => {
