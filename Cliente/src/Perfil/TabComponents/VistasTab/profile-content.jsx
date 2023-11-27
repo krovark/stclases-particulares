@@ -6,21 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import TabsComponent from '../mainTabsCompo';
 
 const Profilesite = () => {
-  const initialProfileData = [
-
-
-    { "nombre": "Santiago",
-    "apellido": "Gonzalez",
-    "email": "santglez51@gmail.com",
-    "telefono": "01149401031",
-    "password": "...",
-    "titulo": "",
-    "experiencia": "111",
-    "calificacionPromedio": null,},
-
-
-
-  ];
+ 
 
   const [perfil, setDatos] = useState(null);
   const [editMode, setEditMode] = useState(false);
@@ -28,7 +14,7 @@ const Profilesite = () => {
 
   const [editedTitulo, setEditedTitulo] = useState('');
   const [editedExperiencia, setEditedExperiencia] = useState('');
-
+  const [editedTelefono, setEditedTelefono] = useState('');
  
   // useEffect(() => {
   //   if (editMode) {
@@ -75,17 +61,24 @@ const Profilesite = () => {
     fetchUserData();
   }, []);
 
-  if (!perfil) {
-          
-    return <div>Cargando datos del perfil...</div>;
-  }
+  
+
+  useEffect(() => {
+    if (editMode && perfil) {
+    setEditedTelefono(perfil.telefono);
+    setEditedTitulo(perfil.titulo);
+    setEditedExperiencia(perfil.experiencia);
+    }
+  }, [editMode, perfil]);
+
+
+
 
   const handleSaveChanges = async () => {
     const updatedUserData = {
-      _id: 'elIdDelUsuario', // Asegúrate de tener el ID del usuario
-      nombre: editedData.nombre,
-      apellido: editedData.apellido,
-      // ... otros campos
+      telefono: editedTelefono,
+      titulo: editedTitulo,
+      experiencia: editedExperiencia,
     };
   
     try {
@@ -98,19 +91,22 @@ const Profilesite = () => {
         body: JSON.stringify(updatedUserData),
       });
   
-      if (response.ok) {
-        const data = await response.json();
-        // Actualizar el estado del perfil aquí
-      } else {
-        // Manejar errores aquí
+      if (!response.ok) {
+        throw new Error('Error al actualizar el perfil');
       }
+      const updatedProfile = await response.json();
+      setDatos(updatedProfile.data); // Asumiendo que la respuesta del servidor incluye los datos actualizados
+      setEditMode(false); // Desactiva el modo de edición
     } catch (error) {
-      console.error('Error al actualizar el perfil:', error);
-      // Manejar errores de red aquí
+      console.error('Error:', error);
+      // Manejar el error (mostrar mensaje al usuario, etc.)
     }
   };
 
-
+  if (!perfil) {
+          
+    return <div>Cargando datos del perfil...</div>;
+  }
 
   return (
     <div className="inside-container"> 
