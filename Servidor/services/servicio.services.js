@@ -5,6 +5,7 @@ exports.createServicio = async function (servicioData) {
 
     try {
         var savedServicio = await newServicio.save();
+        console.log("create servicio: ")
         return savedServicio;
     } catch (e) {
         throw new Error('Error while Creating Servicio: ' + e.message);

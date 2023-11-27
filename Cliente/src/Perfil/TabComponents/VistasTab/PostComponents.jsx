@@ -14,7 +14,10 @@ export function FormDialog() {
     const [tipo, setTipo] = useState(''); // Estado para rastrear el valor del tipo
     const [frecuencia, setFrecuencia] = useState(''); // Estado para rastrear el valor de la frecuencia
     const [descripcion, setDescripcion] = useState('');
-  
+    const [categoria, setCategoria] = useState('');
+    const [costo, setCosto] = useState('');
+    const [duracion, setDuracion] = useState('');
+
     const handleClickOpen = () => {
       setOpen(true);
     };
@@ -35,14 +38,36 @@ export function FormDialog() {
       setDescripcion(event.target.value);
     };
 
+    const handleCategoriaChange = (event) => {
+      setCategoria(event.target.value);
+  };
+  
+  const handleCostoChange = (event) => {
+      setCosto(event.target.value);
+  };
+
+  const handleDuracionChange = (event) => {
+    setDuracion(event.target.value);
+};
+
     const handleAccept = async () => {
+      
+      if (!categoria || !tipo || !frecuencia || !costo || !descripcion || !duracion) {
+        alert("Por favor, completa todos los campos."); 
+        return;
+      }
+
       const data = {
-        category: document.getElementById("category").value,
-        type: tipo,
-        frecuency: frecuencia,
-        cost: document.getElementById("costo").value,
-        description: descripcion,
-      }; 
+        nombre: categoria, 
+        tipoClase: tipo,
+        frecuencia: frecuencia,
+        costo: costo,
+        descripcion: descripcion,
+        duracion: duracion,
+        estado: 'activo' // Siempre se establece como 'activo' por defecto
+        
+    };
+    
 
       try {
         const response = await fetch('http://localhost:4000/api/servicios/crearsv', {
@@ -56,42 +81,57 @@ export function FormDialog() {
     
         if (response.ok) {
           const responseData = await response.json();
-          console.log("Servicio creado exitosamente", responseData)
-          // Actualizar el estado del perfil aquí
-        } else {
+          console.log("Servicio creado exitosamente", responseData);
+          setCategoria('');
+          setTipo('');
+          setFrecuencia('');
+          setCosto('');
+          setDescripcion('');
+          setDuracion(''); 
+      } else {
+          console.error('Error en la respuesta:', response);
           const errorData = await response.json();
-          // Manejar errores aquí
-          console.error('Error al crear el servicio:', errorData.message);
-        }
+          console.error('Detalle del error:', errorData);
+      }
       } catch (error) {
         console.error('Error crear el curso', error);
         // Manejar errores de red aquí
       }
     };
   
+    
+    const handleFormSubmit = async (event) => {
+      console.log("Hola?")
+      event.preventDefault(); // Prevenir la recarga de la página
+      await handleAccept(); // Llamar a handleAccept para manejar el envío de datos
+  };
+
+
   return (
       <div>
         <Button variant="contained" onClick={handleClickOpen} sx={{fontSize: "large",}} >
           Crear curso  
         </Button>
         <Dialog open={open} onClose={handleClose}>
-          
+        <form onSubmit={handleFormSubmit}>
           <DialogContent>
             <DialogContentText>
-              {/* Dialog para la creacion de un nuevo curso  */}
+              
             </DialogContentText>
             <TextField
         autoFocus
         margin="dense"
-        id="category"
+        id="nombre"
         label="Categoría"
         type="text"
+        value={categoria}
         fullWidth
         variant="outlined"
+        onChange={handleCategoriaChange}
       />
       <TextField
         margin="dense"
-        id="type"
+        id="tipoClase"
         label="Tipo"
         select
         fullWidth
@@ -125,26 +165,42 @@ export function FormDialog() {
         id="costo"
         label="Costo por clase"
         type="text"
+        value={costo}
         fullWidth
         variant="outlined"
+        onChange={handleCostoChange}
       />
+       <TextField
+              margin="dense"
+              id="duracion"
+              label="Duracion"
+              placeholder='Duracion en minutos'
+              rows={4} 
+              fullWidth
+              variant="outlined" // Puedes usar outlined para un borde visible o standard para un borde más delgado
+              value={duracion}
+              onChange={handleDuracionChange}
+            />
       <TextField
               margin="dense"
               id="descripcion"
               label="Descripción"
-              multiline // Esto habilita el modo multilinea
+              //multiline // Esto habilita el modo multilinea
               rows={4} // Puedes ajustar la cantidad de filas que deseas mostrar
               fullWidth
               variant="outlined" // Puedes usar outlined para un borde visible o standard para un borde más delgado
               value={descripcion}
               onChange={handleDescripcionChange}
             />
+            
     </DialogContent>
           
           <DialogActions>
             <Button variant="outlined" onClick={handleClose}>Cancelar</Button>
-            <Button variant="contained" onClick={handleAccept}>Aceptar</Button>
+            {/* <Button type="submit" variant="contained" onClick={handleAccept}>Aceptar</Button> */}
+            <Button type="submit" variant="contained" onClick={handleClose}>Aceptar</Button>
           </DialogActions>
+          </form>
         </Dialog>
       </div>
     );
@@ -156,7 +212,7 @@ const PostSite = () => {
     
       const [pub_commited, setPublicaciones] = useState([
         { 
-          categoria: 'Piano', 
+          categoria: 'Buceo', 
           precio: '50', 
           calificacion: 4 ,
           cclases: 'Individuales', 

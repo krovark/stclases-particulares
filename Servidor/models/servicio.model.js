@@ -22,7 +22,7 @@ var ServicioSchema = new mongoose.Schema({
     },
     experiencia: {
         type: String,
-        required: true
+        required: false
     },
     duracion: {
         type: Number, // Duración en minutos
@@ -47,6 +47,7 @@ var ServicioSchema = new mongoose.Schema({
         enum: [ 'activo', 'desactivado'],
         default: 'activo' 
     },
+    
 },{collection: 'servicios'});
 
 // Agrega la paginación al esquema

@@ -1,15 +1,30 @@
 var ServicioService = require('../services/servicio.services');
 const Servicio = require('../models/servicio.model');
+const User = require('../models/User.model');
+
+async function obtenerExperienciaDeUsuario(userId) {
+    try {
+        const usuario = await User.findById(userId).exec();
+        return usuario ? usuario.experiencia : null;
+    } catch (error) {
+        console.error("Error al obtener la experiencia del usuario:", error);
+        throw new Error(error);
+    }
+}
+
 
 
 // Async Controller function to create a service
 exports.createServicio = async function (req, res, next) {
+
+    let experienciaUsuario = await obtenerExperienciaDeUsuario(req.userId);
+
     var servicioData = {
         proveedorId: req.userId,
         nombre: req.body.nombre,
         tipoClase: req.body.tipoClase,
         descripcion: req.body.descripcion,
-        experiencia: req.body.experiencia,
+        experiencia: experienciaUsuario,
         duracion: req.body.duracion,
         frecuencia: req.body.frecuencia,
         costo: req.body.costo,
@@ -17,6 +32,7 @@ exports.createServicio = async function (req, res, next) {
     };
     try {
         var createdServicio = await ServicioService.createServicio(servicioData);
+        console.log("servicio create controller");
         res.status(201).json({ servicio: createdServicio, message: "Servicio successfully created" });
     } catch (e) {
         // Aquí puedes manejar diferentes tipos de errores, como errores de validación, o errores de duplicados si aplican.
