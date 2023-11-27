@@ -73,41 +73,62 @@ exports.createUser = async function (user) {
     }
 }
 
-exports.updateUser = async function (user) {
+// exports.updateUser = async function (user) {
     
-    //var id = {name :user.name}
+//     //var id = {name :user.name}
 
-    var id = { _id: user._id };
-    console.log("######################################");
-    console.log(id);
+//     var id = { _id: user._id };
+//     console.log("######################################");
+//     console.log(id);
+//     try {
+//         //Find the old User Object by the Id
+//         var oldUser = await User.findOne(id);
+//         console.log (oldUser)
+//     } catch (e) {
+//         throw Error("Error occured while Finding the User")
+//     }
+//     // If no old User Object exists return false
+//     if (!oldUser) {
+//         return false;
+//     }
+//     //Edit the User Object
+//         if (user.nombre) oldUser.nombre = user.nombre;
+//         if (user.apellido) oldUser.apellido = user.apellido;
+//         if (user.email) oldUser.email = user.email;
+//         if (user.telefono) oldUser.telefono = user.telefono;
+//         if (user.password) oldUser.password = bcrypt.hashSync(user.password, 8);
+//         if (user.titulo) oldUser.titulo = user.titulo;
+//         if (user.experiencia) oldUser.experiencia = user.experiencia;
+//         if (user.calificacionPromedio) oldUser.calificacionPromedio = user.calificacionPromedio;
+//     try {
+//         var savedUser = await oldUser.save()
+//         return savedUser;
+//     } catch (e) {
+//         throw Error("And Error occured while updating the User");
+//     }
+// }
+
+exports.updateUser = async function (userId, userUpdateData) {
     try {
-        //Find the old User Object by the Id
-        var oldUser = await User.findOne(id);
-        console.log (oldUser)
-    } catch (e) {
-        throw Error("Error occured while Finding the User")
-    }
-    // If no old User Object exists return false
-    if (!oldUser) {
-        return false;
-    }
-    //Edit the User Object
-        if (user.nombre) oldUser.nombre = user.nombre;
-        if (user.apellido) oldUser.apellido = user.apellido;
-        if (user.email) oldUser.email = user.email;
-        if (user.telefono) oldUser.telefono = user.telefono;
-        if (user.password) oldUser.password = bcrypt.hashSync(user.password, 8);
-        if (user.titulo) oldUser.titulo = user.titulo;
-        if (user.experiencia) oldUser.experiencia = user.experiencia;
-        if (user.calificacionPromedio) oldUser.calificacionPromedio = user.calificacionPromedio;
-    try {
-        var savedUser = await oldUser.save()
+        
+        var oldUser = await User.findById(userId);
+        if (!oldUser) {
+            throw Error("User not found");
+        }
+
+        
+        if (userUpdateData.telefono) oldUser.telefono = userUpdateData.telefono;
+        if (userUpdateData.titulo) oldUser.titulo = userUpdateData.titulo;
+        if (userUpdateData.experiencia) oldUser.experiencia = userUpdateData.experiencia;
+       
+
+        // Guarda los cambios
+        var savedUser = await oldUser.save();
         return savedUser;
     } catch (e) {
-        throw Error("And Error occured while updating the User");
+        throw Error("Error occurred while updating the User: " + e.message);
     }
 }
-
 
 
 exports.deleteUser = async function (id) {

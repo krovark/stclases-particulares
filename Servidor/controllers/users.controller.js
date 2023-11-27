@@ -70,36 +70,54 @@ exports.createUser = async function (req, res, next) {
     }
 }
 
-exports.updateUser = async function (req, res, next) {
+// exports.updateUser = async function (req, res, next) {
 
-    // Id is necessary for the update
-    if (!req.body.name) {
-        console.log("hola");
-        return res.status(400).json({status: 400., message: "Name be present"})
-    }
+//     // Id is necessary for the update
+//     if (!req.body.name) {
+//         console.log("hola");
+//         return res.status(400).json({status: 400., message: "Name be present"})
+//     }
 
-    var User = {
+//     var User = {
        
-        _id: req.body._id,
-        nombre: req.body.nombre,
-        apellido: req.body.apellido,
-        email: req.body.email,
+//         _id: req.body._id,
+//         nombre: req.body.nombre,
+//         apellido: req.body.apellido,
+//         email: req.body.email,
+//         telefono: req.body.telefono,
+//         password: req.body.password, 
+//         titulo: req.body.titulo,
+//         experiencia: req.body.experiencia,
+//         calificacionPromedio: req.body.calificacionPromedio
+//     }
+
+//     try {
+//         var updatedUser = await UserService.updateUser(User)
+//         return res.status(200).json({status: 200, data: updatedUser, message: "Succesfully Updated User"})
+//     } catch (e) {
+//         return res.status(400).json({status: 400., message: e.message})
+//     }
+// }
+
+exports.updateUser = async function (req, res, next) {
+    
+    var userId = req.userId; 
+
+    var userUpdateData = {
         telefono: req.body.telefono,
-        password: req.body.password, 
         titulo: req.body.titulo,
         experiencia: req.body.experiencia,
-        calificacionPromedio: req.body.calificacionPromedio
-    }
-
+       
+    };
+    console.log(req.body)
     try {
-        var updatedUser = await UserService.updateUser(User)
-        return res.status(200).json({status: 200, data: updatedUser, message: "Succesfully Updated User"})
+        var updatedUser = await UserService.updateUser(userId, userUpdateData);
+        return res.status(200).json({status: 200, data: updatedUser, message: "Successfully Updated User"});
     } catch (e) {
-        return res.status(400).json({status: 400., message: e.message})
+        console.error(e);
+        return res.status(400).json({status: 400, message: e.message});
     }
 }
-
-
 
 exports.removeUser = async function (req, res, next) {
 

@@ -120,7 +120,7 @@ const Profilesite = () => {
               {/* <p id='time-stamp'>Cuenta creada: {dcPersona.ccreada}</p> */}
               <br></br>
               <p>Email: {perfil.email}</p>
-              <p>Telefono: {editMode ? <input type="text" value={editedData?.phonen || ''} onChange={(e) => setEditedData({ ...editedData, phonen: e.target.value })} /> : perfil.telefono}</p>
+              <p>Telefono: {editMode ? <input type="text" value={editedTelefono || ''} onChange={(e) => setEditedTelefono( e.target.value )} /> : perfil.telefono}</p>
               <p>Título: {editMode ? <input type="text" value={editedTitulo || ''} onChange={(e) => setEditedTitulo(e.target.value)} /> : perfil.titulo}</p>
               <p>Experiencia: {editMode ? <input type="text" value={editedExperiencia || ''} onChange={(e) => setEditedExperiencia(e.target.value)} /> : perfil.experiencia}</p>
               {!editMode && <p>Calificación: {perfil.calificacionPromedio}</p>}
