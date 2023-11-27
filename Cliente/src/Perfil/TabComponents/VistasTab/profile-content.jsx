@@ -16,25 +16,7 @@ const Profilesite = () => {
   const [editedExperiencia, setEditedExperiencia] = useState('');
   const [editedTelefono, setEditedTelefono] = useState('');
  
-  // useEffect(() => {
-  //   if (editMode) {
-  //     // Copia los datos actuales del perfil a editedData al entrar en modo de edición
-  //     setEditedData(perfil[0]) ;
-  //     setEditedTitulo(perfil[0].cclases);
-  //     setEditedExperiencia(perfil[0].experiencia);
-  //   }
-  // }, [editMode, perfil]);
 
-  // const handleSaveChanges = () => {
-  //   // Aquí puedes enviar los datos editados al servidor o realizar otras acciones necesarias.
-  //   // Actualiza el perfil con los datos de editedData.
-  //   setDatos([{
-  //     ...editedData,
-  //     cclases: editedTitulo,
-  //     experiencia: editedExperiencia,
-  //   }]);
-  //   setEditMode(false); // Desactiva el modo de edición.
-  // };
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -95,11 +77,11 @@ const Profilesite = () => {
         throw new Error('Error al actualizar el perfil');
       }
       const updatedProfile = await response.json();
-      setDatos(updatedProfile.data); // Asumiendo que la respuesta del servidor incluye los datos actualizados
-      setEditMode(false); // Desactiva el modo de edición
+      setDatos(updatedProfile.data); 
+      setEditMode(false); 
     } catch (error) {
       console.error('Error:', error);
-      // Manejar el error (mostrar mensaje al usuario, etc.)
+      
     }
   };
 
