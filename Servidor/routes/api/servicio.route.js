@@ -9,6 +9,8 @@ router.post('/crearsv', Authorization ,ServicioController.createServicio);
 // Ruta para obtener todos los servicios con paginación
 router.get('/obtenersv', Authorization ,ServicioController.getAllServicios);
 
+router.get('/getservicios', Authorization, ServicioController.getServiciosByUser);
+
 // Ruta para obtener los servicios por estado con paginación
 router.get('/estado/:estado', Authorization ,ServicioController.getServiciosByEstado);
 

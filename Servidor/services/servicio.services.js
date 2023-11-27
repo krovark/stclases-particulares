@@ -38,6 +38,21 @@ exports.getAllServicios = async function (query, page, limit) {
     }
 };
 
+exports.getServiciosByUser = async function (query, page, limit) {
+    try {
+        var options = {
+            page,
+            limit,
+            sort: { createdAt: -1 } // Ordenar por fecha de creación
+        };
+        var serviciosPaginated = await Servicio.paginate(query, options);
+        return serviciosPaginated;
+    } catch (e) {
+        throw Error('Error while Paginating Servicios: ' + e.message);
+    }
+};
+
+
 exports.getServiciosByEstado = async function(estado, page, limit) {
     try {
         var options = {

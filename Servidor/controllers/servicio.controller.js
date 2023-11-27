@@ -110,3 +110,19 @@ exports.getAllServicios = async function(req, res, next) {
     }
 };
 
+exports.getServiciosByUser = async function(req, res, next) {
+    let userId = req.userId; 
+    let page = req.query.page ? parseInt(req.query.page) : 1;
+    let limit = req.query.limit ? parseInt(req.query.limit) : 25;
+
+    try {
+        var servicios = await ServicioService.getServiciosByUser({ proveedorId: userId }, page, limit);
+        return res.status(200).json({
+            status: 200,
+            data: servicios.docs,
+            message: "Servicios retrieved successfully"
+        });
+    } catch (e) {
+        res.status(400).json({ status: 400, message: e.message });
+    }
+};
