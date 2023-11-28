@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../estiloTabs/profile-style.css';
 import MenuItem from '@mui/material/MenuItem';
 import ProfileTest from '../../PrExpansionC';
@@ -9,7 +9,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 
-export function FormDialog() {
+export function FormDialog({ onUpdate }) {
     const [open, setOpen] = React.useState(false);
     const [tipo, setTipo] = useState(''); // Estado para rastrear el valor del tipo
     const [frecuencia, setFrecuencia] = useState(''); // Estado para rastrear el valor de la frecuencia
@@ -88,6 +88,7 @@ export function FormDialog() {
           setCosto('');
           setDescripcion('');
           setDuracion(''); 
+          onUpdate();
       } else {
           console.error('Error en la respuesta:', response);
           const errorData = await response.json();
@@ -101,7 +102,7 @@ export function FormDialog() {
   
     
     const handleFormSubmit = async (event) => {
-      console.log("Hola?")
+      
       event.preventDefault(); // Prevenir la recarga de la página
       await handleAccept(); // Llamar a handleAccept para manejar el envío de datos
   };
@@ -208,81 +209,173 @@ export function FormDialog() {
   
 
 
-const PostSite = () => {
+// const PostSite = () => {
+  
+//   const [pub_commited, setPublicaciones] = useState([]);
+//   const [isLoading, setIsLoading] = useState(true);
+//   const [error, setError] = useState(null);
+
+
+//       useEffect(() => {
+//         const fetchPublicaciones = async () => {
+//           setIsLoading(true);
+//           try {
+//             const response = await fetch('http://localhost:4000/api/servicios/getservicios', {
+//               method: 'GET',
+//               headers: {
+//                 'Content-Type': 'application/json',
+//               },    
+//               credentials: 'include', // Si es necesario para manejar las cookies
+//             });
+//             if (!response.ok) throw new Error('Error al cargar publicaciones');
+//             const responseData = await response.json();
+//             console.log(responseData);
+//             const publicacionesConvertidas = responseData.data.map(publicacion => {
+//               return {
+//                 ...publicacion,
+//                 _id: publicacion._id.$oid,
+//                 duracion: publicacion.duracion, // Si duracion ya es un número
+//                 costo: publicacion.costo, //
+      
+//               };
+              
+//             });
+//             console.log("Publicaciones convertidas:", publicacionesConvertidas); 
+//             setPublicaciones(publicacionesConvertidas);
+//           } catch (error) {
+//             setError(error.message);
+//           }
+//           setIsLoading(false);
+//         };
+      
+//       //   fetchPublicaciones();
+//       // }, []);
+
+//        useEffect(() => {
+//          fetchPublicaciones();
+//        }, []);
+
+//     if (isLoading) return <p>Cargando publicaciones...</p>;
+//     if (error) return <p>Error: {error}</p>;
+//     if (!Array.isArray(pub_commited)) {
+//       console.error("pub_commited no es un array", pub_commited);
+//       return; // o maneja este caso de manera adecuada
+//     }
+  
+//     const acceptComment = (postId, commentId) => {
+//       setPublicaciones((prevState) =>
+//         prevState.map((post) => {
+//           if (post.id === postId) {
+//             return {
+//               ...post,
+//               comentarios: post.comentarios.map((comment) => {
+//                 if (comment.id === commentId) {
+//                   return { ...comment, aceptado: true };
+//                 }
+//                 return comment;
+//               }),
+//             };
+//           }
+//           return post;
+//         })
+//       );
+//     };
+
+//     // Función para eliminar un comentario en una publicación específica
+//     const deleteComment = (postId, commentId) => {
+//       setPublicaciones((prevState) =>
+//         prevState.map((post) => {
+//           if (post.id === postId) {
+//             return {
+//               ...post,
+//               comentarios: post.comentarios.filter(
+//                 (comment) => comment.id !== commentId
+//               ),
+//             };
+//           }
+//           return post;
+//         })
+//       );
+//     };
     
-      const [pub_commited, setPublicaciones] = useState([
-        { 
-          categoria: 'Buceo', 
-          precio: '50', 
-          calificacion: 4 ,
-          cclases: 'Individuales', 
-          despcripcion: 'Vamos hacer esto y lo otro', 
-          id: 1, 
-          freq: 'Semanal', 
-          estado:'Activa', 
-          comentarios: [
-            { id: 1, texto: 'Usuario 20: Comentario 1 para Piano' },
-            { id: 2, texto: 'Usuario 10: Comentario 2 para Piano' },
-            { id: 3, texto: 'Usuario 18: Comentario 3 para Piano' },
-            { id: 4, texto: 'Usuario 12: Comentario 4 para Piano' },
-            { id: 5, texto: 'Usuario 26: Comentario 5 para Piano' },
-            { id: 6, texto: 'Usuario 24: Comentario 6 para Piano' },
-            { id: 7, texto: 'Usuario 23: Comentario 7 para Piano' },
-            { id: 8, texto: 'Usuario 17: Comentario 8 para Piano' },
-            { id: 9, texto: 'Usuario 27: Comentario 9 para Piano' },
-            { id: 10, texto: 'Usuario 14: Comentario 10 para Piano' },
-          ]
-        },
-            
-        { 
-          categoria: 'Guitarra', 
-          precio: '50', 
-          calificacion: 5 ,
-          cclases: 'Individual', 
-          despcripcion: 'Vamos hacer esto y lo otro', 
-          id: 2, 
-          freq: 'Unica', 
-          estado:'Deshabilitada',
-          comentarios: 
-          [
-            { id: 1, texto:  'Usuario 8: Comentario 1 para Guitarra' },
-            { id: 2, texto: 'Usuario 3: Comentario 2 para Guitarra' },
-          ]
-        },
-        { 
-          categoria: 'Cocina', 
-          precio: '50', 
-          calificacion: 1 ,
-          cclases: 'Grupales', 
-          despcripcion: 'Vamos hacer esto y lo otro', 
-          id: 3,
-          freq: 'Mensual',
-          estado:'Deshabilitada',
-          comentarios: 
-          [
-            { id: 1, texto: 'Usuario 22:  Comentario 1 para Cocina' },
-            { id: 2, texto: 'Usuario 12: Comentario 2 para Cocina' },
-          ]
-        },
-        { 
-          categoria: 'Manejo', 
-          precio: '50', 
-          calificacion: 3 ,
-          cclases: 'Individual', 
-          despcripcion: 'Vamos hacer esto y lo otro', 
-          id: 4,
-          freq: 'Unica' ,
-          estado:'Activa' ,
-          comentarios: 
-          [
-            { id: 1, texto: 'Usuario 50: Comentario 1 para Manejo' },
-            { id: 2, texto: 'Usuario 40: Comentario 2 para Manejo' },
-          ] 
-        },
-      ]);
+//     return ( 
+      
+//       <div className="posteos-hechos">
+//       <div className="agregar-publi">
+//         <FormDialog onUpdate={fetchPublicaciones} />
+//       </div>
+//       <div className="posteos-container">
+      
+      
+
+//   {pub_commited.map((dcPost) => {
+        
+        
+//         return (
+//           <div className="perfil-preview" key={dcPost.id}>
+//             <ProfileTest
+//               publicacion={dcPost}
+//               onAcceptComment={acceptComment}
+//               onDeleteComment={deleteComment}
+//             />
+//           </div>
+//         );
+//       })}
+
+//     </div>
+//     </div>
+//      );
+// }
+// }
+ 
+// export default PostSite;
 
 
-    // Función para aceptar un comentario en una publicación específica
+const PostSite = () => {
+  const [pub_commited, setPublicaciones] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchPublicaciones = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch('http://localhost:4000/api/servicios/getservicios', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include', // Si es necesario para manejar las cookies
+      });
+      if (!response.ok) throw new Error('Error al cargar publicaciones');
+      const responseData = await response.json();
+      console.log(responseData);
+      const publicacionesConvertidas = responseData.data.map(publicacion => {
+        return {
+          ...publicacion,
+          _id: publicacion._id.$oid,
+          duracion: publicacion.duracion, // Si duracion ya es un número
+          costo: publicacion.costo, //
+        };
+      });
+      console.log("Publicaciones convertidas:", publicacionesConvertidas);
+      setPublicaciones(publicacionesConvertidas);
+    } catch (error) {
+      setError(error.message);
+    }
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    fetchPublicaciones();
+  }, []);
+
+    if (isLoading) return <p>Cargando publicaciones...</p>;
+    if (error) return <p>Error: {error}</p>;
+    if (!Array.isArray(pub_commited)) {
+      console.error("pub_commited no es un array", pub_commited);
+      return; // o maneja este caso de manera adecuada
+    }
+
     const acceptComment = (postId, commentId) => {
       setPublicaciones((prevState) =>
         prevState.map((post) => {
@@ -318,26 +411,27 @@ const PostSite = () => {
         })
       );
     };
-    
-    return ( 
 
+    return (
       <div className="posteos-hechos">
-      <div className="agregar-publi">
-        <FormDialog />
-      </div>
-      <div className="posteos-container">
-      {pub_commited.map((dcPost) => (
-        <div className="perfil-preview" key={dcPost.id}>
-          <ProfileTest
-            publicacion={dcPost}
-            onAcceptComment={acceptComment}
-            onDeleteComment={deleteComment}
-          />
+        <div className="agregar-publi">
+          <FormDialog onUpdate={fetchPublicaciones} />
         </div>
-      ))}
-    </div>
-    </div>
-     );
-}
- 
-export default PostSite;
+        <div className="posteos-container">
+          {pub_commited.map((dcPost) => {
+            return (
+              <div className="perfil-preview" key={dcPost.id}>
+                <ProfileTest
+                  publicacion={dcPost}
+                  onAcceptComment={acceptComment}
+                  onDeleteComment={deleteComment}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+  
+  export default PostSite;

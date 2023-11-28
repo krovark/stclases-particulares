@@ -10,7 +10,7 @@ const Profilesite = () => {
 
   const [perfil, setDatos] = useState(null);
   const [editMode, setEditMode] = useState(false);
-  const [editedData, setEditedData] = useState(null);
+  
 
   const [editedTitulo, setEditedTitulo] = useState('');
   const [editedExperiencia, setEditedExperiencia] = useState('');

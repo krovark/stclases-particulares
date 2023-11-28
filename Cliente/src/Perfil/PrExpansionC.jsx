@@ -1,44 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './TabComponents/estiloTabs/profile-style.css';
-import { styled } from '@mui/material/styles';
+//import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Box } from '@mui/material';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
-import AcceptIcon from '@mui/icons-material/CheckCircle';
-import DeleteIcon from '@mui/icons-material/Delete';
 
 
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
+// const ExpandMore = styled((props) => {
+//   const { expand, ...other } = props;
+//   return <IconButton {...other} />;
+// })(({ theme, expand }) => ({
+//   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+//   marginLeft: 'auto',
+//   transition: theme.transitions.create('transform', {
+//     duration: theme.transitions.duration.shortest,
+//   }),
+// }));
 
 export default function ProfileTest({ publicacion, onAcceptComment, onDeleteComment }) {
-  const [expanded, setExpanded] = React.useState(false);
+  //const [expanded, setExpanded] = React.useState(false);
   const [editMode, setEditMode] = useState(false); // Estado para controlar el modo de edición
   const [editedData, setEditedData] = useState({}); // Estado para rastrear los valores editados
   const [anchorEl, setAnchorEl] = useState(null); // Definir anchorEl
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  // const handleExpandClick = () => {
+  //   setExpanded(!expanded);
+  // };
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -81,6 +75,7 @@ export default function ProfileTest({ publicacion, onAcceptComment, onDeleteComm
     setEditedData({ ...editedData, [name]: value });
   };
 
+
   return (
     <div>
       <Card sx={{ maxWidth: 1000 }}>
@@ -114,17 +109,17 @@ export default function ProfileTest({ publicacion, onAcceptComment, onDeleteComm
                 <MenuItem onClick={handleDisableClick}>Desactivar</MenuItem>
                 <MenuItem onClick={handleDeleteClick}>Eliminar</MenuItem>
               </Menu>
-              {/* checking */}
+              
             </React.Fragment>
           }
           title={editMode ? (
             <TextField
               name="categoria"
-              value={editedData.categoria || publicacion.categoria}
+              value={editedData.nombre || publicacion.nombre}
               onChange={handleInputChange}
             />
           ) : (
-            publicacion.categoria
+            publicacion.nombre
           )}
           subheader={publicacion.estado}
         />
@@ -133,54 +128,77 @@ export default function ProfileTest({ publicacion, onAcceptComment, onDeleteComm
           {editMode ? (
             <TextField
               name="cclases"
-              value={editedData.cclases || publicacion.cclases}
+              value={editedData.tipoClase || publicacion.tipoClase}
               onChange={handleInputChange}
             />
           ) : (
-            <h5>Clases: {publicacion.cclases}</h5>
+            <h5>Clases: {publicacion.tipoClase}</h5>
           )}
           {editMode ? (
             <TextField
               name="freq"
-              value={editedData.freq || publicacion.freq}
+              value={editedData.frecuencia || publicacion.frecuencia}
               onChange={handleInputChange}
             />
           ) : (
-            <h5>Frecuencia: {publicacion.freq}</h5>
+            <h5>Frecuencia: {publicacion.frecuencia}</h5>
+          )}
+          {editMode ? (
+            <TextField
+              name="duracion"
+              value={editedData.duracion || publicacion.duracion}
+              onChange={handleInputChange}
+              
+            />
+            
+          ) : (
+            <h5>Duración: {publicacion.duracion}</h5>
           )}
           {editMode ? (
             <TextField
               name="precio"
-              value={editedData.precio || publicacion.precio}
+              value={editedData.costo || publicacion.costo}
               onChange={handleInputChange}
+              
             />
+            
           ) : (
-            <h5>Precio hora: {publicacion.precio}</h5>
+            <h5>Precio hora: {publicacion.costo}</h5>
           )}
           <br></br>
           {editMode ? (
             <TextField
               name="despcripcion"
-              value={editedData.despcripcion || publicacion.despcripcion}
+              value={editedData.descripcion || publicacion.descripcion}
               onChange={handleInputChange}
             />
           ) : (
-            <h6>Descripcion: {publicacion.despcripcion}</h6>
+            <h6>Descripcion: {publicacion.descripcion}</h6>
           )}
         </CardContent>
 
-        <CardActions disableSpacing>
+
+
+
+
+
+
+
+
+
+
+        {/* <CardActions disableSpacing>
           <ExpandMore
             expand={expanded}
             onClick={handleExpandClick}
             aria-expanded={expanded}
             aria-label="show more"
           >
-            {/* <ExpandMoreIcon /> */}
+            <ExpandMoreIcon />
           </ExpandMore>
-        </CardActions>
+        </CardActions> */}
 
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
+        {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent id="box-comentarios">
             <Typography>Comentarios:</Typography>
             <br></br>
@@ -209,7 +227,7 @@ export default function ProfileTest({ publicacion, onAcceptComment, onDeleteComm
               </Box>
             ))}
           </CardContent>
-        </Collapse>
+        </Collapse> */}
       </Card>
     </div>
   );

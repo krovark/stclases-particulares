@@ -34,7 +34,7 @@ var ServicioSchema = new mongoose.Schema({
         enum: ['Única', 'Semanal', 'Mensual'] // Solo admite 'Única', 'Semanal' o 'Mensual'
     },
     costo: {
-        type: mongoose.Types.Decimal128, // Para manejar valores decimales
+        type: Number, // Para manejar valores decimales
         required: true
     },
     calificacion: {
