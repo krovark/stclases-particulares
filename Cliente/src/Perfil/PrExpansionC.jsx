@@ -13,32 +13,38 @@ import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
 
 
+
 export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,onAcceptComment, onDeleteComment }) {
   //const [expanded, setExpanded] = React.useState(false);
   const [editMode, setEditMode] = useState(false); // Estado para controlar el modo de edición
   const [editedData, setEditedData] = useState({}); // Estado para rastrear los valores editados
   const [anchorEl, setAnchorEl] = useState(null); // Definir anchorEl
+  
+  
 
-  // const handleExpandClick = () => {
-  //   setExpanded(!expanded);
-  // };
-
+// ESCUCHA EL ICONO DE SETTINGS
+//   
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
+//  ESTADO PARA EL SETTING ICONS
+//   
   const handleMenuClose = () => {
     setAnchorEl(null);
     
   };
 
   const handleEditClick = () => {
+    
     setEditMode(true);
     handleMenuClose();
   };
 
+//  CAMBIAR ESTADO A ACTIVO
+//   
   const handleActivateClick = () => {
-    console.log('Valor de publicacion.estado:', publicacion.estado);
+    
     if (!postId) {
       console.error('ID del posteo no definido');
       return;
@@ -52,18 +58,18 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
       headers: {
         'Content-Type': 'application/json',
       },
-      credentials: 'include', // Si es necesario para manejar las cookies
+      credentials: 'include', 
       body: JSON.stringify({ estado: nuevoEstado }), // Cambiar el estado a "activo"
     })
       .then((response) => {
         if (response.ok) {
           
-          console.log('Estado del posteo cambiado a "activo" con éxito');
+          
           // También puedes actualizar el estado local del posteo si lo deseas
           // setPublicacion({ ...publicacion, estado: nuevoEstado });
           fetchPublicaciones();
         } else {
-          // Maneja errores aquí si la solicitud no es exitosa
+          
           console.error('Error al cambiar el estado del posteo a "activo"');
         }
       })
@@ -74,12 +80,10 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
     handleMenuClose();
   };
 
-
+//  DESACTIVAR PUBLICACION
+//   
   const handleDisableClick = () => {
-   // const postIdValue  = postId;
-    
-   console.log('Valor de postId:', postId);
-
+  
   if (!postId ) {
     console.error('ID del posteo no definido');
     return;
@@ -92,13 +96,13 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
     headers: {
       'Content-Type': 'application/json',
     },
-    credentials: 'include', // Si es necesario para manejar las cookies
+    credentials: 'include', 
     body: JSON.stringify({ estado: nuevoEstado }), // Aquí pasas el nuevo estado en el cuerpo de la solicitud
   })
     .then((response) => {
       if (response.ok) {
-        // La solicitud PATCH se completó con éxito, puedes manejarlo aquí
-        console.log('Estado del posteo cambiado con éxito');
+        
+        
         // También puedes actualizar el estado local del posteo si lo deseas
         // setPublicacion({ ...publicacion, estado: nuevoEstado });
         fetchPublicaciones();
@@ -114,8 +118,32 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
     handleMenuClose();
   };
 
+//   ELIMINAR PUBLICACION 
+// 
+
   const handleDeleteClick = () => {
-    
+    if (!postId) {
+      console.error('ID del posteo no definido');
+      return;
+    }
+  
+    fetch(`http://localhost:4000/api/servicios/borrar/${postId}`, {
+      method: 'DELETE',
+      credentials: 'include', 
+    })
+      .then((response) => {
+        if (response.ok) {
+          
+         
+          fetchPublicaciones();
+        } else {
+          console.error('Error al eliminar la publicación');
+        }
+      })
+      .catch((error) => {
+        console.error('Error al eliminar la publicación', error);
+      });
+  
     handleMenuClose();
   };
 
@@ -126,7 +154,7 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
   };
 
   const handleCancelClick = () => {
-    // Aquí puedes cancelar la edición y restaurar los valores originales
+    // Cancela la edición y restaurar los valores originales
     setEditedData({});
     setEditMode(false);
   };
@@ -248,3 +276,4 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
     </div>
   );
 }
+

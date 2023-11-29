@@ -86,11 +86,26 @@ exports.updateEstadoServicio = async function (servicioId, nuevoEstado) {
     }
 };
 
-exports.deleteServicio = async function (servicioId) {
+exports.removeServicio = async function (servicioId) {
     try {
         var deletedServicio = await Servicio.findByIdAndRemove(servicioId);
         return deletedServicio;
     } catch (e) {
         throw new Error('Error while Deleting Servicio: ' + e.message);
     }
+};
+
+exports.editServicio = async (id, datosActualizados) => {
+  try {
+    const servicioActualizado = await Servicio.findByIdAndUpdate(
+      id,
+      datosActualizados,
+      { new: true } // Para devolver el documento actualizado
+    );
+
+    return servicioActualizado;
+  } catch (error) {
+    console.error('Error al editar el servicio en el servicio', error);
+    throw error; // Propaga el error para manejarlo en el controlador
+  }
 };

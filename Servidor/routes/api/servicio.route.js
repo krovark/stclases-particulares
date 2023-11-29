@@ -23,4 +23,6 @@ router.patch('/cambiarestado/:id', Authorization ,ServicioController.updateEstad
 // Ruta para eliminar un servicio específico por ID
 router.delete('/borrar/:id', Authorization ,ServicioController.removeServicio);
 
+router.patch('/editServicio/:id', ServicioController.editServicio);
+
 module.exports = router;

@@ -126,3 +126,26 @@ exports.getServiciosByUser = async function(req, res, next) {
         res.status(400).json({ status: 400, message: e.message });
     }
 };
+
+exports.editServicio = async (req, res) => {
+    try {
+      const { nombre, tipoClase, descripcion, duracion, costo, frecuencia } = req.body;
+      const { id } = req.params;
+  
+      
+      const servicioActualizado = await Servicio.findByIdAndUpdate(
+        id,
+        { nombre, tipoClase, descripcion, duracion, costo, frecuencia },
+        { new: true } // Para devolver el documento actualizado
+      );
+  
+      if (!servicioActualizado) {
+        return res.status(404).json({ message: 'Servicio no encontrado' });
+      }
+  
+      res.status(200).json(servicioActualizado);
+    } catch (error) {
+      console.error('Error al editar el servicio', error);
+      res.status(500).json({ message: 'Error interno del servidor' });
+    }
+  };
