@@ -236,7 +236,8 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
           }
           title={editMode ? (
             <TextField
-              name="categoria"
+              name="nombre"
+              label="nombre"
               value={editedData.nombre || publicacion.nombre}
               onChange={handleInputChange}
               placeholder='Curso'
@@ -251,11 +252,12 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
           {editMode ? (
             
             <Select
-                  name="cclases"
+                  name="tipoClase"
+                  
                   value={editedData.tipoClase || publicacion.tipoClase}
                   onChange={handleInputChange}
                   placeholder='Tipo de clase'
-                  style={{ width: '250px' }}
+                  style={{ width: '250px' , marginTop: '10px' }}
                 >
         <MenuItem value="Individual">Individual</MenuItem>
         <MenuItem value="Grupal">Grupal</MenuItem>        
@@ -265,11 +267,12 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
           )}
           {editMode ? (
                   <Select
-                  name="cclases"
+                  name="frecuencia"
+                  
                   value={editedData.frecuencia || publicacion.frecuencia}
                   onChange={handleInputChange}
                   placeholder='Frecuencia'
-                  style={{ width: '250px' }}
+                  style={{ width: '250px' , marginTop: '10px' }}
                 >
                     <MenuItem value="Individual">Única</MenuItem>
                     <MenuItem value="Semanal">Semanal</MenuItem>
@@ -281,9 +284,11 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
           {editMode ? (
             <TextField
               name="duracion"
+              label="duracion"
               value={editedData.duracion || publicacion.duracion}
               onChange={handleInputChange}
               placeholder='Duracion en minutos'
+              style={{ width: '250px' , marginTop: '10px' }}
             />
             
           ) : (
@@ -291,11 +296,12 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
           )}
           {editMode ? (
             <TextField
-              name="precio"
+              name="costo"
+              label="costo"
               value={editedData.costo || publicacion.costo}
               onChange={handleInputChange}
               placeholder='Precio'
-              style={{ width: '300px' }}
+              style={{ width: '300px' , marginTop: '10px', marginBottom: '10px' }}
               
             />
             
@@ -305,7 +311,8 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
           <br></br>
           {editMode ? (
             <TextField
-              name="despcripcion"
+              name="descripcion"
+              label="descripcion"
               value={editedData.descripcion || publicacion.descripcion}
               onChange={handleInputChange}
               placeholder='Frecuencia'
