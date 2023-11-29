@@ -129,15 +129,36 @@ exports.getServiciosByUser = async function(req, res, next) {
 
 exports.editServicio = async (req, res) => {
     try {
-      const { nombre, tipoClase, descripcion, duracion, costo, frecuencia } = req.body;
+      
       const { id } = req.params;
-  
+      const updateFields = {};
+
+      if (req.body.nombre) {
+        updateFields.nombre = req.body.nombre;
+      }
+      if (req.body.tipoClase) {
+        updateFields.tipoClase = req.body.tipoClase;
+      }
+      if (req.body.descripcion) {
+        updateFields.descripcion = req.body.descripcion;
+      }
+      if (req.body.duracion) {
+        updateFields.duracion = req.body.duracion;
+      }
+      if (req.body.costo) {
+        updateFields.costo = req.body.costo;
+      }
+      if (req.body.frecuencia) {
+        updateFields.frecuencia = req.body.frecuencia;
+      }
       
       const servicioActualizado = await Servicio.findByIdAndUpdate(
         id,
-        { nombre, tipoClase, descripcion, duracion, costo, frecuencia },
-        { new: true } // Para devolver el documento actualizado
+      updateFields,
+      { new: true }  // Para devolver el documento actualizado
       );
+
+      console.log(servicioActualizado);
   
       if (!servicioActualizado) {
         return res.status(404).json({ message: 'Servicio no encontrado' });

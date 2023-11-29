@@ -100,9 +100,10 @@ exports.editServicio = async (id, datosActualizados) => {
     const servicioActualizado = await Servicio.findByIdAndUpdate(
       id,
       datosActualizados,
+      
       { new: true } // Para devolver el documento actualizado
     );
-
+    console.log(datosActualizados);
     return servicioActualizado;
   } catch (error) {
     console.error('Error al editar el servicio en el servicio', error);

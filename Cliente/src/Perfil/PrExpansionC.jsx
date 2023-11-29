@@ -11,6 +11,7 @@ import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
+import Select from '@mui/material/Select';
 
 
 
@@ -19,7 +20,7 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
   const [editMode, setEditMode] = useState(false); // Estado para controlar el modo de edición
   const [editedData, setEditedData] = useState({}); // Estado para rastrear los valores editados
   const [anchorEl, setAnchorEl] = useState(null); // Definir anchorEl
-  
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
 
 // ESCUCHA EL ICONO DE SETTINGS
@@ -148,9 +149,36 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
   };
 
   const handleSaveClick = () => {
-    // Aquí puedes guardar los datos editados, por ejemplo, enviar una solicitud al servidor si es necesario
-    // Luego, puedes salir del modo de edición
-    setEditMode(false);
+    if (!postId) {
+      console.error('ID del posteo no definido');
+      return;
+    }
+  
+    // Preparar los datos a enviar al servidor, puedes usar el objeto editedData
+    const dataToUpdate = { ...editedData };
+    console.log("data editada", editedData);
+    fetch(`http://localhost:4000/api/servicios/editServicio/${postId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(dataToUpdate), // Enviar los datos editados al servidor
+    })
+      .then((response) => {
+        if (response.ok) {
+          // Datos editados con éxito en el servidor
+          // Aquí puedes realizar cualquier actualización adicional necesaria en el cliente
+          fetchPublicaciones();
+        } else {
+          console.error('Error al guardar los datos editados');
+        }
+      })
+      .catch((error) => {
+        console.error('Error al guardar los datos editados', error);
+      });
+  
+    setEditMode(false); // Salir del modo de edición
   };
 
   const handleCancelClick = () => {
@@ -211,6 +239,7 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
               name="categoria"
               value={editedData.nombre || publicacion.nombre}
               onChange={handleInputChange}
+              placeholder='Curso'
             />
           ) : (
             publicacion.nombre
@@ -220,20 +249,32 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
 
         <CardContent id="card-body">
           {editMode ? (
-            <TextField
-              name="cclases"
-              value={editedData.tipoClase || publicacion.tipoClase}
-              onChange={handleInputChange}
-            />
+            
+            <Select
+                  name="cclases"
+                  value={editedData.tipoClase || publicacion.tipoClase}
+                  onChange={handleInputChange}
+                  placeholder='Tipo de clase'
+                  style={{ width: '250px' }}
+                >
+        <MenuItem value="Individual">Individual</MenuItem>
+        <MenuItem value="Grupal">Grupal</MenuItem>        
+      </Select>
           ) : (
             <h5>Clases: {publicacion.tipoClase}</h5>
           )}
           {editMode ? (
-            <TextField
-              name="freq"
-              value={editedData.frecuencia || publicacion.frecuencia}
-              onChange={handleInputChange}
-            />
+                  <Select
+                  name="cclases"
+                  value={editedData.frecuencia || publicacion.frecuencia}
+                  onChange={handleInputChange}
+                  placeholder='Frecuencia'
+                  style={{ width: '250px' }}
+                >
+                    <MenuItem value="Individual">Única</MenuItem>
+                    <MenuItem value="Semanal">Semanal</MenuItem>
+                    <MenuItem value="Mensual">Mensual</MenuItem>        
+                  </Select>
           ) : (
             <h5>Frecuencia: {publicacion.frecuencia}</h5>
           )}
@@ -242,7 +283,7 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
               name="duracion"
               value={editedData.duracion || publicacion.duracion}
               onChange={handleInputChange}
-              
+              placeholder='Duracion en minutos'
             />
             
           ) : (
@@ -253,6 +294,8 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
               name="precio"
               value={editedData.costo || publicacion.costo}
               onChange={handleInputChange}
+              placeholder='Precio'
+              style={{ width: '300px' }}
               
             />
             
@@ -265,6 +308,7 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
               name="despcripcion"
               value={editedData.descripcion || publicacion.descripcion}
               onChange={handleInputChange}
+              placeholder='Frecuencia'
             />
           ) : (
             <h6>Descripcion: {publicacion.descripcion}</h6>
@@ -276,4 +320,3 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
     </div>
   );
 }
-
