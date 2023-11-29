@@ -13,17 +13,6 @@ import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
 
 
-// const ExpandMore = styled((props) => {
-//   const { expand, ...other } = props;
-//   return <IconButton {...other} />;
-// })(({ theme, expand }) => ({
-//   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-//   marginLeft: 'auto',
-//   transition: theme.transitions.create('transform', {
-//     duration: theme.transitions.duration.shortest,
-//   }),
-// }));
-
 export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,onAcceptComment, onDeleteComment }) {
   //const [expanded, setExpanded] = React.useState(false);
   const [editMode, setEditMode] = useState(false); // Estado para controlar el modo de edición
@@ -40,10 +29,48 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+    
   };
 
   const handleEditClick = () => {
     setEditMode(true);
+    handleMenuClose();
+  };
+
+  const handleActivateClick = () => {
+    console.log('Valor de publicacion.estado:', publicacion.estado);
+    if (!postId) {
+      console.error('ID del posteo no definido');
+      return;
+      
+    }
+  
+    const nuevoEstado = 'activo';
+  
+    fetch(`http://localhost:4000/api/servicios/cambiarestado/${postId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include', // Si es necesario para manejar las cookies
+      body: JSON.stringify({ estado: nuevoEstado }), // Cambiar el estado a "activo"
+    })
+      .then((response) => {
+        if (response.ok) {
+          
+          console.log('Estado del posteo cambiado a "activo" con éxito');
+          // También puedes actualizar el estado local del posteo si lo deseas
+          // setPublicacion({ ...publicacion, estado: nuevoEstado });
+          fetchPublicaciones();
+        } else {
+          // Maneja errores aquí si la solicitud no es exitosa
+          console.error('Error al cambiar el estado del posteo a "activo"');
+        }
+      })
+      .catch((error) => {
+        console.error('Error al cambiar el estado del posteo a "activo"', error);
+      });
+  
     handleMenuClose();
   };
 
@@ -131,19 +158,24 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
                 </IconButton>
               )}
               <Menu
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={handleMenuClose}
-              >
-                {editMode ? (
-                  <MenuItem onClick={handleCancelClick}>Cancelar</MenuItem>
-                ) : (
-                  <MenuItem onClick={handleEditClick}>Modificar</MenuItem>
-                )}
-                <MenuItem onClick={handleDisableClick}>Desactivar</MenuItem>
-                <MenuItem onClick={handleDeleteClick}>Eliminar</MenuItem>
-              </Menu>
-              
+                    anchorEl={anchorEl}
+                    open={Boolean(anchorEl)}
+                    onClose={handleMenuClose}
+                  >
+                    {editMode ? (
+                      <MenuItem onClick={handleCancelClick}>Cancelar</MenuItem>
+                    ) : (
+                      <MenuItem onClick={handleEditClick}>Modificar</MenuItem>
+                    )}
+                    {publicacion.estado.trim() === 'desactivado' && (
+                      <MenuItem onClick={handleActivateClick}>Activar</MenuItem>
+                      
+                    )}
+                    {publicacion.estado.trim() === 'activo' && (
+                        <MenuItem onClick={handleDisableClick}>Desactivar</MenuItem>
+                    )}
+                    <MenuItem onClick={handleDeleteClick}>Eliminar</MenuItem>
+                  </Menu>
             </React.Fragment>
           }
           title={editMode ? (
@@ -211,57 +243,7 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
           )}
         </CardContent>
 
-
-
-
-
-
-
-
-
-
-
-        {/* <CardActions disableSpacing>
-          <ExpandMore
-            expand={expanded}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-          >
-            <ExpandMoreIcon />
-          </ExpandMore>
-        </CardActions> */}
-
-        {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent id="box-comentarios">
-            <Typography>Comentarios:</Typography>
-            <br></br>
-            {publicacion.comentarios.map((comentario) => (
-              <Box
-                key={comentario.id}
-                sx={{ border: '1px solid gray', m: 1, p: 1, display: 'flex', alignItems: 'center' }}
-              >
-                <Typography>{comentario.texto}</Typography>
-                {!comentario.aceptado && (
-                  <>
-                    <IconButton
-                      aria-label="Aceptar"
-                      onClick={() => onAcceptComment(publicacion.id, comentario.id)}
-                    >
-                      <AcceptIcon />
-                    </IconButton>
-                    <IconButton
-                      aria-label="Eliminar"
-                      onClick={() => onDeleteComment(publicacion.id, comentario.id)}
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  </>
-                )}
-              </Box>
-            ))}
-          </CardContent>
-        </Collapse> */}
+        
       </Card>
     </div>
   );
