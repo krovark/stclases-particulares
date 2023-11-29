@@ -8,6 +8,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
+import Spinner from 'react-bootstrap/Spinner';
 
 export function FormDialog({ onUpdate }) {
     const [open, setOpen] = React.useState(false);
@@ -50,6 +51,14 @@ export function FormDialog({ onUpdate }) {
     setDuracion(event.target.value);
 };
 
+    
+const handleFormSubmit = async (event) => {
+      
+  event.preventDefault(); // Prevenir la recarga de la página
+  await handleAccept(); // Llamar a handleAccept para manejar el envío de datos
+};
+
+
     const handleAccept = async () => {
       
       if (!categoria || !tipo || !frecuencia || !costo || !descripcion || !duracion) {
@@ -64,7 +73,7 @@ export function FormDialog({ onUpdate }) {
         costo: costo,
         descripcion: descripcion,
         duracion: duracion,
-        estado: 'activo' // Siempre se establece como 'activo' por defecto
+        estado: 'activo' // 'activo' por defecto
         
     };
     
@@ -80,8 +89,7 @@ export function FormDialog({ onUpdate }) {
         });
     
         if (response.ok) {
-          const responseData = await response.json();
-          console.log("Servicio creado exitosamente", responseData);
+          
           setCategoria('');
           setTipo('');
           setFrecuencia('');
@@ -100,12 +108,7 @@ export function FormDialog({ onUpdate }) {
       }
     };
   
-    
-    const handleFormSubmit = async (event) => {
-      
-      event.preventDefault(); // Prevenir la recarga de la página
-      await handleAccept(); // Llamar a handleAccept para manejar el envío de datos
-  };
+
 
 
   return (
@@ -129,6 +132,7 @@ export function FormDialog({ onUpdate }) {
         fullWidth
         variant="outlined"
         onChange={handleCategoriaChange}
+        autoComplete="off"
       />
       <TextField
         margin="dense"
@@ -170,6 +174,7 @@ export function FormDialog({ onUpdate }) {
         fullWidth
         variant="outlined"
         onChange={handleCostoChange}
+        autoComplete="off"
       />
        <TextField
               margin="dense"
@@ -181,6 +186,7 @@ export function FormDialog({ onUpdate }) {
               variant="outlined" // Puedes usar outlined para un borde visible o standard para un borde más delgado
               value={duracion}
               onChange={handleDuracionChange}
+              autoComplete="off"
             />
       <TextField
               margin="dense"
@@ -192,6 +198,7 @@ export function FormDialog({ onUpdate }) {
               variant="outlined" // Puedes usar outlined para un borde visible o standard para un borde más delgado
               value={descripcion}
               onChange={handleDescripcionChange}
+              autoComplete="off"
             />
             
     </DialogContent>
@@ -209,132 +216,21 @@ export function FormDialog({ onUpdate }) {
   
 
 
-// const PostSite = () => {
-  
-//   const [pub_commited, setPublicaciones] = useState([]);
-//   const [isLoading, setIsLoading] = useState(true);
-//   const [error, setError] = useState(null);
-
-
-//       useEffect(() => {
-//         const fetchPublicaciones = async () => {
-//           setIsLoading(true);
-//           try {
-//             const response = await fetch('http://localhost:4000/api/servicios/getservicios', {
-//               method: 'GET',
-//               headers: {
-//                 'Content-Type': 'application/json',
-//               },    
-//               credentials: 'include', // Si es necesario para manejar las cookies
-//             });
-//             if (!response.ok) throw new Error('Error al cargar publicaciones');
-//             const responseData = await response.json();
-//             console.log(responseData);
-//             const publicacionesConvertidas = responseData.data.map(publicacion => {
-//               return {
-//                 ...publicacion,
-//                 _id: publicacion._id.$oid,
-//                 duracion: publicacion.duracion, // Si duracion ya es un número
-//                 costo: publicacion.costo, //
-      
-//               };
-              
-//             });
-//             console.log("Publicaciones convertidas:", publicacionesConvertidas); 
-//             setPublicaciones(publicacionesConvertidas);
-//           } catch (error) {
-//             setError(error.message);
-//           }
-//           setIsLoading(false);
-//         };
-      
-//       //   fetchPublicaciones();
-//       // }, []);
-
-//        useEffect(() => {
-//          fetchPublicaciones();
-//        }, []);
-
-//     if (isLoading) return <p>Cargando publicaciones...</p>;
-//     if (error) return <p>Error: {error}</p>;
-//     if (!Array.isArray(pub_commited)) {
-//       console.error("pub_commited no es un array", pub_commited);
-//       return; // o maneja este caso de manera adecuada
-//     }
-  
-//     const acceptComment = (postId, commentId) => {
-//       setPublicaciones((prevState) =>
-//         prevState.map((post) => {
-//           if (post.id === postId) {
-//             return {
-//               ...post,
-//               comentarios: post.comentarios.map((comment) => {
-//                 if (comment.id === commentId) {
-//                   return { ...comment, aceptado: true };
-//                 }
-//                 return comment;
-//               }),
-//             };
-//           }
-//           return post;
-//         })
-//       );
-//     };
-
-//     // Función para eliminar un comentario en una publicación específica
-//     const deleteComment = (postId, commentId) => {
-//       setPublicaciones((prevState) =>
-//         prevState.map((post) => {
-//           if (post.id === postId) {
-//             return {
-//               ...post,
-//               comentarios: post.comentarios.filter(
-//                 (comment) => comment.id !== commentId
-//               ),
-//             };
-//           }
-//           return post;
-//         })
-//       );
-//     };
-    
-//     return ( 
-      
-//       <div className="posteos-hechos">
-//       <div className="agregar-publi">
-//         <FormDialog onUpdate={fetchPublicaciones} />
-//       </div>
-//       <div className="posteos-container">
-      
-      
-
-//   {pub_commited.map((dcPost) => {
-        
-        
-//         return (
-//           <div className="perfil-preview" key={dcPost.id}>
-//             <ProfileTest
-//               publicacion={dcPost}
-//               onAcceptComment={acceptComment}
-//               onDeleteComment={deleteComment}
-//             />
-//           </div>
-//         );
-//       })}
-
-//     </div>
-//     </div>
-//      );
-// }
-// }
- 
-// export default PostSite;
-
-
 const PostSite = () => {
   const [pub_commited, setPublicaciones] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // useEffect(() => {
+  //   // Simular un retraso de 3 segundos antes de realizar la solicitud de fetch
+  //   const delayFetch = setTimeout(() => {
+  //     fetchPublicaciones(); // Llamar a la función de solicitud después del retraso
+  //   }, 5000);
+
+  //   // Limpia el retraso si el componente se desmonta antes de que se complete
+  //   return () => clearTimeout(delayFetch);
+  // }, []);
+
 
   const fetchPublicaciones = async () => {
     setIsLoading(true);
@@ -348,17 +244,25 @@ const PostSite = () => {
       });
       if (!response.ok) throw new Error('Error al cargar publicaciones');
       const responseData = await response.json();
-      console.log(responseData);
+      
+       console.log('Documentos recibidos del servidor:', responseData.data);
+
+      
       const publicacionesConvertidas = responseData.data.map(publicacion => {
-        return {
-          ...publicacion,
-          _id: publicacion._id.$oid,
-          duracion: publicacion.duracion, // Si duracion ya es un número
-          costo: publicacion.costo, //
-        };
+        if (publicacion._id) {
+          return {
+            ...publicacion,
+            duracion: publicacion.duracion, // Si duracion ya es un número
+            costo: publicacion.costo, //
+          };
+        }
+        return publicacion;
       });
-      console.log("Publicaciones convertidas:", publicacionesConvertidas);
+
+
       setPublicaciones(publicacionesConvertidas);
+      setIsLoading(false);
+      console.log('Contenido de pub_commited:', publicacionesConvertidas);
     } catch (error) {
       setError(error.message);
     }
@@ -369,7 +273,19 @@ const PostSite = () => {
     fetchPublicaciones();
   }, []);
 
-    if (isLoading) return <p>Cargando publicaciones...</p>;
+    //if (isLoading) return <p>Cargando publicaciones...</p>;
+    if (isLoading) {
+      
+      return (
+        <div className="text-center">
+          <Spinner animation="border" role="status">
+            <span className="visually-hidden">Cargando...</span>
+          </Spinner>
+        </div>
+      );
+    }
+
+
     if (error) return <p>Error: {error}</p>;
     if (!Array.isArray(pub_commited)) {
       console.error("pub_commited no es un array", pub_commited);
@@ -379,7 +295,7 @@ const PostSite = () => {
     const acceptComment = (postId, commentId) => {
       setPublicaciones((prevState) =>
         prevState.map((post) => {
-          if (post.id === postId) {
+          if (post._id === postId) {
             return {
               ...post,
               comentarios: post.comentarios.map((comment) => {
@@ -412,6 +328,8 @@ const PostSite = () => {
       );
     };
 
+    
+
     return (
       <div className="posteos-hechos">
         <div className="agregar-publi">
@@ -422,9 +340,12 @@ const PostSite = () => {
             return (
               <div className="perfil-preview" key={dcPost.id}>
                 <ProfileTest
+                 
                   publicacion={dcPost}
+                  postId={dcPost._id}
                   onAcceptComment={acceptComment}
                   onDeleteComment={deleteComment}
+                  fetchPublicaciones={fetchPublicaciones}
                 />
               </div>
             );

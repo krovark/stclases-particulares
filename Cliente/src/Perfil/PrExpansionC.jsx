@@ -24,7 +24,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 //   }),
 // }));
 
-export default function ProfileTest({ publicacion, onAcceptComment, onDeleteComment }) {
+export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,onAcceptComment, onDeleteComment }) {
   //const [expanded, setExpanded] = React.useState(false);
   const [editMode, setEditMode] = useState(false); // Estado para controlar el modo de edición
   const [editedData, setEditedData] = useState({}); // Estado para rastrear los valores editados
@@ -49,6 +49,40 @@ export default function ProfileTest({ publicacion, onAcceptComment, onDeleteComm
 
 
   const handleDisableClick = () => {
+   // const postIdValue  = postId;
+    
+   console.log('Valor de postId:', postId);
+
+  if (!postId ) {
+    console.error('ID del posteo no definido');
+    return;
+  }
+
+  const nuevoEstado = 'desactivado';
+
+    fetch(`http://localhost:4000/api/servicios/cambiarestado/${postId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include', // Si es necesario para manejar las cookies
+    body: JSON.stringify({ estado: nuevoEstado }), // Aquí pasas el nuevo estado en el cuerpo de la solicitud
+  })
+    .then((response) => {
+      if (response.ok) {
+        // La solicitud PATCH se completó con éxito, puedes manejarlo aquí
+        console.log('Estado del posteo cambiado con éxito');
+        // También puedes actualizar el estado local del posteo si lo deseas
+        // setPublicacion({ ...publicacion, estado: nuevoEstado });
+        fetchPublicaciones();
+      } else {
+        // Maneja errores aquí si la solicitud no es exitosa
+        console.error('Error al cambiar el estado del posteo');
+      }
+    })
+    .catch((error) => {
+      console.error('Error al cambiar el estado del posteo', error);
+    });
     
     handleMenuClose();
   };
