@@ -7,35 +7,26 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 exports.createContratacion = async function(contratacionData) {
     // const newContratacion = new Contratacion(contratacionData);
 
-
     try {
         // Obtener el servicio para encontrar el proveedor
         const servicio = await Servicio.findById(contratacionData.servicioId);
         if (!servicio) {
             throw new Error('Servicio no encontrado');
         }
-
         // Obtener el email del proveedor
         const proveedor = await User.findById(servicio.proveedorId);
         if (!proveedor) {
             throw new Error('Proveedor no encontrado');
-        }
-        
+        }       
         const newContratacion = new Contratacion({
             ...contratacionData,
             userId: proveedor._id 
-        });
-        
+        });       
         await newContratacion.save();
-
-
         const destinatario = proveedor.email;
         const destinatariotest = 'santglez51@gmail.com';
-
-
         // Envío del correo electrónico al proveedor
         const msg = {
-
             to: destinatariotest, 
             from: 'santiagojgonzalez@uade.edu.ar', // Tu dirección de correo electrónico verificada en SendGrid
             subject: `Contratación de ${servicio.nombre}`, // Nombre del servicio
@@ -54,8 +45,7 @@ exports.createContratacion = async function(contratacionData) {
             </ul>
         </div>`
         };
-        await sgMail.send(msg);
-        
+        await sgMail.send(msg);     
         return newContratacion;
     } catch (e) {
         throw new Error('Error while sending email: ' + e.message);

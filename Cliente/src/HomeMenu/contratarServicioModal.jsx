@@ -68,6 +68,7 @@ const numericOptions = Array.from({ length: 10 }, (_, index) => index + 1);
             type="text"
             fullWidth
             variant="outlined"
+            autoComplete="off"
           />
           <TextField
             autoFocus
@@ -77,6 +78,7 @@ const numericOptions = Array.from({ length: 10 }, (_, index) => index + 1);
             type="text"
             fullWidth
             variant="outlined"
+            autoComplete="off"
           />
           <TextField
             autoFocus
@@ -86,6 +88,7 @@ const numericOptions = Array.from({ length: 10 }, (_, index) => index + 1);
             type="text"
             fullWidth
             variant="outlined"
+            autoComplete="off"
           />
           <TextField
             autoFocus
@@ -95,6 +98,7 @@ const numericOptions = Array.from({ length: 10 }, (_, index) => index + 1);
             type="text"
             fullWidth
             variant="outlined"
+            autoComplete="off"
           />
            {/* <TextField
             margin="dense"

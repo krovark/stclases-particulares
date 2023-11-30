@@ -12,10 +12,10 @@ import LandingPage from './LandingPage'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './estilos-menu/menu.css';
 import NavigationBar from './NavBar';
-import Home from './Home'
+//import Home from './Home'
 
-import CommentM from './commentModal'
-import HireService from './getService'
+import ComentarioModal from './verComentariosModal'
+import HireService from './contratarServicioModal'
 
 import { BrowserRouter as Router, Route, Switch, useLocation  } from 'react-router-dom';
 import Profilesite from '../Perfil/TabComponents/VistasTab/profile-content';
@@ -158,7 +158,7 @@ const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, fil
               </li>
               <div className="comentarios">
               <QuestionAnswerIcon className="PlusIcon" sx={{ fontSize: 30 }} onClick={() => setModalShow(true)}/>
-                  <CommentM
+                  <ComentarioModal
                     show={modalShow}
                     onHide={() => setModalShow(false)}
                     
@@ -273,13 +273,6 @@ const HomeMenu = () => {
   const [currentPage, setCurrentPage] = useState(1); // Nuevo estado
   const postsPerPage = 10; // Nueva constante
   const publicaciones = generateRandomPosts(30);
-  
-
-
-  // Generar 50 publicaciones aleatorias que cumplen con los filtros
-  // const indexOfLastPost = currentPage * postsPerPage; // Nueva constante
-  // const indexOfFirstPost = indexOfLastPost - postsPerPage; // Nueva constante
-  // const currentPosts = publicaciones.slice(indexOfFirstPost, indexOfLastPost); // Nueva constante
   
 
   return (

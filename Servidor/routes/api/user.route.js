@@ -27,10 +27,17 @@ router.get('/me', Authorization, UserController.getProfile);
 router.post('/userByMail', Authorization, UserController.getUsersByMail);
 router.patch('/update', Authorization, UserController.updateUser);
 router.delete('/delete', Authorization, UserController.removeUser);
-
-//router.patch('/update_image', Authorization, upload.single('imgProfile'), UserController.uploadProfileImage);
-
 router.patch('/update_image', Authorization ,upload.single('imgProfile'), UserController.uploadProfileImage);
+
+
+
+router.post('/logout', (req, res) => {
+  res.cookie('jwt', '', { expires: new Date(0), httpOnly: true });
+  res.status(200).send({ message: 'Logout successful' });
+});
+
+
+
 
 module.exports = router;
 

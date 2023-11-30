@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import './estilos-menu/menu.css';
 
 
-const NotificationContent = () => {
+const verComentariosModal = () => {
     const simulatedComments = [
         { username: "Usuario1", text: "Este es un comentario." },
         { username: "Usuario2", text: "Bien explicado." },
@@ -28,4 +28,4 @@ const NotificationContent = () => {
     );
 }
 
-export default NotificationContent;
+export default verComentariosModal;

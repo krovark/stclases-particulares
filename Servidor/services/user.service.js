@@ -222,13 +222,15 @@ exports.updateProfileImage = async function(userId, imageBuffer) {
       
       return user;
     } catch (e) {
+        console.error(e);
       throw new Error('Error while updating profile image: ' + e.message);
+
     }
   };
 
   exports.getProfile = async function(userId) {
     try {
-        const user = await User.findById(userId, 'email nombre apellido titulo experiencia telefono calificacionPromedio');
+        const user = await User.findById(userId, 'email nombre apellido titulo experiencia telefono calificacionPromedio imgProfile');
         return user;
     } catch (error) {
         throw new Error('Error al obtener el usuario: ' + error.message);

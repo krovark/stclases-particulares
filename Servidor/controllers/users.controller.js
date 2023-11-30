@@ -191,20 +191,22 @@ exports.logoutUser = function(req, res) {
 
 exports.uploadProfileImage = async function(req, res) {
     try {
-      const userId = req.userId; // Asumimos que el userId viene de un middleware de autenticación
+      const userId = req.userId; 
       const imageBuffer = req.file.buffer; // Asumimos que estás utilizando middleware como multer para manejar la carga de archivos
   
       const user = await UserService.updateProfileImage(userId, imageBuffer);
-  
+        console.log("hola imagen?")
       res.status(200).json({
         message: "Profile image updated successfully",
         user: user
       });
     } catch (e) {
+        console.error(e);
       res.status(400).json({ message: e.message });
     }
   };
     
+
   exports.getProfile = async function(req, res) {
     try {
         const userId = req.userId; // Asumiendo que el middleware JWT ha establecido req.userId

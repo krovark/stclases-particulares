@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-
+// import store, { persistor } from './store'; 
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
@@ -11,6 +11,7 @@ const authSlice = createSlice({
     },
     logOut: (state) => {
       state.isLoggedIn = false;
+      // persistor.purge();
     }
   }
 });

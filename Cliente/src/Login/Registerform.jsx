@@ -15,7 +15,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
     confirmPassword: '',
     experiencia: '',
     calificacionPromedio: '',
-    imgProfile: '',
+    imgProfile: 'https://res.cloudinary.com/dstqx4yk0/image/upload/f_auto,q_auto/hnctdvnktwij9ova4ey4',
     titulo:'',
     resetPasswordToken: '',
     resetPasswordExpires: '', 

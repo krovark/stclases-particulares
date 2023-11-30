@@ -7,9 +7,6 @@ import Box from '@mui/material/Box';
 import Historial from './VistasTab/cursosDados'
 import PostCreados from './VistasTab/PostComponents'
 import ComentariosMod from './VistasTab/ComentariosMod'
-
-
-
 import '../TabComponents/estiloTabs/profile-style.css';
 
 function CustomTabPanel(props) {
@@ -32,21 +29,7 @@ function CustomTabPanel(props) {
   );
 }
 
-function generarComentariosAleatorios() {
-  const loremIpsum =
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
-  const comentariosAleatorios = [];
 
-  for (let i = 1; i <= 7; i++) {
-    comentariosAleatorios.push({
-      id: i,
-      text: loremIpsum,
-      pendiente: true, // Inicialmente, todos los comentarios están pendientes de revisión
-    });
-  }
-
-  return comentariosAleatorios;
-}
 
 CustomTabPanel.propTypes = {
   children: PropTypes.node,
