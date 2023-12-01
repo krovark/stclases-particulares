@@ -22,7 +22,7 @@ const ContratacionSchema = new mongoose.Schema({
     },
     estado: {
         type: String,
-        enum: ['Solicitada', 'Confirmada', 'Cancelada'], 
+        enum: ['Solicitada', 'Confirmada', 'Cancelada', 'Finalizada'], 
         default: 'Solicitada'
     },
     cantclases: {

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../estiloTabs/coursesDictated-style.css';
 import Pagination from 'react-bootstrap/Pagination';
 import Rating from '@mui/material/Rating';
 
-const PedidoStatusSelector = ({ selectedStatus, onStatusChange }) => {
+const PedidoStatusSelector = ({ selectedStatus, onStatusChange, contratacionId }) => {
   const [isDropdownDisabled, setIsDropdownDisabled] = useState(false);
   const [currentSelection, setCurrentSelection] = useState(selectedStatus);
 
@@ -11,10 +11,32 @@ const PedidoStatusSelector = ({ selectedStatus, onStatusChange }) => {
       setCurrentSelection(event.target.value);
   };
 
-  const handleConfirm = () => {
-      onStatusChange(currentSelection);
-      setIsDropdownDisabled(currentSelection === 'Finalizada' || currentSelection === 'Cancelada');
-  };
+
+  const handleConfirm = async () => {
+
+    try {
+        const response = await fetch(`http://localhost:4000/api/contratar/editarcontratacion/${contratacionId}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include', // Si es necesario para la autenticación
+          body: JSON.stringify({ estado: currentSelection }),
+        });
+  
+        if (!response.ok) {
+          throw new Error('Error al actualizar la contratación');
+        }
+  
+        const responseData = await response.json();
+        console.log('Contratación actualizada:', responseData);
+  
+        onStatusChange(currentSelection); // Actualiza el estado local después de una actualización exitosa
+        setIsDropdownDisabled(currentSelection === 'Finalizada' || currentSelection === 'Cancelada');
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
 
   const shouldDisplayPendiente = !(["Aceptada", "Finalizada", "Cancelada"].includes(currentSelection));
 
@@ -33,6 +55,8 @@ const PedidoStatusSelector = ({ selectedStatus, onStatusChange }) => {
   );
 };
 
+
+
 const HistorialItem = ({ item }) => (
     <li>
         <strong>{item.title}:</strong> {item.value}
@@ -40,22 +64,22 @@ const HistorialItem = ({ item }) => (
 );
 
 const HistorialPreview = ({ item, onStatusChange }) => {
+    
     const studentDetails = [
-        { title: 'Servicio', value: item.nombre },
-        { title: 'Telefono', value: item.telefono },
-        { title: 'Email', value: item.email },
-        { title: 'Tipo', value: item.tipo },
-        { title: 'Cantidad de clases', value: item.cclases },
-       
-       // { title: 'Calificacion', value: <Rating name="read-only" value={item.calificacion} readOnly /> },
-       // { title: 'Comentario', value: item.comentario }
+        { title: 'Servicio', value: item.servicioId.nombre },
+        { title: 'Teléfono', value: item.cliente.telefono },
+        { title: 'Email', value: item.cliente.email },
+        { title: 'Tipo', value: item.servicioId.tipoClase }, 
+        { title: 'Cantidad de Clases', value: item.cantclases },
+        
     ];
 
+    
     return (
         <div className="historial-preview">
-          <div className="hist-estudiante">         
-                <h2>{item.studentName}</h2>     
-          </div>
+            <div className="hist-estudiante">         
+                <h2>{`${item.cliente.nombre} ${item.cliente.apellido}`}</h2>     
+            </div>
             <div className='body-alumno'>
                 <ul className='ul-alumno'>
                     {studentDetails.map(detail => (
@@ -64,8 +88,8 @@ const HistorialPreview = ({ item, onStatusChange }) => {
                 </ul>
             </div>
             <div className="status-class">
-            <PedidoStatusSelector selectedStatus={item.estado || 'Pendiente'} onStatusChange={nuevoEstado => onStatusChange(item.id, nuevoEstado)} />
-        </div>
+                <PedidoStatusSelector selectedStatus={item.estado || 'Pendiente'} onStatusChange={nuevoEstado => onStatusChange(item._id, nuevoEstado)} contratacionId={item._id} />
+            </div>
         </div>
     );
 };
@@ -74,14 +98,60 @@ const HistorialPreview = ({ item, onStatusChange }) => {
 
 
 const HistorialCursos = () => {
-  const [historial, setHistorial] = useState([
-    { studentName: 'Tiago Bartoli', telefono: 'Abogado', email: 'lorem ipsum...', nombre: 'Piano', tipo: 'Individual', cclases: '4', calificacion: '3', comentario: 'bueno bueno', id: 1 },
-    { studentName: 'Lucila Manson', telefono: 'Matematicas', email: 'asdasd', nombre: "Pasteleria", tipo: 'Grupal', cclases: '5', calificacion: '4' , comentario: 'bueno bueno'  , id: 2 },
-    { studentName: 'Kevin Mcarty', telefono: 'Botanica', email: 'lorem ipsum...', nombre: 'Malabares', tipo: 'Individual', cclases: '3', calificacion: '5' , comentario: 'bueno bueno'  , id: 3 },
-    { studentName: 'Maria Sol Corrado', telefono: 'Fisica', email: 'lorem ipsum...', nombre: 'Canto', tipo: 'Individual', cclases: '2', calificacion: '2' , comentario: 'malo malo'  , id: 4 },
-    { studentName: 'Ezequiel Borrado', telefono: 'Artista', email: 'lorem ipsum...', nombre: 'Guitarra', tipo: 'Grupal', cclases: '4', calificacion: '4' , comentario: 'bueno bueno'  , id: 5 },
-    { studentName: 'Ester Esposito', telefono: 'Defensas Personales', email: 'lorem ipsum...', nombre: 'Cocina', tipo: 'Grupal', cclases: '5', calificacion: '1' , comentario: 'malo malo'  , id: 6 },
-  ]);
+//   const [historial, setHistorial] = useState([
+//     { studentName: 'Tiago Bartoli', telefono: 'Abogado', email: 'lorem ipsum...', nombre: 'Piano', tipo: 'Individual', cclases: '4', calificacion: '3', comentario: 'bueno bueno', id: 1 },
+//     { studentName: 'Lucila Manson', telefono: 'Matematicas', email: 'asdasd', nombre: "Pasteleria", tipo: 'Grupal', cclases: '5', calificacion: '4' , comentario: 'bueno bueno'  , id: 2 },
+//     { studentName: 'Kevin Mcarty', telefono: 'Botanica', email: 'lorem ipsum...', nombre: 'Malabares', tipo: 'Individual', cclases: '3', calificacion: '5' , comentario: 'bueno bueno'  , id: 3 },
+//     { studentName: 'Maria Sol Corrado', telefono: 'Fisica', email: 'lorem ipsum...', nombre: 'Canto', tipo: 'Individual', cclases: '2', calificacion: '2' , comentario: 'malo malo'  , id: 4 },
+//     { studentName: 'Ezequiel Borrado', telefono: 'Artista', email: 'lorem ipsum...', nombre: 'Guitarra', tipo: 'Grupal', cclases: '4', calificacion: '4' , comentario: 'bueno bueno'  , id: 5 },
+//     { studentName: 'Ester Esposito', telefono: 'Defensas Personales', email: 'lorem ipsum...', nombre: 'Cocina', tipo: 'Grupal', cclases: '5', calificacion: '1' , comentario: 'malo malo'  , id: 6 },
+//   ]);
+
+  const [historial, setHistorial] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+
+
+  useEffect(() => {
+    const fetchHistorial = async () => {
+      try {
+        
+       
+        const response = await fetch('http://localhost:4000/api/contratar/contrataciones/me', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            credentials: 'include', // Importante para enviar cookies
+            
+        });
+
+
+        if (!response.ok) {
+          throw new Error('Error al obtener las contrataciones');
+        }
+
+        const data = await response.json();
+        console.log("Datos recibidos del servidor:", data);
+        
+        // setHistorial(data.data.docs); 
+
+        if (data && Array.isArray(data.docs)) {
+            setHistorial(data.docs); // Asegúrate de que 'docs' es un arreglo
+          } else {
+            setHistorial(data.data);
+          }
+
+
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchHistorial();
+  }, []);
+
+
+
 
   const handleStatusChange = (id, nuevoEstado, isDropdownDisabled) => {
     const nuevoHistorial = historial.map((item) =>
@@ -90,8 +160,7 @@ const HistorialCursos = () => {
     setHistorial(nuevoHistorial);
   };
 
-  const [currentPage, setCurrentPage] = useState(1);
-
+  
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
