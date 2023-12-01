@@ -8,7 +8,7 @@ var UserSchema = new mongoose.Schema({
     email: { type: String, unique: true, required: true},
     telefono: String,  
     password: { type: String, required: true},
-    titulo: String,  
+    titulo: { type: String, required: false},  
     experiencia: { type: String, required: true},
     calificacionPromedio: Number,
     imgProfile: {

@@ -12,18 +12,29 @@ async function obtenerExperienciaDeUsuario(userId) {
     }
 }
 
+async function obtenerTituloDeUsuario(userId) {
+    try {
+        const usuario = await User.findById(userId).exec();
+        return usuario ? usuario.titulo : null;
+    } catch (error) {
+        console.error("Error al obtener la experiencia del usuario:", error);
+        throw new Error(error);
+    }
+}
 
 
 // Async Controller function to create a service
 exports.createServicio = async function (req, res, next) {
 
     let experienciaUsuario = await obtenerExperienciaDeUsuario(req.userId);
+    let tituloUsuario = await obtenerTituloDeUsuario(req.userId);
 
     var servicioData = {
         proveedorId: req.userId,
         nombre: req.body.nombre,
         tipoClase: req.body.tipoClase,
         descripcion: req.body.descripcion,
+        titulo: tituloUsuario,
         experiencia: experienciaUsuario,
         duracion: req.body.duracion,
         frecuencia: req.body.frecuencia,

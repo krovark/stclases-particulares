@@ -20,6 +20,10 @@ var ServicioSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    titulo: {
+        type: String,
+        required: false
+    },
     experiencia: {
         type: String,
         required: false
@@ -57,3 +61,4 @@ ServicioSchema.plugin(mongoosePaginate);
 const Servicio = mongoose.model('Servicio', ServicioSchema);
 
 module.exports = Servicio;
+

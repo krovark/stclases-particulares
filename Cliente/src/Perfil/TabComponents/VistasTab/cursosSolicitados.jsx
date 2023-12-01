@@ -41,13 +41,14 @@ const HistorialItem = ({ item }) => (
 
 const HistorialPreview = ({ item, onStatusChange }) => {
     const studentDetails = [
+        { title: 'Servicio', value: item.nombre },
         { title: 'Telefono', value: item.telefono },
         { title: 'Email', value: item.email },
         { title: 'Tipo', value: item.tipo },
         { title: 'Cantidad de clases', value: item.cclases },
-        { title: 'Servicio', value: item.categoria },
-        { title: 'Calificacion', value: <Rating name="read-only" value={item.calificacion} readOnly /> },
-        { title: 'Comentario', value: item.comentario }
+       
+       // { title: 'Calificacion', value: <Rating name="read-only" value={item.calificacion} readOnly /> },
+       // { title: 'Comentario', value: item.comentario }
     ];
 
     return (
@@ -74,12 +75,12 @@ const HistorialPreview = ({ item, onStatusChange }) => {
 
 const HistorialCursos = () => {
   const [historial, setHistorial] = useState([
-    { studentName: 'Tiago Bartoli', telefono: 'Abogado', email: 'lorem ipsum...', categoria: 'Piano', tipo: 'Individual', cclases: '4', calificacion: '3', comentario: 'bueno bueno', id: 1 },
-    { studentName: 'Lucila Manson', telefono: 'Matematicas', email: 'asdasd', categoria: "Pasteleria", tipo: 'Grupal', cclases: '5', calificacion: '4' , comentario: 'bueno bueno'  , id: 2 },
-    { studentName: 'Kevin Mcarty', telefono: 'Botanica', email: 'lorem ipsum...', categoria: 'Malabares', tipo: 'Individual', cclases: '3', calificacion: '5' , comentario: 'bueno bueno'  , id: 3 },
-    { studentName: 'Maria Sol Corrado', telefono: 'Fisica', email: 'lorem ipsum...', categoria: 'Canto', tipo: 'Individual', cclases: '2', calificacion: '2' , comentario: 'malo malo'  , id: 4 },
-    { studentName: 'Ezequiel Borrado', telefono: 'Artista', email: 'lorem ipsum...', categoria: 'Guitarra', tipo: 'Grupal', cclases: '4', calificacion: '4' , comentario: 'bueno bueno'  , id: 5 },
-    { studentName: 'Ester Esposito', telefono: 'Defensas Personales', email: 'lorem ipsum...', categoria: 'Cocina', tipo: 'Grupal', cclases: '5', calificacion: '1' , comentario: 'malo malo'  , id: 6 },
+    { studentName: 'Tiago Bartoli', telefono: 'Abogado', email: 'lorem ipsum...', nombre: 'Piano', tipo: 'Individual', cclases: '4', calificacion: '3', comentario: 'bueno bueno', id: 1 },
+    { studentName: 'Lucila Manson', telefono: 'Matematicas', email: 'asdasd', nombre: "Pasteleria", tipo: 'Grupal', cclases: '5', calificacion: '4' , comentario: 'bueno bueno'  , id: 2 },
+    { studentName: 'Kevin Mcarty', telefono: 'Botanica', email: 'lorem ipsum...', nombre: 'Malabares', tipo: 'Individual', cclases: '3', calificacion: '5' , comentario: 'bueno bueno'  , id: 3 },
+    { studentName: 'Maria Sol Corrado', telefono: 'Fisica', email: 'lorem ipsum...', nombre: 'Canto', tipo: 'Individual', cclases: '2', calificacion: '2' , comentario: 'malo malo'  , id: 4 },
+    { studentName: 'Ezequiel Borrado', telefono: 'Artista', email: 'lorem ipsum...', nombre: 'Guitarra', tipo: 'Grupal', cclases: '4', calificacion: '4' , comentario: 'bueno bueno'  , id: 5 },
+    { studentName: 'Ester Esposito', telefono: 'Defensas Personales', email: 'lorem ipsum...', nombre: 'Cocina', tipo: 'Grupal', cclases: '5', calificacion: '1' , comentario: 'malo malo'  , id: 6 },
   ]);
 
   const handleStatusChange = (id, nuevoEstado, isDropdownDisabled) => {
@@ -114,9 +115,7 @@ const HistorialCursos = () => {
 
   return (
     <div className="main-container">
-        {/* <div className="titulo">
-        <h1>Historial de Contrataciones</h1>
-        </div> */}
+        
         <div className="historial-list">
             {paginatedData.map(historialItem => (
                 <HistorialPreview key={historialItem.id} item={historialItem} onStatusChange={handleStatusChange} />

@@ -1,6 +1,8 @@
 const ContratacionService = require('../services/contratacion.services');
 
 exports.createContratacion = async function(req, res) {
+
+    
     try {
         const contratacionData = {
             servicioId: req.body.servicioId,
@@ -22,6 +24,8 @@ exports.createContratacion = async function(req, res) {
         res.status(400).json({ message: e.message });
     }
 };
+
+
 
 exports.getAllContrataciones = async function(req, res) {
     try {

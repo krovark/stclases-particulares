@@ -73,40 +73,6 @@ exports.createUser = async function (user) {
     }
 }
 
-// exports.updateUser = async function (user) {
-    
-//     //var id = {name :user.name}
-
-//     var id = { _id: user._id };
-//     console.log("######################################");
-//     console.log(id);
-//     try {
-//         //Find the old User Object by the Id
-//         var oldUser = await User.findOne(id);
-//         console.log (oldUser)
-//     } catch (e) {
-//         throw Error("Error occured while Finding the User")
-//     }
-//     // If no old User Object exists return false
-//     if (!oldUser) {
-//         return false;
-//     }
-//     //Edit the User Object
-//         if (user.nombre) oldUser.nombre = user.nombre;
-//         if (user.apellido) oldUser.apellido = user.apellido;
-//         if (user.email) oldUser.email = user.email;
-//         if (user.telefono) oldUser.telefono = user.telefono;
-//         if (user.password) oldUser.password = bcrypt.hashSync(user.password, 8);
-//         if (user.titulo) oldUser.titulo = user.titulo;
-//         if (user.experiencia) oldUser.experiencia = user.experiencia;
-//         if (user.calificacionPromedio) oldUser.calificacionPromedio = user.calificacionPromedio;
-//     try {
-//         var savedUser = await oldUser.save()
-//         return savedUser;
-//     } catch (e) {
-//         throw Error("And Error occured while updating the User");
-//     }
-// }
 
 exports.updateUser = async function (userId, userUpdateData) {
     try {
@@ -175,39 +141,7 @@ exports.loginUser = async function (user) {
 
 }
 
-// exports.updateProfileImage = async function(req, res) {
-//     try {
-//         const result = await cloudinary.uploader.upload(req.file.path);
-//         const user = await UserService.updateProfileImage(req.userId, result.secure_url);
-//         res.status(200).json({ user, message: 'Profile image updated successfully' });
-//     } catch (e) {
-//         res.status(400).json({ message: e.message });
-//     }
-// };
 
-
-// exports.updateProfileImage = async function(userId, imageBuffer) {
-//     try {
-//       const result = await cloudinary.uploader.upload_stream({
-//         resource_type: 'image',
-//       }, (error, result) => {
-//         if (error) throw new Error('Error uploading to Cloudinary: ' + error.message);
-//         return result;
-//       }).end(imageBuffer);
-  
-//       const user = await User.findById(userId);
-//       if (!user) {
-//         throw new Error('User not found');
-//       }
-  
-//       user.imgProfile = result.secure_url;
-//       await user.save();
-  
-//       return user;
-//     } catch (e) {
-//       throw new Error('Error while updating profile image: ' + e.message);
-//     }
-//   };
 
 exports.updateProfileImage = async function(userId, imageBuffer) {
     try {
