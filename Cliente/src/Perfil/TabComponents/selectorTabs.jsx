@@ -8,7 +8,7 @@ import Historial from './VistasTab/cursosSolicitados'
 import PostCreados from './VistasTab/PostComponents'
 import ComentariosMod from './VistasTab/ComentariosMod'
 import '../TabComponents/estiloTabs/profile-style.css';
-
+import './estiloTabs/Tabs-styles.css'
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -60,8 +60,9 @@ export default function BasicTabs() {
           <Tab label="Moderar" {...a11yProps(2)} style={{ fontSize: '16px' }}/>
         </Tabs>
       </Box>
-      <CustomTabPanel value={value} index={0}>
-        <PostCreados/>
+      <div className="back-ground_check">
+      <CustomTabPanel value={value} index={0}> 
+        <PostCreados/> 
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
       <Historial/>
@@ -69,6 +70,7 @@ export default function BasicTabs() {
       <CustomTabPanel value={value} index={2}>
       <ComentariosMod/>
       </CustomTabPanel>
+      </div>
     </Box>
   );
 }

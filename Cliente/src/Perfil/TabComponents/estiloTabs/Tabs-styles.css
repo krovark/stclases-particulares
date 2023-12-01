@@ -106,6 +106,12 @@
 
 
 
+  .back-ground_check{
+
+    background-color: #f0f0f0 ;
+    border-radius: 5px;
+  }
+
   @media (min-width: 768px) and (max-width: 1024px) {
     .cursos-preview {
         width: calc(50% - 1%); 

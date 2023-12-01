@@ -7,9 +7,9 @@ const PedidoStatusSelector = ({ selectedStatus, onStatusChange, contratacionId }
   const [isDropdownDisabled, setIsDropdownDisabled] = useState(false);
   const [currentSelection, setCurrentSelection] = useState(selectedStatus);
 
-  const handleStatusChange = (event) => {
-      setCurrentSelection(event.target.value);
-  };
+//   const handleStatusChange = (event) => {
+//       setCurrentSelection(event.target.value);
+//   };
 
 
   const handleConfirm = async () => {
@@ -37,6 +37,19 @@ const PedidoStatusSelector = ({ selectedStatus, onStatusChange, contratacionId }
         console.error('Error:', error);
       }
     };
+
+    useEffect(() => {
+        // Establecer isDropdownDisabled basado en el estado inicial seleccionado
+        setIsDropdownDisabled(selectedStatus === 'Finalizada' || selectedStatus === 'Cancelada');
+      }, [selectedStatus]); // Dependencia: selectedStatus
+    
+      const handleStatusChange = (event) => {
+          setCurrentSelection(event.target.value);
+      };
+    
+
+
+
 
   const shouldDisplayPendiente = !(["Aceptada", "Finalizada", "Cancelada"].includes(currentSelection));
 
@@ -98,14 +111,7 @@ const HistorialPreview = ({ item, onStatusChange }) => {
 
 
 const HistorialCursos = () => {
-//   const [historial, setHistorial] = useState([
-//     { studentName: 'Tiago Bartoli', telefono: 'Abogado', email: 'lorem ipsum...', nombre: 'Piano', tipo: 'Individual', cclases: '4', calificacion: '3', comentario: 'bueno bueno', id: 1 },
-//     { studentName: 'Lucila Manson', telefono: 'Matematicas', email: 'asdasd', nombre: "Pasteleria", tipo: 'Grupal', cclases: '5', calificacion: '4' , comentario: 'bueno bueno'  , id: 2 },
-//     { studentName: 'Kevin Mcarty', telefono: 'Botanica', email: 'lorem ipsum...', nombre: 'Malabares', tipo: 'Individual', cclases: '3', calificacion: '5' , comentario: 'bueno bueno'  , id: 3 },
-//     { studentName: 'Maria Sol Corrado', telefono: 'Fisica', email: 'lorem ipsum...', nombre: 'Canto', tipo: 'Individual', cclases: '2', calificacion: '2' , comentario: 'malo malo'  , id: 4 },
-//     { studentName: 'Ezequiel Borrado', telefono: 'Artista', email: 'lorem ipsum...', nombre: 'Guitarra', tipo: 'Grupal', cclases: '4', calificacion: '4' , comentario: 'bueno bueno'  , id: 5 },
-//     { studentName: 'Ester Esposito', telefono: 'Defensas Personales', email: 'lorem ipsum...', nombre: 'Cocina', tipo: 'Grupal', cclases: '5', calificacion: '1' , comentario: 'malo malo'  , id: 6 },
-//   ]);
+
 
   const [historial, setHistorial] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);

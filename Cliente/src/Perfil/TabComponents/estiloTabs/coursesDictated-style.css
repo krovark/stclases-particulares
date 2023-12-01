@@ -20,10 +20,11 @@
     .hist-estudiante{
       text-align: center;
       text-shadow: rgba(0,0,0,0.3);
-      
+      display: flex;
       width: 200px;
       height: 50px;
       align-items: center;
+      
     }
 
     .body-alumno, .ul-alumno {
@@ -50,6 +51,7 @@
     .main-container{
       padding: none;
       margin: none;
+      
     }
 
     /* .mainMenu{
@@ -116,6 +118,7 @@
   
     .ul-alumno{
       list-style-type: none;
+      font-size: 20px;
     }
 
     #select-value{
