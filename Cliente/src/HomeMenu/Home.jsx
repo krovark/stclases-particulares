@@ -38,7 +38,6 @@ if (!posts || posts.length === 0) {
   
   
 
-
   const handleHireServiceOpen = () => {
     setHireServiceOpen(true);
   };
@@ -114,7 +113,12 @@ const Sidebar = ({ setFiltroTipo, setFiltroFrecuencia, setFiltroCalificacion, se
     { value: 5, label: '5' },
   ];
 
+  
+
+
+
   return (
+
     <div className="sidebar">
       <header>
         <h3>Filtros</h3>
@@ -198,7 +202,7 @@ const HomeMenu = () => {
   // const publicaciones = generateRandomPosts(30);
   //const location = useLocation();
   const [servicios, setServicios] = useState([]);
-
+  
 
   useEffect(() => {
     const fetchServicios = async () => {
