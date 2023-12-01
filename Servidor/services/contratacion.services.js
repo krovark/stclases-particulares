@@ -5,29 +5,31 @@ const User = require('../models/User.model')
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 exports.createContratacion = async function(contratacionData) {
-    // const newContratacion = new Contratacion(contratacionData);
-
     try {
-        // Obtener el servicio para encontrar el proveedor
         const servicio = await Servicio.findById(contratacionData.servicioId);
         if (!servicio) {
             throw new Error('Servicio no encontrado');
         }
-        // Obtener el email del proveedor
+
         const proveedor = await User.findById(servicio.proveedorId);
         if (!proveedor) {
             throw new Error('Proveedor no encontrado');
-        }       
+        }
+
         const newContratacion = new Contratacion({
             ...contratacionData,
-            userId: proveedor._id 
-        });       
+            userId: proveedor._id,
+            tipoClase: servicio.tipoClase,
+            frecuencia: servicio.frecuencia,
+        });
+
         await newContratacion.save();
         const destinatario = proveedor.email;
-        const destinatariotest = 'santglez51@gmail.com';
+       // const destinatariotest = 'santglez51@gmail.com';
+
         // Envío del correo electrónico al proveedor
         const msg = {
-            to: destinatariotest, 
+            to: destinatario, 
             from: 'santiagojgonzalez@uade.edu.ar', // Tu dirección de correo electrónico verificada en SendGrid
             subject: `Contratación de ${servicio.nombre}`, // Nombre del servicio
             text: `Detalles de la contratación en formato texto...`, // Versión en texto para clientes de correo sin soporte HTML

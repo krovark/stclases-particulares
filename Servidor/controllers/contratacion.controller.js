@@ -1,12 +1,17 @@
-const ContratacionService = require('../services/contratacion.services');
+const Servicio = require('../models/servicio.model');
+const ContratacionService = require ('../services/contratacion.services')
 
 exports.createContratacion = async function(req, res) {
-
-
     try {
+        const servicioId = req.params.id; // Asegúrate de que la ruta sea /contratar/:id
+        const servicio = await Servicio.findById(servicioId);
+
+        if (!servicio) {
+            return res.status(404).json({ message: 'Servicio no encontrado' });
+        }
+
         const contratacionData = {
-            servicioId: req.body.servicioId,
-            
+            servicioId,
             cliente: {
                 nombre: req.body.nombre,
                 apellido: req.body.apellido,
@@ -17,13 +22,14 @@ exports.createContratacion = async function(req, res) {
             cantclases: req.body.cantclases,
             fechaContratacion: req.body.fechaContratacion
         };
-        const contratacionCreada = await ContratacionService.createContratacion(contratacionData);
 
+        const contratacionCreada = await ContratacionService.createContratacion(contratacionData);
         res.status(201).json({ data: contratacionCreada, message: 'Contratación creada y email enviado con éxito.' });
     } catch (e) {
         res.status(400).json({ message: e.message });
     }
 };
+
 
 
 

@@ -14,7 +14,7 @@ var ServicioSchema = new mongoose.Schema({
     tipoClase: {
         type: String,
         required: true,
-        enum: ['Grupal', 'Individual'] // Solo admite 'Grupal' o 'Individual'
+        enum: ['Grupal', 'Individual']
     },
     descripcion: {
         type: String,

@@ -71,7 +71,7 @@
       display: flex;
       justify-content: space-between;
       display: inline-block; /* Hace que las tarjetas sean elementos en línea en lugar de bloques */
-      width: 300px; 
+      width: 305px; 
       height: 660px;
       display: grid;
       grid-template-rows: auto 1fr auto;

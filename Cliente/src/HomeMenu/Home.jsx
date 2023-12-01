@@ -110,7 +110,7 @@ if (!posts || posts.length === 0) {
             </ul>
  
             <div className="precio-clase">     
-            <HireService precio={servicio.costo} open={hireServiceOpen} onClose={handleHireServiceClose} > </HireService>     
+            <HireService servicioId={servicio._id} precio={servicio.costo} open={hireServiceOpen} onClose={handleHireServiceClose} > </HireService>     
             </div>
 
             

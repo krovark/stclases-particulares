@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
   });
 
 
-router.post('/contratar', ContratacionController.createContratacion);
+router.post('/contratar/:id', ContratacionController.createContratacion);
 router.get('/allcontrataciones', Authorization, ContratacionController.getAllContrataciones);
 router.patch('/editarcontratacion/:id', Authorization, ContratacionController.updateEstadoContratacion);
 router.get('/contrataciones/me', Authorization, ContratacionController.getContratacionesByUsuario);

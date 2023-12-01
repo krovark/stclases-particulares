@@ -82,7 +82,8 @@ const HistorialPreview = ({ item, onStatusChange }) => {
         { title: 'Servicio', value: item.servicioId.nombre },
         { title: 'Teléfono', value: item.cliente.telefono },
         { title: 'Email', value: item.cliente.email },
-        { title: 'Tipo', value: item.servicioId.tipoClase }, 
+        { title: 'Tipo', value: item.servicioId.tipoClase },
+        { title: 'Frecuencia', value: item.servicioId.frecuencia },  
         { title: 'Cantidad de Clases', value: item.cantclases },
         
     ];

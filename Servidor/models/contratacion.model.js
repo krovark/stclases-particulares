@@ -25,6 +25,16 @@ const ContratacionSchema = new mongoose.Schema({
         enum: ['Solicitada', 'Confirmada', 'Cancelada', 'Finalizada'], 
         default: 'Solicitada'
     },
+    frecuencia: {
+        type: String,
+        required: true,
+        enum: ['Única', 'Semanal', 'Mensual']
+    },
+    tipoClase: {
+        type: String,
+        required: true,
+        
+    },
     cantclases: {
         type: Number,
         required: true
