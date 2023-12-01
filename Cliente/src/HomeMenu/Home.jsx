@@ -7,101 +7,14 @@ import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
-import LandingPage from './LandingPage'
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './estilos-menu/menu.css';
-import NavigationBar from './NavBar';
-import Home from './Home'
-
 import ComentarioModal from './verComentariosModal'
 import HireService from './contratarServicioModal'
-
-import { BrowserRouter as Router, Route, Switch, useLocation  } from 'react-router-dom';
-import Profilesite from '../Perfil/TabComponents/VistasTab/profile-content';
-import userLogin from '../Login/LoginForm';
-
 import Rating from '@mui/material/Rating';
 import Pagination from 'react-bootstrap/Pagination';
 
-// const generateRandomCalificacion = () => {
-//   return Math.floor(Math.random() * 5) + 1; // Genera una calificación aleatoria de 1 a 5
-// };
 
-
-// const generateRandomFrecuencia = () => {
-//   const frecuencias = ['Unica', 'Semanal', 'Mensual'];
-//   const randomIndex = Math.floor(Math.random() * frecuencias.length);
-//   return frecuencias[randomIndex];
-// };
-
-// const generateRandomDuracion = () => {
-//   const frecuencias = ['60', '30'];
-//   const randomIndex = Math.floor(Math.random() * frecuencias.length);
-//   return frecuencias[randomIndex];
-// };
-
-// const generateRandomTipoClase = () => {
-//   const tipos = ['Individual', 'Grupal'];
-//   const randomIndex = Math.floor(Math.random() * tipos.length);
-//   return tipos[randomIndex];
-// };
-
-// const generateRandomCategoria = () => {
-//   const categorias = ['Piano', 'Cocina', 'Manejo', 'Matematicas', 'Circo', 'Natación'];
-//   const randomIndex = Math.floor(Math.random() * categorias.length);
-//   return categorias[randomIndex];
-// };
-
-// const generateRandomExperiencia = () => {
-//   const experiencias = [
-//     // 'Experiencia en la enseñanza de esta materia por más de 5 años.',
-//     // 'Amplia experiencia en el campo y excelentes resultados con mis estudiantes.',
-//     'Soy un experto en esta área y he ayudado a muchos estudiantes a tener éxito.',
-//     // 'He trabajado con estudiantes de todas las edades y niveles de habilidad.',
-//   ];
-//   const randomIndex = Math.floor(Math.random() * experiencias.length);
-//   return experiencias[randomIndex];
-// };
-
-// const generateRandomPrecio = () => {
-//   return Math.floor(Math.random() * 100) + 20; // Genera un precio aleatorio entre 20 y 120
-// };
-
-const getRandomAvatarNumber = () => {
-  return Math.floor(Math.random() * 4) + 1; 
-};
-
-// const generateRandomPosts = (count) => {
-//   const posts = [];
-//   for (let i = 1; i <= count; i++) {
-//     const author = `Autor ${i}`;
-//     const titulo = `Título ${i}`;
-//     const experiencia = generateRandomExperiencia();
-//     const categoria = generateRandomCategoria();
-//     const precio = generateRandomPrecio();
-//     const calificacion = generateRandomCalificacion();
-//     const tipoClase = generateRandomTipoClase();
-//     const frecuencia = generateRandomFrecuencia();
-//     const duracion = generateRandomDuracion();
-
-//     const post = {
-//       author,
-//       titulo,
-//       experiencia,
-//       categoria,
-//       precio,
-//       calificacion,
-//       id: i,
-//       tipoClase,
-//       frecuencia,
-//       duracion,
-//     };
-
-//     posts.push(post);
-//   }
-//   return posts;
-// };
 
 const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, filtroCategoria }) => {
 
@@ -125,7 +38,6 @@ if (!posts || posts.length === 0) {
   
   
 
-  
 
   const handleHireServiceOpen = () => {
     setHireServiceOpen(true);
@@ -144,8 +56,7 @@ if (!posts || posts.length === 0) {
             <div className="head-post">
             <div className="avatar">
               <Stack direction="row" spacing={1}>
-                {/* <Avatar alt="Remy Sharp" src={`/${getRandomAvatarNumber()}.jpg`} sx={{ width: 80, height: 80 }}>   
-                </Avatar> */}
+              <Avatar src={servicio.proveedorId.imgProfile} sx={{ width: 80, height: 80 }} />
               </Stack>
               
             </div>
@@ -155,7 +66,7 @@ if (!posts || posts.length === 0) {
                 <h2>{servicio.nombre}</h2>
               </div>        
             <ul id="ul-data-cards">
-              <li>Nombre: {servicio.author}</li>
+              <li>Nombre: {servicio.proveedorId && `${servicio.proveedorId.nombre} ${servicio.proveedorId.apellido}`} </li>
               <li>Titulo: {servicio.titulo}</li>
               <li>Experiencia: {servicio.experiencia}</li>
               <li>Tipo: {servicio.tipoClase}</li>

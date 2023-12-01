@@ -60,6 +60,12 @@ exports.getServiciosByEstado = async function(estado, page, limit) {
             limit,
             sort: {
                 createdAt: -1 
+            },
+
+            populate: {
+                path: 'proveedorId', 
+                select: 'imgProfile nombre apellido' 
+
             }
         };
         
