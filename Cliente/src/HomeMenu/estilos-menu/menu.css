@@ -72,9 +72,16 @@
       justify-content: space-between;
       display: inline-block; /* Hace que las tarjetas sean elementos en línea en lugar de bloques */
       width: 100%; /* Asegura que las tarjetas ocupen el ancho completo de la columna */ 
-      
+      display: grid;
+      grid-template-rows: auto 1fr auto;
       
     }
+
+    .post-preview > * {
+      flex: 1;
+    }
+
+
     .post-preview:hover {
       box-shadow: 1px 3px 5px rgba(0,0,0,0.3);
     }
@@ -144,7 +151,14 @@
     
   }    
 
+  .description-container {
+    max-height: 100px; /* Ajusta a lo que necesites */
+    overflow: hidden; /* Esto asegurará que el contenido no desborde */
+  }
+
+
     .precio-clase{
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -159,7 +173,7 @@
     .precio-clase span{
       color: white;
     }
-    
+    S
     .precio-clase:hover{
 
       color: #003f6e;

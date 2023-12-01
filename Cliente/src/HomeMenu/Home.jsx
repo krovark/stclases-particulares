@@ -159,7 +159,9 @@ if (!posts || posts.length === 0) {
               <li>Titulo: {servicio.titulo}</li>
               <li>Experiencia: {servicio.experiencia}</li>
               <li>Tipo: {servicio.tipoClase}</li>
+              <div className="description-container">
               <li>Descripcion: {servicio.descripcion}</li>
+              </div>
               <li>Frecuencia: {servicio.frecuencia} </li>
               <li>Duración: {servicio.duracion} minutos </li>
               <br></br>
