@@ -16,12 +16,18 @@ import Pagination from 'react-bootstrap/Pagination';
 import Spinner from 'react-bootstrap/Spinner';
 
 
-const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, filtroCategoria }) => {
+const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, filtroCategoria, currentPage, postsPerPage }) => {
 
   const [modalShow, setModalShow] = useState(false);
   const [hireServiceOpen, setHireServiceOpen] = useState(false);
-  console.log("Posts en Postlist:", posts);
-  console.log("Posts en Postlist:", posts);
+  
+
+
+  // console.log("Posts en Postlist:", posts);
+  // console.log("Posts en Postlist:", posts);
+
+
+
 if (!posts || posts.length === 0) {
 
   return (
@@ -47,8 +53,12 @@ if (!posts || posts.length === 0) {
     );   
   });
   
-  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
 
+
+  
   const handleHireServiceOpen = () => {
     setHireServiceOpen(true);
   };
@@ -61,7 +71,7 @@ if (!posts || posts.length === 0) {
   return (
     <div className="post-container">
       <div className="post-grid">
-        {filteredPosts.map((servicio) => (
+        {currentPosts.map((servicio) => (
           <div className="post-preview" key={servicio.id}>
             <div className="head-post">
             <div className="avatar">
@@ -123,9 +133,6 @@ const Sidebar = ({ setFiltroTipo, setFiltroFrecuencia, setFiltroCalificacion, se
     { value: 4, label: '4' },
     { value: 5, label: '5' },
   ];
-
-  
-  
 
 
 
@@ -211,12 +218,13 @@ const HomeMenu = () => {
   const [filtroFrecuencia, setFiltroFrecuencia] = useState('');
   const [filtroCalificacion, setFiltroCalificacion] = useState(null);
   const [filtroCategoria, setFiltroCategoria] = useState('');
+
   const [categorias, setCategorias] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 10;
+
+
   
-  // const [currentPage, setCurrentPage] = useState(1); // Nuevo estado
-  // const postsPerPage = 10; // Nueva constante
-  // const publicaciones = generateRandomPosts(30);
-  //const location = useLocation();
   const [servicios, setServicios] = useState([]);
   
 
@@ -287,7 +295,18 @@ const HomeMenu = () => {
   }, []);
 
 
+  const filteredPosts = servicios.filter(servicio => {
+    return (!filtroTipo || servicio.tipoClase === filtroTipo) &&
+           (!filtroFrecuencia || servicio.frecuencia === filtroFrecuencia) &&
+           (!filtroCalificacion || servicio.calificacion >= filtroCalificacion) &&
+           (!filtroCategoria || servicio.nombre === filtroCategoria);
+  });
 
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = pageNumber => setCurrentPage(pageNumber);
 
   return (
     
@@ -306,21 +325,23 @@ const HomeMenu = () => {
             <div className="feed-container"></div>
             <div className="feed-post">
               <Postlist
-                posts={servicios}
+                posts={currentPosts}
                 filtroTipo={filtroTipo}
                 filtroFrecuencia={filtroFrecuencia}
                 filtroCalificacion={filtroCalificacion}
                 filtroCategoria={filtroCategoria}
+                currentPage={currentPage}
+                postsPerPage={postsPerPage}
               />
             </div>
             <footer>
-            {/* <Pagination className="mt-3 justify-content-center"> 
-            {Array.from({ length: Math.ceil(servicios.length / postsPerPage) }).map((_, idx) => (
-            <Pagination.Item key={idx + 1} active={idx + 1 === currentPage} onClick={() => setCurrentPage(idx + 1)}>
-              {idx + 1}
-            </Pagination.Item>
-          ))}
-        </Pagination> */}
+            <Pagination className="mt-3 justify-content-center">
+      {Array.from({ length: Math.ceil(filteredPosts.length / postsPerPage) }, (_, i) => (
+        <Pagination.Item key={i + 1} active={i + 1 === currentPage} onClick={() => paginate(i + 1)}>
+          {i + 1}
+        </Pagination.Item>
+      ))}
+    </Pagination>
         </footer>
       </div>
   );
