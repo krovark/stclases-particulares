@@ -2,7 +2,7 @@ const ContratacionService = require('../services/contratacion.services');
 
 exports.createContratacion = async function(req, res) {
 
-    
+
     try {
         const contratacionData = {
             servicioId: req.body.servicioId,
@@ -36,6 +36,7 @@ exports.getAllContrataciones = async function(req, res) {
     }
 };
 
+
 exports.updateEstadoContratacion = async function(req, res) {
     try {
         const contratacionId = req.params.id;
@@ -43,6 +44,19 @@ exports.updateEstadoContratacion = async function(req, res) {
 
         const updatedContratacion = await ContratacionService.updateEstadoContratacion(contratacionId, nuevoEstado);
         res.status(200).json({ data: updatedContratacion, message: 'Contratación updated successfully.' });
+    } catch (e) {
+        res.status(400).json({ message: e.message });
+    }
+};
+
+exports.getContratacionesByUsuario = async function (req, res) {
+    const userId = req.userId; // Suponiendo que el ID del usuario está en req.userId
+    const page = req.query.page ? parseInt(req.query.page) : 1;
+    const limit = req.query.limit ? parseInt(req.query.limit) : 25;
+
+    try {
+        const contrataciones = await ContratacionService.getContratacionesByUsuario(userId, page, limit);
+        res.status(200).json({ data: contrataciones.docs, message: 'Contrataciones retrieved successfully' });
     } catch (e) {
         res.status(400).json({ message: e.message });
     }

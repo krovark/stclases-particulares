@@ -15,7 +15,7 @@ router.get('/getservicios', Authorization, ServicioController.getServiciosByUser
 router.get('/estado/:estado' ,ServicioController.getServiciosByEstado);
 
 // Ruta para obtener un servicio específico por ID
-router.get('/:id', Authorization ,ServicioController.getServicioById);
+router.get('/getservicio/:id', Authorization ,ServicioController.getServicioById);
 
 // Ruta para actualizar un estado del servicio específico por ID
 router.patch('/cambiarestado/:id', Authorization ,ServicioController.updateEstadoServicio);

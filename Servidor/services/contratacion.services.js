@@ -74,3 +74,18 @@ exports.updateEstadoContratacion = async function(contratacionId, nuevoEstado) {
         throw Error('Error while updating Contratacion: ' + e.message);
     }
 };
+
+exports.getContratacionesByUsuario = async function (userId, page, limit) {
+    try {
+        const options = {
+            page: page,
+            limit: limit,
+            populate: 'servicioId' // Puedes especificar poblaciones adicionales aquí si es necesario
+        };
+        
+        const contrataciones = await Contratacion.paginate({ userId: userId }, options);
+        return contrataciones;
+    } catch (error) {
+        throw Error('Error while getting Contrataciones by User ID: ' + error.message);
+    }
+};

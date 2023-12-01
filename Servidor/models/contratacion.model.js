@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+var mongoosePaginate = require('mongoose-paginate');
 
 const ContratacionSchema = new mongoose.Schema({
     servicioId: {
@@ -21,8 +22,8 @@ const ContratacionSchema = new mongoose.Schema({
     },
     estado: {
         type: String,
-        enum: ['solicitada', 'confirmada', 'cancelada'], // Agrega más estados según sea necesario
-        default: 'solicitada'
+        enum: ['Solicitada', 'Confirmada', 'Cancelada'], 
+        default: 'Solicitada'
     },
     cantclases: {
         type: Number,
@@ -33,6 +34,8 @@ const ContratacionSchema = new mongoose.Schema({
         default: Date.now
     }
 },{collection: 'contratacions'});
+
+ContratacionSchema.plugin(mongoosePaginate);
 
 const Contratacion = mongoose.model('Contratacion', ContratacionSchema);
 module.exports = Contratacion;
