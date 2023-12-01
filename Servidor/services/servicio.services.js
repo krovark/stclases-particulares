@@ -29,21 +29,37 @@ exports.getAllServicios = async function (query, page, limit) {
         var options = {
             page,
             limit,
-            sort: { createdAt: -1 } // Ordenar por fecha de creación o cualquier otro criterio
+            sort: { createdAt: -1 } 
         };
         var serviciosPaginated = await Servicio.paginate(query, options);
-        return serviciosPaginated; // Devuelve el resultado paginado
+        return serviciosPaginated; 
     } catch (e) {
         throw Error('Error while Paginating Servicios: ' + e.message);
     }
 };
+
+exports.getNombreServicios = async function (query, page, limit) {
+    try {
+        var options = {
+            page,
+            limit,
+            sort: { createdAt: -1 },
+            select: 'nombre' 
+        };
+        var serviciosPaginated = await Servicio.paginate(query, options);
+        return serviciosPaginated;
+    } catch (e) {
+        throw Error('Error while Paginating Servicios: ' + e.message);
+    }
+};
+
 
 exports.getServiciosByUser = async function (query, page, limit) {
     try {
         var options = {
             page,
             limit,
-            sort: { createdAt: -1 } // Ordenar por fecha de creación
+            sort: { createdAt: -1 } 
         };
         var serviciosPaginated = await Servicio.paginate(query, options);
         return serviciosPaginated;
@@ -69,7 +85,7 @@ exports.getServiciosByEstado = async function(estado, page, limit) {
             }
         };
         
-        // Asegúrate de que el valor de `estado` se pasa correctamente a la consulta.
+       
         var servicios = await Servicio.paginate({ estado: estado }, options);
         return servicios;
     } catch (e) {
@@ -79,7 +95,7 @@ exports.getServiciosByEstado = async function(estado, page, limit) {
 
 exports.updateEstadoServicio = async function (servicioId, nuevoEstado) {
     try {
-        console.log(`Actualizando servicio con ID: ${servicioId} a estado: ${nuevoEstado}`); // Añade esto para logging
+        console.log(`Actualizando servicio con ID: ${servicioId} a estado: ${nuevoEstado}`); 
         var servicio = await Servicio.findById(servicioId);
         if (!servicio) {
             throw new Error('Servicio not found');
@@ -107,12 +123,12 @@ exports.editServicio = async (id, datosActualizados) => {
       id,
       datosActualizados,
       
-      { new: true } // Para devolver el documento actualizado
+      { new: true } 
     );
     console.log(datosActualizados);
     return servicioActualizado;
   } catch (error) {
     console.error('Error al editar el servicio en el servicio', error);
-    throw error; // Propaga el error para manejarlo en el controlador
+    throw error; 
   }
 };

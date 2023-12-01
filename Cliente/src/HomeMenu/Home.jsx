@@ -13,7 +13,7 @@ import ComentarioModal from './verComentariosModal'
 import HireService from './contratarServicioModal'
 import Rating from '@mui/material/Rating';
 import Pagination from 'react-bootstrap/Pagination';
-
+import Spinner from 'react-bootstrap/Spinner';
 
 
 const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, filtroCategoria }) => {
@@ -23,17 +23,28 @@ const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, fil
   console.log("Posts en Postlist:", posts);
   console.log("Posts en Postlist:", posts);
 if (!posts || posts.length === 0) {
-  return <div>Cargando servicios...</div>;
+
+  return (
+    
+    <div className="text-center">
+          <Spinner animation="border" role="status">
+            <span className="visually-hidden">Cargando...</span>
+          </Spinner>
+        </div>
+    
+    );
+   
 }
 
 
   const filteredPosts = posts.filter((servicio) => {
+    console.log("Filtrando servicio:", servicio);
     return (
       (!filtroTipo || servicio.tipoClase === filtroTipo) &&
       (!filtroFrecuencia || servicio.frecuencia === filtroFrecuencia) &&
       (!filtroCalificacion || servicio.calificacion >= filtroCalificacion) && 
-      (!filtroCategoria || servicio.categoria === filtroCategoria)
-    );
+      (!filtroCategoria || servicio.nombre === filtroCategoria)  
+    );   
   });
   
   
@@ -104,7 +115,7 @@ if (!posts || posts.length === 0) {
   );
 };
 
-const Sidebar = ({ setFiltroTipo, setFiltroFrecuencia, setFiltroCalificacion, setFiltroCategoria }) => {
+const Sidebar = ({ setFiltroTipo, setFiltroFrecuencia, setFiltroCalificacion, setFiltroCategoria, categorias }) => {
   const marks = [
     { value: 1, label: '1' },
     { value: 2, label: '2' },
@@ -113,6 +124,7 @@ const Sidebar = ({ setFiltroTipo, setFiltroFrecuencia, setFiltroCalificacion, se
     { value: 5, label: '5' },
   ];
 
+  
   
 
 
@@ -170,24 +182,28 @@ const Sidebar = ({ setFiltroTipo, setFiltroFrecuencia, setFiltroCalificacion, se
         </div>
 
         <div className="filter">
-          <InputLabel className="custom-label">Categoría</InputLabel>
-          <Select
-            className="custom-select"
-            label="Categoría"
-            onChange={(e) => setFiltroCategoria(e.target.value)}
-          >
-            <MenuItem value="">Todos</MenuItem>
-            <MenuItem value="Piano">Piano</MenuItem>
-            <MenuItem value="Cocina">Cocina</MenuItem>
-            <MenuItem value="Manejo">Manejo</MenuItem>
-            <MenuItem value="Matematicas">Matematicas</MenuItem>
-            <MenuItem value="Circo">Circo</MenuItem>
-            <MenuItem value="Natación">Natación</MenuItem>
-          </Select>
-        </div>
+        <InputLabel className="custom-label">Categoría</InputLabel>
+        <Select
+          className="custom-select"
+          label="Categoría"
+          onChange={(e) => {
+            console.log("Categoría seleccionada:", e.target.value);
+            setFiltroCategoria(e.target.value);
+          }}
+        >
+          <MenuItem value="">Todos</MenuItem>
+          {categorias.map((categoria, index) => (
+            <MenuItem key={index} value={categoria.nombre}>{categoria.nombre}</MenuItem>
+          ))}
+        </Select>
+      </div>
       </div>
     </div>
   );
+
+
+
+
 };
 
 const HomeMenu = () => {
@@ -195,7 +211,7 @@ const HomeMenu = () => {
   const [filtroFrecuencia, setFiltroFrecuencia] = useState('');
   const [filtroCalificacion, setFiltroCalificacion] = useState(null);
   const [filtroCategoria, setFiltroCategoria] = useState('');
-
+  const [categorias, setCategorias] = useState([]);
   
   // const [currentPage, setCurrentPage] = useState(1); // Nuevo estado
   // const postsPerPage = 10; // Nueva constante
@@ -204,7 +220,7 @@ const HomeMenu = () => {
   const [servicios, setServicios] = useState([]);
   
 
-  useEffect(() => {
+  
     const fetchServicios = async () => {
       try {
         const response = await fetch('http://localhost:4000/api/servicios/estado/activo', {
@@ -231,9 +247,43 @@ const HomeMenu = () => {
       } catch (error) {
         console.error('Error:', error);
       }
+     
     };
 
+    // fetchServicios();
+ 
+
+
+  const fetchCategorias = async () => {
+    try {
+      const response = await fetch('http://localhost:4000/api/servicios/nombres', {
+          method: 'GET',
+          // credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+            
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Error al obtener las categorias');
+        }
+
+      
+      const data = await response.json();
+      console.log(data);
+      setCategorias(data.data); // Actualiza el estado con las categorías
+    } catch (error) {
+      console.error('Error al obtener las categorías:', error);
+    }
+  };
+
+
+
+  useEffect(() => {
     fetchServicios();
+    fetchCategorias();
+    
   }, []);
 
 
@@ -250,6 +300,7 @@ const HomeMenu = () => {
                 setFiltroFrecuencia={setFiltroFrecuencia}
                 setFiltroCalificacion={setFiltroCalificacion}
                 setFiltroCategoria={setFiltroCategoria}
+                categorias={categorias}
               />
             </div>
             <div className="feed-container"></div>

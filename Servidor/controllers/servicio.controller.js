@@ -121,6 +121,24 @@ exports.getAllServicios = async function(req, res, next) {
     }
 };
 
+
+exports.getNombreServicios = async function(req, res, next) {
+    let page = req.query.page ? parseInt(req.query.page) : 1;
+    let limit = req.query.limit ? parseInt(req.query.limit) : 10;
+
+    try {
+        var servicios = await ServicioService.getNombreServicios({}, page, limit);
+        return res.status(200).json({
+            status: 200,
+            data: servicios.docs,
+            message: "Nombres de servicios obtenidos con éxito"
+        });
+    } catch (e) {
+        res.status(400).json({ status: 400, message: e.message });
+    }
+};
+
+
 exports.getServiciosByUser = async function(req, res, next) {
     let userId = req.userId; 
     let page = req.query.page ? parseInt(req.query.page) : 1;

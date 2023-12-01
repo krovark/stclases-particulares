@@ -5,6 +5,9 @@ var jwt = require('jsonwebtoken');
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 const cloudinary = require('../auth/cloudinaryConfig');
+const crypto = require('crypto');
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 
 // Saving the context of this module inside the _the variable
@@ -171,3 +174,44 @@ exports.updateProfileImage = async function(userId, imageBuffer) {
     }
 };
 
+
+exports.forgotPassword = async function(email) {
+    const user = await User.findOne({ email: email });
+    if (!user) {
+        throw new Error('No existe una cuenta con ese email.');
+    }
+
+    const token = crypto.randomBytes(10).toString('hex');
+    user.resetPasswordToken = token;
+    user.resetPasswordExpires = Date.now() + 3600000; // 1 hora
+    await user.save();
+
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    // const msg = {
+    //     to: email,
+    //     from: 'tucorreo@example.com', // Cambiar al correo emisor
+    //     subject: 'Password Reset',
+    //     text: `Por favor, usa el siguiente token para restablecer tu contraseña: ${token}`
+    // };
+
+    // await sgMail.send(msg);
+    return { token };
+};
+
+exports.resetPassword = async function(token, password) {
+    var hashedPassword = bcrypt.hashSync(password, 8);
+    const user = await User.findOne({ 
+        resetPasswordToken: token, 
+        resetPasswordExpires: { $gt: Date.now() } 
+    });
+
+    if (!user) {
+        throw new Error('Token inválido o expirado.');
+    }
+
+    user.password = hashedPassword; // Asegúrate de encriptar la contraseña
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+
+    await user.save();
+};

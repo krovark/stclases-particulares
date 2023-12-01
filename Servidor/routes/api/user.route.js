@@ -28,7 +28,8 @@ router.post('/userByMail', Authorization, UserController.getUsersByMail);
 router.patch('/update', Authorization, UserController.updateUser);
 router.delete('/delete', Authorization, UserController.removeUser);
 router.patch('/update_image', Authorization ,upload.single('imgProfile'), UserController.uploadProfileImage);
-
+router.post('/forgot-password', UserController.forgotPassword);
+router.post('/reset-password', UserController.resetPassword);
 
 
 router.post('/logout', (req, res) => {

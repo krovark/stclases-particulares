@@ -70,34 +70,6 @@ exports.createUser = async function (req, res, next) {
     }
 }
 
-// exports.updateUser = async function (req, res, next) {
-
-//     // Id is necessary for the update
-//     if (!req.body.name) {
-//         console.log("hola");
-//         return res.status(400).json({status: 400., message: "Name be present"})
-//     }
-
-//     var User = {
-       
-//         _id: req.body._id,
-//         nombre: req.body.nombre,
-//         apellido: req.body.apellido,
-//         email: req.body.email,
-//         telefono: req.body.telefono,
-//         password: req.body.password, 
-//         titulo: req.body.titulo,
-//         experiencia: req.body.experiencia,
-//         calificacionPromedio: req.body.calificacionPromedio
-//     }
-
-//     try {
-//         var updatedUser = await UserService.updateUser(User)
-//         return res.status(200).json({status: 200, data: updatedUser, message: "Succesfully Updated User"})
-//     } catch (e) {
-//         return res.status(400).json({status: 400., message: e.message})
-//     }
-// }
 
 exports.updateUser = async function (req, res, next) {
     
@@ -130,26 +102,6 @@ exports.removeUser = async function (req, res, next) {
     }
 }
 
-
-// exports.loginUser = async function (req, res, next) {
-//     // Req.Body contains the form submit values.
-//     console.log("body",req.body)
-//     var User = {
-//         email: req.body.email,
-//         password: req.body.password
-//     }
-//     try {
-//         // Calling the Service function with the new object from the Request Body
-//         var loginUser = await UserService.loginUser(User);
-//         if (loginUser===0)
-//             return res.status(400).json({message: "Error en la contraseña"})
-//         else
-//             return res.status(201).json({loginUser, message: "Inicio de Sesion Exitoso"})
-//     } catch (e) {
-//         //Return an Error Response Message with Code and the Error Message.
-//         return res.status(400).json({status: 400, message: "Invalid username or password"})
-//     }
-// }
 
 exports.loginUser = async function (req, res, next) {
     
@@ -227,31 +179,24 @@ exports.uploadProfileImage = async function(req, res) {
     }
 };
 
+exports.forgotPassword = async function(req, res) {
+    try {
+        const email = req.body.email;
+        const { token } = await UserService.forgotPassword(email);
+        console.log(token);
+        res.status(200).json({ message: 'Token enviado al email', token });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
 
-
-
-
-
-// exports.uploadProfileImage = async function(req, res) {
-//     multer.single('imgProfile')(req, res, async function(err) {
-//       if (err) {
-//         return res.status(400).json({ message: err.message });
-//       }
-//       if (!req.file) {
-//         return res.status(400).json({ message: "Please upload a file." });
-//       }
-  
-//       try {
-//         const userId = req.userId; // Asumimos que el userId viene de un middleware de autenticación
-//         const user = await UserService.updateProfileImage(userId, req.file.buffer);
-//         res.status(200).json({
-//           message: "Profile image updated successfully",
-//           user: user
-//         });
-//       } catch (e) {
-//         res.status(500).json({ message: e.message });
-//       }
-//     });
-//   };
-
+exports.resetPassword = async function(req, res) {
+    try {
+        const { resetPasswordToken, password } = req.body;
+        await UserService.resetPassword(resetPasswordToken, password);
+        res.status(200).json({ message: 'Contraseña actualizada con éxito' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
 

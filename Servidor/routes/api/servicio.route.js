@@ -14,6 +14,8 @@ router.get('/getservicios', Authorization, ServicioController.getServiciosByUser
 // Ruta para obtener los servicios por estado con paginación
 router.get('/estado/:estado' ,ServicioController.getServiciosByEstado);
 
+router.get('/nombres', ServicioController.getNombreServicios);
+
 // Ruta para obtener un servicio específico por ID
 router.get('/getservicio/:id', Authorization ,ServicioController.getServicioById);
 
