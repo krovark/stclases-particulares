@@ -65,6 +65,7 @@ h1 {
     padding: 20px 30px;
     border-radius: 15px;
     transition: var(--transition);
+    align-items: center;
   }
   
   .btn-secondary {

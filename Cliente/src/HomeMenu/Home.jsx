@@ -338,7 +338,7 @@ const HomeMenu = () => {
                 categorias={categorias}
               />
             </div>
-            <div className="feed-container"></div>
+            
             
             <div className="feed-post">
               <Postlist
