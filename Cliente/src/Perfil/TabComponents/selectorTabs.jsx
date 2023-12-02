@@ -9,6 +9,8 @@ import PostCreados from './VistasTab/PostComponents'
 import ComentariosMod from './VistasTab/ComentariosMod'
 import '../TabComponents/estiloTabs/profile-style.css';
 import './estiloTabs/Tabs-styles.css'
+import CardTesting from './VistasTab/CardTesting'
+
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -28,7 +30,6 @@ function CustomTabPanel(props) {
     </div>
   );
 }
-
 
 
 CustomTabPanel.propTypes = {
@@ -58,6 +59,7 @@ export default function BasicTabs() {
           <Tab label="Publicaciones" {...a11yProps(0)} style={{ fontSize: '16px' }}/>
           <Tab label="Solicitudes" {...a11yProps(1)} style={{ fontSize: '16px' }}/>
           <Tab label="Moderar" {...a11yProps(2)} style={{ fontSize: '16px' }}/>
+          
         </Tabs>
       </Box>
       <div className="back-ground_check">
@@ -70,6 +72,7 @@ export default function BasicTabs() {
       <CustomTabPanel value={value} index={2}>
       <ComentariosMod/>
       </CustomTabPanel>
+      
       </div>
     </Box>
   );

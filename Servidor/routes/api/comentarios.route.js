@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 
 
  
-router.post('/newcomentario', ComentariosController.createComentario);
+router.post('/comentar/:servicioId', ComentariosController.createComentario);
 router.get('/allcomentarios', Authorization, ComentariosController.getAllComentarios); // Obtener todos los comentarios
 router.get('/proveedor/:proveedorId', Authorization, ComentariosController.getComentariosByProveedor);
 router.get('/proveedorestado/:proveedorId', Authorization, ComentariosController.getComentariosByProveedorAndEstado);

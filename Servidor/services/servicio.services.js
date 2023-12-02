@@ -44,7 +44,8 @@ exports.getNombreServicios = async function (query, page, limit) {
             page,
             limit,
             sort: { createdAt: -1 },
-            select: 'nombre' 
+            select: 'nombre',
+            query: { ...query, estado: "activo" } 
         };
         var serviciosPaginated = await Servicio.paginate(query, options);
         return serviciosPaginated;

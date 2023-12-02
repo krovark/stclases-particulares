@@ -14,7 +14,7 @@ import HireService from './contratarServicioModal'
 import Rating from '@mui/material/Rating';
 import Pagination from 'react-bootstrap/Pagination';
 import Spinner from 'react-bootstrap/Spinner';
-
+import CardTesting from '../Perfil/TabComponents/VistasTab/CardTesting'
 
 const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, filtroCategoria, currentPage, postsPerPage }) => {
 
@@ -69,60 +69,79 @@ if (!posts || posts.length === 0) {
  
  
   return (
-    <div className="post-container">
-      <div className="post-grid">
-        {currentPosts.map((servicio) => (
-          <div className="post-preview" key={servicio.id}>
-            <div className="head-post">
-            <div className="avatar">
-              <Stack direction="row" spacing={1}>
-              <Avatar src={servicio.proveedorId.imgProfile} sx={{ width: 100, height: 100 }} />
-              </Stack>
+    // <div className="post-container">
+    //   <div className="post-grid">
+    //     {currentPosts.map((servicio) => (
+    //       <div className="post-preview" key={servicio.id}>
+    //         <div className="head-post">
+    //         <div className="avatar">
+    //           <Stack direction="row" spacing={1}>
+    //           <Avatar src={servicio.proveedorId.imgProfile} sx={{ width: 100, height: 100 }} />
+    //           </Stack>
               
-            </div>
-            </div>
+    //         </div>
+    //         </div>
             
-            <div className="class-category">
-                <h2>{servicio.nombre}</h2>
-              </div>        
-            <ul id="ul-data-cards">
-              <li>Nombre: {servicio.proveedorId && `${servicio.proveedorId.nombre} ${servicio.proveedorId.apellido}`} </li>
-              <li>Titulo: {servicio.titulo}</li>
-              <li>Experiencia: {servicio.experiencia}</li>
-              <li>Tipo: {servicio.tipoClase}</li>
-              <div className="description-container">
-              <li>Descripcion: {servicio.descripcion}</li>
-              </div>
-              <li>Frecuencia: {servicio.frecuencia} </li>
-              <li>Duración: {servicio.duracion} minutos </li>
-              <br></br>
-              <li> 
-              <Rating name="read-only" value={servicio.calificacion} readOnly />
-              </li>
-              <div className="comentarios">
-              <QuestionAnswerIcon className="PlusIcon" sx={{ fontSize: 30 }} onClick={() => setModalShow(true)}/>
-                  <ComentarioModal
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
-                    servicioId={servicio._id}
+    //         <div className="class-category">
+    //             <h2>{servicio.nombre}</h2>
+    //           </div>        
+    //         <ul id="ul-data-cards">
+    //           <li>Nombre: {servicio.proveedorId && `${servicio.proveedorId.nombre} ${servicio.proveedorId.apellido}`} </li>
+    //           <li>Titulo: {servicio.titulo}</li>
+    //           <li>Experiencia: {servicio.experiencia}</li>
+    //           <li>Tipo: {servicio.tipoClase}</li>
+    //           <div className="description-container">
+    //           <li>Descripcion: {servicio.descripcion}</li>
+    //           </div>
+    //           <li>Frecuencia: {servicio.frecuencia} </li>
+    //           <li>Duración: {servicio.duracion} minutos </li>
+    //           <br></br>
+    //           <li> 
+    //           <Rating name="read-only" value={servicio.calificacion} readOnly />
+    //           </li>
+    //           <div className="comentarios">
+    //           <QuestionAnswerIcon className="PlusIcon" sx={{ fontSize: 30 }} onClick={() => setModalShow(true)}/>
+    //               <ComentarioModal
+    //                 show={modalShow}
+    //                 onHide={() => setModalShow(false)}
+    //                 servicioId={servicio._id}
                     
-                  />
-                  </div>
-            </ul>
+    //               />
+    //               </div>
+    //         </ul>
  
-            <div className="precio-clase">     
-            <HireService servicioId={servicio._id} precio={servicio.costo} open={hireServiceOpen} onClose={handleHireServiceClose} > </HireService>     
-            </div>
+    //         <div className="precio-clase">     
+    //         <HireService servicioId={servicio._id} precio={servicio.costo} open={hireServiceOpen} onClose={handleHireServiceClose} > </HireService>     
+    //         </div>
 
             
 
-          </div>
-        ))}
+    //       </div>
+    //     ))}
 
 
 
-      </div>
-    </div>
+    //   </div>
+    // </div>
+    currentPosts.map((servicio) => (
+      <CardTesting
+        key={servicio.id}
+        servicioId={servicio._id}
+        course={{
+          instructorName: `${servicio.proveedorId.nombre} ${servicio.proveedorId.apellido}`,
+          title: servicio.nombre,
+          experience: servicio.experiencia,
+          description: servicio.descripcion,
+          titulo: servicio.titulo,
+          frequency: servicio.frecuencia,
+          tipoClase: servicio.tipoClase,
+          price: servicio.costo
+        }}
+        avatarUrl={servicio.proveedorId.imgProfile}
+        titulo={servicio.titulo}
+      />
+    ))
+    
   );
 };
 
@@ -140,10 +159,6 @@ const Sidebar = ({ setFiltroTipo, setFiltroFrecuencia, setFiltroCalificacion, se
   return (
 
     <div className="sidebar">
-      <header>
-        <h3>Filtros</h3>
-      </header>
-
       <div className="filter-container" aria-hidden="false">
         <div className="filter">
           <InputLabel className="custom-label">Tipo de clase</InputLabel>
@@ -259,10 +274,6 @@ const HomeMenu = () => {
      
     };
 
-    // fetchServicios();
- 
-
-
   const fetchCategorias = async () => {
     try {
       const response = await fetch('http://localhost:4000/api/servicios/nombres', {
@@ -309,6 +320,10 @@ const HomeMenu = () => {
 
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
+  currentPosts.forEach(servicio => {
+    console.log(servicio.proveedorId.imgProfile);
+  });
+  
   return (
     
     
@@ -324,6 +339,7 @@ const HomeMenu = () => {
               />
             </div>
             <div className="feed-container"></div>
+            
             <div className="feed-post">
               <Postlist
                 posts={currentPosts}

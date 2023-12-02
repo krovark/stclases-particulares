@@ -4,19 +4,18 @@ var ComentariosService = require('../services/comentarios.services');
 
 exports.createComentario = async function (req, res, next) {
     try {
-        // El cuerpo de la solicitud debe incluir servicioId y proveedorId
         var comentarioData = {
-            //servicioId: req.body.servicioId,
-            servicioId: req.body.servicioId,
-            proveedorId: req.body.proveedorId,
+            servicioId: req.params.servicioId, 
             comentario: req.body.comentario,
-            estado: req.body.estado,
+            estado: 'pendiente', 
             calificacion: req.body.calificacion
         };
         
         var createdComentario = await ComentariosService.createComentario(comentarioData);
+        console.log(comentarioData);
         res.status(201).json({ comentario: createdComentario, message: "Comentario successfully created" });
     } catch (e) {
+        console.error(e);
         res.status(400).json({ message: e.message });
     }
 };

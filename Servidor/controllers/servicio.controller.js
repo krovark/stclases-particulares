@@ -127,7 +127,7 @@ exports.getNombreServicios = async function(req, res, next) {
     let limit = req.query.limit ? parseInt(req.query.limit) : 10;
 
     try {
-        var servicios = await ServicioService.getNombreServicios({}, page, limit);
+        var servicios = await ServicioService.getNombreServicios({estado: "activo"}, page, limit);
         return res.status(200).json({
             status: 200,
             data: servicios.docs,

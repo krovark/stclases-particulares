@@ -1,17 +1,24 @@
 var Comentario = require('../models/comentarios.model'); // Asegúrate de que la ruta sea correcta
+var Servicio = require('../models/servicio.model');
+
 
 // Función para crear un nuevo comentario
 exports.createComentario = async function (comentarioData) {
-    // Asumimos que comentarioData ya incluye servicioId y proveedorId
-    var newComentario = new Comentario({
-        servicioId: comentarioData.servicioId, // ID del servicio
-        proveedorId: comentarioData.proveedorId, // ID del proveedor (usuario)
-        comentario: comentarioData.comentario,
-        estado: comentarioData.estado, // 'pendiente' por defecto si no se provee
-        calificacion: comentarioData.calificacion
-    });
-
     try {
+        // Busca el servicio para obtener el proveedorId
+        const servicio = await Servicio.findById(comentarioData.servicioId);
+        if (!servicio) {
+            throw Error('Servicio no encontrado');
+        }
+
+        var newComentario = new Comentario({
+            servicioId: comentarioData.servicioId,
+            proveedorId: servicio.proveedorId, // Obtén el proveedorId del servicio
+            comentario: comentarioData.comentario,
+            estado: comentarioData.estado || 'pendiente', // Usa 'pendiente' como valor por defecto
+            calificacion: comentarioData.calificacion
+        });
+
         var savedComentario = await newComentario.save();
         return savedComentario;
     } catch (e) {
