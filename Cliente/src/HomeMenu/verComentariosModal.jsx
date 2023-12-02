@@ -6,74 +6,81 @@ import Rating from '@mui/material/Rating';
 import Button from 'react-bootstrap/Button';
 
 
-function CommentModal(props) {
-
-
-    useEffect(() => {
-        if(props.show) {
-          document.body.classList.add('blur-background');
-        } else {
-          document.body.classList.remove('blur-background');
-        }
-        
-        return () => { 
-          document.body.classList.remove('blur-background'); 
-        }; 
-      }, [props.show]);
-
-      const simulatedComments = [
-        { username: "Usuario1", text: "Este es un comentario.", calificacion: 4 },
-        { username: "Usuario2", text: "Bien explicado.", calificacion: 4 },
-        { username: "Usuario3", text: "¡Me encanta este contenido!" , calificacion: 2 },
-        { username: "Usuario4", text: "Este es un comentario." , calificacion: 5 },
-        { username: "Usuario5", text: "Bien explicado." , calificacion: 2 }, 
-        { username: "Usuario6", text: "¡Me encanta este contenido!" , calificacion: 1 },
-        { username: "Usuario7", text: "Este es un comentario.", calificacion: 3 },
-        { username: "Usuario8", text: "Bien explicado." , calificacion: 3 },
-        { username: "Usuario9", text: "¡Me encanta este contenido!", calificacion: 2 },
-        { username: "Usuario10", text: "Este es un comentario.",  calificacion: 4 },
-        { username: "Usuario11", text: "Bien explicado.", calificacion: 4 },
-        { username: "Usuario12", text: "¡Me encanta este contenido!", calificacion: 4 },
-        { username: "Usuario13", text: "Este es un comentario.", calificacion: 4 },
-        { username: "Usuario14", text: "Bien explicado.", calificacion: 3 },
-        { username: "Usuario11", text: "Bien explicado." ,calificacion: 2 },
-        { username: "Usuario12", text: "¡Me encanta este contenido!" ,calificacion: 2},
-        { username: "Usuario13", text: "Este es un comentario." ,calificacion: 2 },
-        { username: "Usuario14", text: "Bien explicado.",calificacion: 3 },
-        { username: "Usuario11", text: "Bien explicado." ,calificacion: 2},
-        { username: "Usuario12", text: "¡Me encanta este contenido!",calificacion: 3 },
- 
-        
-    ];
-
-    const [userComment, setUserComment] = useState('');
-    const [userRating, setUserRating] = useState(2);  
-
-    const handleCommentChange = (e) => {
-        setUserComment(e.target.value);
-    };
-
-    const handleRatingChange = (newRating) => {
-        setUserRating(newRating);
-    };
-
-    const handleCommentSubmit = () => {
-      if (userComment.trim() === '') {
-        alert('Por favor escribe un comentario antes de calificar.');
-        return;
+function CommentModal({ show, onHide, servicioId }) {
+  useEffect(() => {
+    if (!show) {
+      handleCommentReset();
     }
-    };
+      if(show) {
+          document.body.classList.add('blur-background');
+          
+      } else {
+          document.body.classList.remove('blur-background');
+      }
+      
+      return () => { 
+          document.body.classList.remove('blur-background'); 
+      }; 
+   
+  }, [show]);
 
-    const handleCommentReset = () => {
-        setUserComment('');
-        setUserRating(2);  
-    };
+  const [userComment, setUserComment] = useState('');
+  const [userRating, setUserRating] = useState(2);  
+
+  const handleCommentChange = (e) => {
+      setUserComment(e.target.value);
+  };
+
+  const handleRatingChange = (newRating) => {
+      setUserRating(newRating);
+  };
+
+  const handleCommentSubmit = async () => {
+      if (userComment.trim() === '') {
+          alert('Por favor escribe un comentario antes de calificar.');
+          return;
+      }
+
+
+      try {
+          const response = await fetch(`http://localhost:4000/api/comentarios/comentar/${servicioId}`, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ 
+                  comentario: userComment, 
+                  calificacion: userRating 
+              })
+          });
+
+          if (!response.ok) {
+              throw new Error('Error al enviar el comentario');
+          }
+
+          const result = await response.json();
+          console.log('Comentario enviado con éxito:', result);
+          setUserComment('');
+          setUserRating(2);  
+      } catch (error) {
+          console.error('Error al enviar el comentario:', error);
+      }
+  };
+
+  const handleCommentReset = () => {
+      setUserComment('');
+      setUserRating(2);  
+  };
+
+  // Simulated comments (you can replace this with real comments later)
+  const simulatedComments = [];
 
   return (
     <Modal
-      {...props}
+    show={show} 
+    onHide={onHide}
       size="md"
-      // size="lg"
+      
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >

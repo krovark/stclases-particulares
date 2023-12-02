@@ -76,7 +76,7 @@ if (!posts || posts.length === 0) {
             <div className="head-post">
             <div className="avatar">
               <Stack direction="row" spacing={1}>
-              <Avatar src={servicio.proveedorId.imgProfile} sx={{ width: 80, height: 80 }} />
+              <Avatar src={servicio.proveedorId.imgProfile} sx={{ width: 100, height: 100 }} />
               </Stack>
               
             </div>
@@ -104,6 +104,7 @@ if (!posts || posts.length === 0) {
                   <ComentarioModal
                     show={modalShow}
                     onHide={() => setModalShow(false)}
+                    servicioId={servicio._id}
                     
                   />
                   </div>

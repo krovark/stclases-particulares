@@ -1,45 +1,3 @@
-// import React from 'react';
-// import Modal from 'react-bootstrap/Modal';
-// import Button from 'react-bootstrap/Button';
-// import './login.css'
-
-
-
-// const RecoverPw = ({ show, handleClose, handleShow }) => {
-//   return (
-//     <Modal show={show} onHide={handleClose} className="my-custom-modal">
-//       <Modal.Header closeButton>
-//         <Modal.Title>Recuperar contraseña</Modal.Title>
-//       </Modal.Header>
-//       <Modal.Body>
-//         <div className="recover-pwd">
-//           <form>
-//             <div className="input-container">
-//               <label htmlFor="nombre">Email:<span id='rq'> *</span></label>
-//               <input
-//                 type="email"
-//                 id="email"
-//                 name="email"
-//                 placeholder="Tu email"
-//                 required
-//               />
-//             </div>
-
-//             <br></br>
-//             <Button type="submit" variant="primary">
-//                 Confirmar
-//             </Button>
-//           </form>
-//         </div>
-//       </Modal.Body>
-//       <Modal.Footer></Modal.Footer>
-      
-//     </Modal>
-//   );
-// }
-
-// export default RecoverPw;
-
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -53,6 +11,10 @@ const RecoverPw = ({ show, handleClose, handleShow }) => {
 
   // Solicitar token de recuperación de contraseña
   const requestPasswordReset = async () => {
+    if (!email) {
+      alert('Por favor, ingresa tu email');
+      return;
+    }
     try {
       const response = await fetch('http://localhost:4000/api/users/forgot-password', {
         method: 'POST',
@@ -67,7 +29,8 @@ const RecoverPw = ({ show, handleClose, handleShow }) => {
         throw new Error('Error al solicitar el cambio de contraseña');
       }
 
-      // Proceder al siguiente paso
+      alert('Se te ha enviado un token al email para reinciar la contraseña');
+      
       setStep(step + 1);
     } catch (error) {
       console.error('Error:', error);

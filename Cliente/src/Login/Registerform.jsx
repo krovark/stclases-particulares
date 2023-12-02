@@ -23,7 +23,6 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
 
   const [errorMessage, setErrorMessage] = useState('');
 
-
   const handleInputChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
     setErrorMessage('');
@@ -37,7 +36,10 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
       return;
     }
 
-    
+    if (!formData.nombre || !formData.apellido || !formData.email || !formData.telefono || !formData.experiencia) {
+      alert("Todos los campos son obligatorios.");
+      return;
+    }
 
     try {
       const response = await fetch('http://localhost:4000/api/users/registration', { 
@@ -51,11 +53,11 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
       const data = await response.json();
 
       if (!response.ok) {
-        // Manejar los errores del servidor
-        console.error(data.message); // Puedes modificar esto para mostrar errores al usuario
+        alert(data.message);
+        //console.error(data.message); 
       } else {
-        // Manejar registro exitoso
-        console.log('Registro exitoso:', data);
+        
+        alert('Registro exitoso:');
         handleClose(); 
       }
     } catch (error) {
@@ -82,6 +84,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
                                   placeholder="Tu nombre"
                                   onChange={handleInputChange}
                                   required
+                                  autoComplete='false'
                                 />
                               </div>
 
@@ -93,20 +96,10 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
                                   name="apellido"
                                   placeholder="Tu apellido"
                                   onChange={handleInputChange}
+                                  autoComplete='false'
                                   required
                                 />
                               </div>
-
-                              {/* <div className="input-container">
-                                <label htmlFor="dni">DNI:<span id='rq'> *</span></label>
-                                <input
-                                  type="text"
-                                  id="dni"
-                                  name="dni"
-                                  placeholder="Tu número de DNI"
-                                  required
-                                />
-                              </div> */}
 
                               <div className="input-container">
                                 <label htmlFor="telefono">Teléfono:<span id='rq'> *</span></label>
@@ -116,6 +109,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
                                   name="telefono"
                                   placeholder="Tu número de teléfono"
                                   onChange={handleInputChange}
+                                  autoComplete='false'
                                   required
                                 />
                               </div>
@@ -128,6 +122,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
                                   name="email"
                                   placeholder="Tu correo electrónico"
                                   onChange={handleInputChange}
+                                  autoComplete='false'
                                   required
                                 />
                               </div>
@@ -140,6 +135,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
                                   name="password"
                                   placeholder="Tu contraseña"
                                   onChange={handleInputChange}
+                                  autoComplete='false'
                                   required
                                 />
                               </div>
@@ -152,6 +148,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
                                   name="confirmPassword"
                                   placeholder="Confirmar contraseña"
                                   required
+                                  autoComplete='false'
                                   onChange={handleInputChange}
                                 />
                               </div>
@@ -166,6 +163,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
                                   placeholder="Escribe aquí tu experiencia (máximo 200 caracteres)"
                                   maxLength="200"
                                   onChange={handleInputChange}
+                                  autoComplete='false'
                                   required
                                 ></textarea>
                               </div>
