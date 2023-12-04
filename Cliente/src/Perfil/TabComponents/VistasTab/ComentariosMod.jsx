@@ -70,18 +70,21 @@ export default function GridOfCards() {
     <Grid container spacing={3}>
       {comentarios.map((comentario, index) => (
         <Grid item xs={12} sm={6} md={4} key={index}>
-          <Box sx={{ minWidth: 275 }}>
+          <Box sx={{ minWidth: 300 }}>
             <Card variant="outlined">
               <CardContent>
-                <Typography sx={{ fontSize: 14, borderBottom: '1px solid gray' }} color="black" gutterBottom>
-                 Comentario pendiente
+                <Typography sx={{ fontSize: 14, borderBottom: '1px solid gray'}} color="black" gutterBottom>
+                 Comentario pendiente de {comentario.comentarioCliente}
                 </Typography>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  <Rating name="disabled" value={comentario.calificacion} readOnly />
-                </Typography>
-                <Typography variant="body2">
+
+                <Typography sx={{ mb: 1.5, mt: 3 }} variant="body2">
                   {comentario.comentario}
                 </Typography>
+
+                <Typography sx={{ mb: 1.5, mt: 4 }} color="text.secondary">
+                  <Rating name="disabled" value={comentario.calificacion} readOnly />
+                </Typography>
+                
               </CardContent>
               <CardActions>
                 <Button size="small">Aceptar</Button>

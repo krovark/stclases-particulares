@@ -17,6 +17,10 @@ var ComentarioSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    comentarioCliente: {
+        type: String,
+        required: true
+    },
     estado: {
         type: String,
         enum: ['pendiente', 'aprobado', 'rechazado'], // Enum para los posibles estados de un comentario

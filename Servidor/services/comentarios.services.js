@@ -14,6 +14,7 @@ exports.createComentario = async function (comentarioData) {
         var newComentario = new Comentario({
             servicioId: comentarioData.servicioId,
             proveedorId: servicio.proveedorId, // Obtén el proveedorId del servicio
+            comentarioCliente: comentarioData.comentarioCliente,
             comentario: comentarioData.comentario,
             estado: comentarioData.estado || 'pendiente', // Usa 'pendiente' como valor por defecto
             calificacion: comentarioData.calificacion

@@ -5,7 +5,8 @@ var ComentariosService = require('../services/comentarios.services');
 exports.createComentario = async function (req, res, next) {
     try {
         var comentarioData = {
-            servicioId: req.params.servicioId, 
+            servicioId: req.params.servicioId,
+            comentarioCliente: req.body.comentarioCliente, 
             comentario: req.body.comentario,
             estado: 'pendiente', 
             calificacion: req.body.calificacion

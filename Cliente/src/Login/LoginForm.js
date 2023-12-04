@@ -22,8 +22,6 @@ const Login = () => {
   const handleShow2 = () => setShow2(true);
 
 
-  const DUMMY_USER = 'admin';
-  const DUMMY_PASSWORD = '123';
   const dispatch = useDispatch();
   const history = useHistory();
   const [email, setEmail] = useState('');
@@ -91,8 +89,8 @@ const Login = () => {
   
         <div className="links">
 
-          <a href="#" onClick={handleShow2}>Olvidaste la contraseña?</a>
-          <a href="#"onClick={handleShow} >Crear nueva cuenta </a>
+          <a href="#hola" onClick={handleShow2}>Olvidaste la contraseña?</a>
+          <a href="#hola"onClick={handleShow} >Crear nueva cuenta </a>
   
           </div>
 

@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import './estilos-menu/menu.css';
 import Rating from '@mui/material/Rating';
 import Button from 'react-bootstrap/Button';
+import TextField from '@mui/material/TextField'
 
 
 function CommentModal({ show, onHide, servicioId }) {
@@ -25,7 +26,8 @@ function CommentModal({ show, onHide, servicioId }) {
   }, [show]);
 
   const [userComment, setUserComment] = useState('');
-  const [userRating, setUserRating] = useState(2);  
+  const [userRating, setUserRating] = useState(2);
+  const [clienteNombre, setClienteNombre] = useState('');
 
   const handleCommentChange = (e) => {
       setUserComment(e.target.value);
@@ -48,7 +50,8 @@ function CommentModal({ show, onHide, servicioId }) {
               headers: {
                   'Content-Type': 'application/json',
               },
-              body: JSON.stringify({ 
+              body: JSON.stringify({
+                comentarioCliente: clienteNombre,
                   comentario: userComment, 
                   calificacion: userRating 
               })
@@ -58,22 +61,25 @@ function CommentModal({ show, onHide, servicioId }) {
               throw new Error('Error al enviar el comentario');
           }
 
-          const result = await response.json();
-          console.log('Comentario enviado con éxito:', result);
+          
+          alert('Comentario enviado con éxito. Se encuentra en pendiente de moderación');
+          setClienteNombre('');
           setUserComment('');
           setUserRating(2);  
       } catch (error) {
-          console.error('Error al enviar el comentario:', error);
+          alert('Hubo un problema para crear el comentarios. Aguarde unos minutos');
       }
   };
 
   const handleCommentReset = () => {
+      setClienteNombre('');
       setUserComment('');
       setUserRating(2);  
   };
 
   // Simulated comments (you can replace this with real comments later)
   const simulatedComments = [];
+
 
   return (
     <Modal
@@ -91,14 +97,17 @@ function CommentModal({ show, onHide, servicioId }) {
       </Modal.Header>
       <Modal.Body className="custom-dialog-content" style={{ maxHeight: '650px', overflowY: 'auto' }}>
 
+      <TextField autoFocus margin="dense" label="Nombre" type="text" fullWidth variant="outlined"
+            value={clienteNombre} onChange={(e) => setClienteNombre(e.target.value)} autoComplete="off" />
 
-      <textarea 
+        <textarea 
                     value={userComment} 
                     onChange={handleCommentChange} 
                     placeholder="Escribe tu comentario aquí..."
                     maxLength="150" 
-                    style={{ width: '100%', marginBottom: '10px' }}
+                    style={{ width: '500px', marginBottom: '10px' }}
                 />
+                
                 Califica: 
                 <Rating
                      
