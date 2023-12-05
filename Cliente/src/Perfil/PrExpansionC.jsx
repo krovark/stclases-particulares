@@ -182,16 +182,21 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
   };
 
   const handleCancelClick = () => {
-    // Cancela la edición y restaurar los valores originales
     setEditedData({});
     setEditMode(false);
   };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setEditedData({ ...editedData, [name]: value });
+    const updatedValue = name === 'nombre' ? toTitleCase(value) : value;
+    setEditedData({ ...editedData, [name]: updatedValue });
   };
 
+  function toTitleCase(str) {
+    return str.replace(/\w\S*/g, function(txt){
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+  }
 
   return (
     <div>
@@ -285,6 +290,7 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
             <TextField
               name="duracion"
               label="duracion"
+              type="number"
               value={editedData.duracion || publicacion.duracion}
               onChange={handleInputChange}
               placeholder='Duracion en minutos'
@@ -298,6 +304,7 @@ export default function ProfileTest({ publicacion, postId, fetchPublicaciones ,o
             <TextField
               name="costo"
               label="costo"
+              type="number"
               value={editedData.costo || publicacion.costo}
               onChange={handleInputChange}
               placeholder='Precio'

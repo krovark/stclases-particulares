@@ -11,13 +11,16 @@ router.get('/', function(req, res, next) {
 
  
 router.post('/comentar/:servicioId', ComentariosController.createComentario);
-router.get('/allcomentarios', Authorization, ComentariosController.getAllComentarios); // Obtener todos los comentarios
-router.get('/proveedor/:proveedorId', Authorization, ComentariosController.getComentariosByProveedor);
-router.get('/proveedorestado/:proveedorId', Authorization, ComentariosController.getComentariosByProveedorAndEstado);
-router.get('/:id', Authorization, ComentariosController.getComentarioById); // Obtener un comentario por ID
+
+router.get('/proveedor', Authorization, ComentariosController.getComentariosByProveedor);
+
+router.get('/comentario/:servicioId', ComentariosController.getComentariosByServicioAndEstado);
+
+
 router.patch('/cambiarestadocomentario/:id', Authorization, ComentariosController.updateEstadoComentario); // Actualizar solo el estado de un comentario
-router.get('/estado/:estado', Authorization, ComentariosController.getComentariosByEstado);
-router.delete('/:id', Authorization, ComentariosController.deleteComentario);
+
+
+
 module.exports = router;
 
 

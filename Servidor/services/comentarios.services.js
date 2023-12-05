@@ -45,39 +45,23 @@ exports.updateEstadoComentario = async function (comentarioId, nuevoEstado) {
     }
 };
 
-exports.getComentariosByEstado = async function (estado) {
-    try {
-        var comentarios = await Comentario.find({ estado: estado });
-        return comentarios;
-    } catch (e) {
-        // Manejo de errores
-        throw Error('Error while Getting Comentarios by estado');
-    }
-};
-
-exports.getAllComentarios = async function () {
-    try {
-        const comentarios = await Comentario.find({}); // Encuentra todos los comentarios
-        return comentarios;
-    } catch (e) {
-        // Manejo de errores
-        throw Error('Error while Getting all Comentarios: ' + e.message);
-    }
-};
-
-exports.getComentariosByProveedorId = async function (proveedorId) {
-    try {
-        var comentarios = await Comentario.find({ proveedorId: proveedorId });
-        return comentarios;
-    } catch (e) {
-        throw Error('Error while Getting Comentarios by Proveedor ID: ' + e.message);
-    }
-};
-
-exports.getComentariosByProveedorIdAndEstado = async function (proveedorId, estado) {
+exports.getComentariosByProveedorId = async function (proveedorId, estado) {
     try {
         var comentarios = await Comentario.find({ 
             proveedorId: proveedorId,
+            estado: estado 
+        }).populate('servicioId', 'nombre');
+        return comentarios;
+    } catch (e) {
+        throw Error('Error while Getting Comentarios by Proveedor ID and Estado: ' + e.message);
+    }
+};
+
+
+exports.getComentariosByServicioAndEstado = async function (servicioId, estado) {
+    try {
+        var comentarios = await Comentario.find({ 
+            servicioId: servicioId,
             estado: estado
         });
         return comentarios;

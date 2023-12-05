@@ -181,7 +181,7 @@ const Sidebar = ({ setFiltroTipo, setFiltroFrecuencia, setFiltroCalificacion, se
             onChange={(e) => setFiltroFrecuencia(e.target.value)}
           >
             <MenuItem value="">Todos</MenuItem>
-            <MenuItem value="Unica">Única</MenuItem>
+            <MenuItem value="Única">Única</MenuItem>
             <MenuItem value="Semanal">Semanal</MenuItem>
             <MenuItem value="Mensual">Mensual</MenuItem>
           </Select>

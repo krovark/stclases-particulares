@@ -40,7 +40,7 @@ export function FormDialog({ onUpdate }) {
     };
 
     const handleCategoriaChange = (event) => {
-      setCategoria(event.target.value);
+      setCategoria(toTitleCase(event.target.value));
   };
   
   const handleCostoChange = (event) => {
@@ -109,6 +109,13 @@ const handleFormSubmit = async (event) => {
     };
   
 
+    function toTitleCase(str) {
+      return str.replace(/\w\S*/g, function(txt){
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      });
+    }
+    
+
 
 
   return (
@@ -169,7 +176,7 @@ const handleFormSubmit = async (event) => {
         margin="dense"
         id="costo"
         label="Costo por clase"
-        type="text"
+        type="number"
         value={costo}
         fullWidth
         variant="outlined"
@@ -180,6 +187,7 @@ const handleFormSubmit = async (event) => {
               margin="dense"
               id="duracion"
               label="Duracion"
+              type="number"
               placeholder='Duracion en minutos'
               rows={4} 
               fullWidth
@@ -221,16 +229,6 @@ const PostSite = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // useEffect(() => {
-  //   // Simular un retraso de 3 segundos antes de realizar la solicitud de fetch
-  //   const delayFetch = setTimeout(() => {
-  //     fetchPublicaciones(); // Llamar a la función de solicitud después del retraso
-  //   }, 5000);
-
-  //   // Limpia el retraso si el componente se desmonta antes de que se complete
-  //   return () => clearTimeout(delayFetch);
-  // }, []);
-
 
   const fetchPublicaciones = async () => {
     setIsLoading(true);
@@ -240,7 +238,7 @@ const PostSite = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        credentials: 'include', // Si es necesario para manejar las cookies
+        credentials: 'include', 
       });
       if (!response.ok) throw new Error('Error al cargar publicaciones');
       const responseData = await response.json();
@@ -273,7 +271,7 @@ const PostSite = () => {
     fetchPublicaciones();
   }, []);
 
-    //if (isLoading) return <p>Cargando publicaciones...</p>;
+   
     if (isLoading) {
       
       return (
@@ -311,7 +309,7 @@ const PostSite = () => {
       );
     };
 
-    // Función para eliminar un comentario en una publicación específica
+    
     const deleteComment = (postId, commentId) => {
       setPublicaciones((prevState) =>
         prevState.map((post) => {

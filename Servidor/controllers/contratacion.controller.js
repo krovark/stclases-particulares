@@ -56,7 +56,7 @@ exports.updateEstadoContratacion = async function(req, res) {
 };
 
 exports.getContratacionesByUsuario = async function (req, res) {
-    const userId = req.userId; // Suponiendo que el ID del usuario está en req.userId
+    const userId = req.userId; 
     const page = req.query.page ? parseInt(req.query.page) : 1;
     const limit = req.query.limit ? parseInt(req.query.limit) : 25;
 

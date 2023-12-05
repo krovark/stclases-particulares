@@ -9,7 +9,7 @@ import PostCreados from './VistasTab/PostComponents'
 import ComentariosMod from './VistasTab/ComentariosMod'
 import '../TabComponents/estiloTabs/profile-style.css';
 import './estiloTabs/Tabs-styles.css'
-import CardTesting from './VistasTab/CardTesting'
+
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
