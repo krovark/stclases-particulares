@@ -99,6 +99,12 @@ export default function GridOfCards() {
 
 
   return (
+    <div>
+      {comentarios.length === 0 ? (
+        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+          <Typography variant="h6">Aún no tienes comentarios pendientes de moderación.</Typography>
+        </div>
+      ) : (
     <Grid container spacing={3}>
       {comentarios.map((comentario, index) => (
         <Grid item xs={12} sm={6} md={4} key={index}>
@@ -145,8 +151,7 @@ export default function GridOfCards() {
         </Grid>
       ))}
     </Grid>
-  );
+ )}
+ </div>
+);
 }
-
-
-
