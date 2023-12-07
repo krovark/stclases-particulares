@@ -1625,6 +1625,7 @@ progress {
   .col-xxl-8 {
     flex: 0 0 auto;
     width: 66.66666667%;
+    
   }
   .col-xxl-9 {
     flex: 0 0 auto;
@@ -7894,6 +7895,7 @@ textarea.form-control-lg {
 .px-5 {
   padding-right: 3rem !important;
   padding-left: 3rem !important;
+  
 }
 
 .py-0 {
@@ -7924,7 +7926,7 @@ textarea.form-control-lg {
 .py-5 {
   padding-top: 3rem !important;
   padding-bottom: 3rem !important;
-  background-color: #fafafa;
+  background-color: RGB(201, 193, 180,0.2);
   
 }
 
@@ -11550,16 +11552,51 @@ html {
   height: 100%;
 }
 
+@keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+
 .bg-gradient-primary-to-secondary {
   background: #1e30f3;
   background: linear-gradient(135deg, #1e30f3 0%, #e21e80 100%);
+  animation: float 3s ease-in-out infinite;
 }
+
+.bg-gradient-primary-to-secondaryv2 {
+    background: #1e30f3;
+    background: linear-gradient(135deg, #1e30f3 0%, #e21e80 100%);
+    
+  }
 
 .text-gradient {
   background: -webkit-linear-gradient(315deg, #1e30f3 0%, #e21e80 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  
 }
+
+@keyframes blink {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+
+.text-gradientv2 {
+    background: -webkit-linear-gradient(315deg, #1e30f3 0%, #e21e80 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: blink 1s step-start infinite;
+  }
 
 .rounded-4 {
   border-radius: 1rem !important;

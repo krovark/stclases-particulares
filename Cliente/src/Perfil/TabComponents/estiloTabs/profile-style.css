@@ -20,7 +20,8 @@
     border-radius: 10px;
     background-color: #F8F9FA;
     display: flex;
-    max-width: 50%;
+    max-width:50%;
+    max-height:50%;
     justify-content: center;
     align-items: center;
   
@@ -49,16 +50,19 @@ transition: box-shadow 0.1s ease-in-out;
 
  
   .avatar-container {
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     border-radius: 20%;
     margin-right: 120px;
-    border: 2px #8AA1B1 solid;
+    border: 4px #8AA1B1 solid;
     overflow: hidden;
+    transition: opacity 0.3s ease-in-out;
+    position: relative;
   }
   .avatar-container{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1),
     0 2px 4px rgba(0, 0, 0, 0.06);
+
   }
   .avatar-container img {
     width: 100%;
@@ -68,6 +72,29 @@ transition: box-shadow 0.1s ease-in-out;
     
     
   }
+
+  .avatar-container:hover img {
+  opacity: 0.5;
+}
+
+.avatar-container::after {
+  content: '';
+  object-position: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('../../../Img/editIcon.png') center/50% no-repeat;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out; 
+  object-position: center;
+  overflow: hidden;
+  object-fit: cover;
+  
+}
+.avatar-container img :hover::after {
+  opacity: 1; 
+}
   
   .datos-docente {
     display: flex;
@@ -115,8 +142,8 @@ transition: box-shadow 0.1s ease-in-out;
     height: auto;
     max-width: 45%; 
     padding: 10px 16px 20px;
-    /* margin: 40px auto; */
-    flex: 0 0 calc(50% - 10px); /* Esto define un ancho fijo del 50% menos 10px para cada tarjeta */
+    
+    flex: 0 0 calc(50% - 10px); 
     margin-bottom: 20px;
     border-radius: 20px;
     border: 2mm solid  #8AA1B1;
@@ -145,8 +172,8 @@ transition: box-shadow 0.1s ease-in-out;
 
   @media only screen and (min-width: 901px) and (max-width: 1200px) {
     .avatar-container {
-        width: 200px;
-        height: 200px;
+        width: 320px;
+        height: 320px;
         margin-right: 60px;
     }
     .avatar-container img {
@@ -192,3 +219,5 @@ transition: box-shadow 0.1s ease-in-out;
     margin-right: 0;
     }
 }
+
+

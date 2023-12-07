@@ -167,7 +167,7 @@ exports.updateProfileImage = async function(userId, imageBuffer) {
 
   exports.getProfile = async function(userId) {
     try {
-        const user = await User.findById(userId, 'email nombre apellido titulo experiencia telefono calificacionPromedio imgProfile');
+        const user = await User.findById(userId, 'email nombre apellido titulo experiencia telefono calificacionPromedio imgProfile calificacionPromedio');
         return user;
     } catch (error) {
         throw new Error('Error al obtener el usuario: ' + error.message);
@@ -187,14 +187,14 @@ exports.forgotPassword = async function(email) {
     await user.save();
 
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-    // const msg = {
-    //     to: email,
-    //     from: 'tucorreo@example.com', // Cambiar al correo emisor
-    //     subject: 'Password Reset',
-    //     text: `Por favor, usa el siguiente token para restablecer tu contraseña: ${token}`
-    // };
+    const msg = {
+        to: email,
+        from: 'santiagojgonzalez@uade.edu.ar', 
+        subject: 'Password Reset',
+        text: `Por favor, usa el siguiente token para restablecer tu contraseña: ${token}`
+    };
 
-    // await sgMail.send(msg);
+    await sgMail.send(msg);
     return { token };
 };
 

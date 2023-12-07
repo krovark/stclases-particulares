@@ -58,7 +58,7 @@ exports.createUser = async function (req, res, next) {
         // Calling the Service function with the new object from the Request Body
         var createdUser = await UserService.createUser(User)
         console.log("hola")
-        return res.status(201).json({createdUser, message: "Succesfully Created User"})
+        return res.status(201).json({createdUser, message: "Usuario creado con éxito"})
     } catch (e) {
         if (e.message === 'El email ya se encuentra registrado.') {
             // Devolver un código de estado HTTP 409 si el email ya está registrado
@@ -66,7 +66,7 @@ exports.createUser = async function (req, res, next) {
         }
         //Return an Error Response Message with Code and the Error Message.
         console.log(e)
-        return res.status(400).json({status: 400, message: "User Creation was Unsuccesfull"})
+        return res.status(400).json({status: 400, message: "Hubo un problema en crear al usuario"})
     }
 }
 
@@ -84,7 +84,7 @@ exports.updateUser = async function (req, res, next) {
     console.log(req.body)
     try {
         var updatedUser = await UserService.updateUser(userId, userUpdateData);
-        return res.status(200).json({status: 200, data: updatedUser, message: "Successfully Updated User"});
+        return res.status(200).json({status: 200, data: updatedUser, message: "Usuario actualizado con éxito"});
     } catch (e) {
         console.error(e);
         return res.status(400).json({status: 400, message: e.message});
@@ -96,7 +96,7 @@ exports.removeUser = async function (req, res, next) {
     var id = req.body.id;
     try {
         var deleted = await UserService.deleteUser(id);
-        res.status(200).send("Succesfully Deleted... ");
+        res.status(200).send("Borrado correctamente... ");
     } catch (e) {
         return res.status(400).json({status: 400, message: e.message})
     }
@@ -114,8 +114,7 @@ exports.loginUser = async function (req, res, next) {
         var loginUser = await UserService.loginUser(User);
 
         if (loginUser === 0) {
-            console.log("Email controller", email);
-            console.log("password controller", password);
+      
             return res.status(400).json({ message: "Error en la contraseña" });
         } else {
             // Genera token
@@ -127,11 +126,11 @@ exports.loginUser = async function (req, res, next) {
               maxAge: 86400000 // tiempo de vida de la cookie 24 horas
             });
 
-            return res.status(201).json({ loginUser, message: "Succesfully login" });
+            return res.status(201).json({ loginUser, message: "Inicio de sesión exitoso" });
         }
     } catch (e) {
         console.error("Error en loginUser:", e);
-        return res.status(400).json({ status: 400, message: "Invalid username or password" });
+        return res.status(400).json({ status: 400, message: "Usuario o contraseña invalido" });
     }
 };
 

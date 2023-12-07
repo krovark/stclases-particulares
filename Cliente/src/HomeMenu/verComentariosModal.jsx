@@ -5,6 +5,9 @@ import './estilos-menu/menu.css';
 import Rating from '@mui/material/Rating';
 import Button from 'react-bootstrap/Button';
 import TextField from '@mui/material/TextField'
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+
 
 
 function CommentModal({ show, onHide, servicioId }) {
@@ -42,6 +45,8 @@ function CommentModal({ show, onHide, servicioId }) {
   const handleCommentSubmit = async () => {
       if (userComment.trim() === '') {
           alert('Por favor escribe un comentario antes de calificar.');
+
+
           return;
       }
 
@@ -65,11 +70,15 @@ function CommentModal({ show, onHide, servicioId }) {
 
           
           alert('Comentario enviado con éxito. Se encuentra en pendiente de moderación');
+          
+   
           setClienteNombre('');
           setUserComment('');
           setUserRating(2);  
       } catch (error) {
+
           alert('Hubo un problema para crear el comentarios. Aguarde unos minutos');
+ 
       }
   };
 
@@ -137,15 +146,6 @@ function CommentModal({ show, onHide, servicioId }) {
           
         />
 
-
-        {/* <textarea 
-                    value={userComment} 
-                    onChange={handleCommentChange} 
-                    placeholder="Escribe tu comentario aquí..."
-                    maxLength="150" 
-                    style={{ width: '500px', marginBottom: '10px' }}
-                /> */}
-                
                 Califica: 
                 <Rating
                      
@@ -159,7 +159,7 @@ function CommentModal({ show, onHide, servicioId }) {
               <br></br>
               <br></br>
                   <Button onClick={handleCommentSubmit} style={{ marginRight: '10px' }}>Comentar</Button>
-                  <Button variant="secondary" onClick={handleCommentReset}>Reset</Button>
+                  <Button variant="warning" onClick={handleCommentReset}>Reset</Button>
               </div>
 
 

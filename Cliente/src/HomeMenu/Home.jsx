@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
 import Slider from '@mui/material/Slider';
 import Typography from '@mui/material/Typography';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './estilos-menu/menu.css';
-import ComentarioModal from './verComentariosModal'
-import HireService from './contratarServicioModal'
-import Rating from '@mui/material/Rating';
 import Pagination from 'react-bootstrap/Pagination';
 import Spinner from 'react-bootstrap/Spinner';
 import CardTesting from '../Perfil/TabComponents/VistasTab/CardTesting'
@@ -22,17 +16,11 @@ const Postlist = ({ posts, filtroTipo, filtroFrecuencia, filtroCalificacion, fil
   const [hireServiceOpen, setHireServiceOpen] = useState(false);
   
 
-
-  // console.log("Posts en Postlist:", posts);
-  // console.log("Posts en Postlist:", posts);
-
-
-
 if (!posts || posts.length === 0) {
 
   return (
     
-    <div className="text-center">
+    <div className="text-center-spinner">
           <Spinner animation="border" role="status">
             <span className="visually-hidden">Cargando...</span>
           </Spinner>
@@ -45,10 +33,13 @@ if (!posts || posts.length === 0) {
 
   const filteredPosts = posts.filter((servicio) => {
     console.log("Filtrando servicio:", servicio);
+    const calificacionPromedioRedondeada = Math.round(servicio.proveedorId.calificacionPromedio);
     return (
       (!filtroTipo || servicio.tipoClase === filtroTipo) &&
       (!filtroFrecuencia || servicio.frecuencia === filtroFrecuencia) &&
-      (!filtroCalificacion || servicio.calificacion >= filtroCalificacion) && 
+      // (!filtroCalificacion || servicio.calificacion >= filtroCalificacion) && 
+      (filtroCalificacion === null || calificacionPromedioRedondeada === filtroCalificacion) &&
+      // (!filtroCalificacion || servicio.proveedorId.calificacionPromedio >= filtroCalificacion) && 
       (!filtroCategoria || servicio.nombre === filtroCategoria)  
     );   
   });
@@ -69,60 +60,7 @@ if (!posts || posts.length === 0) {
  
  
   return (
-    // <div className="post-container">
-    //   <div className="post-grid">
-    //     {currentPosts.map((servicio) => (
-    //       <div className="post-preview" key={servicio.id}>
-    //         <div className="head-post">
-    //         <div className="avatar">
-    //           <Stack direction="row" spacing={1}>
-    //           <Avatar src={servicio.proveedorId.imgProfile} sx={{ width: 100, height: 100 }} />
-    //           </Stack>
-              
-    //         </div>
-    //         </div>
-            
-    //         <div className="class-category">
-    //             <h2>{servicio.nombre}</h2>
-    //           </div>        
-    //         <ul id="ul-data-cards">
-    //           <li>Nombre: {servicio.proveedorId && `${servicio.proveedorId.nombre} ${servicio.proveedorId.apellido}`} </li>
-    //           <li>Titulo: {servicio.titulo}</li>
-    //           <li>Experiencia: {servicio.experiencia}</li>
-    //           <li>Tipo: {servicio.tipoClase}</li>
-    //           <div className="description-container">
-    //           <li>Descripcion: {servicio.descripcion}</li>
-    //           </div>
-    //           <li>Frecuencia: {servicio.frecuencia} </li>
-    //           <li>Duración: {servicio.duracion} minutos </li>
-    //           <br></br>
-    //           <li> 
-    //           <Rating name="read-only" value={servicio.calificacion} readOnly />
-    //           </li>
-    //           <div className="comentarios">
-    //           <QuestionAnswerIcon className="PlusIcon" sx={{ fontSize: 30 }} onClick={() => setModalShow(true)}/>
-    //               <ComentarioModal
-    //                 show={modalShow}
-    //                 onHide={() => setModalShow(false)}
-    //                 servicioId={servicio._id}
-                    
-    //               />
-    //               </div>
-    //         </ul>
- 
-    //         <div className="precio-clase">     
-    //         <HireService servicioId={servicio._id} precio={servicio.costo} open={hireServiceOpen} onClose={handleHireServiceClose} > </HireService>     
-    //         </div>
 
-            
-
-    //       </div>
-    //     ))}
-
-
-
-    //   </div>
-    // </div>
     currentPosts.map((servicio) => (
       <CardTesting
         key={servicio.id}
@@ -132,6 +70,7 @@ if (!posts || posts.length === 0) {
           title: servicio.nombre,
           experience: servicio.experiencia,
           description: servicio.descripcion,
+          calificacionPromedio: servicio.proveedorId.calificacionPromedio,
           titulo: servicio.titulo,
           frequency: servicio.frecuencia,
           tipoClase: servicio.tipoClase,
@@ -232,7 +171,7 @@ const Sidebar = ({ setFiltroTipo, setFiltroFrecuencia, setFiltroCalificacion, se
 const HomeMenu = () => {
   const [filtroTipo, setFiltroTipo] = useState('');
   const [filtroFrecuencia, setFiltroFrecuencia] = useState('');
-  const [filtroCalificacion, setFiltroCalificacion] = useState(null);
+  const [filtroCalificacion, setFiltroCalificacion] = useState('');
   const [filtroCategoria, setFiltroCategoria] = useState('');
 
   const [categorias, setCategorias] = useState([]);
@@ -262,7 +201,7 @@ const HomeMenu = () => {
 
         const data = await response.json();
         console.log("Datos recibidos:", data);
-        setServicios(data.servicios); // Asume que la respuesta tiene un campo `servicios`
+        setServicios(data.servicios); 
         if (data.data && data.data.docs) {
           setServicios(data.data.docs);
         } else {
@@ -303,14 +242,15 @@ const HomeMenu = () => {
   useEffect(() => {
     fetchServicios();
     fetchCategorias();
-    
+    setFiltroCalificacion(null);
   }, []);
 
 
   const filteredPosts = servicios.filter(servicio => {
+    const calificacionPromedioRedondeada = Math.round(servicio.proveedorId.calificacionPromedio);
     return (!filtroTipo || servicio.tipoClase === filtroTipo) &&
            (!filtroFrecuencia || servicio.frecuencia === filtroFrecuencia) &&
-           (!filtroCalificacion || servicio.calificacion >= filtroCalificacion) &&
+           (filtroCalificacion === null || calificacionPromedioRedondeada === filtroCalificacion) &&
            (!filtroCategoria || servicio.nombre === filtroCategoria);
   });
 

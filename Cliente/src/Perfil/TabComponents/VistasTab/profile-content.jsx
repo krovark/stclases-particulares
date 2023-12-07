@@ -5,6 +5,24 @@ import IconButton from '@mui/material/IconButton';
 import TabsComponent from '../selectorTabs';
 import CircularProgress from '@mui/material/CircularProgress';
 
+
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import EmailIcon from '@mui/icons-material/Email';
+import SmartphoneIcon from '@mui/icons-material/Smartphone';
+
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import BadgeIcon from '@mui/icons-material/Badge';
+import SaveAsIcon from '@mui/icons-material/SaveAs';
+import DoNotDisturbIcon from '@mui/icons-material/DoNotDisturb';
+import Rating from '@mui/material/Rating';
+
+
 const Profilesite = () => {
  
 
@@ -140,12 +158,9 @@ const Profilesite = () => {
   return (
     <div className="inside-container"> 
     <div className="top-site_profile">
+      
       <div className="info-container">
-        {/* <div className="avatar-container">
-          <img src={avatarImage} alt="Avatar del docente" />
-        </div> */}
         <div className="avatar-container" onClick={() => document.getElementById('input-image').click()}>
-        {/* <img src={perfil.imgProfile || avatarImage} alt="Avatar del docente" /> */}
         {loading 
       ? <CircularProgress /> 
       : <img src={`${perfil.imgProfile}?${new Date().getTime()}`} alt="Avatar" />}
@@ -156,31 +171,21 @@ const Profilesite = () => {
         onChange={handleFileChange}
         accept="image/*" // Asegúrate de aceptar solo imágenes
       />
-        {/* <ImageUploading
-          value={images}
-          onChange={onChange}
-          maxNumber={maxNumber}
-          dataURLKey="data_url"
-        >
-          
-          {({ onImageUpload, onImageRemoveAll }) => (
-            // Esconde el input real y usa un div clickeable para activarlo
-            <div style={{ display: 'none' }}>
-              <input id="input-image" type="file" onChange={onImageUpload} />
-            </div>
-          )}
-        </ImageUploading> */}
+      
       </div>
         <div className="datos-docente">
           <div className="settings">
             {editMode ? (
               <div>
-                <IconButton onClick={() => setEditMode(false)}>
-                  Cancelar
-                </IconButton>
-                <IconButton onClick={() => handleSaveChanges()}>
-                  Guardar
-                </IconButton>
+
+              {/* <div className="cancel">
+                <DoNotDisturbIcon fontSize="large" onClick={() => setEditMode(false)}>
+                  
+                </DoNotDisturbIcon>
+                </div> */}
+                <SaveAsIcon  fontSize="large" onClick={() => handleSaveChanges()}>
+                
+                </SaveAsIcon>
               </div>
             ) : (
               <IconButton onClick={() => setEditMode(true)}>
@@ -193,13 +198,19 @@ const Profilesite = () => {
               <h1>{perfil.nombre} {perfil.apellido}</h1>
               {/* <p id='time-stamp'>Cuenta creada: {dcPersona.ccreada}</p> */}
               <br></br>
-              <p>Email: {perfil.email}</p>
-              <p>Telefono: {editMode ? <input type="text" value={editedTelefono || ''} onChange={(e) => setEditedTelefono( e.target.value )} /> : perfil.telefono}</p>
-              <p>Título: {editMode ? <input type="text" value={editedTitulo || ''} onChange={(e) => setEditedTitulo(e.target.value)} /> : perfil.titulo}</p>
-              <p>Experiencia: {editMode ? <input type="text" value={editedExperiencia || ''} onChange={(e) => setEditedExperiencia(e.target.value)} /> : perfil.experiencia}</p>
-              {!editMode && <p>Calificación: {perfil.calificacionPromedio}</p>}
-            </div>
-         
+              <p> <EmailIcon fontSize="large" sx={{ mr: 1 }} /> : {perfil.email}</p>
+              <p> <SmartphoneIcon fontSize="large"/> : {editMode ? <input type="text" value={editedTelefono || ''} onChange={(e) => setEditedTelefono( e.target.value )} /> : perfil.telefono}</p>
+              <p><BadgeIcon fontSize="large"/>: {editMode ? <input type="text" value={editedTitulo || ''} onChange={(e) => setEditedTitulo(e.target.value)} /> : perfil.titulo}</p>
+              <p><AccountTreeIcon fontSize="large"/>: {editMode ? <input type="text" value={editedExperiencia || ''} onChange={(e) => setEditedExperiencia(e.target.value)} /> : perfil.experiencia}</p>
+              {/* <p> {!editMode && <><ThumbUpIcon fontSize="large"/>: {perfil.calificacionPromedio}</>}</p>
+            </div> */}
+            {
+              !editMode &&
+              <div>
+                <ThumbUpIcon fontSize="large"/>: <Rating name="read-only" value={perfil.calificacionPromedio} readOnly />
+              </div>
+            }
+         </div>
         </div>
       </div>
       <br></br>
@@ -210,7 +221,15 @@ const Profilesite = () => {
           <TabsComponent />
         </div>
       </div>
+
+     
     </div>
+
+
+
+
+
+
   );
 };
 

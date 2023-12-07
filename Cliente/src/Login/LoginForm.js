@@ -52,18 +52,16 @@ const Login = () => {
       const data = await response.json();
   
       if (response.ok) {
-        // Aquí manejas el inicio de sesión exitoso
-        // Por ejemplo, almacenar el token de acceso y actualizar el estado de Redux
-        dispatch(logIn(data)); // Asume que 'data' contiene la información necesaria
+        
+        dispatch(logIn(data)); 
         history.push('/home');
       } else {
-        // Manejar respuesta de error del servidor
+        
         alert(data.message || 'Error al iniciar sesión');
       }
     } catch (error) {
       // Manejar errores de red o de conexión
-      console.error('Error en el proceso de inicio de sesión:', error);
-      alert('Error al conectar con el servidor');
+      alert('Error al enviar la petición al servidor. Aguarde uno minutos y vuelva a intentar');
     }
   };
 
@@ -79,12 +77,12 @@ const Login = () => {
           <div className="input-container">
             <label>Email </label>
             <input type="text" name="email" required onChange={(e) => setEmail(e.target.value)}/>
-            {/* {renderErrorMessage("uname")} */}
+            
           </div>
           <div className="input-container">
             <label>Contraseña </label>
             <input type="password" name="pass" required onChange={(e) => setPassword(e.target.value)}/>
-            {/* {renderErrorMessage("pass")} */}
+           
           </div>
   
         <div className="links">

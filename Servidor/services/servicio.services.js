@@ -81,7 +81,7 @@ exports.getServiciosByEstado = async function(estado, page, limit) {
 
             populate: {
                 path: 'proveedorId', 
-                select: 'imgProfile nombre apellido' 
+                select: 'imgProfile nombre apellido calificacionPromedio' 
 
             }
         };

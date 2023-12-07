@@ -24,10 +24,10 @@ const LandingPage = () => {
                         <div className="col-xxl-5">
                            
                             <div className="text-center text-xxl-start">
-                                <div className="badge bg-gradient-primary-to-secondary text-white mb-4"><div className="text-uppercase">Diseño &middot; Finanzas &middot; Marketing &middot; Inglés</div></div>
-                                <div className="badge bg-gradient-primary-to-secondary text-white mb-4"><div className="text-uppercase">Gastronimia &middot; Defensa Personal</div></div>
+                                <div className="badge bg-gradient-primary-to-secondaryv2 text-white mb-4"><div className="text-uppercase">Diseño &middot; Finanzas &middot; Marketing &middot; Inglés</div></div>
+                                <div className="badge bg-gradient-primary-to-secondaryv2 text-white mb-4"><div className="text-uppercase">Gastronimia &middot; Defensa Personal</div></div>
                                 <div className="fs-3 fw-light text-muted">Desarrollamos tus conocimientos</div>
-                                <h1 className="display-3 fw-bolder mb-5"><span className="text-gradient d-inline">Empezá a potenciarte</span></h1>
+                                <h1 className="display-3 fw-bolder mb-5"><span className="text-gradient d-inline">Empezá a potenciarte</span><span className="text-gradientv2">|</span></h1>
                                 <div className="d-flex justify-content-center mb-3">
                                     <Link to="/home">
                                     <a className="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" href="resume.html">COMENZAR</a>

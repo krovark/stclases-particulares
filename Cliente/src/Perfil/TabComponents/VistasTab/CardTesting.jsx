@@ -12,15 +12,20 @@ import { blue } from '@mui/material/colors';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import Button from '@mui/material/Button';
 import '../estiloTabs/cards.css'
-
-import HireService from '../../../HomeMenu/verComentariosModal'
-
+import Rating from '@mui/material/Rating';
 
 
+import Comentarios from '../../../HomeMenu/verComentariosModal'
 
-const CourseCard = ({ course, avatarUrl, servicioId }) => {
+import HireService from '../../../HomeMenu/contratarServicioModal'
+
+
+const CourseCard = ({ course, avatarUrl, servicioId, calificacionPromedio }) => {
     const [commentModalShow, setCommentModalShow] = useState(false);
-  
+    const [hireServiceOpen, setHireServiceOpen] = useState(false);
+
+
+
 
   const handleCommentClick = () => {
     setCommentModalShow(true);
@@ -32,7 +37,14 @@ const CourseCard = ({ course, avatarUrl, servicioId }) => {
     setCommentModalShow(false);
   };
 
-  
+   const handleHireServiceClick = () => {
+        setHireServiceOpen(true);
+    };
+
+    const handleHireServiceClose = () => {
+        setHireServiceOpen(false);
+    };
+
 
 
 
@@ -71,10 +83,13 @@ const CourseCard = ({ course, avatarUrl, servicioId }) => {
             fontFamily: 'Arial', // Cambia la familia de fuentes
             fontSize: '1.5rem' // O especifica un tamaño de fuente personalizado
           }}
+
       />
       </div>
       <div className="card-content">
+        
       <CardContent>
+      <Rating name="read-only" value={Number(course.calificacionPromedio)} readOnly/>
         <Typography sx={{ fontSize: '18px' }} variant="body2" color="text.secondary">
           {course.description}
         </Typography>
@@ -105,17 +120,32 @@ const CourseCard = ({ course, avatarUrl, servicioId }) => {
         <div className="contratar-boton">
         <Button variant="contained"
             color="primary"
-            sx={{ padding: '10px 20px', fontSize: '2rem' }}>
+            sx={{ padding: '10px 20px', fontSize: '2rem' }} 
+            onClick={handleHireServiceClick}>
           ${course.price}
         </Button>
+
         </div>
       </CardActions>
       </div>
-      <HireService
+      <Comentarios
         show={commentModalShow}
         onHide={handleCommentModalClose}
-        servicioId={servicioId} // Asegúrate de tener el id del servicio
+        servicioId={servicioId}
       />
+
+          <HireService
+          
+        servicioId={servicioId}
+        open={hireServiceOpen}
+        onClose={handleHireServiceClose}
+
+          />
+
+
+
+
+
     </Card>
   );
 };
