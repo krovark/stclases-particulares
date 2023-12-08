@@ -1,4 +1,4 @@
-var Comentario = require('../models/comentarios.model'); // Asegúrate de que la ruta sea correcta
+var Comentario = require('../models/comentarios.model'); 
 var Servicio = require('../models/servicio.model');
 var User = require('../models/User.model')
 
@@ -6,7 +6,7 @@ var User = require('../models/User.model')
 // Función para crear un nuevo comentario
 exports.createComentario = async function (comentarioData) {
     try {
-        // Busca el servicio para obtener el proveedorId
+       
         const servicio = await Servicio.findById(comentarioData.servicioId);
         if (!servicio) {
             throw Error('Servicio no encontrado');
@@ -14,7 +14,7 @@ exports.createComentario = async function (comentarioData) {
 
         var newComentario = new Comentario({
             servicioId: comentarioData.servicioId,
-            proveedorId: servicio.proveedorId, // Obtén el proveedorId del servicio
+            proveedorId: servicio.proveedorId, 
             comentarioCliente: comentarioData.comentarioCliente,
             comentario: comentarioData.comentario,
             estado: comentarioData.estado || 'pendiente', // Usa 'pendiente' como valor por defecto
@@ -27,43 +27,6 @@ exports.createComentario = async function (comentarioData) {
         throw Error('Error while Creating Comentario: ' + e.message);
     }
 };
-
-// Función para actualizar el estado de un comentario
-// exports.updateEstadoComentario = async function (comentarioId, nuevoEstado) {
-//     try {
-//         var comentario = await Comentario.findById(comentarioId);
-//         if (!comentario) {
-//             throw Error('Comentario not found');
-//         }
-
-//         comentario.estado = nuevoEstado;
-        
-//         var updatedComentario = await comentario.save();
-//         if (nuevoEstado === 'aprobado') {
-//             await actualizarCalificacionPromedio(comentario.proveedorId);
-//             console.log(comentario.proveedorId);
-//         }
-//         return updatedComentario;
-//     } catch (e) {
-//         // Manejar errores aquí
-//         throw Error('Error while updating Comentario: ' + e.message);
-//     }
-// };
-
-// async function actualizarCalificacionPromedio(userId) {
-//     try {
-//         const comentarios = await Comentario.find({ proveedorId: userId, estado: 'aprobado' });
-//         if (comentarios.length > 0) {
-//             const totalCalificacion = comentarios.reduce((acc, comentario) => acc + comentario.calificacion, 0);
-//             const promedio = totalCalificacion / comentarios.length;
-//             console.log(promedio);
-//             console.log(totalCalificacion);
-//             await User.findByIdAndUpdate(userId, { calificacionPromedio: promedio });
-//         }
-//     } catch (error) {
-//         console.error('Error al actualizar la calificación promedio:', error);
-//     }
-// }
 
 exports.updateEstadoComentario = async function (comentarioId, nuevoEstado) {
     try {

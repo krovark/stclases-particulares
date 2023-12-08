@@ -41,10 +41,6 @@ var ServicioSchema = new mongoose.Schema({
         type: Number, // Para manejar valores decimales
         required: true
     },
-    calificacion: {
-        type: Number,
-        default: 0 // La calificación inicial podría ser 0 si se calcula como promedio
-    },
     estado: {
         type: String,
         required: true,

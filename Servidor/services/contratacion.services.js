@@ -25,14 +25,14 @@ exports.createContratacion = async function(contratacionData) {
 
         await newContratacion.save();
         const destinatario = proveedor.email;
-       // const destinatariotest = 'santglez51@gmail.com';
+       
 
         // Envío del correo electrónico al proveedor
         const msg = {
             to: destinatario, 
-            from: 'santiagojgonzalez@uade.edu.ar', // Tu dirección de correo electrónico verificada en SendGrid
+            from: 'santiagojgonzalez@uade.edu.ar', // dirección de correo electrónico verificada en SendGrid
             subject: `Contratación de ${servicio.nombre}`, // Nombre del servicio
-            text: `Detalles de la contratación en formato texto...`, // Versión en texto para clientes de correo sin soporte HTML
+            text: `Detalles de la contratación en formato texto...`, 
     html: `
         <div style="background-color: #f0f0f0; padding: 20px; border-radius: 7px;">
             <h1 style="color: #333;">Detalles de la Contratación</h1>
@@ -82,7 +82,7 @@ exports.getContratacionesByUsuario = async function (userId, page, limit) {
         const options = {
             page: page,
             limit: limit,
-            populate: 'servicioId' // Puedes especificar poblaciones adicionales aquí si es necesario
+            populate: 'servicioId' 
         };
         
         const contrataciones = await Contratacion.paginate({ userId: userId }, options);

@@ -83,7 +83,7 @@ export default function FormDialog({ precio, onClose, servicioId }) {
             value={clienteApellido} onChange={(e) => setClienteApellido(e.target.value)} autoComplete="off" />
           <TextField margin="dense" label="Email" type="email" fullWidth variant="outlined"
             value={clienteEmail} onChange={(e) => setClienteEmail(e.target.value)} autoComplete="off" />
-          <TextField margin="dense" label="Telefono" type="tel" fullWidth variant="outlined"
+          <TextField margin="dense" label="Telefono" type="number" fullWidth variant="outlined"
             value={clienteTelefono}  onChange={(e) => setClienteTelefono(e.target.value)} autoComplete="off" />
           <TextField margin="dense" label="Cantidad de clases" type="number" fullWidth variant="outlined"
             value={cantClases} onChange={(e) => setCantClases(e.target.value)} autoComplete="off" />

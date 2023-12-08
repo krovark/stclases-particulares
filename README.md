@@ -1,5 +1,5 @@
 
-¡Hola a todos! Bienvenidos al proyecto **tuClaseYA**, el lugar en internet donde vamos a conectar a profesionales y usuarios de todo tipo. Acá, si tenés algo para enseñar, compartir o un servicio para ofrecer, este es tu lugar. Y si estás buscando aprender algo nuevo, también llegaste al punto indicado. ¡Vamos a desglosar de qué va todo esto!
+¡Hola a todos! Bienvenidos **tuClaseYA**, el lugar en internet donde vamos a conectar a profesionales y usuarios de todo tipo. Acá, si tenés algo para enseñar, compartir o un servicio para ofrecer, este es tu lugar. Y si estás buscando aprender algo nuevo, también llegaste al punto indicado. ¡Vamos a desglosar de qué va todo esto!
 
 ## 🚀 Descripción del Proyecto
 
@@ -10,7 +10,6 @@
 - **Gestión de Servicios:** Los proveedores pueden administrar sus servicios de forma simple.
 - **Contratación Online:** Los usuarios pueden contratar servicios directamente desde su detalle.
 
-🔗 [Enlace a tuClaseYA](#) (En cuanto esté online, actualizamos el link)
 
 ## 📸 Diseños y Mockups
 
@@ -21,22 +20,38 @@
 ### Tecnologías Implementadas
 - **Frontend:** React
 - **Backend:** NodeJS
-- **Base de Datos:** A definir [SQL Server o MongoDB]
+- **Base de Datos:** Atlas MongoDB
 
 ### Instalación y Ejecución Local
-
+Tener instalada la ultima version de Node.js ---> https://nodejs.org/en
 git clone https://github.com/krovark/stclases-particulares.git
-cd Clases-particulares-new
+
+**CLIENTE**
+cd .\Cliente\
 npm install
 npm run start
 
+**SERVIDOR**
+cd .\Servidor\
+npm install
+nodemon app.js
+
+--------------------------------
 
 Estructura de Carpetas
-
+//Cliente:
 /src: Todo el código fuente.
 /public: Assets y index.html.
 /node_modules: Modulos utilizados.
 
+//Servidor:
+/auth: Contiene middlewares de multer, jws y la configuración de cloudinary
+/controller: Contiene los controlladores
+/models: Contiene los model de las colleciones de la base de datos
+/routes: Contiene las rutas de acceso 
+/services: Contiene la logica de los servicios
+/uploads: N/A
+/node_modules: Modulos utilizados.
 
 Scripts Básicos
 npm start: Levantar el servidor de desarrollo.
@@ -131,11 +146,13 @@ Postcondiciones: El comentario bloqueado ya no es visible para el proveedor ni l
 
  ✅ Definir DB
 
- ⬜ Entregar aplicación
+ ✅ Entregar aplicación
+
+ ✅ Terminar documentación
 
  ⬜ Deployar en algun hosting gratuito
 
- ⬜ Terminar documentación
+
  
  
 

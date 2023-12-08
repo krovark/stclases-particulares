@@ -16,7 +16,6 @@ router.get('/proveedor', Authorization, ComentariosController.getComentariosByPr
 
 router.get('/comentario/:servicioId', ComentariosController.getComentariosByServicioAndEstado);
 
-
 router.patch('/cambiarestadocomentario/:id', Authorization, ComentariosController.updateEstadoComentario); // Actualizar solo el estado de un comentario
 
 
