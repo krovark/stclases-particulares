@@ -1,4 +1,3 @@
-
 ¡Hola a todos! Bienvenidos **tuClaseYA**, el lugar en internet donde vamos a conectar a profesionales y usuarios de todo tipo. Acá, si tenés algo para enseñar, compartir o un servicio para ofrecer, este es tu lugar. Y si estás buscando aprender algo nuevo, también llegaste al punto indicado. ¡Vamos a desglosar de qué va todo esto!
 
 ## 🚀 Descripción del Proyecto
@@ -9,7 +8,7 @@
 - **Búsqueda Avanzada:** Permite a los usuarios encontrar lo que necesitan de manera eficiente.
 - **Gestión de Servicios:** Los proveedores pueden administrar sus servicios de forma simple.
 - **Contratación Online:** Los usuarios pueden contratar servicios directamente desde su detalle.
-
+- **
 
 ## 📸 Diseños y Mockups
 
@@ -22,15 +21,17 @@
 - **Backend:** NodeJS
 - **Base de Datos:** Atlas MongoDB
 
-### Instalación y Ejecución Local
+### Instalación y Ejecución Local ###
 Tener instalada la ultima version de Node.js ---> https://nodejs.org/en
 git clone https://github.com/krovark/stclases-particulares.git
 
+--- Para levantar el front-end ---
 **CLIENTE**
 cd .\Cliente\
 npm install
 npm run start
 
+--- Para levantar el back-end ---
 **SERVIDOR**
 cd .\Servidor\
 npm install
@@ -57,7 +58,9 @@ Scripts Básicos
 npm start: Levantar el servidor de desarrollo.
 npm test: Correr los tests.
 npm build: Generar build para producción.
-
+npm install: Instala los 
+npm run start: Instala todas las dependencias listadas en package.json
+cd : Cambia directorio
 
 📘 Historias de Usuario y Casos de Uso
 Historias de Usuario:
@@ -151,14 +154,3 @@ Postcondiciones: El comentario bloqueado ya no es visible para el proveedor ni l
  ✅ Terminar documentación
 
  ⬜ Deployar en algun hosting gratuito
-
-
- 
- 
-
-
-
-
-
-
-
