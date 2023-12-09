@@ -127,8 +127,8 @@ const Sidebar = ({ setFiltroTipo, setFiltroFrecuencia, setFiltroCalificacion, se
         </div>
 
         <div className="filter">
-          <Typography id="calificacion-slider" gutterBottom>
-            <strong style={{ textAlign: 'center', display: 'block' }}>Calificación</strong>
+          <Typography id="calificacion-slider" gutterBottom style={{ textAlign: 'center', display: 'block' }}>
+              Calificación
           </Typography>
           <Slider
             defaultValue={3}
@@ -181,9 +181,7 @@ const HomeMenu = () => {
 
   
   const [servicios, setServicios] = useState([]);
-  
 
-  
     const fetchServicios = async () => {
       try {
         const response = await fetch('http://localhost:4000/api/servicios/estado/activo', {
@@ -231,7 +229,7 @@ const HomeMenu = () => {
       
       const data = await response.json();
       console.log(data);
-      setCategorias(data.data); // Actualiza el estado con las categorías
+      setCategorias(data.data); 
     } catch (error) {
       console.error('Error al obtener las categorías:', error);
     }

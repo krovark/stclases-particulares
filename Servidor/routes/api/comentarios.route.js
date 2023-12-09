@@ -11,11 +11,8 @@ router.get('/', function(req, res, next) {
 
  
 router.post('/comentar/:servicioId', ComentariosController.createComentario);
-
 router.get('/proveedor', Authorization, ComentariosController.getComentariosByProveedor);
-
 router.get('/comentario/:servicioId', ComentariosController.getComentariosByServicioAndEstado);
-
 router.patch('/cambiarestadocomentario/:id', Authorization, ComentariosController.updateEstadoComentario); // Actualizar solo el estado de un comentario
 
 

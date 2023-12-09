@@ -24,19 +24,6 @@ exports.getServicioById = async function (servicioId) {
     }
 };
 
-exports.getAllServicios = async function (query, page, limit) {
-    try {
-        var options = {
-            page,
-            limit,
-            sort: { createdAt: -1 } 
-        };
-        var serviciosPaginated = await Servicio.paginate(query, options);
-        return serviciosPaginated; 
-    } catch (e) {
-        throw Error('Error while Paginating Servicios: ' + e.message);
-    }
-};
 
 exports.getNombreServicios = async function (query, page, limit) {
     try {

@@ -1,4 +1,3 @@
-// Gettign the Newly created Mongoose Model we just created 
 var User = require('../models/User.model');
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
@@ -9,34 +8,11 @@ const crypto = require('crypto');
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-
-// Saving the context of this module inside the _the variable
 _this = this
 
-// Async function to get the User List
-exports.getUsers = async function (query, page, limit) {
-
-    // Options setup for the mongoose paginate
-    var options = {
-        page,
-        limit
-    }
-    // Try Catch the awaited promise to handle the error 
-    try {
-        console.log("Query",query)
-        var Users = await User.paginate(query, options)
-        // Return the Userd list that was retured by the mongoose promise
-        return Users;
-
-    } catch (e) {
-        // return a Error message describing the reason 
-        console.log("error services",e)
-        throw Error('Error while Paginating Users');
-    }
-}
 
 exports.createUser = async function (user) {
-    // Creating a new Mongoose Object by using the new keyword
+   
     var hashedPassword = bcrypt.hashSync(user.password, 8);
     
 
@@ -56,18 +32,18 @@ exports.createUser = async function (user) {
     })
 
     try {
-        // Saving the User 
+        
         var savedUser = await newUser.save();
         var token = jwt.sign({
             id: savedUser._id
         }, process.env.SECRET, {
-            expiresIn: 86400 // expires in 24 hours
+            expiresIn: 86400 
         });
-        //return token;
+        
         return { user: savedUser, token: token };
     } catch (e) {
         if (e.code === 11000) { // Verificar si el error es un error de duplicidad de MongoDB
-            // Lanzar un nuevo Error que será manejado en el controlador
+            
             throw new Error('El email ya se encuentra registrado.');
         } else {
             // Lanzar un Error genérico o puedes manejar otros códigos específicos
@@ -120,7 +96,7 @@ exports.deleteUser = async function (id) {
 exports.loginUser = async function (user) {
     console.log("Email recibido:", user.email);
     console.log("Contraseña recibida:", user.password);
-    // Creating a new Mongoose Object by using the new keyword
+    
     try {
          
 
@@ -134,7 +110,7 @@ exports.loginUser = async function (user) {
         var token = jwt.sign({
             id: _details._id
         }, process.env.SECRET, {
-            expiresIn: 86400 // expires in 24 hours
+            expiresIn: 86400 
         });
         return {token:token, user:_details};
     } catch (e) {
@@ -143,7 +119,6 @@ exports.loginUser = async function (user) {
     }
 
 }
-
 
 
 exports.updateProfileImage = async function(userId, imageBuffer) {

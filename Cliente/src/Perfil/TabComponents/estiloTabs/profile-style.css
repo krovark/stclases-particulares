@@ -6,7 +6,7 @@
 
 .top-site_profile{
   padding-top: 20px;
-  background-image: url('../../../Img/profile-info_b.jpg'); /* Ruta a tu imagen de fondo */
+  background-image: url('../../../Img/study-scene.png'); /* Ruta a tu imagen de fondo */
   background-size: cover; 
   background-repeat: no-repeat; /* Evita la repetición de la imagen */
 }

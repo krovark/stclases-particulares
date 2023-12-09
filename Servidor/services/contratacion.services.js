@@ -55,15 +55,6 @@ exports.createContratacion = async function(contratacionData) {
 };
 
 
-exports.getAllContrataciones = async function() {
-    try {
-        const contrataciones = await Contratacion.find({});
-        return contrataciones;
-    } catch (e) {
-        throw Error('Error while Getting all Contrataciones: ' + e.message);
-    }
-};
-
 exports.updateEstadoContratacion = async function(contratacionId, nuevoEstado) {
     try {
         const updatedContratacion = await Contratacion.findByIdAndUpdate(

@@ -105,22 +105,6 @@ exports.getServiciosByEstado = async function(req, res, next) {
     }
 };
 
-exports.getAllServicios = async function(req, res, next) {
-    let page = req.query.page ? parseInt(req.query.page) : 1;
-    let limit = req.query.limit ? parseInt(req.query.limit) : 10;
-
-    try {
-        var servicios = await ServicioService.getAllServicios({}, page, limit); // No aplicar filtro por estado
-        return res.status(200).json({
-            status: 200,
-            data: servicios.docs, // Asegúrate de devolver el array de documentos
-            message: "Servicios retrieved successfully"
-        });
-    } catch (e) {
-        res.status(400).json({ status: 400, message: e.message });
-    }
-};
-
 
 exports.getNombreServicios = async function(req, res, next) {
     let page = req.query.page ? parseInt(req.query.page) : 1;

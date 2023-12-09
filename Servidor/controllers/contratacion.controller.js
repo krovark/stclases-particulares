@@ -31,18 +31,6 @@ exports.createContratacion = async function(req, res) {
 };
 
 
-
-
-exports.getAllContrataciones = async function(req, res) {
-    try {
-        const contrataciones = await ContratacionService.getAllContrataciones();
-        res.status(200).json({ data: contrataciones, message: 'Contrataciones retrieved successfully.' });
-    } catch (e) {
-        res.status(400).json({ message: e.message });
-    }
-};
-
-
 exports.updateEstadoContratacion = async function(req, res) {
     try {
         const contratacionId = req.params.id;

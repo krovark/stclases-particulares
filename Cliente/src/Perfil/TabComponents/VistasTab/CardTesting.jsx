@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
-
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Avatar from '@mui/material/Avatar';
@@ -16,7 +14,6 @@ import Rating from '@mui/material/Rating';
 
 
 import Comentarios from '../../../HomeMenu/verComentariosModal'
-
 import HireService from '../../../HomeMenu/contratarServicioModal'
 
 
@@ -61,7 +58,7 @@ const CourseCard = ({ course, avatarUrl, servicioId, calificacionPromedio }) => 
           src={avatarUrl}
           sx={{ 
 
-            width: 100,  // Aumenta el ancho del avatar
+            width: 100,  
             height: 100,
             bgcolor: blue[500] 
             
@@ -73,15 +70,15 @@ const CourseCard = ({ course, avatarUrl, servicioId, calificacionPromedio }) => 
         }
         title={course.instructorName}
         titleTypographyProps={{ 
-            variant: 'h6', // Utiliza una variante de título predefinida que controla el tamaño
-            fontFamily: 'Arial', // Cambia la familia de fuentes
-            fontSize: '1.80rem' // O especifica un tamaño de fuente personalizado
+            variant: 'h6', 
+            fontFamily: 'Arial', 
+            fontSize: '1.80rem' 
           }}
         subheader={course.title}
         subheaderTypographyProps={{ 
-            variant: 'subtitle1', // Utiliza una variante de subtítulo predefinida que controla el tamaño
-            fontFamily: 'Arial', // Cambia la familia de fuentes
-            fontSize: '1.5rem' // O especifica un tamaño de fuente personalizado
+            variant: 'subtitle1', 
+            fontFamily: 'Arial', 
+            fontSize: '1.5rem' 
           }}
 
       />
