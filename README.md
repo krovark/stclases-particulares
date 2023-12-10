@@ -29,8 +29,9 @@
 
 ### Tecnologías Implementadas
 - **Frontend:** React
-- 
+  
 - **Backend:** NodeJS
+  
   Documentación del back-end : https://documenter.getpostman.com/view/8407295/2s9Ykhg4M5
   
 - **Base de Datos:** Atlas MongoDB  
