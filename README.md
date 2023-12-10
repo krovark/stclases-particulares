@@ -27,45 +27,46 @@
 ![image](https://github.com/krovark/stclases-particulares/assets/76181681/8610f2ea-4de5-4970-b365-2870c9be6ac6)
 
 ### Instalación y Ejecución Local ###
-Tener instalada la ultima version de Node.js ---> https://nodejs.org/en
-git clone https://github.com/krovark/stclases-particulares.git
+Tener instalada la ultima version de Node.js ---> https://nodejs.org/en  
 
---- Para levantar el front-end ---
-**CLIENTE**
-cd .\Cliente\
-npm install
-npm run start
+git clone https://github.com/krovark/stclases-particulares.git  
 
---- Para levantar el back-end ---
-**SERVIDOR**
-cd .\Servidor\
-npm install
-nodemon app.js
+--- Para levantar el front-end ---  
+**CLIENTE**  
+cd .\Cliente\  
+npm install  
+npm run start  
 
+--- Para levantar el back-end ---  
+**SERVIDOR**  
+cd .\Servidor\  
+npm install  
+nodemon app.js  
+  
 --------------------------------
 
-Estructura de Carpetas
-//Cliente:
-/src: Todo el código fuente.
-/public: Assets y index.html.
-/node_modules: Modulos utilizados.
+Estructura de Carpetas  
+//Cliente:  
+/src: Todo el código fuente.  
+/public: Assets y index.html.  
+/node_modules: Modulos utilizados.  
+  
+//Servidor:  
+/auth: Contiene middlewares de multer, jws y la configuración de cloudinary  
+/controller: Contiene los controlladores  
+/models: Contiene los model de las colleciones de la base de datos  
+/routes: Contiene las rutas de acceso  
+/services: Contiene la logica de los servicios  
+/uploads: N/A  
+/node_modules: Modulos utilizados.  
 
-//Servidor:
-/auth: Contiene middlewares de multer, jws y la configuración de cloudinary
-/controller: Contiene los controlladores
-/models: Contiene los model de las colleciones de la base de datos
-/routes: Contiene las rutas de acceso 
-/services: Contiene la logica de los servicios
-/uploads: N/A
-/node_modules: Modulos utilizados.
-
-Scripts Básicos
-npm start: Levantar el servidor de desarrollo.
-npm test: Correr los tests.
-npm build: Generar build para producción.
-npm install: Instala los 
-npm run start: Instala todas las dependencias listadas en package.json
-cd : Cambia directorio
+Scripts Básicos  
+npm start: Levantar el servidor de desarrollo.  
+npm test: Correr los tests.  
+npm build: Generar build para producción.  
+npm install: Instala los   
+npm run start: Instala todas las dependencias listadas en package.json  
+cd : Cambia directorio  
 
 📘 Historias de Usuario y Casos de Uso
 Historias de Usuario:
