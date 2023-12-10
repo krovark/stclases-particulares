@@ -29,7 +29,10 @@
 
 ### Tecnologías Implementadas
 - **Frontend:** React
+- 
 - **Backend:** NodeJS
+  Documentación del back-end : https://documenter.getpostman.com/view/8407295/2s9Ykhg4M5
+  
 - **Base de Datos:** Atlas MongoDB  
 DbSchema de la base de datos
 ![image](https://github.com/krovark/stclases-particulares/assets/76181681/8610f2ea-4de5-4970-b365-2870c9be6ac6)
