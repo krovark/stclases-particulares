@@ -12,7 +12,15 @@
 
 ## 📸 Diseños y Mockups
 
-[//]: # (Acá van a ir todos los diseños y mockups una vez que los tengamos listos.)
+![image](https://github.com/krovark/stclases-particulares/assets/76181681/d4106fd2-191d-46aa-bc32-c9d59e943608)  
+![image](https://github.com/krovark/stclases-particulares/assets/76181681/61d5d0d2-8c6d-41d0-b186-8bc1a3917d24)  
+![image](https://github.com/krovark/stclases-particulares/assets/76181681/74e45016-3d91-4ef9-a839-07491731d11b)  
+![image](https://github.com/krovark/stclases-particulares/assets/76181681/ea9b9131-dd0f-49f8-8576-738d1a9c4270)  
+![image](https://github.com/krovark/stclases-particulares/assets/76181681/589e937d-62a4-4ff5-b659-b6b536db42e5)  
+
+
+
+
 
 
 
@@ -22,9 +30,12 @@
 ### Tecnologías Implementadas
 - **Frontend:** React
 - **Backend:** NodeJS
-- **Base de Datos:** Atlas MongoDB
-
+- **Base de Datos:** Atlas MongoDB  
+DbSchema de la base de datos
 ![image](https://github.com/krovark/stclases-particulares/assets/76181681/8610f2ea-4de5-4970-b365-2870c9be6ac6)
+
+Documentación del backend  
+
 
 ### Instalación y Ejecución Local ###
 Tener instalada la ultima version de Node.js ---> https://nodejs.org/en  
