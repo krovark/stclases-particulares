@@ -173,4 +173,3 @@ Postcondiciones: El comentario bloqueado ya no es visible para el proveedor ni l
 
  ✅ Terminar documentación
 
- ⬜ Deployar en algun hosting gratuito
