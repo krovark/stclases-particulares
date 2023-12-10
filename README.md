@@ -14,12 +14,17 @@
 
 [//]: # (Acá van a ir todos los diseños y mockups una vez que los tengamos listos.)
 
+
+
+
 ## 🛠️ Desarrollo
 
 ### Tecnologías Implementadas
 - **Frontend:** React
 - **Backend:** NodeJS
 - **Base de Datos:** Atlas MongoDB
+
+![image](https://github.com/krovark/stclases-particulares/assets/76181681/8610f2ea-4de5-4970-b365-2870c9be6ac6)
 
 ### Instalación y Ejecución Local ###
 Tener instalada la ultima version de Node.js ---> https://nodejs.org/en
