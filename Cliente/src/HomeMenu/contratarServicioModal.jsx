@@ -7,7 +7,6 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-import AdsClickIcon from '@mui/icons-material/AdsClick';
 import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
 
 export default function FormDialog({ precio, onClose, servicioId }) {
@@ -25,8 +24,18 @@ export default function FormDialog({ precio, onClose, servicioId }) {
 
   const handleClose = () => {
     setOpen(false);
-    onClose && onClose(); // Llamar a onClose si existe
+    onClose && onClose();
   };
+
+  const validarEmail = (email) => {
+    const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return re.test(String(email).toLowerCase());
+  };
+
+  const validarCamposCompletos = () => {
+    return clienteNombre && clienteApellido && clienteEmail && clienteTelefono && cantClases;
+  };
+  
 
   const handleSubmit = async () => {
     const contratacionData = {
@@ -36,6 +45,16 @@ export default function FormDialog({ precio, onClose, servicioId }) {
       telefono: clienteTelefono,
       cantclases: cantClases
     };
+
+    if (!validarCamposCompletos()) {
+      alert('Por favor complete todos los campos.');
+      return;
+    }
+
+    if (!validarEmail(clienteEmail)) {
+      alert('Por favor ingrese un email válido.');
+      return;
+    }
 
     try {
       const response = await fetch(`http://localhost:4000/api/contratar/contratar/${servicioId}`, {
@@ -50,7 +69,7 @@ export default function FormDialog({ precio, onClose, servicioId }) {
         throw new Error('Error al realizar la contratación');
       }
 
-      // const result = await response.json();
+      //const result = await response.json();
       alert('Contratación realizada con éxito');
 
       handleClose(); 

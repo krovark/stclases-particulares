@@ -158,6 +158,7 @@ exports.forgotPassword = async function(email) {
 
     const token = crypto.randomBytes(10).toString('hex');
     user.resetPasswordToken = token;
+    console.log(token);
     user.resetPasswordExpires = Date.now() + 3600000; // 1 hora
     await user.save();
 

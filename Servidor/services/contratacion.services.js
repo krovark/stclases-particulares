@@ -47,7 +47,8 @@ exports.createContratacion = async function(contratacionData) {
             </ul>
         </div>`
         };
-        await sgMail.send(msg);     
+        await sgMail.send(msg);
+        console.log(newContratacion);     
         return newContratacion;
     } catch (e) {
         throw new Error('Error while sending email: ' + e.message);

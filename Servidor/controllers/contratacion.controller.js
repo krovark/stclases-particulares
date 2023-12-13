@@ -24,6 +24,7 @@ exports.createContratacion = async function(req, res) {
         };
 
         const contratacionCreada = await ContratacionService.createContratacion(contratacionData);
+        console.log(contratacionCreada);
         res.status(201).json({ data: contratacionCreada, message: 'Contratación creada y email enviado con éxito.' });
     } catch (e) {
         res.status(400).json({ message: e.message });

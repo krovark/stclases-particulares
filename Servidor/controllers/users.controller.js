@@ -143,6 +143,7 @@ exports.forgotPassword = async function(req, res) {
         console.log(token);
         res.status(200).json({ message: 'Token enviado al email', token });
     } catch (error) {
+        console.error(error);
         res.status(400).json({ message: error.message });
     }
 };
