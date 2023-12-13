@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import TabsComponent from '../selectorTabs';
 import CircularProgress from '@mui/material/CircularProgress';
 
-
+import Tooltip from '@mui/material/Tooltip';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
@@ -198,16 +198,26 @@ const Profilesite = () => {
               <h1>{perfil.nombre} {perfil.apellido}</h1>
               {/* <p id='time-stamp'>Cuenta creada: {dcPersona.ccreada}</p> */}
               <br></br>
+              <Tooltip title="Email">
               <p> <EmailIcon fontSize="large" sx={{ mr: 1 }} /> : {perfil.email}</p>
-              <p> <SmartphoneIcon fontSize="large"/> : {editMode ? <input type="text" value={editedTelefono || ''} onChange={(e) => setEditedTelefono( e.target.value )} /> : perfil.telefono}</p>
+              </Tooltip>
+              <Tooltip title="Teléfono">
+              <p> <SmartphoneIcon fontSize="large" /> : {editMode ? <input type="text" value={editedTelefono || ''} onChange={(e) => setEditedTelefono( e.target.value )} /> : perfil.telefono}</p>
+              </Tooltip>
+              <Tooltip title="Título">
               <p><BadgeIcon fontSize="large"/>: {editMode ? <input type="text" value={editedTitulo || ''} onChange={(e) => setEditedTitulo(e.target.value)} /> : perfil.titulo}</p>
+              </Tooltip>
+              <Tooltip title="Experiencia">
               <p><AccountTreeIcon fontSize="large"/>: {editMode ? <input type="text" value={editedExperiencia || ''} onChange={(e) => setEditedExperiencia(e.target.value)} /> : perfil.experiencia}</p>
+              </Tooltip>
               {/* <p> {!editMode && <><ThumbUpIcon fontSize="large"/>: {perfil.calificacionPromedio}</>}</p>
             </div> */}
             {
               !editMode &&
               <div>
+                  <Tooltip title="Calificación">
                 <ThumbUpIcon fontSize="large"/>: <Rating name="read-only" value={perfil.calificacionPromedio} readOnly />
+                </Tooltip>
               </div>
             }
          </div>

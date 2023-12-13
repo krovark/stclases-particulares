@@ -57,7 +57,7 @@ const RegistrationForm = ({ show, handleClose, handleShow }) => {
         //console.error(data.message); 
       } else {
         
-        alert('Registro exitoso:');
+        alert('Usuario registrado con éxito. Por favor termine de completar su perfil en la sección "Perfil" ');
         handleClose(); 
       }
     } catch (error) {
