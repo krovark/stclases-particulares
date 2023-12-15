@@ -46,7 +46,7 @@ exports.createUser = async function (user) {
             
             throw new Error('El email ya se encuentra registrado.');
         } else {
-            // Lanzar un Error genérico o puedes manejar otros códigos específicos
+           
             throw new Error('Error while Creating User: ' + e.message);
         }
     }
@@ -67,7 +67,7 @@ exports.updateUser = async function (userId, userUpdateData) {
         if (userUpdateData.experiencia) oldUser.experiencia = userUpdateData.experiencia;
        
 
-        // Guarda los cambios
+        
         var savedUser = await oldUser.save();
         return savedUser;
     } catch (e) {
@@ -78,7 +78,7 @@ exports.updateUser = async function (userId, userUpdateData) {
 
 exports.deleteUser = async function (id) {
     console.log(id)
-    // Delete the User
+   
     try {
         var deleted = await User.remove({
             _id: id
@@ -114,7 +114,7 @@ exports.loginUser = async function (user) {
         });
         return {token:token, user:_details};
     } catch (e) {
-        // return a Error message describing the reason     
+             
         throw Error("Error invalid password")
     }
 
@@ -185,7 +185,7 @@ exports.resetPassword = async function(token, password) {
         throw new Error('Token inválido o expirado.');
     }
 
-    user.password = hashedPassword; // Asegúrate de encriptar la contraseña
+    user.password = hashedPassword; 
     user.resetPasswordToken = undefined;
     user.resetPasswordExpires = undefined;
 

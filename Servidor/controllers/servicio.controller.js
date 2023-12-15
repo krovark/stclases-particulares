@@ -46,7 +46,7 @@ exports.createServicio = async function (req, res, next) {
         console.log("servicio create controller");
         res.status(201).json({ servicio: createdServicio, message: "Servicio successfully created" });
     } catch (e) {
-        // Aquí puedes manejar diferentes tipos de errores, como errores de validación, o errores de duplicados si aplican.
+       
         res.status(400).json({ message: e.message });
     }
 };
@@ -54,11 +54,11 @@ exports.createServicio = async function (req, res, next) {
 // Async Controller function to update a service status
 exports.updateEstadoServicio = async function (req, res, next) {
     try {
-        // Asegúrate de obtener solo el ID del servicio desde los parámetros de la solicitud
+       
         const servicioId = req.params.id;
         const nuevoEstado = req.body.estado;
 
-        // Luego pasas ese ID y el nuevo estado al servicio
+       
         const updatedServicio = await ServicioService.updateEstadoServicio(servicioId, nuevoEstado);
 
         res.status(200).json({ servicio: updatedServicio, message: "Estado del servicio actualizado con éxito" });
@@ -91,7 +91,7 @@ exports.getServicioById = async function (req, res, next) {
 exports.getServiciosByEstado = async function(req, res, next) {
     var page = req.query.page ? parseInt(req.query.page) : 1;
     var limit = req.query.limit ? parseInt(req.query.limit) : 10;
-    let estado = req.params.estado; // `estado` debe ser una cadena (string)
+    let estado = req.params.estado; 
 
     try {
         var servicios = await ServicioService.getServiciosByEstado(estado, page, limit);
@@ -168,7 +168,7 @@ exports.editServicio = async (req, res) => {
       const servicioActualizado = await Servicio.findByIdAndUpdate(
         id,
       updateFields,
-      { new: true }  // Para devolver el documento actualizado
+      { new: true }  
       );
 
       console.log(servicioActualizado);

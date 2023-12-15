@@ -118,7 +118,7 @@ exports.uploadProfileImage = async function(req, res) {
 
   exports.getProfile = async function(req, res) {
     try {
-        const userId = req.userId; // Asumiendo que el middleware JWT ha establecido req.userId
+        const userId = req.userId; 
         const user = await UserService.getProfile(userId);
 
         if (!user) {
@@ -126,9 +126,9 @@ exports.uploadProfileImage = async function(req, res) {
         }
 
         console.log(userId);
-        // Opcionalmente, excluye campos sensibles como la contraseña antes de enviarlos
+        
         user.password = undefined;
-        //console.log(token)
+      
         return res.status(200).json(user);
     } catch (error) {
         console.error(error)
