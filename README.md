@@ -17,7 +17,7 @@
 ![image](https://github.com/krovark/stclases-particulares/assets/76181681/74e45016-3d91-4ef9-a839-07491731d11b)  
 ![image](https://github.com/krovark/stclases-particulares/assets/76181681/ea9b9131-dd0f-49f8-8576-738d1a9c4270)  
 ![image](https://github.com/krovark/stclases-particulares/assets/76181681/589e937d-62a4-4ff5-b659-b6b536db42e5)  
-
+![image](https://github.com/krovark/stclases-particulares/assets/76181681/3b442d6f-9ddc-4537-bad6-71439710075c)  
 
 
 
@@ -87,7 +87,7 @@ Historias de Usuario:
 
 1) Como usuario quiero ver detalles de un servicio para entender completamente lo que se ofrece.
 
-2) Como proveedor quiero bloquear comentarios no deseados para mantener una imagen profesional en mi perfil.
+2) Como proveedor quiero rechazar comentarios no deseados para mantener una imagen profesional en mi perfil.
 
 3) Como usuario quiero contratar un servicio para confirmar y asegurar la disponibilidad del proveedor.
 
@@ -125,24 +125,24 @@ Postcondiciones: El comentario se visualiza en la interfaz del proveedor para su
 Caso de Uso 3: Contratación de un Servicio
 
 Actor: Usuario
-Precondiciones: El usuario debe estar registrado y haber iniciado sesión.
+Precondiciones: El usuario puede estar o no registrado y no haber iniciado sesión.
 
 Flujo Principal:
 4.1 El usuario busca y selecciona un servicio.
-4.2 Ingresa la información solicitada (teléfono, mail, horario preferido de contacto y mensaje al proveedor).
+4.2 Ingresa la información solicitada .
 4.3 Envía la solicitud de contratación.
-4.4 La solicitud de contratación aparece en el perfil del proveedor.
+4.4 La solicitud de contratación aparece en el perfil del proveedor y al mismo tiempo es enviada al mail.
 
 Postcondiciones: La solicitud se encuentra en estado "solicitada" hasta que el proveedor la modifica.
 
-Caso de Uso 4: Bloquear Comentarios
+Caso de Uso 4: Rechazar Comentarios
 
 Actor: Proveedor
 Precondiciones: El proveedor debe haber iniciado sesión y tener al menos un comentario pendiente de revisión.
 
 Flujo Principal:
-4.1 Elproveedor accede a su perfil y visualiza los comentarios pendientes de revisión.
-4.2 Sel ecciona un comentario y opta por bloquearlo.
+4.1 El proveedor accede a su perfil y visualiza los comentarios pendientes de revisión.
+4.2 Selecciona un comentario y opta por rechazarlo.
 4.3 La aplicación elimina el comentario sin publicarlo.
 
 Postcondiciones: El comentario bloqueado ya no es visible para el proveedor ni los usuarios.
