@@ -9,7 +9,8 @@ exports.createContratacion = async function(req, res) {
         if (!servicio) {
             return res.status(404).json({ message: 'Servicio no encontrado' });
         }
-
+ 
+        
         const contratacionData = {
             servicioId,
             cliente: {
