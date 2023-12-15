@@ -104,7 +104,10 @@ const Sidebar = ({ setFiltroTipo, setFiltroFrecuencia, setFiltroCalificacion, se
           <Select
             className="custom-select"
             label="Tipo de clase"
-            onChange={(e) => setFiltroTipo(e.target.value)}
+            onChange={(e) => {
+              setFiltroTipo(e.target.value);
+              setFiltroCalificacion(null);
+            }}
           >
             <MenuItem value="">Todos</MenuItem>
             <MenuItem value="Individual">Individual</MenuItem>
@@ -117,7 +120,9 @@ const Sidebar = ({ setFiltroTipo, setFiltroFrecuencia, setFiltroCalificacion, se
           <Select
             className="custom-select"
             label="Frecuencia"
-            onChange={(e) => setFiltroFrecuencia(e.target.value)}
+            onChange={(e) => {setFiltroFrecuencia(e.target.value);
+              setFiltroCalificacion(null);
+            }}
           >
             <MenuItem value="">Todos</MenuItem>
             <MenuItem value="Única">Única</MenuItem>
