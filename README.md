@@ -46,12 +46,14 @@ Tener instalada la ultima version de Node.js ---> https://nodejs.org/en
 git clone https://github.com/krovark/stclases-particulares.git  
 
 --- Para levantar el front-end ---  
+-Abrir una terminal-  
 **CLIENTE**  
 cd .\Cliente\  
 npm install  
 npm run start  
 
 --- Para levantar el back-end ---  
+-Abrir una terminal-  
 **SERVIDOR**  
 cd .\Servidor\  
 npm install  
