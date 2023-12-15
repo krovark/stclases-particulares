@@ -58,7 +58,10 @@ npm install
 nodemon app.js  
   
 --------------------------------
+Si hay problemas con la contratación y reseteo de contraseña, por favor lanzar el comando : npm install --save @sendgrid/mail
+Desconozco la razón por lo cual la API de SendGrip tira error de autorización y esto lo soluciona.
 
+--------------------------------
 Estructura de Carpetas  
 //Cliente:  
 /src: Todo el código fuente.  
